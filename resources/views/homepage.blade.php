@@ -15,7 +15,7 @@
     <section id="nowplaying">
         <h1>Now Playing</h1>
         <div class="row md-row-cols-2">
-            @foreach ($listMovie as Pgitmovie)
+            @foreach ($listMovie as $movie)
             <div class="col-sm-6 col-md-3 text-center">
                 <a href="{{ url('movie/spiderverse-the-challenge') }}">
                     <!-- movie[img] -->

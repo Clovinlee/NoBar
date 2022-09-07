@@ -1,0 +1,37 @@
+.carousel, .carousel-item{
+    height:400px;
+}
+
+.container{
+    max-width: 90vw;
+}
+
+.movie-title-link{
+    color: black;
+    text-decoration: none;
+}
+
+.movie-title-link:hover{
+    color: grey;
+}
+
+.movie-poster-link{
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.movie-poster-link:hover{
+    transform: scale(1.05);
+}
+
+.red{
+    background-color: red;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.green{
+    background-color: green;
+}

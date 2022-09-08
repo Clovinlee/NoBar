@@ -42,8 +42,10 @@ Route::post("/logout", [VerificationController::class,"logout"]);
 ///////////////////////
 
 // EMAIL VERIFICATION
-Route::get("/email/verify", [VerificationController::class,"showverify"])->middleware("auth")->name('verification.notice');
-Route::get("/email/verify/resend", [VerificationController::class, "showresend"])->middleware(["auth", "throttle:6,1"])->name("verification.send");
-Route::get("/email/verify/{id}/{hash}", [VerificationController::class, "verify"])->middleware(['auth','signed'])->name('verification.verify');
+Route::prefix("/email")->group(function() {
+    Route::get("/verify", [VerificationController::class,"showverify"])->middleware("auth")->name('verification.notice');
+    Route::get("/verify/resend", [VerificationController::class, "showresend"])->middleware(["auth", "throttle:6,1"])->name("verification.send");
+    Route::get("/verify/{id}/{hash}", [VerificationController::class, "verify"])->middleware(['auth','signed'])->name('verification.verify');
+});
 // Route::post("/email/send", [VerificationController::class, "send"])->middleware(["auth","verified"]);
 ///////////////////////

@@ -24,6 +24,14 @@
     transform: scale(1.05);
 }
 
+.h-screen{
+    height: 100vh;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
 .red{
     background-color: red;
 }

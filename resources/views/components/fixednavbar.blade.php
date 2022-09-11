@@ -12,9 +12,24 @@
                     <i class="fa-solid fa-user"></i> Account
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li class="d-flex justify-content-around"><a class="dropdown-item" href="{{ url('/login') }}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Register</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                    @auth
+                    <li><a class="dropdown-item" href="{{ url('/user') }}"><i class="fa-solid fa-user"></i> Your Account</a></li>
+                    <form action="{{ url('/logout') }}" method="POST">
+                        @csrf
+                        <li><span class="dropdown-item pointer" onclick="submitLogout(this)"><i class="fa-solid fa-right-from-bracket"></i> Logout</span></li>
+                    </form>
+                    <!-- Logout Submit Script -->
+                    <script>
+                        function submitLogout(e){
+                            let frm = e.parentElement.parentElement;
+                            frm.submit();
+                        }
+                    </script>
+                    <!-- -------------------- -->
+                    @else
+                    <li class="d-flex justify-content-around"><a class="dropdown-item" href="{{ url('/login') }}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                    <li><a class="dropdown-item" href="{{ url('/register') }}"><i class="fa-solid fa-user"></i> Register</a></li>
+                  @endauth
                 </ul>
               </div>
         </div>

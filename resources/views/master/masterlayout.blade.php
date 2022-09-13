@@ -32,4 +32,6 @@
 <!-- Custom JS -->
 <script src="{{ url("/js/script.js") }}"></script>
 
+@yield("pageScript")
+
 </html>

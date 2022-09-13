@@ -26,9 +26,7 @@ Route::get('/comingsoon', function () {
     return view('comingsoonpage');
 });
 
-Route::get("/movie/{slug}", function(){
-    return view("detailmovie");
-});
+Route::get("/movie/{movie:slug}", [PageController::class, "detailmovie"]);
 
 Route::get("/find", [SearchController::class,"search"]);
 

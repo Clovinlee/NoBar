@@ -17,7 +17,7 @@
         <div class="row md-row-cols-2">
             @foreach ($listMovie as $movie)
             <div class="col-sm-6 col-md-3 text-center">
-                <a href="{{ url('movie/spiderverse-the-challenge') }}">
+                <a href='{{ url("movie/$movie->slug") }}'>
                     <!-- movie[img] -->
                     <x-movie img="https://source.unsplash.com/random/600x1200?cinema,poster">{{ $movie["judul"] }}</x-movie>
                 </a>

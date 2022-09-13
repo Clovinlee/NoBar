@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([MovieSeeder::class]);
+        $this->call([MovieSeeder::class, UserSeeder::class]);
         $this->call([BranchSeeder::class]);
         $this->call([StudioSeeder::class]);
         $this->call([ChairSeeder::class]);

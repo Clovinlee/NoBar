@@ -1,5 +1,5 @@
 @extends('master.masterlayout')
-@section("subtitle","Coming Soon")
+@section("subtitle","User")
 
 
 @section("navbar")

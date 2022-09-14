@@ -14,6 +14,6 @@ class Dtrans extends Model
     }
     public function chair()
     {
-        $this->belongsTo(Chair::class)
+        $this->belongsTo(Chair::class);
     }
 }

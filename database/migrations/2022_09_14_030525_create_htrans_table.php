@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('htrans', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string("role",1)->default(1);
-            $table->rememberToken();
+            $table->foreignId("user")->references("id")->on("users");
+            $table->foreignId("schedule")->references("id")->on("schedules");
+            $table->integer("total");
+            $table->integer("status")->default(0); // 0 = blom 1 = sudah
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('htrans');
     }
 };

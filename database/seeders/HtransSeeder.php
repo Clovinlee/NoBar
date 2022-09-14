@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Branch;
+use App\Models\Htrans;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BranchSeeder extends Seeder
+class HtransSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +16,11 @@ class BranchSeeder extends Seeder
     public function run()
     {
         //
-        Branch::create([
-          "nama"=>"Ciputra World"
-        ]);  
+        Htrans::create([
+            "user"=>1,
+            "schedule"=>1,
+            "total"=>100000,
+            "status"=>1
+        ]);
     }
 }

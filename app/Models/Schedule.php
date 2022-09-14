@@ -16,4 +16,8 @@ class Schedule extends Model
     {
         $this->belongsTo(Movie::class);
     }
+    public function htrans()
+    {
+        $this->hasMany(Htrans::class);
+    }
 }

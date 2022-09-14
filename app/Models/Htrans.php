@@ -16,4 +16,8 @@ class Htrans extends Model
     {
         $this->belongsTo(User::class);
     }
+    public function dtrans()
+    {
+        $this->hasMany(Dtrans::class);
+    }
 }

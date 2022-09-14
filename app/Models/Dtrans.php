@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chair extends Model
+class Dtrans extends Model
 {
     use HasFactory;
-    public function studio()
+    public function htrans()
     {
-        $this->belongsTo(Studio::class);
+        $this->belongsTo(Htrans::class);
     }
-    public function dtrans()
+    public function chair()
     {
-        $this->hasMany(Dtrans::class);
+        $this->belongsTo(Chair::class)
     }
 }

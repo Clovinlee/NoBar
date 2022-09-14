@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Chair;
+use App\Models\Dtrans;
 use App\Models\H_Trans;
 use App\Models\Htrans;
 use App\Models\Schedule;
@@ -26,6 +27,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([MovieSeeder::class, UserSeeder::class,BranchSeeder::class,StudioSeeder::class,ChairSeeder::class,ScheduleSeeder::class,HtransSeeder::class]);
+        $this->call([MovieSeeder::class, UserSeeder::class,BranchSeeder::class,StudioSeeder::class,ChairSeeder::class,ScheduleSeeder::class,HtransSeeder::class,DtransSeeder::class]);
     }
 }

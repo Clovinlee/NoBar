@@ -54,4 +54,14 @@ Route::prefix("/email")->group(function() {
 });
 // |----------------------|
 
+// |----------------------|
+// | USER                 |
+// |----------------------|
+Route::prefix("/user")->group(function() {
+    Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
+    Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
+});
+// |----------------------|
+
+// BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","test");

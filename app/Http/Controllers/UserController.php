@@ -8,6 +8,9 @@ class UserController extends Controller
 {
     //
     public function index(){
-        return view("userpage");
+        return view("users.userpage");
     }
+
+    public function history(){
+        return view("users.historypage");
 }

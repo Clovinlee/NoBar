@@ -13,4 +13,5 @@ class UserController extends Controller
 
     public function history(){
         return view("users.historypage");
+    }
 }

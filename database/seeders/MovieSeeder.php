@@ -20,7 +20,10 @@ class MovieSeeder extends Seeder
             "judul"=>"Spiderman The Spiderverse",
             "slug"=>"spiderman-the-spiderverse",
             "image"=>"spiderverse.jpg",
-            "status"=>"0",
+            "director"=>"Peter Ramsey, Bob Persichetti, and Rodney Rothman",
+            "producer"=>"Avi Arad, Amy Pascal, Phil Lord, Christopher Miller, Christina Steinberg",
+            "casts"=>"Shameik Moore, Jake Johnson, Hailee Steinfeld, Mahershala Ali, Brian Tyree Henry",
+            "status"=>"0"
         ]);
 
         Movie::create([

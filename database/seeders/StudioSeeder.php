@@ -18,7 +18,8 @@ class StudioSeeder extends Seeder
     {
         Studio::create([
             "branch"=>1,
-            "nama"=>"Studio 1"
+            "nama"=>"Studio 1",
+            "slot"=>90
         ]);
     }
 }

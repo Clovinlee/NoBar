@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("branch")->references("id")->on("branches");
             $table->string("nama");
+            $table->integer("slot");
             $table->timestamps();
         });
     }

@@ -20,5 +20,17 @@ class DtransSeeder extends Seeder
             "htrans"=>1,
             "chair"=>1
         ]);
+        Dtrans::create([
+            "htrans"=>1,
+            "chair"=>3
+        ]);
+        Dtrans::create([
+            "htrans"=>2,
+            "chair"=>3
+        ]);
+        Dtrans::create([
+            "htrans"=>3,
+            "chair"=>2
+        ]);
     }
 }

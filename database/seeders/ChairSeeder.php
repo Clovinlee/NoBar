@@ -18,7 +18,27 @@ class ChairSeeder extends Seeder
         Chair::create([
             "studio"=>"1",
             "row"=>"A",
+            "column"=>9
+        ]);
+        Chair::create([
+            "studio"=>"3",
+            "row"=>"C",
             "column"=>1
+        ]);
+        Chair::create([
+            "studio"=>"1",
+            "row"=>"D",
+            "column"=>12
+        ]);
+        Chair::create([
+            "studio"=>"2",
+            "row"=>"F",
+            "column"=>7
+        ]);
+        Chair::create([
+            "studio"=>"3",
+            "row"=>"E",
+            "column"=>2
         ]);
     }
 }

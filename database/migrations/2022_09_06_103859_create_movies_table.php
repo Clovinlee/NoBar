@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string("synopsis");
             $table->string("genre");
             $table->integer("duration");
-            $table->string("producer");
 
             $table->string("status",1)->default("0"); //0=now playing, 1=comingsoon, 2=done playing
 

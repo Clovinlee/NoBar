@@ -19,5 +19,11 @@ class BranchSeeder extends Seeder
         Branch::create([
           "nama"=>"Ciputra World"
         ]);  
+        Branch::create([
+          "nama"=>"Galaxy Mall"
+        ]);  
+        Branch::create([
+          "nama"=>"Marvell City"
+        ]);  
     }
 }

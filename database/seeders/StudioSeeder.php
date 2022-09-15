@@ -21,5 +21,20 @@ class StudioSeeder extends Seeder
             "nama"=>"Studio 1",
             "slot"=>90
         ]);
+        Studio::create([
+            "branch"=>1,
+            "nama"=>"Studio IMAX",
+            "slot"=>150
+        ]);
+        Studio::create([
+            "branch"=>2,
+            "nama"=>"Studio 1",
+            "slot"=>108
+        ]);
+        Studio::create([
+            "branch"=>3,
+            "nama"=>"Studio Premiere 1",
+            "slot"=>30
+        ]);
     }
 }

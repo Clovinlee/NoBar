@@ -5,10 +5,6 @@
 <x-navbar></x-navbar>
 @stop
 
-@section("navbar2")
-<x-fixednavbar></x-fixednavbar>
-@stop
-
 @section('body')
 <div class="container py-4">
     <h2>Now Playing</h2>

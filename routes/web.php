@@ -53,3 +53,5 @@ Route::prefix("/email")->group(function() {
     Route::get("/verify/{id}/{hash}", [VerificationController::class, "verify"])->middleware(['auth','signed'])->name('verification.verify');
 });
 // |----------------------|
+
+Route::view("/test","test");

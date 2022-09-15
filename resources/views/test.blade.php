@@ -1,25 +1,24 @@
 @extends('master.masterlayout')
-@section("subtitle","Login")
+@section("subtitle","Test Page")
 
 @section("navbar")
 <x-navbar></x-navbar>
 @stop
 
 @section('body')
-<div class="container col-12 col-md-12 col-lg-4 d-flex flex-column h-screen justify-content-center">
+<div class="container col-12 col-md-12 col-lg-4 d-flex h-screen align-items-center">
     @if (session()->has("loginError"))
-        <div class="alert alert-dismissible fade show alert-danger" role="alert" data-mdb-color="danger">
-          <i class="fas fa-times-circle me-3"></i>{{ session("loginError") }}
-          <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
-      </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session("loginError") }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
-    <form class="md-form w-100 border rounded-3 p-5" method="POST" action="{{ url('/login') }}">
-        @csrf
+    <form class="w-100" method="POST">
         <h2 class="text-center mb-3">Login Form</h2>
 
         <!-- Email input -->
-        <div class="form-outline" style="margin-bottom: 25px">
-            <input id="inpEmail" type="email" name="email" class="form-control @error('email') is-invalid @enderror" autocomplete="on" required value="{{ old("email") }}">
+        <div class="form-outline mb-4">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" autocomplete="on"/>
             <label class="form-label" >Email address</label>
             @error('email')
               <div class="invalid-feedback"> 
@@ -85,4 +84,4 @@
             }
         }
     </script>
-@stop
+@endsection

@@ -2,6 +2,16 @@
     height:400px;
 }
 
+#navbar{
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: block;
+    transition: top 0.4s;
+    z-index: 99;
+}
+
 .container{
     max-width: 90vw;
 }
@@ -41,13 +51,13 @@
 }
 
 .red{
-    background-color: red;
+    background-color: red !important;
 }
 
 .blue{
-    background-color: blue;
+    background-color: blue !important;
 }
 
 .green{
-    background-color: green;
+    background-color: green !important;
 }

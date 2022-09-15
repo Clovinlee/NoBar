@@ -26,9 +26,7 @@ Route::get('/comingsoon', function () {
     return view('comingsoonpage');
 });
 
-Route::get("/movie/{slug}", function(){
-    return view("detailmovie");
-});
+Route::get("/movie/{movie:slug}", [PageController::class, "detailmovie"]);
 
 Route::get("/find", [SearchController::class,"search"]);
 
@@ -55,3 +53,15 @@ Route::prefix("/email")->group(function() {
     Route::get("/verify/{id}/{hash}", [VerificationController::class, "verify"])->middleware(['auth','signed'])->name('verification.verify');
 });
 // |----------------------|
+
+// |----------------------|
+// | USER                 |
+// |----------------------|
+Route::prefix("/user")->group(function() {
+    Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
+    Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
+});
+// |----------------------|
+
+// BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
+Route::view("/test","test");

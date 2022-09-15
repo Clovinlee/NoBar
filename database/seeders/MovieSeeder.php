@@ -19,28 +19,28 @@ class MovieSeeder extends Seeder
         Movie::create([
             "judul"=>"Spiderman The Spiderverse",
             "slug"=>"spiderman-the-spiderverse",
-            "image"=>"spiderverse.jpg",
+            "image"=>"spiderman.jpg",
             "status"=>"0",
         ]);
 
         Movie::create([
             "judul"=>"Manhattan Family",
             "slug"=>"manhattan-family",
-            "image"=>"manhattan.jpg",
+            "image"=>"spiderman.jpg",
             "status"=>"0",
         ]);
 
         Movie::create([
             "judul"=>"Simpson Not Home",
             "slug"=>"simpson-not-home",
-            "image"=>"simpsonnothome.jpg",
+            "image"=>"spiderman.jpg",
             "status"=>"0",
         ]);
 
         Movie::create([
             "judul"=>"Leverestence Mundia",
             "slug"=>"leverestence-mundia",
-            "image"=>"leverestencemundia.jpg",
+            "image"=>"spiderman.jpg",
             "status"=>"0",
         ]);
     }

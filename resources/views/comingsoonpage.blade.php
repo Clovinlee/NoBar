@@ -6,10 +6,6 @@
 <x-navbar></x-navbar>
 @stop
 
-@section("navbar2")
-<x-fixednavbar></x-fixednavbar>
-@stop
-
 @section("body")
 
 <div class="container">

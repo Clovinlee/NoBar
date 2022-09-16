@@ -7,13 +7,7 @@
 
 @section('body')
 <div class="container col-12 col-md-12 col-lg-4 d-flex flex-column h-screen justify-content-center">
-    @if (session()->has("loginError"))
-        <div class="alert alert-dismissible fade show alert-danger" role="alert" data-mdb-color="danger">
-          <i class="fas fa-times-circle me-3"></i>{{ session("loginError") }}
-          <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
-      </div>
-    @endif
-    <form class="md-form w-100 border rounded-3 p-5" method="POST" action="{{ url('/login') }}">
+    <form class="md-form w-100 border rounded-3 p-5 shadow" method="POST" action="{{ url('/login') }}">
         @csrf
         <h2 class="text-center mb-3">Login Form</h2>
 
@@ -30,7 +24,7 @@
 
         <!-- Password input -->
         <div class="input-group form-outline mb-4">
-            <input type="password" name="password" class="form-control" autocomplete="on"/>
+            <input type="password" name="password" class="form-control" autocomplete="on" required/>
             <label class="form-label">Password</label>
             <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-eye-slash pointer" onclick="togglePassword(event)"></i></span>
         </div>
@@ -38,7 +32,7 @@
         <div class="row mb-4">
             <div class="col">
                 <!-- Simple link -->
-                <a href="{{ url('/forgot') }}">Forgot password?</a>
+                <a href="{{ url('/forgot_password') }}">Forgot password?</a>
             </div>
         </div>
 
@@ -65,6 +59,12 @@
         </div>
     </form>
 </div>
+
+    @if (session()->has("success"))
+        <x-toast title="Success" type="success">{{ session("success") }}</x-toast>
+    @elseif(session()->has("loginError"))
+    <x-toast title="Error" type="danger">{{ session("loginError") }}</x-toast>
+    @endif
 @stop
 
 @section('pageScript')

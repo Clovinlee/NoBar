@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
@@ -22,11 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class,"index"]);
 // ->middleware("role:admin,manager");
 
-Route::get('/comingsoon', function () {
-    return view('comingsoonpage');
-});
-
-Route::get("/movie/{movie:slug}", [PageController::class, "detailmovie"]);
+Route::get('/comingsoon',[PageController::class,"comingsoon"]);
 
 Route::get("/find", [SearchController::class,"search"]);
 
@@ -41,16 +39,45 @@ Route::view("/register","register")->name("register")->middleware("guest");
 Route::post("/login",[VerificationController::class,"verifylogin"]);
 Route::post("/register",[VerificationController::class,"verifyregister"]);
 
+
 Route::post("/logout", [VerificationController::class,"logout"]);
+// |----------------------|
+
+// |----------------------|
+// | FORGOT PASSWORD      |
+// |----------------------|
+Route::prefix("/forgot_password")->group(function() {
+    Route::view("/","users.forgot.forgot")->name("password.request")->middleware("guest");
+    Route::post("/",[VerificationController::class, "verifyforgot"]);
+    Route::view("/verify","verify.verify_forgot")->name("password.email")->middleware("guest");
+});
+
+Route::get("/reset-password/{token}", function($token){
+    // return view("users.forgot.reset-password", ["token"=>$token]);
+    return view("users.forgot.reset-password", ["token"=>$token]);
+})->name("password.reset")->middleware("guest");
+
+Route::post("/reset-password/{token}",[VerificationController::class,"reset_password"]);
 // |----------------------|
 
 // |----------------------|
 // | EMAIL VERIFICATION   |
 // |----------------------|
 Route::prefix("/email")->group(function() {
-    Route::view("/verify","verify.verify_email")->middleware("auth")->name("verification.notice");
+    // Route::view("/verify","verify.verify_email")->middleware("auth")->name("verification.notice");
+    Route::view("/verify","verify.verify_email")->name("verification.notice");
     Route::get("/verify/resend", [VerificationController::class, "resend_email"])->middleware(["auth", "throttle:6,1"])->name("verification.send");
-    Route::get("/verify/{id}/{hash}", [VerificationController::class, "verify"])->middleware(['auth','signed'])->name('verification.verify');
+    Route::get("/verify/{id}/{hash}", [VerificationController::class, "verifyemail"])->middleware(['auth','signed'])->name('verification.verify');
+});
+// |----------------------|
+
+// |----------------------|
+// | MOVIE                |
+// |----------------------|
+Route::prefix("/movie")->group(function(){
+    Route::redirect("/",url("/"));
+    Route::get("/{movie:slug}",[MovieController::class,"index"]);
+    Route::get("/{movie:slug}/schedule",[MovieController::class,"schedule"]);
 });
 // |----------------------|
 
@@ -60,6 +87,14 @@ Route::prefix("/email")->group(function() {
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
     Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
+});
+// |----------------------|
+
+// |----------------------|
+// | ADMIN                 |
+// |----------------------|
+Route::prefix("/admin")->group(function() {
+    Route::get("/", [AdminController::class,"index"])->middleware("role:admin");
 });
 // |----------------------|
 

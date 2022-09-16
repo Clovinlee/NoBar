@@ -1,5 +1,5 @@
 @extends('master.masterlayout')
-@section("subtitle","Spiderman The SpiderVerse")
+@section("subtitle",$movie["judul"])
 
 @section("navbar")
 <x-navbar></x-navbar>
@@ -10,7 +10,7 @@
     <h2>Now Playing</h2>
     <div class="row mt-3">
         <div class="col-12 col-md-4">
-          <x-lightbox id="imgSpider" img="spiderman.jpg"> {{ $movie["judul"] }} </x-lightbox>
+          <x-lightbox id="imgSpider" img="{{ $movie['image'] }}"> {{ $movie["judul"] }} </x-lightbox>
         </div>
 
         <div class="col-12 col-md-8">
@@ -47,12 +47,7 @@
                     maxime sequi iusto maiores. Dolorum dolores ullam porro obcaecati qui omnis fuga placeat officia
                     consectetur laudantium, natus, ipsum distinctio dolor libero.</p>
             </div>
-            <form action="" method="post">
-                @csrf
-                <button class="btn btn-warning w-100 p-3 ">
-                    Beli Tiket
-                </button>
-            </form>
+            <a href="{{ url(Request::url()."/schedule") }}"><button class="btn btn-warning w-100 p-3 ">Beli Tiket</button></a>
         </div>
     </div>
 @endsection

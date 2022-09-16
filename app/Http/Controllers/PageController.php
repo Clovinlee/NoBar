@@ -13,7 +13,7 @@ class PageController extends Controller
         return view("homepage",["listMovie" => Movie::all()]);
     }
 
-    public function detailmovie(Movie $movie){
-        return view("detailmovie",["movie" => $movie]);
+    public function comingsoon(){
+        return view("comingsoonpage",["listMovie" => Movie::all()]);
     }
 }

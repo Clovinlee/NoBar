@@ -14,9 +14,14 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Movie $movie)
     {
         //
+        return view("movie.detailmovie",["movie" => $movie]);
+    }
+
+    public function schedule(Movie $movie){
+        return view("movie.schedulepage",["movie" => $movie]);
     }
 
     /**

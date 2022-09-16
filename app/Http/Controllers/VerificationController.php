@@ -30,8 +30,8 @@ class VerificationController extends Controller
 
     public function verifyregister(Request $r){
         $credentials = $r->validate([
-            'email'=>'required|email:dns|unique:users,email',
             'name'=>'required|max:255',
+            'email'=>'required|email:dns|unique:users,email',
             'password'=>'required|min:5|max:255',
             'confirm_password'=>'required|same:password'
         ]);

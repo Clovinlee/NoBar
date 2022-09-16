@@ -4,3 +4,4 @@ $("#nowplaying_link").click(function(){
         scrollTop: $("#nowplaying").offset().top-50
     }, 1000);
 });
+

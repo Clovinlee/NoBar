@@ -12,4 +12,8 @@ class PageController extends Controller
     public function index(){
         return view("homepage",["listMovie" => Movie::all()]);
     }
+
+    public function detailmovie(Movie $movie){
+        return view("detailmovie",["movie" => $movie]);
+    }
 }

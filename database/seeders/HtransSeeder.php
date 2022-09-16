@@ -22,5 +22,17 @@ class HtransSeeder extends Seeder
             "total"=>100000,
             "status"=>1
         ]);
+        Htrans::create([
+            "user"=>1,
+            "schedule"=>3,
+            "total"=>50000,
+            "status"=>1
+        ]);
+        Htrans::create([
+            "user"=>1,
+            "schedule"=>2,
+            "total"=>50000,
+            "status"=>0
+        ]);
     }
 }

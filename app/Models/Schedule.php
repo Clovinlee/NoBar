@@ -13,14 +13,14 @@ class Schedule extends Model
 
     public function studio()
     {
-        $this->belongsTo(Studio::class);
+        return $this->belongsTo(Studio::class);
     }
     public function movie()
     {
-        $this->belongsTo(Movie::class);
+        return $this->belongsTo(Movie::class);
     }
     public function htrans()
     {
-        $this->hasMany(Htrans::class);
+        return $this->hasMany(Htrans::class);
     }
 }

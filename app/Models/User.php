@@ -52,6 +52,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 
     public function htrans()
     {
-        $this->hasMany(Htrans::class);
+        return $this->hasMany(Htrans::class);
     }
 }

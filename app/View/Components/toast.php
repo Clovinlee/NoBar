@@ -19,12 +19,14 @@ class toast extends Component
     // danger -> red
 
     public $title;
+    public $position;
      
-    public function __construct($type, $title)
+    public function __construct($type, $title, $position = "bottom-0 end-0")
     {
         //
         $this->type = $type;
         $this->title = $title;
+        $this->position = $position;
     }
 
     /**

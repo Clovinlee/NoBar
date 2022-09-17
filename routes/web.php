@@ -64,4 +64,4 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
-Route::view("/test","test");
+Route::view("/test","admin.dashboard");

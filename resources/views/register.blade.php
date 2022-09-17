@@ -13,7 +13,7 @@
           <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    <form class="md-form w-100 border rounded-3 p-5" method="POST" action="{{ url('/register') }}">
+    <form class="md-form w-100 border rounded-3 p-5 shadow" method="POST" action="{{ url('/register') }}">
         @csrf
         <h2 class="text-center mb-3">Register Form</h2>
 

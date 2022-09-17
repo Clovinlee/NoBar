@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
+    //ini buat user
     public function index(){
         return view("users.userpage");
     }

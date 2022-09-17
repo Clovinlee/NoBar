@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     use HasFactory;
+
+    protected $with = ["studio"];
+    
     public function studio()
     {
         return $this->hasMany(Studio::class);

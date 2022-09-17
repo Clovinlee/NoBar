@@ -15,11 +15,10 @@
             <!-- DETAIL MOVIE -->
             <div class="">
                 <p class="h4 text-black"><strong>{{ $movie["judul"] }}</strong></p>
-                <div class="my-1"><i class="fa-regular fa-clock"></i> 116 Minutes</div>
-                <div>
-                    <span class="badge badge-info">3D</span> &nbsp;<span class="badge badge-info">Horror</span>
-                    &nbsp;<span class="badge badge-info">Comedy</span>
-                </div>
+                <div class="my-1"><i class="fa-regular fa-clock"></i> {{ $movie["duration"] }} Minutes</div>
+                    @foreach (explode(",",$movie["genre"]) as $g)
+                        <span class="badge badge-info me-1">{{ $g }}</span>
+                    @endforeach
             </div>
 
             <!-- SCHEDULE MOVIE -->

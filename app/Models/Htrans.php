@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Htrans extends Model
 {
     use HasFactory;
+
+    protected $with = ["user","schedule","dtrans"];
+
     public function schedule()
     {
         $this->belongsTo(Schedule::class);

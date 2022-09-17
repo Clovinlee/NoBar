@@ -21,11 +21,25 @@ class StudioSeeder extends Seeder
             "nama"=>"Studio 1",
             "slot"=>90
         ]);
+        
         Studio::create([
             "branch"=>1,
             "nama"=>"Studio IMAX",
             "slot"=>150
         ]);
+
+        Studio::create([
+            "branch"=>1,
+            "nama"=>"Studio 2",
+            "slot"=>100
+        ]);
+
+        Studio::create([
+            "branch"=>1,
+            "nama"=>"Studio 3",
+            "slot"=>80
+        ]);
+
         Studio::create([
             "branch"=>2,
             "nama"=>"Studio 1",

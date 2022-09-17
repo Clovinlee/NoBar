@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     use HasFactory;
+
+    protected $with = ["schedule"];
+
     public function schedule()
     {
         $this->hasMany(Schedule::class);

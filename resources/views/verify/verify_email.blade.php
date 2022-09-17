@@ -1,9 +1,16 @@
 @extends('master.masterlayout')
 @section("subtitle","Verify Email")
 
+@section('navbar')
+    <x-navbar></x-navbar>
+@endsection
+
 @section('body')
 <div class="d-flex justify-content-center align-items-center flex-column w-100" style="background-color: ; height:100vh">
     <h1>Please Check Your Email!</h1>
+    <p class="m-0">You've entered <strong>{{ session()->get("email") }}</strong> as the email address for your
+        account.</p>
+    <p>Please verify the email by clicking verify button in your email</p>
     <form action="{{ url('/logout') }}" method="POST">
         @csrf
         <button class="btn btn-danger" type="submit">Go Back</button>

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Dtrans extends Model
 {
     use HasFactory;
+
+    protected $with = ["htrans"];
+
     public function htrans()
     {
         $this->belongsTo(Htrans::class);

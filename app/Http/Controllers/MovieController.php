@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use Illuminate\Support\Facades\Request;
 
 class MovieController extends Controller
 {
@@ -22,6 +23,10 @@ class MovieController extends Controller
 
     public function schedule(Movie $movie){
         return view("movie.schedulepage",["movie" => $movie]);
+    }
+
+    public function booking_seat(Request $r){
+        return view("movie.bookingseat");
     }
 
     /**

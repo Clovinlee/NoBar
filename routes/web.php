@@ -78,8 +78,16 @@ Route::prefix("/movie")->group(function(){
     Route::redirect("/",url("/"));
     Route::get("/{movie:slug}",[MovieController::class,"index"]);
     Route::get("/{movie:slug}/schedule",[MovieController::class,"schedule"]);
+    Route::post("/{movie:slug}/schedule",[MovieController::class,"verifyschedule"]);
 });
 // |----------------------|
+
+// |----------------------|
+// | BOOKING & PAYMENT    |
+// |----------------------|
+Route::get("/booking_seat",[MovieController::class,"booking_seat"]);
+// |----------------------|
+
 
 // |----------------------|
 // | USER                 |

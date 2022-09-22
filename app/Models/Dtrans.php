@@ -13,10 +13,10 @@ class Dtrans extends Model
 
     public function htrans()
     {
-        $this->belongsTo(Htrans::class);
+        return $this->belongsTo(Htrans::class);
     }
     public function chair()
     {
-        $this->belongsTo(Chair::class);
+        return $this->belongsTo(Chair::class);
     }
 }

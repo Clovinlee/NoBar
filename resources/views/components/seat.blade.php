@@ -1,0 +1,1 @@
+<i id="{{ $id }}" style="font-size: 1.4em" class="fa-solid fa-square text-{{ $color }} mx-1 {{ $status=='available' ? 'pointer' : (($status == 'booked') ? 'pointer' : '') }}" status="{{ $status }}" onclick="{{ $status=='available' ? 'bookSeat(event)' : (($status == 'booked') ? 'bookSeat(event)' : '') }}"></i>

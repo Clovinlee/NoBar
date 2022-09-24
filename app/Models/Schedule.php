@@ -20,5 +20,8 @@ class Schedule extends Model
     public function studio(){
         return $this->belongsTo(Studio::class);
     }
+    public function branch(){
+        return $this->belongsTo(Branch::class);
+    }
 
 }

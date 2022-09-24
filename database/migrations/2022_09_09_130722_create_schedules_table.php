@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId("movie_id")->references("id")->on("movies");
             $table->foreignId("studio_id")->references("id")->on("studios");
+            $table->foreignId("branch_id")->references("id")->on("branches");
             $table->dateTime("time");
+            $table->integer("price");
             $table->timestamps();
         });
     }

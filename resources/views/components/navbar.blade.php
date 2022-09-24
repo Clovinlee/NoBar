@@ -1,6 +1,6 @@
 <!-- Navbar -->
 
-<nav class="navbar navbar-expand-lg bg-transparent navbar-dark">
+<nav class="navbar navbar-expand-lg bg-transparent navbar-dark shadow-0">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">Nobar</a>
     </div>
@@ -24,12 +24,12 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a {{ Request::is("/") ? "" : "href=/" }} id="nowplaying_link" target="" class="nav-link pointer"><i
+                    <a {{ Request::is("/") ? "" : "href=/" }} id="nowplaying_link" target="" class="nav-link pointer {{ Request::getRequestUri() == '/' ? 'active' : '' }}"><i
                             class="fa-solid fa-play" class="nav-link"></i> Now Playing</a>
                 </li>
                 <li class="nav-item">
                     <a {{ Request::is("comingsoon") ? "" : "href=comingsoon" }} id="upcoming_link" target=""
-                        class="nav-link pointer"><i class="fa-solid fa-bullhorn"></i> Upcoming</a>
+                        class="nav-link pointer {{ Request::getRequestUri() == '/comingsoon' ? 'active' : '' }}"><i class="fa-solid fa-bullhorn"></i> Upcoming</a>
                 </li>
 
                 <!-- Account -->

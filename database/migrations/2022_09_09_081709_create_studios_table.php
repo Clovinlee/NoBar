@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('studios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("branch")->references("id")->on("branches");
+            $table->foreignId("branch_id")->references("id")->on("branches");
             $table->string("nama");
             $table->integer("slot");
             $table->timestamps();

@@ -17,19 +17,19 @@ class DtransSeeder extends Seeder
     {
         //
         Dtrans::create([
-            "htrans"=>1,
+            "htrans_id"=>1,
             "chair"=>1
         ]);
         Dtrans::create([
-            "htrans"=>1,
+            "htrans_id"=>1,
             "chair"=>3
         ]);
         Dtrans::create([
-            "htrans"=>2,
+            "htrans_id"=>2,
             "chair"=>3
         ]);
         Dtrans::create([
-            "htrans"=>3,
+            "htrans_id"=>3,
             "chair"=>2
         ]);
     }

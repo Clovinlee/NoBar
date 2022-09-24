@@ -17,20 +17,20 @@ class HtransSeeder extends Seeder
     {
         //
         Htrans::create([
-            "user"=>1,
-            "schedule"=>1,
+            "user_id"=>1,
+            "schedule_id"=>1,
             "total"=>100000,
             "status"=>1
         ]);
         Htrans::create([
-            "user"=>1,
-            "schedule"=>3,
+            "user_id"=>1,
+            "schedule_id"=>3,
             "total"=>50000,
             "status"=>1
         ]);
         Htrans::create([
-            "user"=>1,
-            "schedule"=>2,
+            "user_id"=>1,
+            "schedule_id"=>2,
             "total"=>50000,
             "status"=>0
         ]);

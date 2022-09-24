@@ -16,27 +16,27 @@ class ChairSeeder extends Seeder
     public function run()
     {
         Chair::create([
-            "studio"=>"1",
+            "studio_id"=>"1",
             "row"=>"A",
             "column"=>9
         ]);
         Chair::create([
-            "studio"=>"3",
+            "studio_id"=>"3",
             "row"=>"C",
             "column"=>1
         ]);
         Chair::create([
-            "studio"=>"1",
+            "studio_id"=>"1",
             "row"=>"D",
             "column"=>12
         ]);
         Chair::create([
-            "studio"=>"2",
+            "studio_id"=>"2",
             "row"=>"F",
             "column"=>7
         ]);
         Chair::create([
-            "studio"=>"3",
+            "studio_id"=>"3",
             "row"=>"E",
             "column"=>2
         ]);

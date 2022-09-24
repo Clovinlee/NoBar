@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('chairs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("studio")->references("id")->on("studios");
+            $table->foreignId("studio_id")->references("id")->on("studios");
             $table->string("row");
             $table->integer("column");
             $table->timestamps();

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("movie")->references("id")->on("movies");
-            $table->foreignId("studio")->references("id")->on("studios");
+            $table->foreignId("movie_id")->references("id")->on("movies");
+            $table->foreignId("studio_id")->references("id")->on("studios");
             $table->dateTime("time");
             $table->timestamps();
         });

@@ -12,11 +12,13 @@ class schedulePill extends Component
      * @return void
      */
     public $status;
+    public $idJadwal;
 
-    public function __construct($status = "enabled")
+    public function __construct($status = "enabled", $idJadwal)
     {
         //
         $this->status = $status;
+        $this->idJadwal = $idJadwal;
     }
 
     /**

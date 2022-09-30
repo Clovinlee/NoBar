@@ -6,6 +6,9 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,9 +80,17 @@ Route::prefix("/email")->group(function() {
 Route::prefix("/movie")->group(function(){
     Route::redirect("/",url("/"));
     Route::get("/{movie:slug}",[MovieController::class,"index"]);
+    Route::post("/{movie:slug}/schedule",[MovieController::class,"verifyschedule"]);
     Route::get("/{movie:slug}/schedule",[MovieController::class,"schedule"]);
 });
 // |----------------------|
+
+// |----------------------|
+// | BOOKING & PAYMENT    |
+// |----------------------|
+Route::get("/booking_seat/{movie:slug}",[MovieController::class,"verifyschedule"]);
+// |----------------------|
+
 
 // |----------------------|
 // | USER                 |

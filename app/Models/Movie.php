@@ -9,7 +9,7 @@ class Movie extends Model
 {
     use HasFactory;
 
-    protected $with = ["schedule"];
+    protected $table = "movies";
 
     public function schedule()
     {

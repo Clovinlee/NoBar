@@ -13,6 +13,6 @@ class Branch extends Model
     
     public function studio()
     {
-        return $this->hasMany(Studio::class);
+        return $this->hasMany(Studio::class,"studio");
     }
 }

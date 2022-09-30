@@ -21,6 +21,6 @@ class Htrans extends Model
     }
     public function dtrans()
     {
-        return $this->hasMany(Dtrans::class);
+        return $this->hasMany(Dtrans::class,"htrans");
     }
 }

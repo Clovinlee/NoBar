@@ -21,6 +21,6 @@ class Schedule extends Model
     }
     public function htrans()
     {
-        return $this->hasMany(Htrans::class);
+        return $this->hasMany(Htrans::class,"schedule");
     }
 }

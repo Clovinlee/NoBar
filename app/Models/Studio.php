@@ -17,10 +17,10 @@ class Studio extends Model
     }
     public function chair()
     {
-        return $this->hasMany(Chair::class);
+        return $this->hasMany(Chair::class,"studio");
     }
     public function schedule()
     {
-        return $this->hasMany(Schedule::class);
+        return $this->hasMany(Schedule::class,"studio");
     }
 }

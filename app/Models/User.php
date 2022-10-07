@@ -48,8 +48,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ["htrans"];
-
     public function htrans()
     {
         return $this->hasMany(Htrans::class);

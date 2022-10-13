@@ -18,12 +18,24 @@
 <script>
   // console.log("HEY")
   $(document).ready(function () {
+    Reload();
     const page=["dashboard","branch","schedule","movie"];
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+    function Reload(){
+      $.ajax({
+        type: "get",
+        url: "url",
+        data: "data",
+        dataType: "dataType",
+        success: function (response) {
+          
+        }
+      });
+    }
     function PageChange(e){
       const current=$(e.target).attr("target");
       for (let i = 0; i < page.length; i++) {
@@ -40,9 +52,9 @@
     $("#AddBranch").on("click",function(){
       const nama=$("#nama_branch").val();
       $.ajax({
-        type: "POST",
+        type: "get",
         url: "{{url('admin/branch/add')}}",
-        data: {"nama":nama},
+        data: "nama="+nama,
         success: function (response) {
           $(".btn-close").click();
           

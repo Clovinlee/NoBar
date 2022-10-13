@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Branch;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('studios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("branch_id")->references("id")->on("branches");
+            $table->foreignIdFor(Branch::class);
             $table->string("nama");
             $table->integer("slot");
             $table->timestamps();

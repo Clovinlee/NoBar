@@ -11,7 +11,8 @@ class BranchController extends Controller
 {
     public function AddBranch(Request $request)
     {
-        Branch::insert(["nama"=>$request->nama]);
+        $data["nama"]=$request->nama;
+        Branch::insert($request->data);
         return response();
     }
 }

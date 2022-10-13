@@ -15,12 +15,7 @@ class Branch extends Model
         return $this->hasMany(Studio::class);
     }
 
-    public function schedules(){
+    public function schedule(){
         return $this->hasMany(Schedule::class);
-    }
-    public function adminpage(Request $r){
-        if ($r->ajax()) {
-            return Branch::all();
-        }
     }
 }

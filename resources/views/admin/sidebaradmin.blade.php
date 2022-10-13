@@ -1,3 +1,5 @@
+@extends('master.masterlayout')
+@section('body')
 <style>
   body {
   background-color: #fbfbfb;
@@ -103,9 +105,12 @@
 
 <!--Main layout-->
 <main style="margin-top: 58px;">
-  <div class="container pt-4"></div>
+  <div class="container pt-4">
+    @yield('body-nav')
+  </div>
 </main>
 <!--Main layout-->
 <script>
   
 </script>
+@endsection

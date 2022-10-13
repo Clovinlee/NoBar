@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
@@ -107,9 +108,15 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
-    Route::get("/reload", [AdminController::class,"Reload"]);
     Route::prefix('/branch')->group(function () {
+        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
+        
+    });
+    Route::prefix('/movie')->group(function () {
+        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
+        Route::post('/add', [BranchController::class,"AddBranch"]);
+        
     });
 });
 // |----------------------|

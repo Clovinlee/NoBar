@@ -3,67 +3,37 @@
       <section class="mb-4">
         <h1>Branch</h1>
         <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdbranch">Add new Branch here!</button>
-        <div class="accordion accordion-flush" id="accordionFlushExample">
+        <br>
+        <div class="accordion" id="accordionExample">
+          @forelse ($data->branch as $b)
           <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
+            <h2 class="accordion-header" id="heading{{$b->id}}">
               <button
                 class="accordion-button collapsed"
                 type="button"
                 data-mdb-toggle="collapse"
-                data-mdb-target="#flush-collapseOne"
+                data-mdb-target="#collapse{{$b->id}}"
                 aria-expanded="false"
-                aria-controls="flush-collapseOne"
+                aria-controls="collapse{{$b->id}}"
               >
-              Ciputra World
+                {{$b->nama}}
               </button>
             </h2>
-            <div
-              id="flush-collapseOne"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingOne"
-              data-mdb-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                <a href="/admin/{branch}/studio">Add new Studio here!</a>
-                <div class="container-fluid">
-                  Studio 1
-                </div>
-                <div class="container-fluid">
-                  Studio 2
-                </div>
-              </div>
+            <div id="collapse{{$b->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$b->id}}" data-mdb-parent="#accordionExample">
+              <div class="accordion-body" style="padding-left: 2%">
+                <a href="">Add new studio here!</a>
+                @forelse ($b->studio as $s)
+                    <br>
+                    <strong>{{$s->nama}}</strong>
+                @empty
+                    <h3>Branch ini belum punya studio</h3>
+                @endforelse
             </div>
+            <a href="/admin/branch/schedule/{{$b->id}}" class="btn btn-primary" style="margin-left: 2%">Cek Jadwal</a>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-mdb-toggle="collapse"
-                data-mdb-target="#flush-collapseTwo"
-                aria-expanded="false"
-                aria-controls="flush-collapseTwo"
-              >
-                Galaxy Mall
-              </button>
-            </h2>
-            <div
-              id="flush-collapseTwo"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingTwo"
-              data-mdb-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                <a href="/admin/{branch}/studio">Add new Studio here!</a>
-                <div class="container-fluid">
-                  Studio 1
-                </div>
-                <div class="container-fluid">
-                  Studio 2
-                </div>
-              </div>
-            </div>
-          </div>
+          @empty
+              <h1>Belum ada branch!</h1>
+          @endforelse
         </div>
       </section> 
     </div>

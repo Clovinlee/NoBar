@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
+use App\Models\Branch;
+use App\Models\Movie;
+use Illuminate\Database\Eloquent\Collection;
 
 class ScheduleController extends Controller
 {
@@ -13,6 +16,18 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function JadwalBranch($id)
+    {
+        $branch=Branch::find($id);
+        $jadwal=$branch->schedule;
+        return view("admin.schedule")->with("data",["asal"=>"branch","nama"=>$branch->nama,"jadwal"=>$jadwal]);
+    }
+    public function JadwalMovie($id)
+    {
+        $movie=Movie::find($id);
+        $jadwal=$movie->schedule;
+        return view("admin.schedule")->with("data",["asal"=>"movie","nama"=>$movie->judul,"jadwal"=>$jadwal]);
+    }
     public function index()
     {
         //

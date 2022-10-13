@@ -10,16 +10,15 @@
     <div id="div_movie"style="display: none">
       @include('admin.movie')
     </div>
-    <div id="div_schedule" style="display: none">
-      @include('admin.schedule')
-    </div>
 @endsection
 @section('pageScript')
 <script>
   // console.log("HEY")
   $(document).ready(function () {
     Reload();
-    const page=["dashboard","branch","schedule","movie"];
+  });
+  var current=0;
+  const page=["dashboard","branch","movie"];
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -36,8 +35,17 @@
         }
       });
     }
+    function JadwalBranch(){
+      $.ajax({
+        type: "get",
+        url: "/admin/schedule/branch",
+        success: function (response) {
+          
+        }
+      });
+    }
     function PageChange(e){
-      const current=$(e.target).attr("target");
+      current=$(e.target).attr("target");
       for (let i = 0; i < page.length; i++) {
         const p = page[i];
         if (i==current) {
@@ -63,6 +71,5 @@
         }
       });
     });
-  });
 </script>
 @endsection

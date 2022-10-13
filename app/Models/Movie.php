@@ -13,6 +13,6 @@ class Movie extends Model
 
     public function schedule()
     {
-        return $this->hasMany(Schedule::class,"movie");
+        return $this->hasMany(Schedule::class);
     }
 }

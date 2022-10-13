@@ -110,4 +110,4 @@ Route::prefix("/admin")->group(function() {
 // |----------------------|
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
-Route::view("/test","admin.dashboard");
+Route::view("/test","admin.branch.add");

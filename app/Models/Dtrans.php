@@ -9,7 +9,7 @@ class Dtrans extends Model
 {
     use HasFactory;
 
-    protected $with = ["htrans"];
+    //protected $with = ["htrans"];
 
     public function htrans()
     {

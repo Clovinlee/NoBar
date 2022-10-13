@@ -14,6 +14,6 @@ class Chair extends Model
     }
     public function dtrans()
     {
-        return $this->hasMany(Dtrans::class,"chair");
+        return $this->hasMany(Dtrans::class);
     }
 }

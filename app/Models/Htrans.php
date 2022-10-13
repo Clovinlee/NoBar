@@ -9,7 +9,7 @@ class Htrans extends Model
 {
     use HasFactory;
 
-    protected $with = ["user","schedule","dtrans"];
+    //protected $with = ["user","schedule","dtrans"];
 
     public function schedule()
     {
@@ -21,6 +21,6 @@ class Htrans extends Model
     }
     public function dtrans()
     {
-        return $this->hasMany(Dtrans::class,"htrans");
+        return $this->hasMany(Dtrans::class);
     }
 }

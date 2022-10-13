@@ -2,7 +2,7 @@
     <div class="container pt-4" id="branch">
       <section class="mb-4">
         <h1>Branch</h1>
-        <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#staticBackdrop">Add new Schedule here!</button>
+        <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdbranch">Add new Branch here!</button>
         <div class="accordion accordion-flush" id="accordionFlushExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
@@ -75,24 +75,16 @@
           <h5 class="modal-title">Add new Branch</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="" method="post">
-          @csrf
           <div class="modal-body">
             <div class="form-outline mb-4">
-              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"/>
+              <input type="text" class="form-control" id="nama_branch" name="name"/>
               <label class="form-label">Nama branch</label>
-              @error('name')
-                  <div class="invalid-feedback"> 
-                      {{ $message }}
-                  </div>
-                @enderror
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Add branch</button>
+            <button type="button" class="btn btn-primary" id="AddBranch">Add branch</button>
           </div>
-        </form>
       </div>
     </div>
   </div>

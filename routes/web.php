@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SearchController;
@@ -104,8 +105,11 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 // | ADMIN                 |
 // |----------------------|
-Route::prefix("/admin")->group(function() {
-    Route::get("/", [AdminController::class,"index"])->middleware("role:admin");
+Route::prefix("/admin")->middleware("role:admin")->group(function() {
+    Route::get("/", [AdminController::class,"index"]);
+    Route::prefix('/branch')->group(function () {
+        Route::post('/add', [BranchController::class,"AddBranch"]);
+    });
 });
 // |----------------------|
 

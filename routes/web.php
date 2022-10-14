@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -106,10 +108,20 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 // | ADMIN                 |
 // |----------------------|
-Route::prefix("/admin")->group(function() {
-    Route::get("/", [AdminController::class,"index"])->middleware("role:admin");
+Route::prefix("/admin")->middleware("role:admin")->group(function() {
+    Route::get("/", [AdminController::class,"index"]);
+    Route::prefix('/branch')->group(function () {
+        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
+        Route::post('/add', [BranchController::class,"AddBranch"]);
+        
+    });
+    Route::prefix('/movie')->group(function () {
+        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
+        Route::post('/add', [BranchController::class,"AddBranch"]);
+        
+    });
 });
 // |----------------------|
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
-Route::view("/test","admin.dashboard");
+Route::view("/test","admin.branch.add");

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Client\Request;
 
 class Branch extends Model
 {
@@ -14,7 +15,7 @@ class Branch extends Model
         return $this->hasMany(Studio::class);
     }
 
-    public function schedules(){
+    public function schedule(){
         return $this->hasMany(Schedule::class);
     }
 }

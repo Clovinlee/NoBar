@@ -9,7 +9,7 @@ class Htrans extends Model
 {
     use HasFactory;
 
-    protected $with = ["user","schedule","dtrans"];
+    //protected $with = ["user","schedule","dtrans"];
 
     public function schedule()
     {

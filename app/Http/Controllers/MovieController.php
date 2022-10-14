@@ -48,15 +48,14 @@ class MovieController extends Controller
 
     public function verifyschedule(Movie $movie, Request $r){
         $inp = $r->input();
-
-        $token = $inp["_token"] ?? "";
-        if($token == csrf_token()){
+        try {
             $schedule = Schedule::find($inp["idJadwal"]);
-            return view("movie.bookingseat",["movie"=>$movie, "data"=>$inp, "schedule"=>$schedule]);
-        }else{
-            return abort(403);
+            $token = $inp["_token"];
+            $jadwal = $inp["jadwal"];
+        } catch (\Throwable $th) {
+            return redirect(url("/"));
         }
-
+        return view("movie.bookingseat",["movie"=>$movie, "data"=>$inp, "schedule"=>$schedule]);
     }
 
     public function booking_seat(Request $r){

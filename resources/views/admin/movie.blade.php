@@ -20,7 +20,7 @@
                 Duration :<br>
                 {{$m->duration}}<br>
               </p>
-              <a href="/admin/movie/schedule/{{$m->id}}" class="btn btn-primary">Jadwal</a>
+              <button onclick="Schedule(event)" value="/admin/movie/schedule/{{$m->id}}" class="btn btn-primary">Jadwal</button>
               <a href="#!" class="btn btn-warning">Edit</a>
               <a href="#!" class="btn btn-danger">Delete</a>
             </div>

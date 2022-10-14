@@ -78,16 +78,23 @@
             </div>
             <h1 class="text-center mt-4"><strong>LAYAR</strong></h1>
             <div class="col-12 col-md-6 m-auto">
-                <button class="btn btn-danger w-100 mb-2">Confirm Order</button><br>
+                <button class="btn btn-danger w-100 mb-2 disabled" id="btnPay" onclick="confirmPay()">Confirm Order</button><br>
                 <a href="{{ url('/movie/'.$movie->slug.'/schedule') }}"><button class="btn btn-primary w-100">Kembali</button></a>
             </div>
         </div>
     </div>
 
     @section('pageScript')
+        <!-- IMPORT MIDTRANS -->
+        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_SERVERKEY') }}"></script>
+        <!--  -->
+
+        <!-- SCRIPT KURSI -->
         <script>
             var booked = 0;
             var seatList = [];
+
+            
             function bookSeat(e){
                 let seat = $(e.target);
 
@@ -97,6 +104,7 @@
                     changeSeatColor(seat);
                     booked--;
                     $("#ticketQty").text(booked);
+                    $("#btnPay").addClass("disabled");
                     seatList.splice(seatList.indexOf(seat.attr("id")),1);
                     changeSeatText();
                     return;
@@ -111,6 +119,9 @@
                     seat.attr("status","booked");
                     changeSeatColor(seat);
                     booked++;
+                    if(booked >= {{ $data["qtyTicket"] }}){
+                        $("#btnPay").removeClass("disabled");
+                    }
                     seatList.push(seat.attr("id"));
                     changeSeatText();
                 }
@@ -150,6 +161,55 @@
                 seat.removeClass("text-warning");
                 seat.removeClass("text-secondary");
             }
+
+            function confirmPay(){
+                $.ajax({
+                type:'POST',
+                url:'/booking_pay',
+                data:{
+                    _token:'{{ csrf_token() }}',
+                    scheduleId:'{{ $schedule->id }}',
+                    ticketQty:'{{ $data["qtyTicket"] }}',
+                    ticketPrice:'{{ $schedule->price }})',
+                    seatList: JSON.stringify(seatList),
+                },
+                success:function(token) {
+                    snap.pay(token, {
+                        // Optional
+                        onSuccess: function(result){
+                            console.log("Success");
+                            console.log(result);
+                        },
+                        // Optional
+                        onPending: function(result){
+                            console.log("Pending");
+                            console.log(result);
+                            
+                            // {
+                            //     "status_code": "201",
+                            //     "status_message": "Transaksi sedang diproses",
+                            //     "transaction_id": "737949c1-752e-470f-8b54-58e43727968c",
+                            //     "order_id": "584503423",
+                            //     "gross_amount": "200000.00",
+                            //     "payment_type": "qris",
+                            //     "transaction_time": "2022-09-25 21:31:21",
+                            //     "transaction_status": "pending",
+                            //     "fraud_status": "accept",
+                            //     "finish_redirect_url": "http://example.com?order_id=584503423&status_code=201&transaction_status=pending"
+                            // }
+
+                        },
+                        // Optional
+                        onError: function(result){
+                            console.log("Error");
+                            console.log(result);
+                        }
+                    });
+                }
+            });
+            }
         </script>
+        <!--  -->
+
     @endsection
 @endsection

@@ -16,12 +16,12 @@
                 aria-expanded="false"
                 aria-controls="collapse{{$b->id}}"
               >
-                {{$b->nama}}
+                <strong>{{$b->nama}}</strong>
               </button>
             </h2>
-            <div id="collapse{{$b->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$b->id}}" data-mdb-parent="#accordionExample">
+            <div id="collapse{{$b->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$b->id}}">
               <div class="accordion-body" style="padding-left: 2%">
-                <a href="">Add new studio here!</a>
+                <a href="" class="btn btn-warning">Add new studio here!</a>
                 @forelse ($b->studio as $s)
                     <br>
                     <strong>{{$s->nama}}</strong>
@@ -29,7 +29,7 @@
                     <h3>Branch ini belum punya studio</h3>
                 @endforelse
             </div>
-            <a href="/admin/branch/schedule/{{$b->id}}" class="btn btn-primary" style="margin-left: 2%">Cek Jadwal</a>
+            <button onclick="Schedule(event)" value="/admin/branch/schedule/{{$b->id}}" class="btn btn-primary" style="margin-left: 2%">Cek Jadwal</button>
           </div>
           @empty
               <h1>Belum ada branch!</h1>

@@ -6,6 +6,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
@@ -90,7 +91,8 @@ Route::prefix("/movie")->group(function(){
 // |----------------------|
 // | BOOKING & PAYMENT    |
 // |----------------------|
-Route::get("/booking_seat/{movie:slug}",[MovieController::class,"verifyschedule"]);
+Route::get("/booking_seat/{movie:slug}",[MovieController::class,"verifyschedule"])->middleware(["auth","verified"]);
+Route::post("/booking_pay",[TransactionController::class,"bookpayment"]);
 // |----------------------|
 
 

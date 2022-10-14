@@ -45,10 +45,10 @@
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
-        <span href="#" class="list-group-item list-group-item-action py-2 ripple pointer" aria-current="true" onclick="PageChange(event)" target="0" id="nav_dashboard">
+        <span href="#" class="list-group-item list-group-item-action py-2 ripple pointer active" aria-current="true" onclick="PageChange(event)" target="0" id="nav_dashboard">
           <i class="fas fa-tachometer-alt fa-fw me-3"></i>Main dashboard
         </span>
-        <span onclick="PageChange(event)" href="" target="1" id="nav_branch" class="list-group-item list-group-item-action py-2 ripple active"
+        <span onclick="PageChange(event)" href="" target="1" id="nav_branch" class="list-group-item list-group-item-action py-2 ripple"
           ><i class="fas fa-building fa-fw me-3" ></i><span>Branch</span></span>
         <span id="nav_movie" onclick="PageChange(event)" href="" target="2" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-money-bill fa-fw me-3"></i><span>Movie</span></span
         >

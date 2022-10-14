@@ -15,6 +15,8 @@ class AdminController extends Controller
         $data=new stdClass;
         $data->branch=Branch::all();
         $data->schedule=Schedule::all();
+        $data->schedule->asal="";
+        $data->schedule->nama="";
         $data->movie=Movie::all();
         return view("admin.admin")->with("data",$data);
     }

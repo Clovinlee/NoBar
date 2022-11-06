@@ -11,8 +11,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +95,15 @@ Route::prefix("/movie")->group(function(){
 // |----------------------|
 Route::get("/booking_seat/{movie:slug}",[MovieController::class,"verifyschedule"])->middleware(["auth","verified"]);
 Route::post("/booking_pay",[TransactionController::class,"bookpayment"]);
+Route::post("/booking_pay/success",[TransactionController::class, "transactionSuccess"]);
+
+
+Route::prefix("/payment")->group(function(){
+    Route::post("/success",[TransactionController::class,"payment_finish"]);
+    
+    Route::get("/unfinished",[TransactionController::class,"payment_unfinished"]);
+    Route::get("/failed",[TransactionController::class,"payment_failed"]);
+});
 // |----------------------|
 
 

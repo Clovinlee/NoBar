@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Auth;
 
             $transaction_details = array(
                 'order_id' => rand(),
-                'gross_amount' => $total_price, // no decimal allowed for creditcard
+                'gross_amount' => $total_price, 
                 'total_seat' => count($seatList),
             );
 

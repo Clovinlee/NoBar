@@ -10,6 +10,15 @@
     @php $alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; $alphabets = str_split($alphabets); @endphp
     <!--  -->
 
+    <div id="processLoading" style="display: none">
+        <div class="position-absolute w-100 vh-100 bg-black opacity-50 d-flex flex-column justify-content-center align-items-center" style="z-index:99" style="">
+            <div class="spinner-border text-white" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="text-white">Processing payment, please wait</div>
+        </div>
+    </div>
+
     <div class="container-fluid px-3 py-2">
         <div class="col-6" style="font-size: 0.7em">
             <div class="d-flex justify-content-start gap-4">
@@ -163,6 +172,7 @@
             }
 
             function confirmPay(){
+                $("#processLoading").show();
                 $.ajax({
                 type:'POST',
                 url:'/booking_pay',
@@ -170,21 +180,30 @@
                     _token:'{{ csrf_token() }}',
                     scheduleId:'{{ $schedule->id }}',
                     ticketQty:'{{ $data["qtyTicket"] }}',
-                    ticketPrice:'{{ $schedule->price }})',
                     seatList: JSON.stringify(seatList),
                 },
                 success:function(token) {
+                    $("#processLoading").hide();
                     snap.pay(token, {
                         // Optional
                         onSuccess: function(result){
-                            console.log("Success");
-                            console.log(result);
-                        },
+                            $.ajax({
+                                type:"POST",
+                                url:"/booking_pay/success",
+                                data:{
+                                    _token:'{{ csrf_token() }}',
+                                    result:result,
+                                },
+                                success:function(r){
+                                    console.log("SUCCES PAYMENT");
+                                }
+                            },
+                        )},
                         // Optional
                         onPending: function(result){
-                            console.log("Pending");
-                            console.log(result);
-                            
+                            // console.log("Pending");
+                            // console.log(result);
+                            // console.log({{ $schedule->id }})
                             // {
                             //     "status_code": "201",
                             //     "status_message": "Transaksi sedang diproses",
@@ -203,6 +222,16 @@
                         onError: function(result){
                             console.log("Error");
                             console.log(result);
+                            $.ajax({
+                                type: "POST",
+                                url: "/booking_pay/process",
+                                data: {
+                                    _token:'{{ csrf_token() }}',
+                                },
+                                success: function (response) {
+                                    
+                                }
+                            });
                         }
                     });
                 }

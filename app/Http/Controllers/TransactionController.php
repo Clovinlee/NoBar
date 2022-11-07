@@ -2,17 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dtrans;
 use App\Models\Htrans;
 use App\Models\Midtrans as ModelsMidtrans;
 use App\Models\MidtransNotification as ModelsMidtransNotification;
 use App\Models\MidtransNotification\MidtransNotification;
 use App\Models\Schedule;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class TransactionController extends Controller
 {
+    public function transactionProcess(Request $r){
+        $mdResult = json_decode($r->mdResult);
+        $schedule = Schedule::find($r->scheduleId);
+        $qtyTicket = $r->ticketQty;
+        $seatList = json_decode($r->seatList);
+        
+        DB::beginTransaction();
+        try {
+            $t = Transaction::where("transaction_id",$mdResult->transaction_id)->get()->first();
+            $t->transaction_status = $mdResult->transaction_status;
+            $t->save();
+            
+            $h = new Htrans();
+            $h->transaction_id = $t->id;
+            $h->user_id = Auth::user()->id;
+            $h->schedule_id = $schedule->id;
+            $h->status = $mdResult->transaction_status;
+
+            $h->total = $mdResult->gross_amount;
+            // $h->order_id = $mdResult->order_id;
+            // $h->transaction_id = $mdResult->transaction_id;
+            // $h->payment_type = $mdResult->payment_type;
+
+            $h->save();
+
+            foreach ($seatList as $k => $v) {
+                $d = new Dtrans();
+                $d->htrans_id = $h->id;
+                $d->seat = $v;
+                $d->save();
+            }
+
+            DB::commit();
+
+            return 200;
+        } catch (\Throwable $th) {
+            
+            DB::rollBack();
+
+            return $th;
+        }
+    }
+
     public function bookPayment(Request $r){
         if($r->ajax()){
             $md = ModelsMidtrans::getInstance();
@@ -28,44 +74,60 @@ class TransactionController extends Controller
             // ticketQty: "4"
             // _token : "2uEo2zgqLWWVkDnmQNstrFnptDRWeHVU2tUklfc6"
 
-            $mdToken = $md->payment(Schedule::find($r->scheduleId), $r->ticketQty, json_decode($r->seatList));
+            $schedule = Schedule::find($r->scheduleId);
+            $qtyTicket = $r->ticketQty;
+            $seatList = json_decode($r->seatList);
 
-            return $mdToken;
+            $mdToken = $md->payment($schedule, $qtyTicket, $seatList);
+            
+            $json = [
+                "token"=>$mdToken,
+                "schedule"=>$schedule,
+                "seat"=>$seatList,
+            ];
+
+            return json_encode($json);
         }
     }
 
-    public function transactionSuccess(Request $r){
-        if($r->ajax()){
-            $h = new Htrans;
-            $h->user_id = 1;
-            $h->schedule_id = 2;
-            $h->total = 50000;
-            $h->status = 1;
+    public function payment_notification(Request $r){
+        $t = Transaction::where("order_id","=",$r->order_id)->get();
+        if(count($t) != 0){
+            $t = Transaction::where("order_id","=",$r->order_id)->get()->first();
+
+            $h = HTrans::where("transaction_id",$t->id)->get()->first();
+            $h->status = $r->transaction_status;
             $h->save();
+        }else{
+            $t = new Transaction();
+            $t->transaction_id = $r->transaction_id;
+            $t->payment_type = $r->payment_type;
+            $t->order_id = $r->order_id;
+            $t->gross_amount = $r->gross_amount;
         }
-    }
 
-    public function payment_success(Request $r){
-        // $m = ModelsMidtrans::getInstance();
-        // $m->initialize();
-        // $status = \Midtrans\Transaction::status($r->id);
-        // dd($status);
+        $t->transaction_status = $r->transaction_status;
+        $t->save();
+
+        // /Expire Transaction
+        // You can Expire transaction with transaction_status == PENDING (before it become SETTLEMENT or EXPIRE)
+        // $cancel = \Midtrans\Transaction::cancel($orderId);
+        // var_dump($cancel);
+
+
+
+        // Refund Transaction
+        // Refund a transaction (not all payment channel allow refund via API) You can Refund transaction with transaction_status == settlement
+        // $params = array(
+        //     'refund_key' => 'order1-ref1',
+        //     'amount' => 10000,
+        //     'reason' => 'Item out of stock'
+        // );
+        // $refund = \Midtrans\Transaction::refund($orderId, $params);
+        // var_dump($refund);
     }
 
     public function payment_finish(Request $r){
 
-        // $md = ModelsMidtrans::getInstance();
-        // $md->initialize();
-
-        // $notif = new \Midtrans\Notification();
-        // return redirect(env("APP_URL"));
-    }
-
-    public function payment_unfinished(){
-        
-    }
-
-    public function payment_failed(){
-        
     }
 }

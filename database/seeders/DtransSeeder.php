@@ -16,21 +16,21 @@ class DtransSeeder extends Seeder
     public function run()
     {
         //
-        Dtrans::create([
-            "htrans_id"=>1,
-            "chair"=>1
-        ]);
-        Dtrans::create([
-            "htrans_id"=>1,
-            "chair"=>3
-        ]);
-        Dtrans::create([
-            "htrans_id"=>2,
-            "chair"=>3
-        ]);
-        Dtrans::create([
-            "htrans_id"=>3,
-            "chair"=>2
-        ]);
+        // Dtrans::create([
+        //     "htrans_id"=>1,
+        //     "chair"=>1
+        // ]);
+        // Dtrans::create([
+        //     "htrans_id"=>1,
+        //     "chair"=>3
+        // ]);
+        // Dtrans::create([
+        //     "htrans_id"=>2,
+        //     "chair"=>3
+        // ]);
+        // Dtrans::create([
+        //     "htrans_id"=>3,
+        //     "chair"=>2
+        // ]);
     }
 }

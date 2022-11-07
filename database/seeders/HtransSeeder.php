@@ -16,26 +16,26 @@ class HtransSeeder extends Seeder
     public function run()
     {
         //
-        Htrans::create([
-            "user_id"=>1,
-            "order_id"=>"auqi2u81",
-            "schedule_id"=>1,
-            "total"=>100000,
-            "status"=>1
-        ]);
-        Htrans::create([
-            "user_id"=>1,
-            "order_id"=>"ijd81d",
-            "schedule_id"=>3,
-            "total"=>50000,
-            "status"=>1
-        ]);
-        Htrans::create([
-            "user_id"=>1,
-            "order_id"=>"aksdasd02",
-            "schedule_id"=>2,
-            "total"=>50000,
-            "status"=>0
-        ]);
+        // Htrans::create([
+        //     "user_id"=>1,
+        //     "order_id"=>"auqi2u81",
+        //     "schedule_id"=>1,
+        //     "total"=>100000,
+        //     "status"=>1
+        // ]);
+        // Htrans::create([
+        //     "user_id"=>1,
+        //     "order_id"=>"ijd81d",
+        //     "schedule_id"=>3,
+        //     "total"=>50000,
+        //     "status"=>1
+        // ]);
+        // Htrans::create([
+        //     "user_id"=>1,
+        //     "order_id"=>"aksdasd02",
+        //     "schedule_id"=>2,
+        //     "total"=>50000,
+        //     "status"=>0
+        // ]);
     }
 }

@@ -6,11 +6,14 @@ use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Branch;
+use App\Models\Dtrans;
+use App\Models\Htrans;
 use App\Models\Schedule;
 use App\Models\Studio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use stdClass;
 
 use function PHPSTORM_META\map;
 
@@ -52,10 +55,21 @@ class MovieController extends Controller
             $schedule = Schedule::find($inp["idJadwal"]);
             $token = $inp["_token"];
             $jadwal = $inp["jadwal"];
+            $seatList = [];
+            $htrans = Htrans::where("schedule_id",$schedule->id)->where("status","!=","expire")->where("status","!=","deny")->where("status","!=","cancel")->get();
+            foreach ($htrans as $kh => $h) {
+                foreach ($h->dtrans as $kd => $d) {
+                    $seatList[$d->seat] = $h->status;
+                    // $seat = new stdClass();
+                    // $seat->seat = $d->seat;
+                    // $seat->status = $h->status;
+                    // array_push($seatList,$seat);
+                }
+            }
         } catch (\Throwable $th) {
             return redirect(url("/"));
         }
-        return view("movie.bookingseat",["movie"=>$movie, "data"=>$inp, "schedule"=>$schedule]);
+        return view("movie.bookingseat",["movie"=>$movie, "data"=>$inp, "schedule"=>$schedule, "seatList"=>$seatList,"htrans"=>$htrans]);
     }
 
     public function booking_seat(Request $r){

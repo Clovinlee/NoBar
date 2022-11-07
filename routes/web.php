@@ -95,14 +95,15 @@ Route::prefix("/movie")->group(function(){
 // |----------------------|
 Route::get("/booking_seat/{movie:slug}",[MovieController::class,"verifyschedule"])->middleware(["auth","verified"]);
 Route::post("/booking_pay",[TransactionController::class,"bookpayment"]);
-Route::post("/booking_pay/success",[TransactionController::class, "transactionSuccess"]);
+Route::post("/booking_pay/process",[TransactionController::class, "transactionProcess"]);
 
 
 Route::prefix("/payment")->group(function(){
-    Route::post("/success",[TransactionController::class,"payment_finish"]);
+    Route::post("/notification",[TransactionController::class,"payment_notification"]);
+    Route::post("/finish",[TransactionController::class,"payment_finish"]);
     
-    Route::get("/unfinished",[TransactionController::class,"payment_unfinished"]);
-    Route::get("/failed",[TransactionController::class,"payment_failed"]);
+    // Route::get("/unfinished",[TransactionController::class,"payment_unfinished"]);
+    // Route::get("/failed",[TransactionController::class,"payment_failed"]);
 });
 // |----------------------|
 

@@ -41,9 +41,10 @@
             <div class="col-12 d-flex justify-content-center">
                 <table>
                     <!-- Generate Top Number -->
-                    @php $space_seat = 3; $row_seat = 20; $alphanum = 0; @endphp
-                    <!--  -->
-
+                    {{-- Alphanum = indicator for Seat ID --}}
+                    {{-- Space seat = Whitespace after x seat --}}
+                    {{-- Rpw Seat = Per row, how many seat --}}
+                    @php $space_seat = 3; $row_seat = 20; $alphanum = -1; @endphp
                     <tr>
                         <td></td>
                         @for ($i = 1; $i <= $row_seat; $i++)
@@ -53,33 +54,37 @@
                             @endif
                         @endfor
                     </tr>
-                    <tr>
+                    <!-- END Generate Top Number -->
 
                     <!-- Generate Seat -->
                     <!-- intval(($schedule->studio->slot+1)/20) -->
-                    @for ($y = 1; $y <= intval(150/$row_seat); $y++)
-                        {{-- <td><x-seat></x-seat></td> --}}
-                        @for ($x = 1; $x <= $row_seat; $x++)
-                            @if ($x == 1)
-                                <td><strong>{{ strtoupper($alphabets[$alphanum]) }}&nbsp;&nbsp;</strong></td>
-                            @endif
-                            <td><x-seat id="{{ $alphabets[$alphanum].$x }}"></x-seat></td>
-                            @if ($x == $space_seat || $x == $row_seat-$space_seat)
-                                <td>&nbsp;&nbsp;</td>
-                            @endif
-                        @endfor
-                        @php $alphanum += 1 @endphp
-                        </tr><tr>
-                    @endfor
-                    </tr>
                     <tr>
-                        <td><strong>{{ strtoupper($alphabets[$alphanum]) }}</strong></td>
-                        @for ($i = 1; $i <= 150-(intval(150/$row_seat)*$row_seat); $i++)
-                            <td><x-seat id="{{ $alphabets[$alphanum].$i }}"></x-seat></td>
-                            @if ($i == $space_seat || $i == $row_seat-$space_seat)
-                                <td>&nbsp;&nbsp;</td>
-                            @endif
-                        @endfor
+                    @for ($i = 0; $i < 150; $i++)
+                        @php $mod_i = fmod($i,$row_seat) @endphp
+                        @if ($mod_i == 0)
+                            @php $alphanum += 1 @endphp
+                            <td><strong>{{ strtoupper($alphabets[$alphanum]) }}&nbsp;&nbsp;</strong></td>
+                        @endif
+
+                        @php
+                            $idSeat = $alphabets[$alphanum].($mod_i+1);
+                            $status = "available";
+
+                            if(in_array($idSeat, array_keys($seatList))){
+                                $status = $seatList[$idSeat];
+                            }
+                        @endphp
+                        <td><x-seat status="{{ $status }}" id="{{ $idSeat }}"></x-seat></td>
+
+                        @if ($mod_i+1 == $space_seat || $mod_i+1 == $row_seat - $space_seat)
+                            <td>&nbsp;&nbsp;</td>
+                        @endif
+
+                        @if ($mod_i == $row_seat-1) 
+                            </tr> 
+                            <tr>
+                        @endif
+                    @endfor
                     </tr>
                     <!-- End Generate Seat -->
 
@@ -171,6 +176,24 @@
                 seat.removeClass("text-secondary");
             }
 
+            function ajaxTrans(result){
+
+                $.ajax({
+                    type:"POST",
+                    url:"/booking_pay/process",
+                    data:{
+                        _token:'{{ csrf_token() }}',
+                        scheduleId:'{{ $schedule->id }}',
+                        ticketQty:'{{ $data["qtyTicket"] }}',
+                        seatList: JSON.stringify(seatList),
+                        mdResult: JSON.stringify(result),
+                    },
+                    success: function(body){
+                        console.log("DB Added |code : "+body);
+                    }
+                })
+            }
+            var tst = "";
             function confirmPay(){
                 $("#processLoading").show();
                 $.ajax({
@@ -182,25 +205,25 @@
                     ticketQty:'{{ $data["qtyTicket"] }}',
                     seatList: JSON.stringify(seatList),
                 },
-                success:function(token) {
+                success:function(body) {
                     $("#processLoading").hide();
-                    snap.pay(token, {
-                        // Optional
-                        onSuccess: function(result){
-                            $.ajax({
-                                type:"POST",
-                                url:"/booking_pay/success",
-                                data:{
-                                    _token:'{{ csrf_token() }}',
-                                    result:result,
-                                },
-                                success:function(r){
-                                    console.log("SUCCES PAYMENT");
-                                }
+                    var r = JSON.parse(body);
+                    
+                    snap.pay(r.token, {
+                        onSuccess: async function(result){
+                            await ajaxTrans(result)
+                            console.log("SUCCESS PAYMENY");
+
+                            // window.location.replace("http://{{env('APP_URL')}}/user/history")
+
                             },
-                        )},
                         // Optional
                         onPending: function(result){
+                            console.log("PENDING BEGIN");
+                            console.log(result);
+                            tst = result;
+                            ajaxTrans(result)
+
                             // console.log("Pending");
                             // console.log(result);
                             // console.log({{ $schedule->id }})
@@ -222,16 +245,6 @@
                         onError: function(result){
                             console.log("Error");
                             console.log(result);
-                            $.ajax({
-                                type: "POST",
-                                url: "/booking_pay/process",
-                                data: {
-                                    _token:'{{ csrf_token() }}',
-                                },
-                                success: function (response) {
-                                    
-                                }
-                            });
                         }
                     });
                 }

@@ -34,7 +34,7 @@ class TransactionController extends Controller
         $duplicate = false;
 
         foreach ($seatList as $key => $seat) {
-            $seatDB = DB::select('SELECT d.id, d.seat FROM htrans h JOIN dtrans d ON d.htrans_id = h.id WHERE h.schedule_id = ? AND d.seat = ?;', [$schedule->id, $seat]);
+            $seatDB = DB::select('SELECT d.id, d.seat FROM htrans h JOIN dtrans d ON d.htrans_id = h.id WHERE h.schedule_id = ? AND d.seat = ? AND h.status != ?;', [$schedule->id, $seat, 'expire']);
             $duplicate = $seatDB != null;
             if($duplicate == true){
                 break;

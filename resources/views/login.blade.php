@@ -38,7 +38,7 @@
 
         <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
-        <div class="text-center">
+        {{-- <div class="text-center">
             <p>Not a member? <a href="{{ url('/register') }}">Register</a></p>
             <p>or sign up with:</p>
             <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -56,7 +56,7 @@
             <button type="button" class="btn btn-primary btn-floating mx-1">
                 <i class="fab fa-github"></i>
             </button>
-        </div>
+        </div> --}}
     </form>
 </div>
 

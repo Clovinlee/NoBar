@@ -73,7 +73,7 @@
       
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
-        <p class="text-center">Already a member? <a href="{{ url('/login') }}">Login now</a></p>
+        {{-- <p class="text-center">Already a member? <a href="{{ url('/login') }}">Login now</a></p>
 
         <!-- Register buttons -->
         <div class="text-center">
@@ -93,7 +93,7 @@
           <button type="button" class="btn btn-primary btn-floating mx-1">
             <i class="fab fa-github"></i>
           </button>
-        </div>
+        </div> --}}
       </form>
 </div>
 @stop

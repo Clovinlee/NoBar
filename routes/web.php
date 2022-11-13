@@ -111,6 +111,7 @@ Route::prefix("/user")->group(function() {
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
     Route::prefix('/branch')->group(function () {
+        Route::get("/search",[BranchController::class,"SearchBranch"]);
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
         Route::post('/{id}', [BranchController::class,"EditBranch"]);

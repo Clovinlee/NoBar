@@ -39,4 +39,11 @@ class BranchController extends Controller
             return json_encode($b);
         }
     }
+    public function SearchBranch(Request $r)
+    {
+        if ($r->ajax()) {
+            $b=Branch::where("nama","like","%".$r->nama."%")->get();
+            return json_encode($b);
+        }
+    }
 }

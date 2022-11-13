@@ -138,5 +138,17 @@
         cbranch=$(this).attr("data-id")
         $("#hapusbranchh1").text("Hapus Branch "+d+"?")
       })
+      $("#btn_search_branch").click(function(){
+        const nama=$("#search_branch").val()
+        dn=$.ajax({
+          type:"get",
+          url:"admin/branch/search",
+          data:{
+            nama:nama
+          },success:function(data){
+            Reload(JSON.parse(data,false))
+          }
+        })
+      })
 </script>
 @endsection

@@ -2,6 +2,11 @@
     <div class="container pt-4" id="branch">
       <section class="mb-4">
         <h1>Branch</h1>
+        <div class="form-outline mb-4">
+          <input type="text" class="form-control" id="search_branch" name="name"/>
+          <label class="form-label">Nama branch</label>
+        </div>
+        <button class="btn btn-primary" id="btn_search_branch">Search</button>
         <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdbranch">Add new Branch here!</button>
         <br>
         <div class="accordion" id="accordionExample">

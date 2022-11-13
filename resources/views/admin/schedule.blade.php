@@ -4,8 +4,7 @@
       <h1>Jadwal {{$data->schedule->nama}}</h1>
       <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#staticBackdrop">Add new schedule here!</button>
       <br><br>
-      <table class="table table-striped" id="schedule_table">
-        <tr>
+      <table class="table table-striped">
           <thead>
             <th>Branch</th>
             <th>Studio</th>
@@ -13,8 +12,8 @@
             <th>Waktu Tayang</th>
             <th>Harga</th>
           </thead>
-        </tr>
-        @forelse ($data->schedule as $s)
+          <tbody id="schedule_table">
+            @forelse ($data->schedule as $s)
             <tr>
               <td>{{$s->branch->nama}}</td>
               <td>{{$s->studio->nama}}</td>
@@ -25,6 +24,7 @@
         @empty
             <h1>Belum ada jadwal untuk {{$data->schedule->asal}} ini!</h1>
         @endforelse
+          </tbody>
       </table>
     </section> 
   </div>

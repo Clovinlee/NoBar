@@ -76,7 +76,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand" href="#">
-        NOBAR
+        <img src="{{asset('/storage/app/public/logo.jpg')}}" width="20px" alt="">
       </a>
       <!-- Search form -->
       <form class="d-none d-md-flex input-group w-auto my-auto">

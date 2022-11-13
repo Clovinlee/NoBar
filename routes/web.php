@@ -113,6 +113,8 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::prefix('/branch')->group(function () {
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
+        Route::post('/{id}', [BranchController::class,"EditBranch"]);
+        Route::post('/{id}/delete', [BranchController::class,"DeleteBranch"]);
         
     });
     Route::prefix('/movie')->group(function () {

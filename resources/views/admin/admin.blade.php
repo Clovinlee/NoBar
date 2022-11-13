@@ -18,27 +18,18 @@
 <script>
   // console.log("HEY")
   $(document).ready(function () {
-    Reload();
+    //Reload();
   });
   var current=0;
+  var cbranch=-1;
   const page=["dashboard","branch","movie"];
-    function Reload(){
-      $.ajax({
-        type: "get",
-        url: "/admin",
-        success: function (response) {
-          
-        }
-      });
-    }
-    function JadwalBranch(){
-      $.ajax({
-        type: "get",
-        url: "/admin/schedule/branch",
-        success: function (response) {
-          
-        }
-      });
+    function Reload(data){
+      $("#accordionExample").html("")
+      var str="";
+      data.forEach(d => {
+        str+="<div class='accordion-item' id='branchacc"+d.id+"'><h2 class='accordion-header' id='heading"+d.id+"'><button class='accordion-button collapsed'type='button'data-mdb-toggle='collapse'data-mdb-target='#collapse"+d.id+"'aria-expanded='false'aria-controls='collapse"+d.id+"'><strong>"+d.nama+"</strong></h2><div id='collapse"+d.id+"' class='accordion-collapse collapse' aria-labelledby='heading"+d.id+"'><div class='accordion-body' style='padding-left: 2%'><button class='linkgantinama btn btn-secondary' data-mdb-toggle='modal' data-id='"+d.id+"' d='"+d.nama+"' data-mdb-target='#modaleditbranch'>Ganti nama branch?</button><button class='linkhapusbranch btn btn-danger' data-mdb-toggle='modal'data-id='"+d.id+"' d='"+d.nama+"' data-mdb-target='#modaldeletebranch'>Hapus branch ini!</button><a href='' class='btn btn-warning'>Add new studio here!</a><h3>Branch ini belum punya studio</h3></div><button onclick='Schedule(event)' value='/admin/branch/schedule/"+d.id+"'class='btn btn-primary' style='margin-left: 2%'>Cek Jadwal</button></div>"
+          });
+          $("#accordionExample").html(str)
     }
     function Schedule(e) {
     const url=$(e.target).val();
@@ -53,24 +44,8 @@
           $("#div_"+p).css("display","none");
         };
         const data=JSON.parse(response);
-        const table=$("#schedule_table");
-        table.html("");
-        table.addClass("table table-striped");
-        const head=document.createElement("thead");
-        const td1=document.createElement("td");
-        td1.innerHTML="Branch"
-        const td2=document.createElement("td");
-        td2.innerHTML="Studio"
-        const td3=document.createElement("td");
-        td3.innerHTML="Movie"
-        const td4=document.createElement("td");
-        td4.innerHTML="Waktu Tayang"
-        const td5=document.createElement("td");
-        td5.innerHTML="Durasi"
-        const td6=document.createElement("td");
-        td6.innerHTML="Price"
-        head.append(td1,td2,td3,td4,td5,td6);
-        table.append(head);
+        const tbody=$("#schedule_table");
+        tbody.html("");
         for (let i = 0; i < data.schedule.length; i++) {
           const tr=document.createElement("tr");
           const td1=document.createElement("td");
@@ -86,7 +61,7 @@
           const td6=document.createElement("td");
           td6.innerHTML=data.schedule[i].price
           tr.append(td1,td2,td3,td4,td5,td6);
-          table.append(tr);
+          tbody.append(tr);
         }
       }
     });
@@ -105,19 +80,63 @@
         }
       };
     } 
+    $("#EditBranch").on("click",function(){
+      const nama=$("#nama_branch_edit").val();
+      dn=$.ajax({
+        type:"post",
+        url:"/admin/branch/"+cbranch,
+        data: {
+          _token:'{{ csrf_token() }}',
+          nama:nama,
+          id:cbranch
+        },
+        success:function(data){
+          var d=JSON.parse(data,false)
+          Reload(d)
+        }
+      })
+    })
+    $("#DeleteBranch").on("click",function(){
+      dn=$.ajax({
+        type:"post",
+        url:"/admin/branch/"+cbranch+"/delete",
+        data: {
+          _token:'{{ csrf_token() }}',
+          id:cbranch
+        },
+        success:function(data){
+          var d=JSON.parse(data,false)
+          Reload(d)
+        }
+      })
+    })
     $("#AddBranch").on("click",function(){
       const nama=$("#nama_branch").val();
-      $.ajax({
-        type: "get",
-        url: "{{url('admin/branch/add')}}",
-        data: "nama="+nama,
-        success: function (response) {
-          $(".btn-close").click();
-          
-        }, error: function(){
-          alert("error")
+      dn=$.ajax({
+        type: "POST",
+        url: "/admin/branch/add",
+        data: {
+          _token:'{{ csrf_token() }}',
+          nama:nama,
+        },
+        success: function(data){
+          var d=JSON.parse(data,false)
+          var temp=$("#branchacc"+d.parent).html()
+          var temp2="<div class='accordion-item' id='branchacc"+d.id+"'><h2 class='accordion-header' id='heading"+d.id+"'><button class='accordion-button collapsed'type='button'data-mdb-toggle='collapse'data-mdb-target='#collapse"+d.id+"'aria-expanded='false'aria-controls='collapse"+d.id+"'><strong>"+d.nama+"</strong></h2><div id='collapse"+d.id+"' class='accordion-collapse collapse' aria-labelledby='heading"+d.id+"'><div class='accordion-body' style='padding-left: 2%'><button class='linkgantinama btn btn-secondary' data-mdb-toggle='modal' data-id='"+d.id+"' d='"+d.nama+"' data-mdb-target='#modaleditbranch'>Ganti nama branch?</button><button class='linkhapusbranch btn btn-danger' data-mdb-toggle='modal'data-id='"+d.id+"' d='"+d.nama+"' data-mdb-target='#modaldeletebranch'>Hapus branch ini!</button><a href='' class='btn btn-warning'>Add new studio here!</a><h3>Branch ini belum punya studio</h3></div><button onclick='Schedule(event)' value='/admin/branch/schedule/"+d.id+"'class='btn btn-primary' style='margin-left: 2%'>Cek Jadwal</button></div>"
+          $("#branchacc"+d.parent).html(temp+temp2)
         }
       });
+      
     });
+    $("#accordionExample").on('click','.linkgantinama',function(e){
+        const d=$(this).attr("d")
+        cbranch=$(this).attr("data-id")
+        $("#nama_branch_edit").val(d)
+      })
+      $("#accordionExample").on('click','.linkhapusbranch',function(e){
+        const d=$(this).attr("d")
+        cbranch=$(this).attr("data-id")
+        $("#hapusbranchh1").text("Hapus Branch "+d+"?")
+      })
 </script>
 @endsection

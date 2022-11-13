@@ -98,6 +98,10 @@
         </div>
     </div>
 
+    @if (Session::has("bookedseat"))
+        <x-toast title="Error" type="danger">{!! Session::get("bookedseat") !!}</x-toast>
+    @endif
+
     @section('pageScript')
         <!-- IMPORT MIDTRANS -->
         <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_SERVERKEY') }}"></script>
@@ -107,7 +111,6 @@
         <script>
             var booked = 0;
             var seatList = [];
-
             
             function bookSeat(e){
                 let seat = $(e.target);
@@ -176,6 +179,8 @@
                 seat.removeClass("text-secondary");
             }
 
+            //TODO: Test 5 minute transaction
+
             function ajaxTrans(result){
 
                 $.ajax({
@@ -190,12 +195,47 @@
                     },
                     success: function(body){
                         console.log("DB Added |code : "+body);
+                        window.location.replace("http://{{env('APP_URL')}}/user/history");
                     }
                 })
             }
             var tst = "";
-            function confirmPay(){
+            async function confirmPay(){
                 $("#processLoading").show();
+
+                $.ajax({
+                    type:"POST",
+                    url:"/booking_pay/check",
+                    data:{
+                        _token:'{{ csrf_token() }}',
+                        scheduleId:'{{ $schedule->id }}',
+                        ticketQty:'{{ $data["qtyTicket"] }}',
+                        seatList: JSON.stringify(seatList),
+                    },
+                    success:function(duplicate){
+                        if(duplicate == true){
+                            //If chair in pending state
+                            $.ajax({
+                                type:"POST",
+                                url:"/booking_seat/refreshBooked",
+                                data:{
+                                    _token:'{{ csrf_token() }}',
+                                    seatList:JSON.stringify(seatList),
+                                },
+                                success: function(body){
+                                    window.location.reload();
+                                }
+                            })
+                            // $("#processLoading").hide();
+                        }else{
+                            ajaxPay();
+                        }
+                    }
+                });
+                
+            }
+
+            function ajaxPay(){
                 $.ajax({
                 type:'POST',
                 url:'/booking_pay',
@@ -208,21 +248,18 @@
                 success:function(body) {
                     $("#processLoading").hide();
                     var r = JSON.parse(body);
-                    
                     snap.pay(r.token, {
                         onSuccess: async function(result){
                             await ajaxTrans(result)
-                            console.log("SUCCESS PAYMENY");
-
-                            // window.location.replace("http://{{env('APP_URL')}}/user/history")
-
+                            console.log("SUCCESS PAYMENt");
                             },
-                        // Optional
-                        onPending: function(result){
-                            console.log("PENDING BEGIN");
+                        onPending: async function(result){
                             console.log(result);
                             tst = result;
-                            ajaxTrans(result)
+                            await ajaxTrans(result);
+                            console.log("PENDING Payment");
+
+                            // window.location.replace("http://{{env('APP_URL')}}/user/history")
 
                             // console.log("Pending");
                             // console.log(result);
@@ -248,8 +285,9 @@
                         }
                     });
                 }
-            });
+             });
             }
+
         </script>
         <!--  -->
 

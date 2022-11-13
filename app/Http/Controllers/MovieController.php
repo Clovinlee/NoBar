@@ -49,6 +49,10 @@ class MovieController extends Controller
         return view("movie.schedulepage",["movie" => $movie, "scheduleNow" => $scheduleNow, "scheduleTomorrow" => $scheduleTomorrow, "branchNow" => $branchNow, "branchTomorrow" => $branchTomorrow]);
     }
 
+    public function verifyseat(Movie $movie, Request $r){
+        dd($r->seats);
+    }
+
     public function verifyschedule(Movie $movie, Request $r){
         $inp = $r->input();
         try {
@@ -79,69 +83,16 @@ class MovieController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function refreshBooked(Request $r){
+        if($r->ajax()){
+            $seatList = json_decode($r->seatList);
+            $output = "Seats of <b>";
+            $output .= join(", ",$seatList)."</b> are booked. Please choose another seat!";
+
+            Session::flash("bookedseat",$output);
+
+            return $output;
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMovieRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreMovieRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Movie  $movie
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Movie $movie)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Movie  $movie
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Movie $movie)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMovieRequest  $request
-     * @param  \App\Models\Movie  $movie
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMovieRequest $request, Movie $movie)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Movie  $movie
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Movie $movie)
-    {
-        //
-    }
 }

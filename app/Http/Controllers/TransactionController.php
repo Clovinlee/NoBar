@@ -16,7 +16,37 @@ use Illuminate\Support\Facades\Session;
 
 class TransactionController extends Controller
 {
+
+    public function checkBook(Request $r){
+        $schedule = Schedule::find($r->scheduleId);
+        $qtyTicket = $r->ticketQty;
+        $seatList = json_decode($r->seatList);
+
+        // $exist = DB::select('select * from users where active = ?', [1])
+
+        // $htrans = Htrans::where("schedule_id",$schedule->id)->get();
+        // foreach ($htrans as $key => $h) {
+        //     foreach ($h->dtrans() as $k => $d) {
+                
+        //     }
+        // }
+
+        $duplicate = false;
+
+        foreach ($seatList as $key => $seat) {
+            $seatDB = DB::select('SELECT d.id, d.seat FROM htrans h JOIN dtrans d ON d.htrans_id = h.id WHERE h.schedule_id = ? AND d.seat = ?;', [$schedule->id, $seat]);
+            $duplicate = $seatDB != null;
+            if($duplicate == true){
+                break;
+            }
+        }
+
+        // True = duplikat, False = Non duplikat
+        return $duplicate;
+    }
+
     public function transactionProcess(Request $r){
+
         $mdResult = json_decode($r->mdResult);
         $schedule = Schedule::find($r->scheduleId);
         $qtyTicket = $r->ticketQty;

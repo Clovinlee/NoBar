@@ -63,7 +63,7 @@
     @if (session()->has("success"))
         <x-toast title="Success" type="success">{{ session("success") }}</x-toast>
     @elseif(session()->has("loginError"))
-    <x-toast title="Error" type="danger">{{ session("loginError") }}</x-toast>
+        <x-toast title="Error" type="danger">{{ session("loginError") }}</x-toast>
     @endif
 @stop
 

@@ -93,9 +93,17 @@ Route::prefix("/movie")->group(function(){
 // |----------------------|
 // | BOOKING & PAYMENT    |
 // |----------------------|
-Route::get("/booking_seat/{movie:slug}",[MovieController::class,"verifyschedule"])->middleware(["auth","verified"]);
-Route::post("/booking_pay",[TransactionController::class,"bookpayment"]);
-Route::post("/booking_pay/process",[TransactionController::class, "transactionProcess"]);
+Route::prefix("/booking_seat")->middleware(["auth","verified"])->group(function(){
+    Route::get("/{movie:slug}",[MovieController::class,"verifyschedule"]);
+    Route::get("/{movie:slug}/{seats}",[MovieController::class,"verifyseat"]);
+    Route::post("/refreshBooked",[MovieController::class, "refreshBooked"]);
+});
+
+Route::prefix("/booking_pay")->group(function() {
+    Route::post("/",[TransactionController::class,"bookpayment"]);
+    Route::post("/process",[TransactionController::class, "transactionProcess"]);
+    Route::post("/check",[TransactionController::class, "checkBook"]);
+});
 
 
 Route::prefix("/payment")->group(function(){

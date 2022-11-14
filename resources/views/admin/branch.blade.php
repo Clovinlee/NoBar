@@ -6,7 +6,7 @@
           <input type="text" class="form-control" id="search_branch" name="name"/>
           <label class="form-label">Nama branch</label>
         </div>
-        <button class="btn btn-primary" id="btn_search_branch">Search</button>
+        <button class="btn btn-primary" id="btn_search_branch">Search</button><br>
         <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdbranch">Add new Branch here!</button>
         <br>
         <div class="accordion" id="accordionExample">
@@ -28,10 +28,14 @@
               <div class="accordion-body" style="padding-left: 2%">
                 <button class="linkgantinama btn btn-secondary" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaleditbranch">Ganti nama branch?</button>
                 <button class="linkhapusbranch btn btn-danger" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaldeletebranch">Hapus branch ini!</button>
-                <a href="" class="btn btn-warning">Add new studio here!</a>
+                <a href="" class="tambahstudio btn btn-warning" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaladdstudio">Add new studio here!</a>
                 @forelse ($b->studio as $s)
                     <br>
                     <strong>{{$s->nama}}</strong>
+                    <br>
+                    <button class="linkeditstudio btn-warning btn" data-mdb-toggle="modal"data-id='{{$s->id}}' data-slot='{{$s->slot}}' d='{{$s->nama}}' data-mdb-target="#modaleditstudio">Edit studio</button>
+                    <button class="linkhapusstudio btn-danger btn" data-mdb-toggle="modal"data-id='{{$s->id}}' d='{{$s->nama}}' data-mdb-target="#modalhapusstudio">Hapus studio</button>
+
                 @empty
                     <h3>Branch ini belum punya studio</h3>
                 @endforelse
@@ -65,6 +69,72 @@
       </div>
     </div>
   </div>
+  <div class="modal" tabindex="-1" id="modaladdstudio">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modaladdstudioh5">Add new Studio for </h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">
+            <div class="form-outline mb-4">
+              <input type="text" class="form-control" id="nama_studio" name="name"/>
+              <label class="form-label">Nama Studio</label><br>
+              <input type="number" class="form-control" id="slot_studio" name="slot"/>
+              <label  for="slot">Jumlah Slot</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddStudio">Add new studio!</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" id="modaladdstudio">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modaladdstudioh5">Add new Studio for </h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">
+            <div class="form-outline mb-4">
+              <input type="text" class="form-control" id="nama_studio" name="name"/>
+              <label class="form-label">Nama Studio</label><br>
+              <input type="number" class="form-control" id="slot_studio" name="slot"/>
+              <label  for="slot">Jumlah Slot</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddStudio">Add new studio!</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" id="modaleditstudio">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Studio </h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">
+            <div class="form-outline mb-4">
+              <input type="text" class="form-control" id="nama_studio_edit" name="name"/>
+              <label class="form-label">Nama Studio</label><br>
+              <label for="slot">Jumlah Slot</label>
+              <input type="number" class="form-control" id="slot_studio_edit" name="slot"/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="EditStudio">Edit Studio!</button>
+          </div>
+      </div>
+    </div>
+  </div>
   <div class="modal" tabindex="-1" id="modaldeletebranch">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -80,6 +150,25 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">No</button>
             <button type="button" class="btn btn-danger" data-mdb-dismiss="modal"id="DeleteBranch">Yes</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" id="modalhapusstudio">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Hapus Studio</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">
+            <div class="form-outline mb-4">
+              <h1 id="hapusstudioh1">Yakin mau hapus Studio ini?</h1>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">No</button>
+            <button type="button" class="btn btn-danger" data-mdb-dismiss="modal"id="DeleteStudio">Yes</button>
           </div>
       </div>
     </div>

@@ -26,6 +26,9 @@ class BranchController extends Controller
             $branch=Branch::find($r->id);
             $branch->delete();
             $b=Branch::all();
+            foreach ($b as $k => $v) {
+                $v->studio=$v->studio;
+            }
             return json_encode($b);
         }
     }
@@ -36,6 +39,9 @@ class BranchController extends Controller
             $branch->nama=$r->input("nama");
             $branch->save();
             $b=Branch::all();
+            foreach ($b as $k => $v) {
+                $v->studio=$v->studio;
+            }
             return json_encode($b);
         }
     }

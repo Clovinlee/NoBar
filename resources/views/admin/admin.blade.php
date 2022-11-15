@@ -13,6 +13,9 @@
     <div id="div_schedule"style="display: none">
       @include('admin.schedule')
     </div>
+    <div id="div_snack"style="display: none">
+      @include('admin.snack')
+    </div>
 @endsection
 @section('pageScript')
 <script>
@@ -23,7 +26,7 @@
   var current=0;
   var cbranch=-1;
   var cstudio=-1;
-  const page=["dashboard","branch","movie"];
+  const page=["dashboard","branch","movie","snack"];
     function Reload(data){
       $("#accordionExample").html("")
       var str="";

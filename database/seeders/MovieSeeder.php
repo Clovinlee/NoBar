@@ -67,5 +67,57 @@ class MovieSeeder extends Seeder
             "duration"=>"30",
             "status"=>"0",
         ]);
+
+        Movie::create([
+            "judul"=>"Avenger Last Breath",
+            "slug"=>"avenger-last-breath",
+            "image"=>"avengerlastbreath.jpg",
+            "director"=>"Chrisanto Sinatra",
+            "producer"=>"Avi Arad, Amy Pascal, Phil Lord, Christopher Miller, Christina Steinberg",
+            "casts"=>"Rachel Brosnahan, Michael Chernus, Christopher Denham",
+            "Synopsis"=>"In 1943, thor mati.",
+            "genre"=>"History, War",
+            "duration"=>"120",
+            "status"=>"0",
+        ]);
+
+        Movie::create([
+            "judul"=>"Annoying George",
+            "slug"=>"annoying-george",
+            "image"=>"annoyinggeorge.jpg",
+            "director"=>"Georgio Manadaros",
+            "producer"=>"Avi Arad, Amy Pascal, Phil Lord, Christopher Miller, Christina Steinberg",
+            "casts"=>"Rachel Brosnahan, Michael Chernus, Christopher Denham",
+            "Synopsis"=>"George the jungle hates the jungle.",
+            "genre"=>"Nature, Life",
+            "duration"=>"135",
+            "status"=>"0",
+        ]);
+
+        Movie::create([
+            "judul"=>"The State of Detroit",
+            "slug"=>"the-state-of-detroit",
+            "image"=>"thestateofdetroit.jpg",
+            "director"=>"Makalo Kamalo",
+            "producer"=>"Avi Arad, Amy Pascal, Phil Lord, Christopher Miller, Christina Steinberg",
+            "casts"=>"Rachel Brosnahan, Michael Chernus, Christopher Denham",
+            "Synopsis"=>"Detroit or texas, you choose.",
+            "genre"=>"Nature, Life",
+            "duration"=>"135",
+            "status"=>"0",
+        ]);
+
+        Movie::create([
+            "judul"=>"CyberNesia",
+            "slug"=>"cybernesia",
+            "image"=>"cybernesia.jpg",
+            "director"=>"Kamaji Madaji",
+            "producer"=>"Avi Arad, Amy Pascal, Phil Lord, Christopher Miller, Christina Steinberg",
+            "casts"=>"Rachel Brosnahan, Michael Chernus, Christopher Denham",
+            "Synopsis"=>"Wake up bamboo runcing, we have a city to burn",
+            "genre"=>"History, cyberpunk",
+            "duration"=>"135",
+            "status"=>"0",
+        ]);
     }
 }

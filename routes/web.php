@@ -32,7 +32,10 @@ use Illuminate\Support\Facades\Session;
 Route::get('/', [PageController::class,"index"]);
 // ->middleware("role:admin,manager");
 
-Route::get('/comingsoon',[PageController::class,"comingsoon"]);
+Route::get('/nowplaying',[PageController::class,"nowplaying"])->name("nowplaying");
+Route::get('/comingsoon',[PageController::class,"comingsoon"])->name("comingsoon");
+Route::get('/membership',[PageController::class,"membership"])->name("membership");
+Route::get('/contact',[PageController::class,"contact"])->name("contact");
 
 Route::get("/find", [SearchController::class,"search"]);
 
@@ -144,4 +147,4 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
 // |----------------------|
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
-Route::view("/test","admin.branch.add");
+Route::view("/test","index");

@@ -27,8 +27,24 @@ class MovieController extends Controller
 
     public function index(Movie $movie)
     {
-        //
-        return view("movie.detailmovie",["movie" => $movie]);
+        //Now playing or Upcoming
+        $queryStatus = DB::select('select * from movies m where m.id = ? and m.id not in (select movie_id from schedules)',[$movie->id]);
+        $movieStatus = "Upcoming";
+        if(count($queryStatus) == 0){
+            $movieStatus = "Now Playing";
+        }
+
+        //Shows for 4 days ahead of schedule
+        $scheduleUntil = env("WEEK_LATER");
+
+        $tNow = date("Y-m-d");
+        $tNext = date("Y-m-d", strtotime(date("Y-m-d") . $scheduleUntil." days"));
+
+        $schedules = $movie->schedule()->whereDate("time",">=",$tNow)->whereDate("time","<=",$tNext)->orderBy('time',"ASC");
+
+        $branches = $schedules->get()->unique("branch_id")->pluck("branch_id");
+
+        return view("movie.detailmovie",["movie" => $movie, "movieStatus" => $movieStatus, "branches" => $branches, "schedules" => $schedules, "scheduleUntil"=>$scheduleUntil]);
     }
 
     public function schedule(Movie $movie){

@@ -85,7 +85,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>3,
             "studio_id"=>3, 
             "branch_id"=>1,
             "price"=>45000,
@@ -93,7 +93,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>3,
             "studio_id"=>4, 
             "branch_id"=>1,
             "price"=>45000,
@@ -101,7 +101,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>3,
             "studio_id"=>5, 
             "branch_id"=>3,
             "price"=>45000,
@@ -109,7 +109,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>4,
             "studio_id"=>5, 
             "branch_id"=>2,
             "price"=>45000,
@@ -117,7 +117,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>4,
             "studio_id"=>5, 
             "branch_id"=>2,
             "price"=>45000,
@@ -125,7 +125,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>4,
             "studio_id"=>5, 
             "branch_id"=>3,
             "price"=>45000,
@@ -133,7 +133,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>4,
             "studio_id"=>5, 
             "branch_id"=>3,
             "price"=>45000,
@@ -143,7 +143,7 @@ class ScheduleSeeder extends Seeder
         // NEXT DAY
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>4,
             "studio_id"=>1, 
             "branch_id"=>1,
             "price"=>50000,
@@ -151,7 +151,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>3,
             "studio_id"=>2, 
             "branch_id"=>1,
             "price"=>50000,
@@ -159,7 +159,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>2,
             "studio_id"=>3, 
             "branch_id"=>1,
             "price"=>50000,
@@ -167,7 +167,7 @@ class ScheduleSeeder extends Seeder
         ]);
 
         Schedule::create([
-            "movie_id"=>1,
+            "movie_id"=>3,
             "studio_id"=>4, 
             "branch_id"=>1,
             "price"=>50000,
@@ -235,25 +235,25 @@ class ScheduleSeeder extends Seeder
             "studio_id"=>5, 
             "branch_id"=>3,
             "price"=>50000,
-            "time"=>date("Y-m-d H:i:s",strtotime("2022-09-26 22:40:00"))
+            "time"=>date("Y-m-d H:i:s",strtotime("$tNext 22:40:00"))
         ]);
 
         //
 
-        Schedule::create([
-            "movie_id"=>3,
-            "studio_id"=>5, 
-            "branch_id"=>2,
-            "price"=>50000,
-            "time"=>date("Y-m-d H:i:s",strtotime("2022-09-23 12:00:00"))
-        ]);
+        // Schedule::create([
+        //     "movie_id"=>3,
+        //     "studio_id"=>5, 
+        //     "branch_id"=>2,
+        //     "price"=>50000,
+        //     "time"=>date("Y-m-d H:i:s",strtotime("2022-09-23 12:00:00"))
+        // ]);
 
-        Schedule::create([
-            "movie_id"=>4,
-            "studio_id"=>5, 
-            "branch_id"=>3,
-            "price"=>50000,
-            "time"=>date("Y-m-d H:i:s",strtotime("2022-09-23 08:45:00"))
-        ]);
+        // Schedule::create([
+        //     "movie_id"=>4,
+        //     "studio_id"=>5, 
+        //     "branch_id"=>3,
+        //     "price"=>50000,
+        //     "time"=>date("Y-m-d H:i:s",strtotime("2022-09-23 08:45:00"))
+        // ]);
     }
 }

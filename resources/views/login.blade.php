@@ -2,14 +2,15 @@
 @section("subtitle","Login")
 
 @section("navbar")
-<x-navbar></x-navbar>
+<x-navbar2></x-navbar2>
 @stop
 
 @section('body')
+<div class="pt-5">
 <div class="container col-12 col-md-12 col-lg-4 d-flex flex-column h-screen justify-content-center">
     <form class="md-form w-100 border rounded-3 p-5 shadow" method="POST" action="{{ url('/login') }}">
         @csrf
-        <h2 class="text-center mb-3">Login Form</h2>
+        <h2 class="text-center mb-3 text-dark">Login</h2>
 
         <!-- Email input -->
         <div class="form-outline" style="margin-bottom: 25px">
@@ -38,7 +39,7 @@
 
         <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
-        <div class="text-center">
+        {{-- <div class="text-center">
             <p>Not a member? <a href="{{ url('/register') }}">Register</a></p>
             <p>or sign up with:</p>
             <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -56,14 +57,17 @@
             <button type="button" class="btn btn-primary btn-floating mx-1">
                 <i class="fab fa-github"></i>
             </button>
-        </div>
+        </div> --}}
+        <div class="text-dark">Don't have an account? <a href="{{ route('register') }}">Register Now</a></div>
     </form>
+</div>
+
 </div>
 
     @if (session()->has("success"))
         <x-toast title="Success" type="success">{{ session("success") }}</x-toast>
     @elseif(session()->has("loginError"))
-    <x-toast title="Error" type="danger">{{ session("loginError") }}</x-toast>
+        <x-toast title="Error" type="danger">{{ session("loginError") }}</x-toast>
     @endif
 @stop
 

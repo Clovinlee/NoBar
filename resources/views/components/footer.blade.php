@@ -34,7 +34,7 @@
                     <div class="col-md-7">
                         <div class="quick-link-list">
                             <ul>
-                                <li><a href="#">FAQ</a></li>
+                                <li><a href="{{url('/faq')}}">FAQ</a></li>
                                 <li><a href="#">Help Center</a></li>
                                 <li><a href="#">Terms of Use</a></li>
                                 <li><a href="#">Privacy</a></li>

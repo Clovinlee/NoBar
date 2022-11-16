@@ -91,6 +91,7 @@ class TransactionController extends Controller
 
     public function bookPayment(Request $r){
         if($r->ajax()){
+            
             $md = ModelsMidtrans::getInstance();
             // _token:'{{ csrf_token() }}',
             // scheduleId:'{{ $schedule->id }}',

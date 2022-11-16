@@ -246,6 +246,7 @@
                     seatList: JSON.stringify(seatList),
                 },
                 success:function(body) {
+                // console.log(body
                     $("#processLoading").hide();
                     var r = JSON.parse(body);
                     snap.pay(r.token, {

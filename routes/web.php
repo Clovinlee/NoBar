@@ -130,6 +130,14 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 
 // |----------------------|
+// | FOOTER               |
+// |----------------------|
+Route::view("/faq","footer.faq");  
+
+// |----------------------|
+
+
+// |----------------------|
 // | ADMIN                 |
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
@@ -155,5 +163,8 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
 });
 // |----------------------|
 
+
+
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");
+

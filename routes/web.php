@@ -126,6 +126,8 @@ Route::prefix("/payment")->group(function(){
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
     Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
+    Route::get("/edit", [UserController::class,"edit_user"])->middleware(["auth","verified"]);
+    Route::post("/edit/fixedit", [UserController::class,"fix_edit_user"])->middleware(["auth","verified"]);
 });
 // |----------------------|
 

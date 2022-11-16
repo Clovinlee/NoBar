@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>NoBar | @yield("subtitle")</title>
 </head>
 
@@ -20,7 +21,21 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
 
 <!-- Custom Style -->
+<link rel="stylesheet" href="{{ ('/css/animate.min.css') }}">
+<link rel="stylesheet" href="{{ ('/css/magnific-popup.css') }}">
+{{-- <link rel="stylesheet" href="{{ ('/css/fontawesome-all.min.css') }}"> --}}
+<link rel="stylesheet" href="{{ ('/css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ ('/css/flaticon.css') }}">
+<link rel="stylesheet" href="{{ ('/css/odometer.css') }}">
+<link rel="stylesheet" href="{{ ('/css/aos.css') }}">
+<link rel="stylesheet" href="{{ ('/css/slick.css') }}">
+<link rel="stylesheet" href="{{ ('/css/default.css') }}">
+<link rel="stylesheet" href="{{ ('/css/style.css') }}">
+<link rel="stylesheet" href="{{ ('/css/responsive.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
+
+<style>
+</style>
 
 <body>
     @yield("navbar")
@@ -37,6 +52,18 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
 
 <!-- Custom JS -->
+<script src="{{ url('/js/isotope.pkgd.min.js') }}"></script>
+<script src="{{ url('/js/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ url('/js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ url('/js/owl.carousel.min.js') }}"></script>
+<script src="{{ url('/js/jquery.odometer.min.js') }}"></script>
+<script src="{{ url('/js/jquery.appear.js') }}"></script>
+<script src="{{ url('/js/slick.min.js') }}"></script>
+<script src="{{ url('/js/ajax-form.js') }}"></script>
+<script src="{{ url('/js/wow.min.js') }}"></script>
+<script src="{{ url('/js/aos.js') }}"></script>
+<script src="{{ url('/js/plugins.js') }}"></script>
+<script src="{{ url('/js/main.js') }}"></script>
 <script src="{{ url("/js/script.js") }}"></script>
 
 @yield("pageScript")

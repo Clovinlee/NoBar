@@ -9,14 +9,14 @@ class Dtrans extends Model
 {
     use HasFactory;
 
-    protected $with = ["htrans"];
+    //protected $with = ["htrans"];
 
     public function htrans()
     {
-        $this->belongsTo(Htrans::class);
+        return $this->belongsTo(Htrans::class);
     }
     public function chair()
     {
-        $this->belongsTo(Chair::class);
+        return $this->belongsTo(Chair::class);
     }
 }

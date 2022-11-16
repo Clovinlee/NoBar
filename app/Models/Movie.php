@@ -9,10 +9,10 @@ class Movie extends Model
 {
     use HasFactory;
 
-    protected $with = ["schedule"];
+    protected $table = "movies";
 
     public function schedule()
     {
-        $this->hasMany(Schedule::class);
+        return $this->hasMany(Schedule::class);
     }
 }

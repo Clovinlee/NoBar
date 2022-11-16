@@ -1,8 +1,8 @@
-@extends('master.masterlayout')
-@section("subtitle", "Admin")
-<x-sidebaradmin></x-sidebaradmin>
-@section('body')
-    <div class="content">
-        dfsdv
+<main style="margin-top:58px">
+    <div class="container pt-4" id="branch">
+      <section class="mb-4">
+        <h1>Dashboard</h1>
+        
+      </section> 
     </div>
-@endsection
+  </main>

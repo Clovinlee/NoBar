@@ -5,82 +5,51 @@ namespace App\Http\Controllers;
 use App\Models\Branch;
 use App\Http\Requests\StoreBranchRequest;
 use App\Http\Requests\UpdateBranchRequest;
+use Illuminate\Http\Request;
 
 class BranchController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function AddBranch(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $id=Branch::get()->last()->id;
+            $branch=new Branch();
+            $branch->nama=$request->input("nama");
+            $branch->save();
+            $branch->parent=$id;
+            return json_encode($branch);
+        }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function DeleteBranch(Request $r)
     {
-        //
+        if ($r->ajax()) {
+            $branch=Branch::find($r->id);
+            $branch->delete();
+            $b=Branch::all();
+            foreach ($b as $k => $v) {
+                $v->studio=$v->studio;
+            }
+            return json_encode($b);
+        }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBranchRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBranchRequest $request)
+    public function EditBranch(Request $r)
     {
-        //
+        if ($r->ajax()) {
+            $branch=Branch::find($r->id);
+            $branch->nama=$r->input("nama");
+            $branch->save();
+            $b=Branch::all();
+            foreach ($b as $k => $v) {
+                $v->studio=$v->studio;
+            }
+            return json_encode($b);
+        }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Branch  $branch
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Branch $branch)
+    public function SearchBranch(Request $r)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Branch  $branch
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Branch $branch)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBranchRequest  $request
-     * @param  \App\Models\Branch  $branch
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBranchRequest $request, Branch $branch)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Branch  $branch
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Branch $branch)
-    {
-        //
+        if ($r->ajax()) {
+            $b=Branch::where("nama","like","%".$r->nama."%")->get();
+            return json_encode($b);
+        }
     }
 }

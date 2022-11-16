@@ -2,11 +2,11 @@
 @section("subtitle","Register")
 
 @section("navbar")
-<x-navbar></x-navbar>
+<x-navbar2></x-navbar2>
 @stop
 
 @section('body')
-<div class="container col-12 col-md-12 col-lg-4 d-flex flex-column h-screen justify-content-center">
+<div class="container col-12 col-md-12 col-lg-4 d-flex flex-column h-screen justify-content-center mt-5">
     @if (session()->has("registerError"))
         <div class="alert alert-dismissible fade show alert-danger" role="alert" data-mdb-color="danger">
           <i class="fas fa-times-circle me-3"></i>{{ session("registerError") }}
@@ -15,7 +15,7 @@
     @endif
     <form class="md-form w-100 border rounded-3 p-5 shadow" method="POST" action="{{ url('/register') }}">
         @csrf
-        <h2 class="text-center mb-3">Register Form</h2>
+        <h2 class="text-center mb-3 text-dark">Register</h2>
 
         <!-- Name input -->
         <div class="form-outline mb-4">
@@ -73,7 +73,7 @@
       
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
-        <p class="text-center">Already a member? <a href="{{ url('/login') }}">Login now</a></p>
+        {{-- <p class="text-center">Already a member? <a href="{{ url('/login') }}">Login now</a></p>
 
         <!-- Register buttons -->
         <div class="text-center">
@@ -93,7 +93,8 @@
           <button type="button" class="btn btn-primary btn-floating mx-1">
             <i class="fab fa-github"></i>
           </button>
-        </div>
+        </div> --}}
+        <div class="text-dark">Already have an account? <a href="{{ route('login') }}">Login Now</a></div>
       </form>
 </div>
 @stop

@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('dtrans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("htrans")->references("id")->on("htrans");
-            $table->foreignId("chair")->references("id")->on("chairs");
+            $table->foreignId("htrans_id")->references("id")->on("htrans");
+            $table->string("seat");
+            // $table->foreignId("chair")->references("id")->on("chairs");
             $table->timestamps();
         });
     }

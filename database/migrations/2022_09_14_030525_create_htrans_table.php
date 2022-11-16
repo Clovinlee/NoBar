@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('htrans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user")->references("id")->on("users");
-            $table->foreignId("schedule")->references("id")->on("schedules");
+            $table->foreignId("transaction_id")->nullable()->references("id")->on("transactions");
+            $table->foreignId("user_id")->references("id")->on("users");
+            $table->foreignId("schedule_id")->references("id")->on("schedules");
+            $table->string("status");
             $table->integer("total");
-            $table->integer("status")->default(0); // 0 = blom 1 = sudah
             $table->timestamps();
         });
     }

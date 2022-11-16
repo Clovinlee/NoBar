@@ -28,6 +28,11 @@ class VerificationController extends Controller
 
         if(Auth::attempt($credentials)){
             $r->session()->regenerate();
+            if(auth()->user()["role"] == "2"){
+                return redirect(url("/admin"));
+            }else if(auth()->user()["role"] == "3"){
+                return redirect(url("/manager"));
+            };
             return redirect()->intended();
         }
         

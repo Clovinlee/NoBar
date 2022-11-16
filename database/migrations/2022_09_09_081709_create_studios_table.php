@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("nama");
             $table->integer("slot");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Auth;
 
             $transaction_details = array(
                 'order_id' => rand(),
-                'gross_amount' => $total_price, // no decimal allowed for creditcard
+                'gross_amount' => $total_price, 
                 'total_seat' => count($seatList),
             );
 
@@ -66,11 +66,17 @@ use Illuminate\Support\Facades\Auth;
                 'email'         => $usr->email,
             );
 
+            // $custom_expiry = array(
+            //     "expiry_duration"=>1,
+            //     "unit"=>"minute",
+            // );
+
             // Fill transaction details
             $transaction = array(
                 'transaction_details' => $transaction_details,
                 'customer_details' => $customer_details,
                 'item_details' => $item_details,
+                // "custom_expity" => $custom_expiry,
             );
 
             $snap_token = '';

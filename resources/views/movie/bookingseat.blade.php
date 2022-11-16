@@ -2,13 +2,22 @@
 @section("subtitle","Booking Seat")
 
 @section("navbar")
-<x-navbar></x-navbar>
+<x-navbar2></x-navbar>
 @stop
 
 @section('body')
     <!-- data: _token, jadwal, idJadwal, qtyTicket  $schedule -->
     @php $alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; $alphabets = str_split($alphabets); @endphp
     <!--  -->
+
+    <div id="processLoading" style="display: none">
+        <div class="position-absolute w-100 vh-100 bg-black opacity-50 d-flex flex-column justify-content-center align-items-center" style="z-index:99" style="">
+            <div class="spinner-border text-white" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="text-white">Processing payment, please wait</div>
+        </div>
+    </div>
 
     <div class="container-fluid px-3 py-2">
         <div class="col-6" style="font-size: 0.7em">
@@ -32,9 +41,10 @@
             <div class="col-12 d-flex justify-content-center">
                 <table>
                     <!-- Generate Top Number -->
-                    @php $space_seat = 3; $row_seat = 20; $alphanum = 0; @endphp
-                    <!--  -->
-
+                    {{-- Alphanum = indicator for Seat ID --}}
+                    {{-- Space seat = Whitespace after x seat --}}
+                    {{-- Rpw Seat = Per row, how many seat --}}
+                    @php $space_seat = 3; $row_seat = 20; $alphanum = -1; @endphp
                     <tr>
                         <td></td>
                         @for ($i = 1; $i <= $row_seat; $i++)
@@ -44,33 +54,37 @@
                             @endif
                         @endfor
                     </tr>
-                    <tr>
+                    <!-- END Generate Top Number -->
 
                     <!-- Generate Seat -->
                     <!-- intval(($schedule->studio->slot+1)/20) -->
-                    @for ($y = 1; $y <= intval(150/$row_seat); $y++)
-                        {{-- <td><x-seat></x-seat></td> --}}
-                        @for ($x = 1; $x <= $row_seat; $x++)
-                            @if ($x == 1)
-                                <td><strong>{{ strtoupper($alphabets[$alphanum]) }}&nbsp;&nbsp;</strong></td>
-                            @endif
-                            <td><x-seat id="{{ $alphabets[$alphanum].$x }}"></x-seat></td>
-                            @if ($x == $space_seat || $x == $row_seat-$space_seat)
-                                <td>&nbsp;&nbsp;</td>
-                            @endif
-                        @endfor
-                        @php $alphanum += 1 @endphp
-                        </tr><tr>
-                    @endfor
-                    </tr>
                     <tr>
-                        <td><strong>{{ strtoupper($alphabets[$alphanum]) }}</strong></td>
-                        @for ($i = 1; $i <= 150-(intval(150/$row_seat)*$row_seat); $i++)
-                            <td><x-seat id="{{ $alphabets[$alphanum].$i }}"></x-seat></td>
-                            @if ($i == $space_seat || $i == $row_seat-$space_seat)
-                                <td>&nbsp;&nbsp;</td>
-                            @endif
-                        @endfor
+                    @for ($i = 0; $i < 150; $i++)
+                        @php $mod_i = fmod($i,$row_seat) @endphp
+                        @if ($mod_i == 0)
+                            @php $alphanum += 1 @endphp
+                            <td><strong>{{ strtoupper($alphabets[$alphanum]) }}&nbsp;&nbsp;</strong></td>
+                        @endif
+
+                        @php
+                            $idSeat = $alphabets[$alphanum].($mod_i+1);
+                            $status = "available";
+
+                            if(in_array($idSeat, array_keys($seatList))){
+                                $status = $seatList[$idSeat];
+                            }
+                        @endphp
+                        <td><x-seat status="{{ $status }}" id="{{ $idSeat }}"></x-seat></td>
+
+                        @if ($mod_i+1 == $space_seat || $mod_i+1 == $row_seat - $space_seat)
+                            <td>&nbsp;&nbsp;</td>
+                        @endif
+
+                        @if ($mod_i == $row_seat-1) 
+                            </tr> 
+                            <tr>
+                        @endif
+                    @endfor
                     </tr>
                     <!-- End Generate Seat -->
 
@@ -84,6 +98,10 @@
         </div>
     </div>
 
+    @if (Session::has("bookedseat"))
+        <x-toast title="Error" type="danger">{!! Session::get("bookedseat") !!}</x-toast>
+    @endif
+
     @section('pageScript')
         <!-- IMPORT MIDTRANS -->
         <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_SERVERKEY') }}"></script>
@@ -93,7 +111,6 @@
         <script>
             var booked = 0;
             var seatList = [];
-
             
             function bookSeat(e){
                 let seat = $(e.target);
@@ -162,7 +179,63 @@
                 seat.removeClass("text-secondary");
             }
 
-            function confirmPay(){
+            //TODO: Test 5 minute transaction
+
+            function ajaxTrans(result){
+
+                $.ajax({
+                    type:"POST",
+                    url:"/booking_pay/process",
+                    data:{
+                        _token:'{{ csrf_token() }}',
+                        scheduleId:'{{ $schedule->id }}',
+                        ticketQty:'{{ $data["qtyTicket"] }}',
+                        seatList: JSON.stringify(seatList),
+                        mdResult: JSON.stringify(result),
+                    },
+                    success: function(body){
+                        console.log("DB Added |code : "+body);
+                        window.location.replace("http://{{env('APP_URL')}}/user/history");
+                    }
+                })
+            }
+            var tst = "";
+            async function confirmPay(){
+                $("#processLoading").show();
+
+                $.ajax({
+                    type:"POST",
+                    url:"/booking_pay/check",
+                    data:{
+                        _token:'{{ csrf_token() }}',
+                        scheduleId:'{{ $schedule->id }}',
+                        ticketQty:'{{ $data["qtyTicket"] }}',
+                        seatList: JSON.stringify(seatList),
+                    },
+                    success:function(duplicate){
+                        if(duplicate == true){
+                            //If chair in pending state
+                            $.ajax({
+                                type:"POST",
+                                url:"/booking_seat/refreshBooked",
+                                data:{
+                                    _token:'{{ csrf_token() }}',
+                                    seatList:JSON.stringify(seatList),
+                                },
+                                success: function(body){
+                                    window.location.reload();
+                                }
+                            })
+                            // $("#processLoading").hide();
+                        }else{
+                            ajaxPay();
+                        }
+                    }
+                });
+                
+            }
+
+            function ajaxPay(){
                 $.ajax({
                 type:'POST',
                 url:'/booking_pay',
@@ -170,21 +243,27 @@
                     _token:'{{ csrf_token() }}',
                     scheduleId:'{{ $schedule->id }}',
                     ticketQty:'{{ $data["qtyTicket"] }}',
-                    ticketPrice:'{{ $schedule->price }})',
                     seatList: JSON.stringify(seatList),
                 },
-                success:function(token) {
-                    snap.pay(token, {
-                        // Optional
-                        onSuccess: function(result){
-                            console.log("Success");
+                success:function(body) {
+                    $("#processLoading").hide();
+                    var r = JSON.parse(body);
+                    snap.pay(r.token, {
+                        onSuccess: async function(result){
+                            await ajaxTrans(result)
+                            console.log("SUCCESS PAYMENt");
+                            },
+                        onPending: async function(result){
                             console.log(result);
-                        },
-                        // Optional
-                        onPending: function(result){
-                            console.log("Pending");
-                            console.log(result);
-                            
+                            tst = result;
+                            await ajaxTrans(result);
+                            console.log("PENDING Payment");
+
+                            // window.location.replace("http://{{env('APP_URL')}}/user/history")
+
+                            // console.log("Pending");
+                            // console.log(result);
+                            // console.log({{ $schedule->id }})
                             // {
                             //     "status_code": "201",
                             //     "status_message": "Transaksi sedang diproses",
@@ -206,8 +285,9 @@
                         }
                     });
                 }
-            });
+             });
             }
+
         </script>
         <!--  -->
 

@@ -2,7 +2,7 @@
 @section("subtitle","User")
 
 @section("navbar")
-<x-navbar></x-navbar>
+<x-navbar2></x-navbar>
 @stop
 
 @section("body")

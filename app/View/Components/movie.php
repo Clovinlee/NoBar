@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Movie as ModelMovie;
 use Illuminate\View\Component;
 
 class movie extends Component
@@ -11,11 +12,15 @@ class movie extends Component
      * @return void
      */
     public $img;
+    public $slug;
      
-    public function __construct($img)
+    public function __construct($id)
     {
         //
-        $this->img = $img;
+        // $this->img = $img;
+        $m = ModelMovie::find($id);
+        $this->img = $m->image;
+        $this->slug = $m->slug;
     }
 
     /**

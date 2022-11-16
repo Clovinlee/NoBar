@@ -52,6 +52,8 @@
           ><i class="fas fa-building fa-fw me-3" ></i><span>Branch</span></span>
         <span id="nav_movie" onclick="PageChange(event)" href="" target="2" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-money-bill fa-fw me-3"></i><span>Movie</span></span
         >
+        <span onclick="PageChange(event)" href="" target="3" id="nav_snack" class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-building fa-fw me-3" ></i><span>Snack</span></span>
       </div>
     </div>
   </nav>
@@ -76,7 +78,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand" href="#">
-        NOBAR
+        <img src="{{asset('/storage/app/public/logo.jpg')}}" width="20px" alt="">
       </a>
       <!-- Search form -->
       <form class="d-none d-md-flex input-group w-auto my-auto">

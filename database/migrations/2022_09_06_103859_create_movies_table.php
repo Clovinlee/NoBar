@@ -27,8 +27,8 @@ return new class extends Migration
             $table->integer("duration");
 
             $table->string("status",1)->default("0"); //0=now playing, 1=comingsoon, 2=done playing
-
-            $table->timestamps();
+            $table->timestamps();  
+            $table->softDeletes();
         });
     }
 

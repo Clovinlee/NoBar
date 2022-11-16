@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime("time");
             $table->integer("price");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

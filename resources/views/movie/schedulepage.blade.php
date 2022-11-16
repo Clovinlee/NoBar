@@ -95,6 +95,7 @@
             var d = new Date();
             $("#inpJadwal").val(d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()+" "+b);
             $("#inpIdJadwal").val(idJadwal);
+            $("#modalTicket").find(".modal-content").addClass("bg-dark");
         });
     </script>
 @endsection

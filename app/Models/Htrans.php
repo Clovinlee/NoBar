@@ -23,4 +23,7 @@ class Htrans extends Model
     {
         return $this->hasMany(Dtrans::class);
     }
+    public function transaction(){
+        return $this->belongsTo(Transaction::class);
+    }
 }

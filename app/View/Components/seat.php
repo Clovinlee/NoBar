@@ -22,10 +22,10 @@ class seat extends Component
         if($status == "available"){
             $color = "success";
         }
-        if($status == "booked"){
-            $color = "warning";
+        if($status == "pending" || $status == "capture"){
+            $color = "secondary";
         }
-        if($status == "sold"){
+        if($status == "settlement"){
             $color = "danger";
         }
         $this->color = $color;

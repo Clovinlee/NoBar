@@ -7,11 +7,11 @@
 Nobar merupakan aplikasi pemesanan tiket / food & beverages yang digunakan pada bioskop. Aplikasi ini dilengkapi dengan fitur managerial, admin, serta multi branch. Nobar dibuat dengan menggunakan laravel sebagai framework utama.
 
 ## Tim Development
-Chrisanto Sinatra - 220180496
-Calvin Kwan - 220180495
-Esther Gabriel - 220180500
-Kevin Syah -
-Edward Patrick - 
+Chrisanto Sinatra - 220180496 <br> 
+Calvin Kwan - 220180495 <br>
+Esther Gabriel - 220180500 <br>
+Kevin Syah - <br>
+Edward Patrick -  <br>
 
 ## Fitur
 <i>Gambar menyusul</i>

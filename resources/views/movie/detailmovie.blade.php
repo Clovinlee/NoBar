@@ -129,7 +129,8 @@
                                                 <h5 class="title"><span style="color: yellow">{{ date("l",strtotime(date("Y-m-d") . $i." days"))}}</span>{{ ", ".$tNext }}</h5>
                                                 @foreach ($schedule_branch as $s)
                                                     @php $timeShow = date("H:i",strtotime($s->time)); @endphp
-                                                    <x-schedulepill status="enabled" idJadwal="{{ $s->id }}">{{ $timeShow }}</x-schedulepill>
+                                                    {{-- <x-schedulepill status="enabled" idJadwal="{{ $s->id }}">{{ $timeShow }}</x-schedulepill> --}}
+                                                    <x-pill status="enabled" idJadwal="{{ $s->id }}">{{ $timeShow }}</x-pill>
                                                 @endforeach
                                                 <br>
                                                 <br>

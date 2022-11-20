@@ -25,7 +25,10 @@
         <div class="row md-row-cols-2">
             @foreach ($upcoming as $uc)
                 <div class="col-sm-6 col-md-3 text-left">
-                    <x-movie id="{{ $uc->id }}">{{ $uc->judul }}</x-movie>
+                    @php
+                        $m = \App\Models\Movie::find($uc);
+                    @endphp
+                    <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
                 </div>
             @endforeach
         </div>

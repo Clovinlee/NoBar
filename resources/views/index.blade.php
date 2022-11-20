@@ -79,7 +79,7 @@
                                     @php
                                         $m = \App\Models\Movie::find($now);
                                     @endphp
-                                    <x-movie id="{{ $now }}">{{ $m->judul }}</x-movie>
+                                    <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
                                 @endforeach
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                             <div class="tab-pane fade show active" id="tvShow" role="tabpanel" aria-labelledby="tvShow-tab">
                                 <div class="ucm-active owl-carousel">
                                     @foreach ($upComing as $up)
-                                        <x-movie id="{{ $up->id }}">{{ $up->judul }}</x-movie>
+                                        <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
                                     @endforeach
                                 </div>
                             </div>

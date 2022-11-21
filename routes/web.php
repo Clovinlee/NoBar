@@ -6,6 +6,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
@@ -135,9 +136,17 @@ Route::prefix("/user")->group(function() {
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
     Route::prefix('/branch')->group(function () {
+        Route::get("/search",[BranchController::class,"SearchBranch"]);
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
+        Route::post('/{id}', [BranchController::class,"EditBranch"]);
+        Route::post('/{id}/delete', [BranchController::class,"DeleteBranch"]);
         
+    });
+    Route::prefix('/studio')->group(function () {
+        Route::post('/add', [StudioController::class,"AddStudio"]);
+        Route::post('/{id}', [StudioController::class,"EditStudio"]);
+        Route::post('/{id}/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);

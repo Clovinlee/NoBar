@@ -14,13 +14,12 @@ class movie extends Component
     public $img;
     public $slug;
      
-    public function __construct($id)
+    public function __construct($slug, $img)
     {
         //
         // $this->img = $img;
-        $m = ModelMovie::find($id);
-        $this->img = $m->image;
-        $this->slug = $m->slug;
+        $this->slug = $slug;
+        $this->img = $img;
     }
 
     /**

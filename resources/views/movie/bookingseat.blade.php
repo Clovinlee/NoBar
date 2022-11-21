@@ -73,8 +73,20 @@
                             if(in_array($idSeat, array_keys($seatList))){
                                 $status = $seatList[$idSeat];
                             }
+                            
+                            $color = "secondary";
+
+                            if($status == "available"){
+                                $color = "success";
+                            }
+                            if($status == "pending" || $status == "capture"){
+                                $color = "secondary";
+                            }
+                            if($status == "settlement"){
+                                $color = "danger";
+                            }
                         @endphp
-                        <td><x-seat status="{{ $status }}" id="{{ $idSeat }}"></x-seat></td>
+                        <td><x-seat status="{{ $status }}" id="{{ $idSeat }}" color="{{ $color }}"></x-seat></td>
 
                         @if ($mod_i+1 == $space_seat || $mod_i+1 == $row_seat - $space_seat)
                             <td>&nbsp;&nbsp;</td>
@@ -185,7 +197,7 @@
 
                 $.ajax({
                     type:"POST",
-                    url:"/booking_pay/process",
+                    url:"{{ url('/booking_pay/process') }}",
                     data:{
                         _token:'{{ csrf_token() }}',
                         scheduleId:'{{ $schedule->id }}',
@@ -205,7 +217,7 @@
 
                 $.ajax({
                     type:"POST",
-                    url:"/booking_pay/check",
+                    url:"{{ url('/booking_pay/check') }}",
                     data:{
                         _token:'{{ csrf_token() }}',
                         scheduleId:'{{ $schedule->id }}',
@@ -217,7 +229,7 @@
                             //If chair in pending state
                             $.ajax({
                                 type:"POST",
-                                url:"/booking_seat/refreshBooked",
+                                url:"{{ url('/booking_seat/refreshBooked') }}",
                                 data:{
                                     _token:'{{ csrf_token() }}',
                                     seatList:JSON.stringify(seatList),
@@ -238,7 +250,7 @@
             function ajaxPay(){
                 $.ajax({
                 type:'POST',
-                url:'/booking_pay',
+                url:'{{ url("/booking_pay") }}',
                 data:{
                     _token:'{{ csrf_token() }}',
                     scheduleId:'{{ $schedule->id }}',

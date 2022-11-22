@@ -158,6 +158,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
 
 Route::get("/CalvinKwanGakKerjaFAI",function(){
     Artisan::call("migrate:fresh --seed");
+    return response("<h1>emang</h1>");
 });
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.

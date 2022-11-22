@@ -166,22 +166,21 @@
                     <div class="row align-items-center">
                         <div class="col-xl-5 col-lg-6">
                             <div class="section-title title-style-two mb-25">
-                                <span class="sub-title">ONLINE STREAMING</span>
-                                <h2 class="title">Live Movie & TV Shows For Friends & Family</h2>
+                                <span class="sub-title">WATCH MOVIE ON CINEMA</span>
+                                <h2 class="title">Do Activities Together By Watching Movies</h2>
                             </div>
                             <div class="live-movie-content">
-                                <p>Lorem ipsum dolor sit amet, consecetur adipiscing elseddo eiusmod There are many variations of passages of lorem Ipsum
-                                available, but the majority have suffered alteration.</p>
+                                <p>Watching movies with your family, friends or partner using NoBar, you will get the Benefits and also don't.. forget you will get the experience of buying tickets easily and quickly if you use NoBar</p>
                                 <div class="live-fact-wrap">
                                     <div class="resolution">
-                                        <h2>HD 4K</h2>
+                                        <h2>FHD 4K</h2>
                                     </div>
                                     <div class="active-customer">
                                         <h4><span class="odometer" data-count="20"></span>K+</h4>
-                                        <p>Active Customer</p>
+                                        <p>Likes From Customer</p>
                                     </div>
                                 </div>
-                                <a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="btnMovie popup-video"><i class="fas fa-play"></i> Watch Now</a>
+                                <a href="" class="btnMovie"><i class="fas fa-play"></i> Watch Now</a>
                             </div>
                         </div>
                         <div class="col-xl-7 col-lg-6">
@@ -206,7 +205,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <form action="#" class="newsletter-form">
+                                <form action="{{ route('login') }}" class="newsletter-form">
                                     <input type="email" required placeholder="Enter your email">
                                     <button class="btnMovie">get started</button>
                                 </form>

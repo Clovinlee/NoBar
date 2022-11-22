@@ -132,8 +132,10 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 // | FOOTER               |
 // |----------------------|
-Route::view("/faq","footer.faq");  
-
+Route::view("/FAQ","footer.faq");  
+Route::view("/HelpCenter",[PageController::class,"contact"]);  
+Route::view("/TOU","footer.faq");  
+// Route::view("/TOU","footer.faq");  
 // |----------------------|
 
 

@@ -1,7 +1,7 @@
 <div class="movie-item mb-50">
   <div class="movie-poster">
       <a href="{{ url('/movie/'.$slug) }}">
-        <img style="object-fit: contain" width="303px" height="430px" src="{{ file_exists(public_path('assets/images/'.$img)) ? asset('assets/images/'.$img) : asset('assets/img/poster/ucm_poster02.jpg') }}" alt=""></a>
+        <img style="object-fit: contain" width="303px" height="430px" src="{{ asset('assets/images/'.$img) }}" alt=""></a>
   </div>
   <div class="movie-content">
       <div class="top">

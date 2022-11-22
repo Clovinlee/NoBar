@@ -13,6 +13,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -140,18 +141,20 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
-        Route::post('/{id}', [BranchController::class,"EditBranch"]);
-        Route::post('/{id}/delete', [BranchController::class,"DeleteBranch"]);
+        Route::post('/edit', [BranchController::class,"EditBranch"]);
+        Route::post('/delete', [BranchController::class,"DeleteBranch"]);
         
     });
     Route::prefix('/studio')->group(function () {
         Route::post('/add', [StudioController::class,"AddStudio"]);
-        Route::post('/{id}', [StudioController::class,"EditStudio"]);
-        Route::post('/{id}/delete', [StudioController::class,"DeleteStudio"]);
+        Route::post('/edit', [StudioController::class,"EditStudio"]);
+        Route::post('/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
-        Route::post('/add', [BranchController::class,"AddBranch"]);
+        Route::post('/add', [MovieController::class,"AddMovie"]);
+        Route::post('/edit', [MovieController::class,"EditMovie"]);
+        Route::post('/delete', [MovieController::class,"DeleteMovie"]);
         
     });
     Route::prefix('/snack')->group(function(){
@@ -159,16 +162,6 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
     });
 });
 // |----------------------|
-
-
-// |----------------------|
-// | MANAGER              |
-// |----------------------|
-
-Route::prefix('/manager')->group(function(){
-    Route::get('/',[ManagerController::class, "index"]);
-});
-
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

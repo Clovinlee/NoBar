@@ -26,7 +26,10 @@
             @foreach ($nowPlaying as $np)
                 @php $movie = \App\Models\Movie::find($np) @endphp
                 <div class="col-sm-6 col-md-3 text-left">
-                    <x-movie id="{{ $np }}">{{ $movie->judul }}</x-movie>
+                    @php
+                        $m = \App\Models\Movie::find($np);
+                    @endphp
+                    <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
                 </div>
             @endforeach
         </div>

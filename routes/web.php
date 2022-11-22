@@ -123,7 +123,11 @@ Route::prefix("/payment")->group(function(){
 // |----------------------|
 // | USER                 |
 // |----------------------|
-Route::get("/manager/dashboard",[ManagerController::class,"dashboard"]);
+// Route::get("/manager/dashboard",[ManagerController::class,"dashboard2"]);
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
+});
 
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);

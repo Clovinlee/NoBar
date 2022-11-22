@@ -18,4 +18,10 @@ class ManagerController extends Controller
         // dd();
         return view("manager.dashboard",["profit" => $profit[0]->total,"date" => $date[0]->date]);
     }
+
+    public function index(){
+        $profit = DB::select("select SUM(h.total) as total from transactions t, htrans h where year(t.created_at) = year(CURRENT_DATE) and month(t.created_at) = month(CURRENT_DATE) and day(t.created_at) = day(CURRENT_DATE) and t.id = h.transaction_id");
+        $date = DB::select("select CURRENT_DATE as date");
+        return view('manager.manager',["profit" => $profit[0]->total,"date" => $date[0]->date]);
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SnackController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -134,7 +135,7 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 
 // |----------------------|
-// | ADMIN                 |
+// | ADMIN                |
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
@@ -158,13 +159,11 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/delete', [MovieController::class,"DeleteMovie"]);
         
     });
+    Route::prefix('/snack')->group(function(){
+        Route::get('/add',[SnackController::class, "AddSnack"]);
+    });
 });
 // |----------------------|
-
-Route::get("/CalvinKwanGakKerjaFAI",function(){
-    Artisan::call("migrate:fresh --seed");
-    return response("<h1>emang</h1>");
-});
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

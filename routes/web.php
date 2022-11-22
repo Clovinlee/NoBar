@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ScheduleController;
@@ -121,6 +122,8 @@ Route::prefix("/payment")->group(function(){
 // |----------------------|
 // | USER                 |
 // |----------------------|
+Route::get("/manager/dashboard",[ManagerController::class,"dashboard"]);
+
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
     Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);

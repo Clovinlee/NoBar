@@ -34,8 +34,6 @@ use Illuminate\Support\Facades\Session;
 Route::get('/', [PageController::class,"index"]);
 // ->middleware("role:admin,manager");
 
-Route::get("/search", [UserController::class,"SearchMovie"]);
-
 Route::get('/nowplaying',[PageController::class,"nowplaying"])->name("nowplaying");
 Route::get('/comingsoon',[PageController::class,"comingsoon"])->name("comingsoon");
 Route::get('/membership',[PageController::class,"membership"])->name("membership");
@@ -51,7 +49,6 @@ Route::view("/register","register")->name("register")->middleware("guest");
 
 Route::post("/login",[VerificationController::class,"verifylogin"]);
 Route::post("/register",[VerificationController::class,"verifyregister"]);
-
 
 Route::post("/logout", [VerificationController::class,"logout"]);
 // |----------------------|
@@ -128,6 +125,7 @@ Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
     Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
     Route::get("/edit", [UserController::class,"edit_user"])->middleware(["auth","verified"]);
+    Route::get("/movie/search", [UserController::class,"SearchMovie"]);
     Route::post("/edit/fixedit", [UserController::class,"fix_edit_user"])->middleware(["auth","verified"]);
 });
 // |----------------------|

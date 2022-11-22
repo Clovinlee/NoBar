@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -21,8 +22,12 @@ class UserController extends Controller
 
 
     public function SearchMovie(Request $request){
-        dd($request->search);
-        return view("users.search",["hasil" => $request->search]);
+        $tampung = $request->input("search");
+        $movie = DB::table('movies')->where('judul','like','%'.$tampung.'%')->paginate(3);
+        return view("users.search",[
+            "hasil" => $movie,
+            "key" => $tampung
+        ]);
     }
 
     public function fix_edit_user(Request $r){
@@ -35,6 +40,7 @@ class UserController extends Controller
         $credentials["new_password"] = Hash::make($credentials["new_password"]);
         $user->name = $credentials["nama_lengkap"];
         $user->password = $credentials["new_password"];
+        // @ts-ignore
         $user->save();
         return view("users.userpage",["currentUser" => Auth::user()]);
     }

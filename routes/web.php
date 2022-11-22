@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ScheduleController;
@@ -131,7 +132,7 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 
 // |----------------------|
-// | ADMIN                 |
+// | ADMIN                |
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
@@ -158,6 +159,16 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
     });
 });
 // |----------------------|
+
+
+// |----------------------|
+// | MANAGER              |
+// |----------------------|
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
+});
+
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

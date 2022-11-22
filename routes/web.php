@@ -163,5 +163,9 @@ Route::get("/CalvinKwanGakKerjaFAI",function(){
     return response("<h1>emang</h1>");
 });
 
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
+});
+
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

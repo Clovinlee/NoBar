@@ -21,15 +21,22 @@
     </div>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="tvShow" role="tabpanel" aria-labelledby="tvShow-tab">
-            <div class="ucm-active owl-carousel">
-                ini apa coba
-                {{-- @foreach ($nowPlaying as $now)
-                    @php
-                        $m = \App\Models\Movie::find($now);
-                    @endphp
-                    <x-movie id="{{ $now }}">{{ $m->judul }}</x-movie>
-                @endforeach --}}
-            </div>
+            {{-- Testing ISI FAQ --}}
+            <h3>About NoBar</h3>
+            <a href="">How To Buy Ticket?</a>
+            <br>
+            <a href="">Is NoBar Perfect?</a>
+            <br>
+            <a href="">Can I Free Ticket?</a>
+            <br>
+            <a href="">How To Register?</a>
+            <br>
+            <a href="">How To Make Payment?</a>
+            <br>
+            <a href="">How to choose a chair?</a>
+            {{-- <div class="ucm-active owl-carousel">
+                
+            </div> --}}
         </div>
     </div>
 </div>

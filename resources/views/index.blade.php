@@ -151,7 +151,7 @@
                             <div class="tab-pane fade show active" id="tvShow" role="tabpanel" aria-labelledby="tvShow-tab">
                                 <div class="ucm-active owl-carousel">
                                     @foreach ($upComing as $up)
-                                        <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
+                                        <x-movie slug="{{ $up->slug }}" img="{{ $up->image }}">{{ $up->judul }}</x-movie>
                                     @endforeach
                                 </div>
                             </div>

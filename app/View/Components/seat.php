@@ -19,15 +19,6 @@ class seat extends Component
         //
         $this->status = $status;
         $this->id = $id;
-        if($status == "available"){
-            $color = "success";
-        }
-        if($status == "pending" || $status == "capture"){
-            $color = "secondary";
-        }
-        if($status == "settlement"){
-            $color = "danger";
-        }
         $this->color = $color;
     }
 

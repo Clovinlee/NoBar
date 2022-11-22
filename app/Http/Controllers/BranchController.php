@@ -49,6 +49,9 @@ class BranchController extends Controller
     {
         if ($r->ajax()) {
             $b=Branch::where("nama","like","%".$r->nama."%")->get();
+            foreach ($b as $k => $v) {
+                $v->studio=$v->studio;
+            }
             return json_encode($b);
         }
     }

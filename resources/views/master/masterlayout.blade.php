@@ -21,17 +21,17 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
 
 <!-- Custom Style -->
-<link rel="stylesheet" href="{{ ('/css/animate.min.css') }}">
-<link rel="stylesheet" href="{{ ('/css/magnific-popup.css') }}">
+<link rel="stylesheet" href="{{ url('/css/animate.min.css') }}">
+<link rel="stylesheet" href="{{ url('/css/magnific-popup.css') }}">
 {{-- <link rel="stylesheet" href="{{ ('/css/fontawesome-all.min.css') }}"> --}}
-<link rel="stylesheet" href="{{ ('/css/owl.carousel.min.css') }}">
-<link rel="stylesheet" href="{{ ('/css/flaticon.css') }}">
-<link rel="stylesheet" href="{{ ('/css/odometer.css') }}">
-<link rel="stylesheet" href="{{ ('/css/aos.css') }}">
-<link rel="stylesheet" href="{{ ('/css/slick.css') }}">
-<link rel="stylesheet" href="{{ ('/css/default.css') }}">
-<link rel="stylesheet" href="{{ ('/css/style.css') }}">
-<link rel="stylesheet" href="{{ ('/css/responsive.css') }}">
+<link rel="stylesheet" href="{{ url('/css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ url('/css/flaticon.css') }}">
+<link rel="stylesheet" href="{{ url('/css/odometer.css') }}">
+<link rel="stylesheet" href="{{ url('/css/aos.css') }}">
+<link rel="stylesheet" href="{{ url('/css/slick.css') }}">
+<link rel="stylesheet" href="{{ url('/css/default.css') }}">
+<link rel="stylesheet" href="{{ url('/css/style.css') }}">
+<link rel="stylesheet" href="{{ url('/css/responsive.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
 
 <style>

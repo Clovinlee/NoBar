@@ -2,15 +2,18 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SnackController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -130,6 +133,7 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 
 // |----------------------|
+<<<<<<< HEAD
 // | FOOTER               |
 // |----------------------|
 Route::view("/FAQ","footer.faq");  
@@ -141,6 +145,9 @@ Route::view("/TOU","footer.faq");
 
 // |----------------------|
 // | ADMIN                 |
+=======
+// | ADMIN                |
+>>>>>>> 228f1aecec94065f4f5817f9914eff5d9819c6c2
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
@@ -148,24 +155,40 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
-        Route::post('/{id}', [BranchController::class,"EditBranch"]);
-        Route::post('/{id}/delete', [BranchController::class,"DeleteBranch"]);
+        Route::post('/edit', [BranchController::class,"EditBranch"]);
+        Route::post('/delete', [BranchController::class,"DeleteBranch"]);
         
     });
     Route::prefix('/studio')->group(function () {
         Route::post('/add', [StudioController::class,"AddStudio"]);
-        Route::post('/{id}', [StudioController::class,"EditStudio"]);
-        Route::post('/{id}/delete', [StudioController::class,"DeleteStudio"]);
+        Route::post('/edit', [StudioController::class,"EditStudio"]);
+        Route::post('/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
-        Route::post('/add', [BranchController::class,"AddBranch"]);
+        Route::post('/add', [MovieController::class,"AddMovie"]);
+        Route::post('/edit', [MovieController::class,"EditMovie"]);
+        Route::post('/delete', [MovieController::class,"DeleteMovie"]);
         
+    });
+    Route::prefix('/snack')->group(function(){
+        Route::get('/add',[SnackController::class, "AddSnack"]);
     });
 });
 // |----------------------|
 
+<<<<<<< HEAD
 
+=======
+Route::get("/CalvinKwanGakKerjaFAI",function(){
+    Artisan::call("migrate:fresh --seed");
+    return response("<h1>emang</h1>");
+});
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
+});
+>>>>>>> 228f1aecec94065f4f5817f9914eff5d9819c6c2
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

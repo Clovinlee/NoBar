@@ -25,7 +25,7 @@
         <div class="row md-row-cols-2">
             @foreach ($upcoming as $uc)
                 <div class="col-sm-6 col-md-3 text-left">
-                    <x-movie id="{{ $uc->id }}">{{ $uc->judul }}</x-movie>
+                    <x-movie slug="{{ $uc->slug }}" img="{{ $uc->image }}">{{ $uc->judul }}</x-movie>
                 </div>
             @endforeach
         </div>

@@ -1,7 +1,7 @@
 <main style="margin-top:58px">
   <div class="container pt-4" id="branch">
     <section class="mb-4">
-      <h1>Jadwal {{$data->schedule->nama}}</h1>
+      <h1 class="text-dark">Jadwal {{$data->schedule->nama}}</h1>
       <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#staticBackdrop">Add new schedule here!</button>
       <br><br>
       <table class="table table-striped">

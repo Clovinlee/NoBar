@@ -133,7 +133,6 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 
 // |----------------------|
-<<<<<<< HEAD
 // | FOOTER               |
 // |----------------------|
 Route::view("/FAQ","footer.faq");  
@@ -145,9 +144,6 @@ Route::view("/TOU","footer.faq");
 
 // |----------------------|
 // | ADMIN                 |
-=======
-// | ADMIN                |
->>>>>>> 228f1aecec94065f4f5817f9914eff5d9819c6c2
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
@@ -177,18 +173,6 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
 });
 // |----------------------|
 
-<<<<<<< HEAD
-
-=======
-Route::get("/CalvinKwanGakKerjaFAI",function(){
-    Artisan::call("migrate:fresh --seed");
-    return response("<h1>emang</h1>");
-});
-
-Route::prefix('/manager')->group(function(){
-    Route::get('/',[ManagerController::class, "index"]);
-});
->>>>>>> 228f1aecec94065f4f5817f9914eff5d9819c6c2
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

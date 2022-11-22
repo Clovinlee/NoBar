@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Snack;
 use App\Http\Requests\StoreSnackRequest;
 use App\Http\Requests\UpdateSnackRequest;
+use Illuminate\Http\Request;
 
 class SnackController extends Controller
 {
@@ -83,4 +84,15 @@ class SnackController extends Controller
     {
         //
     }
+
+    public function AddSnack(Request $req){
+        if($req->ajax()){
+            $id = Snack::get()->last()->id;
+            $snack = new Snack();
+            $snack->nama_snack = $req->input("nama");
+            $snack->harga = $req->input("harga");
+
+        }
+    }
+    
 }

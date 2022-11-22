@@ -6,6 +6,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SnackController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -151,6 +152,9 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
         
+    });
+    Route::prefix('/snack')->group(function(){
+        Route::get('/add',[SnackController::class, "AddSnack"]);
     });
 });
 // |----------------------|

@@ -19,6 +19,12 @@ class UserController extends Controller
         return view("users.useredit",["currentUser" => Auth::user()]);
     }
 
+
+    public function SearchMovie(Request $request){
+        dd($request->search);
+        return view("users.search",["hasil" => $request->search]);
+    }
+
     public function fix_edit_user(Request $r){
         $user = Auth::user();
         $credentials = $r->validate([

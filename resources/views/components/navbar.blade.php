@@ -29,6 +29,7 @@
                             </div>
                             <div class="header-action d-none d-md-block">
                                 <ul>
+                                    {{-- ini bagian search --}}
                                     <li class="header-search"><a href="#" data-mdb-toggle="modal" data-mdb-target="#search-modal"><i class="fas fa-search"></i></a></li>
                                     @auth
                                         @php $user = Auth::user() @endphp
@@ -95,9 +96,9 @@
                     <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form>
-                                    <input type="text" placeholder="Search here...">
-                                    <button><i class="fas fa-search"></i></button>
+                                <form method="GET" action="{{url("/search")}}">
+                                    <input type="text" placeholder="Search here..." name="search">
+                                    <button type="submit"><i class="fas fa-search"></i></button>
                                 </form>
                             </div>
                         </div>

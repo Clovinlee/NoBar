@@ -33,14 +33,14 @@ use Illuminate\Support\Facades\Session;
 Route::get('/', [PageController::class,"index"]);
 // ->middleware("role:admin,manager");
 
+Route::get("/search", [UserController::class,"SearchMovie"]);
+
 Route::get('/nowplaying',[PageController::class,"nowplaying"])->name("nowplaying");
 Route::get('/comingsoon',[PageController::class,"comingsoon"])->name("comingsoon");
 Route::get('/membership',[PageController::class,"membership"])->name("membership");
 Route::get('/contact',[PageController::class,"contact"])->name("contact");
 
 Route::get("/find", [SearchController::class,"search"]);
-
-Route::get("/user", [UserController::class,"index"])->middleware(["auth","verified"]);
 
 // |----------------------|
 // | LOGIN REGISTER       |
@@ -152,7 +152,6 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::prefix('/movie')->group(function () {
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
-        
     });
 });
 // |----------------------|

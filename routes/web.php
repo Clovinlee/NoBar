@@ -142,24 +142,28 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
-        Route::post('/{id}', [BranchController::class,"EditBranch"]);
-        Route::post('/{id}/delete', [BranchController::class,"DeleteBranch"]);
+        Route::post('/edit', [BranchController::class,"EditBranch"]);
+        Route::post('/delete', [BranchController::class,"DeleteBranch"]);
         
     });
     Route::prefix('/studio')->group(function () {
         Route::post('/add', [StudioController::class,"AddStudio"]);
-        Route::post('/{id}', [StudioController::class,"EditStudio"]);
-        Route::post('/{id}/delete', [StudioController::class,"DeleteStudio"]);
+        Route::post('/edit', [StudioController::class,"EditStudio"]);
+        Route::post('/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
         Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
-        Route::post('/add', [BranchController::class,"AddBranch"]);
+        Route::post('/add', [MovieController::class,"AddMovie"]);
+        Route::post('/edit', [MovieController::class,"EditMovie"]);
+        Route::post('/delete', [MovieController::class,"DeleteMovie"]);
+        
     });
 });
 // |----------------------|
 
 Route::get("/CalvinKwanGakKerjaFAI",function(){
     Artisan::call("migrate:fresh --seed");
+    return response("<h1>emang</h1>");
 });
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.

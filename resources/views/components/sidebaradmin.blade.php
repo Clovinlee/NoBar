@@ -46,14 +46,14 @@
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
         <span href="#" class="list-group-item list-group-item-action py-2 ripple pointer active" aria-current="true" onclick="PageChange(event)" target="0" id="nav_dashboard">
-          <i class="fas fa-tachometer-alt fa-fw me-3"></i>Main dashboard
+          <i span onclick="PageChange(event)" target="0" class="fas fa-tachometer-alt fa-fw me-3"></i>Main dashboard
         </span>
         <span onclick="PageChange(event)" href="" target="1" id="nav_branch" class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-building fa-fw me-3" ></i><span>Branch</span></span>
-        <span id="nav_movie" onclick="PageChange(event)" href="" target="2" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-money-bill fa-fw me-3"></i><span>Movie</span></span
+          ><i span onclick="PageChange(event)" target="1" class="fas fa-building fa-fw me-3" ></i><span onclick="PageChange(event)" target="1">Branch</span></span>
+        <span id="nav_movie" onclick="PageChange(event)" href="" target="2" class="list-group-item list-group-item-action py-2 ripple"><i span onclick="PageChange(event)" target="2" class="fas fa-money-bill fa-fw me-3"></i><span span onclick="PageChange(event)" target="2">Movie</span></span
         >
         <span onclick="PageChange(event)" href="" target="3" id="nav_snack" class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-building fa-fw me-3" ></i><span>Snack</span></span>
+          ><i span onclick="PageChange(event)" target="3" class="fas fa-building fa-fw me-3" ></i><span span onclick="PageChange(event)" target="3">Snack</span></span>
       </div>
     </div>
   </nav>
@@ -78,23 +78,15 @@
 
       <!-- Brand -->
       <a class="navbar-brand" href="#">
-        <img src="{{asset('/storage/app/public/logo.jpg')}}" width="20px" alt="">
+        <img src="{{asset('assets/image/logo.jpg')}}" width="50px" alt="">
       </a>
-      <!-- Search form -->
-      <form class="d-none d-md-flex input-group w-auto my-auto">
-        <input
-          autocomplete="off"
-          type="search"
-          class="form-control rounded"
-          placeholder='Search (ctrl + "/" to focus)'
-          style="min-width: 225px;"
-        />
-        <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
-      </form>
 
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
-        <a href="" class="btn btn-primary">LOGOUT</a>
+        <form action="{{url('/logout')}}" method="post" class="d-inline">
+          @csrf
+        <button type="submit" class="btn btn-primary">LOGOUT</button>
+        </form>
       </ul>
     </div>
     <!-- Container wrapper -->

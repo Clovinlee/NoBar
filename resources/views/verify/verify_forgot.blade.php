@@ -6,7 +6,7 @@
 @endsection
 
 @section('body')
-<div class="d-flex justify-content-center align-items-center flex-column w-100" style="background-color: ; height:100vh">
+<div class="d-flex justify-content-center align-items-center flex-column w-100" style="height:100vh; background-size: contain; background-image: url({{ asset('assets/img/bg/footer_bg.jpg') }})">
     <div class="border rounded-3 shadow d-flex justify-content-center flex-column align-items-center p-5">
         <h1>Please Check Your Email!</h1>
         <p class="m-0">You've entered <strong>{{ session()->get("email") }}</strong> as the email address for your

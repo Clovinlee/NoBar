@@ -20,7 +20,7 @@
 </div>
 </button>
 
-<!-- Collapsed content -->
+<!-- sCollapsed content -->
 <div class="collapse mt-3" id="collapseExample">
   Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
   squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt

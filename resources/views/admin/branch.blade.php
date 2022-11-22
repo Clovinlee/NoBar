@@ -1,7 +1,7 @@
 <main style="margin-top:58px">
     <div class="container pt-4" id="branch">
       <section class="mb-4">
-        <h1>Branch</h1>
+        <h1 class="text-dark">Branch</h1>
         <div class="form-outline mb-4">
           <input type="text" class="form-control" id="search_branch" name="name"/>
           <label class="form-label">Nama branch</label>
@@ -53,7 +53,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Add new Branch</h5>
+          <h5 class="modal-title text-dark">Add new Branch</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="modal-body">
@@ -73,7 +73,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modaladdstudioh5">Add new Studio for </h5>
+          <h5 class="modal-title text-dark" id="modaladdstudioh5">Add new Studio for </h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="modal-body">
@@ -95,7 +95,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modaladdstudioh5">Add new Studio for </h5>
+          <h5 class="modal-title text-dark" id="modaladdstudioh5">Add new Studio for </h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="modal-body">
@@ -117,7 +117,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Edit Studio </h5>
+          <h5 class="modal-title text-dark">Edit Studio </h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="modal-body">
@@ -139,12 +139,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Hapus branch</h5>
-          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title text-dark">Hapus branch</h5>
+          <button type="button" class="btn-close " data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="modal-body">
             <div class="form-outline mb-4">
-              <h1 id="hapusbranchh1">Yakin mau hapus branch ini?</h1>
+              <h1 id="hapusbranchh1 " class="text-dark">Yakin mau hapus branch ini?</h1>
             </div>
           </div>
           <div class="modal-footer">
@@ -158,12 +158,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Hapus Studio</h5>
+          <h5 class="modal-title text-dark">Hapus Studio</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="modal-body">
             <div class="form-outline mb-4">
-              <h1 id="hapusstudioh1">Yakin mau hapus Studio ini?</h1>
+              <h1 id="hapusstudioh1" class="text-dark">Yakin mau hapus Studio ini?</h1>
             </div>
           </div>
           <div class="modal-footer">
@@ -177,7 +177,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Ganti Nama Branch</h5>
+            <h5 class="modal-title text-dark">Ganti Nama Branch</h5>
             <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
           </div>
             <div class="modal-body">

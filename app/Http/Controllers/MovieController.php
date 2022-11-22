@@ -110,5 +110,56 @@ class MovieController extends Controller
             return $output;
         }
     }
+    public function DeleteMovie(Request $r)
+    {
+        if ($r->ajax()) {
+            $m=Movie::find($r->id);
+            $m->delete();
+            $data=Movie::all();
+            return json_encode($data);
+        }
+    }
+    public function AddMovie(Request $r)
+    {
+        if ($r->ajax()) {
+            $m=new Movie;
+            $m->judul=$r->judul;
+            $m->slug=str_replace(" ","-",$r->judul);
+            $img=$r->file("image");
+            $img->storeAs("/movie",$img->getClientOriginalName(),'public');
+            $m->image=$img->getClientOriginalName();
+            $m->producer=$r->produser;
+            $m->casts=$r->cast;
+            $m->director=$r->director;
+            $m->synopsis=$r->synopsis;
+            $m->genre=$r->genre;
+            $m->duration=$r->duration;
+            $m->save();
+            $data=Movie::all();
+            return json_encode($data);
+        }
+    }
+    public function EditMovie(Request $r)
+    {
+        if ($r->ajax()) {
+            $m=Movie::find($r->id);
+            $m->judul=$r->judul;
+            $m->slug=str_replace(" ","-",$r->judul);
+            if ($r->file("image")->getSize()>0) {
+                $img=$r->file("image");
+                $img->storeAs("/movie",$img->getClientOriginalName(),'public');
+                $m->image=$img->getClientOriginalName();
+            }
+            $m->producer=$this->ArrToString($r->producer);
+            $m->casts=$this->ArrToString($r->casts);
+            $m->director=$this->ArrToString($r->director);
+            $m->synopsis=$r->synopsis;
+            $m->genre=$this->ArrToString($r->genre);
+            $m->duration=$r->duration;
+            $m->save();
+            $data=Movie::all();
+            return json_encode($data);
+        }
+    }
 
 }

@@ -1,5 +1,4 @@
-@extends('master.masterlayout')
-@section('body')
+
 <style>
   body {
   background-color: #fbfbfb;
@@ -51,10 +50,58 @@
             <i class="fas fa-tachometer-alt fa-fw me-3"></i>Main dashboard
         </span>
         
-        <span onclick="PageChange(event)" href="" target="1" id="nav_branch" class="list-group-item list-group-item-action py-2 ripple active"><i class="fas fa-building fa-fw me-3" ></i>
+        <span onclick="PageChange(event)" href="" target="1" id="nav_report" class="list-group-item list-group-item-action py-2 ripple active"><i class="fas fa-building fa-fw me-3" ></i>
             <span>Report</span>
+            
         </span>
 
+        <span  href="" target="1" id="nav_report" class="list-group-item list-group-item-action py-2 ripple active">
+            <a data-mdb-toggle="collapse" href="#sidenav-collapse-1-0-1" role="button" aria-expanded="true" tabindex="1">
+              <i class="fas fa-gem fa-fw me-3"> MDB Pro</i>
+              
+            <i class="fas fa-angle-down rotate-icon" style="transition-property: transform; transform: rotate(180deg);"></i>
+          </a>
+
+            <ul class="sidenav-collapse collapse show" id="sidenav-collapse-1-0-1" style="transition-property: height;">
+              <li class="sidenav-item" style="border-bottom: 1px solid #eee;"> 
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/" tabindex="1">About MDB Pro</a>
+          
+              </li>
+              <li class="sidenav-item">
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/installation/" tabindex="1">Installation</a>
+          
+              </li>
+              <li class="sidenav-item">
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/plugins-installation/" tabindex="1">Plugins installation</a>
+          
+              </li>
+              <li class="sidenav-item">
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/quick-start/" tabindex="1">Quick start</a>
+          
+              </li>
+              <li class="sidenav-item">
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/faq/" tabindex="1">FAQ</a>
+          
+              </li>
+              <li class="sidenav-item">
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/git/" tabindex="1">Git &amp; repository</a>
+          
+              </li>
+              <li class="sidenav-item">
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/support/" tabindex="1">Premium support</a>
+          
+              </li>
+              <li class="sidenav-item">
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/updates/" tabindex="1">Updates</a>
+          
+              </li>
+              <li class="sidenav-item">
+                <a class="sidenav-link ripple-surface" href="/docs/standard/pro/enterprise/" tabindex="1">Enterprise &amp; Resellers</a>
+          
+              </li>
+            </ul>
+        </span>
+        
       </div>
     </div>
   </nav>
@@ -114,4 +161,3 @@
 <script>
   
 </script>
-@endsection

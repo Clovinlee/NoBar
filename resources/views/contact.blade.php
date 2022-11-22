@@ -7,7 +7,6 @@
 @endsection
 
 @section('body')
-    
         <!-- preloader -->
         <div id="preloader">
             <div id="loading-center">
@@ -26,7 +25,6 @@
 
         <!-- main-area -->
         <main>
-
             <!-- breadcrumb-area -->
             <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('assets/img/bg/breadcrumb_bg.jpg') }}">
                 <div class="container">

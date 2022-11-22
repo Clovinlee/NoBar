@@ -2,11 +2,11 @@
 @section("subtitle","Verify Email")
 
 @section('navbar')
-    <x-navbar></x-navbar>
+    <x-navbar2></x-navbar2>
 @endsection
 
 @section('body')
-<div class="d-flex justify-content-center align-items-center flex-column w-100" style="background-color: ; height:100vh">
+<div class="d-flex justify-content-center align-items-center flex-column w-100" style="height:100vh; background-size: contain; background-image: url({{ asset('assets/img/bg/footer_bg.jpg') }})">
     <h1>Please Check Your Email!</h1>
     <p class="m-0">You've entered <strong>{{ session()->get("email") }}</strong> as the email address for your
         account.</p>

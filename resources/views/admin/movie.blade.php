@@ -1,19 +1,20 @@
 <main style="margin-top:58px">
     <div class="container pt-4" id="branch">
-      <section class="mb-4">
-        <h1>Movie</h1>
-        <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#staticBackdrop">Add new movie here!</button>
+      <section id="movsec" class="mb-4">
+        <h1 class="text-dark">Movie</h1>
+        <button class="btn btn-primary" id="btnaddmovie">Add new movie here!</button>
         <br><br>
-        @forelse ($data->movie as $m)
+        <div id="containermovie">
+          @forelse ($data->movie as $m)
         <div class="card" style="width: 30%; display: inline-block; margin: 9%;">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
-              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" alt="{{$m->slug}}"/>
+              <img src="{{asset('storage/movie/'.$m->image)}}" class="img-fluid" alt="{{$m->slug}}"/>
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </a>
             </div>
             <div class="card-body">
-              <h5 class="card-title">{{$m->judul}}</h5>
+              <h5 class="card-title text-dark">{{$m->judul}}</h5>
               <p class="card-text">
                 Genre :<br>
                 {{$m->genre}}<br>
@@ -22,38 +23,27 @@
               </p>
               <button onclick="Schedule(event)" value="/admin/movie/schedule/{{$m->id}}" class="btn btn-primary">Jadwal</button>
               <a href="#!" class="btn btn-warning">Edit</a>
-              <a href="#!" class="btn btn-danger">Delete</a>
+              <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->judul}}" data-mdb-target="#modaldeletemovie" class="delmovie btn btn-danger">Delete</button>
             </div>
           </div>
         @empty
             <h2>Belum ada film yang main!</h2>
         @endforelse
+        </div>
       </section> 
     </div>
   </main>
-  <div class="modal" tabindex="-1" id="modaladdbranch">
+  <div class="modal" tabindex="-1" id="modaldeletemovie">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Add new Branch</h5>
+          <h5 class="modal-title text-dark">Delete Movie</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="" method="post">
-          @csrf
-          <div class="modal-body">
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"/>
-              <label class="form-label">Nama branch</label>
-              @error('name')
-                  <div class="invalid-feedback"> 
-                      {{ $message }}
-                  </div>
-                @enderror
-            </div>
-          </div>
+        <h4 class="text-dark">Anda yakin mau hapus film ini?</h4>
           <div class="modal-footer" style="align-content: center">
-            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Add branch</button>
+            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">No</button>
+            <button type="button" class="btn btn-danger" data-mdb-dismiss="modal" id="deletemovie">Yes</button>
           </div>
         </form>
       </div>

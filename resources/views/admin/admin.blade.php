@@ -16,6 +16,9 @@
     <div id="div_snack"style="display: none">
       @include('admin.snack')
     </div>
+    <div id="div_add"style="display: none">
+      @include('admin.movieadd')
+    </div>
 @endsection
 @section('pageScript')
 <script>
@@ -24,9 +27,14 @@
     //Reload();
   });
   var current=0;
-  var cbranch=-1;
-  var cstudio=-1;
+  var cbranch=-1
+  var cstudio=-1
+  var cmov=-1
+  var produser=[];
+  var casts=[]
+  var director=[]
   const page=["dashboard","branch","movie","snack"];
+  var genre=["comedy","horror","action","romance","fantasy"]
     function Reload(data){
       $("#accordionExample").html("")
       var str="";
@@ -43,6 +51,61 @@
           });
           $("#accordionExample").html(str)
     }
+    function delproducer(e) {
+      const i=$(e.target).val()
+      produser.splice(i,1)
+      ReloadProducer()
+    }
+    function deldirektur(e) {
+      const i=$(e.target).val()
+      director.splice(i,1)
+      ReloadDirector()
+    }
+    function delcast(e) {
+      const i=$(e.target).val()
+      casts.splice(i,1)
+      ReloadCast()
+    }
+    function ReloadProducer() {
+      var c=""
+      var i=0
+      produser.forEach(p => {
+        c+="<b>"+p+"</b><button class='btn btn-danger justify-content-end align-items-center' style='position:relative; left:60%;' onclick='delproducer(event)' value='"+i+"'>Delete</button><br>"
+        i++
+      });
+      $("#list_produser").html(c)
+    }
+    function ReloadDirector() {
+      var c=""
+      var i=0
+      director.forEach(d => {
+        c+="<b>"+d+"</b><button class='btn btn-danger justify-content-end align-items-center' style='position:relative; left:60%;' onclick='deldirektur(event)' value='"+i+"'>Delete</button><br>"
+        i++
+      });
+      $("#list_direktur").html(c)
+    }
+    function ReloadCast() {
+      var c=""
+      var i=0
+      casts.forEach(ca => {
+        c+="<b>"+ca+"</b><button class='btn btn-danger justify-content-end align-items-center' style='position:relative; left:60%;' onclick='delcast(event)' value='"+i+"'>Delete</button><br>"
+        i++
+      });
+      $("#list_cast").html(c)
+    }
+    function ReloadMovie(data) { 
+      var c=$("#containermovie")
+      c.html("")
+      var str=""
+      if (data.length>0) {
+        data.forEach(d=>{
+          str+="<div class='card' style='width: 30%; display: inline-block; margin: 9%;''><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light' ><img src='storage/movie/"+d.image+"' class='img-fluid' alt='"+d.slug+"'/><a href=''><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>"+d.judul+"</h5><p class='card-text'>Genre :<br>"+d.genre+"<br>Duration :<br>"+d.duration+"<br></p><button onclick='Schedule(event)' value='/admin/movie/schedule/"+d.id+"' class='btn btn-primary'>Jadwal</button><a href='' class='btn btn-warning'>Edit</a><button href='' data-mdb-toggle='modal' value='"+d.id+"' d='"+d.judul+"' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>"
+        })
+      } else {
+        str="<h2>Belum ada film yang main!</h2>"
+      }
+      c.html(str)
+     }
     function Schedule(e) {
     const url=$(e.target).val();
     console.log(url);
@@ -94,9 +157,10 @@
     } 
     $("#EditBranch").on("click",function(){
       const nama=$("#nama_branch_edit").val();
-      dn=$.ajax({
+      if (nama.length>0) {
+        dn=$.ajax({
         type:"post",
-        url:"/admin/branch/"+cbranch,
+        url:'{{url("/admin/branch/edit")}}',
         data: {
           _token:'{{ csrf_token() }}',
           nama:nama,
@@ -107,11 +171,14 @@
           Reload(d)
         }
       })
+      } else {
+        alert("Nama tidak boleh kosong!");
+      }
     })
     $("#DeleteBranch").on("click",function(){
       dn=$.ajax({
         type:"post",
-        url:"/admin/branch/"+cbranch+"/delete",
+        url:'{{url("/admin/branch/delete")}}',
         data: {
           _token:'{{ csrf_token() }}',
           id:cbranch
@@ -119,13 +186,17 @@
         success:function(data){
           var d=JSON.parse(data,false)
           Reload(d)
-        }
+        },error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    console.log(xhr.responseText);
+                  }
       })
     })
     $("#DeleteStudio").on("click",function(){
       dn=$.ajax({
         type:"post",
-        url:"/admin/studio/"+cstudio+"/delete",
+        url:'{{url("/admin/studio/delete")}}',
         data: {
           _token:'{{ csrf_token() }}',
           id:cstudio
@@ -141,7 +212,7 @@
       const slot=$("#slot_studio_edit").val()
       dn=$.ajax({
         type:"post",
-        url:"/admin/studio/"+cstudio,
+        url:'{{url("/admin/studio/edit")}}',
         data: {
           _token:'{{ csrf_token() }}',
           nama:nama,
@@ -154,12 +225,30 @@
         }
       })
     })
+    $("#addproducer").on("click",function(){
+      const tp=$("#movie_produser").val()
+      produser.push(tp)
+      $("#movie_produser").val("")
+      ReloadProducer()
+    })
+    $("#adddirektur").on("click",function(){
+      const tp=$("#movie_direktur").val()
+      director.push(tp)
+      $("#movie_direktur").val("")
+      ReloadDirector()
+    })
+    $("#addcast").on("click",function(){
+      const tp=$("#movie_cast").val()
+      casts.push(tp)
+      $("#movie_cast").val("")
+      ReloadCast()
+    })
     $("#AddStudio").on("click",function(){
       const nama=$("#nama_studio").val();
       const slot=$("#slot_studio").val();
       dn=$.ajax({
         type: "POST",
-        url: "/admin/studio/add",
+        url: '{{url("/admin/studio/add")}}',
         data: {
           _token:'{{ csrf_token() }}',
           nama:nama,
@@ -172,11 +261,94 @@
         }
       }); 
     });
+    $("#addmovie").on("click",async function(){
+      const judul=$("#movie_judul").val();
+      const synopsis=$("#synopsis").val();
+      const duration=$("#durasi").val()
+      if (judul.length>0) {
+        if (produser.length>0 && casts.length>0 && director.length>0) {
+          if (synopsis.length<=0) {
+            alert("sinopsis tidak boleh kosong!")
+          } else {
+            var addgenre=[]
+            genre.forEach(g => {
+              if ($("#add_"+g).is(":checked")) {
+                addgenre.push(g)
+              }
+            });
+            if (addgenre.length>0) {
+              if (duration>0) {
+                const img=$("#img")[0].files
+                if (img.length>0) {
+                  const fd=new FormData()
+                  fd.append("_token",'{{ csrf_token() }}')
+                  fd.append("synopsis",synopsis)
+                  fd.append("duration",duration)
+                  fd.append("genre",addgenre.join(", "))
+                  fd.append("director",director.join(", "))
+                  fd.append("produser",produser.join(", "))
+                  fd.append("cast",casts.join(", "))
+                  fd.append("image",$("#img").prop("files")[0])
+                  fd.append("judul",judul)
+                  dn=$.ajax({
+                  type: "POST",
+                  url: '{{url("/admin/movie/add")}}',
+                  data: fd,
+                  contentType: false,
+                  processData: false,
+                  cache:false,
+                  dataType: 'html',
+                  success: function(data){
+                    var d=JSON.parse(data,false)
+                    $("#movie_judul").val("")
+                    produser=[]
+                    director=[]
+                    casts=[]
+                    ReloadCast()
+                    ReloadDirector()
+                    ReloadProducer()
+                    $("#movie_produser").val("")
+                    $("#movie_direktur").val("")
+                    $("#movie_cast").val("")
+                    $("#durasi").val(0)
+                    $("#img").val('')
+                    $("#synopsis").val('')
+                    addgenre.forEach(g => {
+                      $("#add_"+g).prop("checked",false)
+                    });
+                    ReloadMovie(d)
+                    $("#div_add").css("display","none")
+                    $("#div_movie").css("display","block")
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    console.log(xhr.responseText);
+                  }
+                }); 
+                } else {
+                  alert("poster belum diupload!")
+                }
+              } else {
+                alert("durasi film harus lebih dari 0!")
+              }
+            }else{
+              alert("belum ada genre yang dipilih!")
+            }
+          }
+        } else {
+          alert("produser, direktur, dan castnya harus ada!")
+        }
+      }else{
+        alert("judul tidak boleh kosong!")
+      }
+    });
     $("#AddBranch").on("click",function(){
       const nama=$("#nama_branch").val();
-      dn=$.ajax({
+      if (nama.length>0) {
+        dn=$.ajax({
         type: "POST",
-        url: "/admin/branch/add",
+        url: '{{url("/admin/branch/add")}}',
         data: {
           _token:'{{ csrf_token() }}',
           nama:nama,
@@ -188,7 +360,28 @@
           $("#branchacc"+d.parent).html(temp+temp2)
         }
       }); 
+      } else {
+        alert("Nama tidak boleh kosong!");
+      }
     });
+    $("#deletemovie").on("click",function(){
+      console.log(cmov);
+      dn=$.ajax({
+        type: "POST",
+        url: '{{url("/admin/movie/delete")}}',
+        data: {
+          _token:'{{ csrf_token() }}',
+          id:cmov,
+        },
+        success: function(data){
+          ReloadMovie(JSON.parse(data,false))
+        }
+      }); 
+    });
+    $('#btnaddmovie').on("click",function(){
+      $("#div_add").css("display","block")
+      $("#div_movie").css("display","none")
+    })
     $("#accordionExample").on('click','.linkgantinama',function(e){
         const d=$(this).attr("d")
         cbranch=$(this).attr("data-id")
@@ -215,6 +408,11 @@
         const d=$(this).attr("d")
         cbranch=$(this).attr("data-id")
         $("#modaladdstudioh5").text("Add new Studio for "+d)
+      })
+      $("#movsec").on('click','.delmovie',function(e){
+        const d=$(this).attr("d")
+        cmov=$(this).val()
+        $("#modaldeletemovie h4").text("Anda yakin ingin menghapus film "+d)
       })
       $("#btn_search_branch").click(function(){
         const nama=$("#search_branch").val()

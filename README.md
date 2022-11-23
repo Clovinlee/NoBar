@@ -10,8 +10,8 @@ Nobar merupakan aplikasi pemesanan tiket / food & beverages yang digunakan pada 
 Chrisanto Sinatra - 220180496 <br> 
 Calvin Kwan - 220180495 <br>
 Esther Gabriel - 220180500 <br>
-Kevin Syah - <br>
-Edward Patrick -  <br>
+Kevin Syah - 220180518 <br>
+Edward Patrick -  220180515 <br>
 
 ## Fitur
 <i>Gambar menyusul</i>
@@ -21,4 +21,4 @@ Edward Patrick -  <br>
 - Admin CRUD
 - Manager Dashboard
 - Report for Management
-- Food & Beverages
+- Voucher

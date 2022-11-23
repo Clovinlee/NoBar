@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SnackController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -41,8 +43,6 @@ Route::get('/contact',[PageController::class,"contact"])->name("contact");
 
 Route::get("/find", [SearchController::class,"search"]);
 
-Route::get("/user", [UserController::class,"index"])->middleware(["auth","verified"]);
-
 // |----------------------|
 // | LOGIN REGISTER       |
 // |----------------------|
@@ -51,7 +51,6 @@ Route::view("/register","register")->name("register")->middleware("guest");
 
 Route::post("/login",[VerificationController::class,"verifylogin"]);
 Route::post("/register",[VerificationController::class,"verifyregister"]);
-
 
 Route::post("/logout", [VerificationController::class,"logout"]);
 // |----------------------|
@@ -124,14 +123,23 @@ Route::prefix("/payment")->group(function(){
 // |----------------------|
 // | USER                 |
 // |----------------------|
+// Route::get("/manager/dashboard",[ManagerController::class,"dashboard2"]);
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
+});
+
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
     Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
+    Route::get("/edit", [UserController::class,"edit_user"])->middleware(["auth","verified"]);
+    Route::get("/movie/search", [UserController::class,"SearchMovie"]);
+    Route::post("/edit/fixedit", [UserController::class,"fix_edit_user"])->middleware(["auth","verified"]);
 });
 // |----------------------|
 
 // |----------------------|
-// | ADMIN                 |
+// | ADMIN                |
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
@@ -156,12 +164,19 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/delete', [MovieController::class,"DeleteMovie"]);
         
     });
+    Route::prefix('/snack')->group(function(){
+        Route::get('/add',[SnackController::class, "AddSnack"]);
+    });
 });
 // |----------------------|
 
 Route::get("/CalvinKwanGakKerjaFAI",function(){
     Artisan::call("migrate:fresh --seed");
     return response("<h1>emang</h1>");
+});
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
 });
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.

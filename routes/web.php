@@ -137,7 +137,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
     Route::prefix('/branch')->group(function () {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
-        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
+        Route::get("/schedule",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
         Route::post('/edit', [BranchController::class,"EditBranch"]);
         Route::post('/delete', [BranchController::class,"DeleteBranch"]);
@@ -149,7 +149,8 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
-        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
+        Route::get("/schedule",[ScheduleController::class,"JadwalMovie"]);
+        Route::get('/get', [MovieController::class,"GetMovie"]);
         Route::post('/add', [MovieController::class,"AddMovie"]);
         Route::post('/edit', [MovieController::class,"EditMovie"]);
         Route::post('/delete', [MovieController::class,"DeleteMovie"]);

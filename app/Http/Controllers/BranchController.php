@@ -16,8 +16,11 @@ class BranchController extends Controller
             $branch=new Branch();
             $branch->nama=$request->input("nama");
             $branch->save();
-            $branch->parent=$id;
-            return json_encode($branch);
+            $b=Branch::all();
+            foreach ($b as $k => $v) {
+                $v->studio=$v->studio;
+            }
+            return json_encode($b);
         }
     }
     public function DeleteBranch(Request $r)

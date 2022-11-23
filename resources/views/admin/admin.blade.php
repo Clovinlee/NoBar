@@ -195,6 +195,7 @@
         }
     }
   }
+
     function PageChange(e){
       current=$(e.target).attr("target");
       $("#div_schedule").css("display","none");
@@ -211,6 +212,7 @@
       $("#div_add").css("display","none");
       $("#div_edit").css("display","none");
     } 
+    
     $("#EditBranch").on("click",function(){
       const nama=$("#nama_branch_edit").val();
       if (nama.length>0) {

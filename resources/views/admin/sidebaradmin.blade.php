@@ -52,7 +52,8 @@
         </span>
         <span onclick="PageChange(event)" href="" target="1" id="nav_branch" class="list-group-item list-group-item-action py-2 ripple active"
           ><i class="fas fa-building fa-fw me-3" ></i><span>Branch</span></span>
-        <span id="nav_movie" onclick="PageChange(event)" href="" target="2" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-money-bill fa-fw me-3"></i><span>Movie</span></span
+        <span id="nav_movie" onclick="PageChange(event)" href="" target="2" class="list-group-item list-group-item-action py-2 ripple">
+          <i class="fas fa-money-bill fa-fw me-3"></i><span>Movie</span></span
         >
       </div>
     </div>

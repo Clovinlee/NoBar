@@ -137,7 +137,7 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 Route::view("/FAQ","footer.faq");  
 Route::view("/HelpCenter",[PageController::class,"contact"]);  
-Route::view("/TOU","footer.faq");  
+Route::view("/TOU","footer.TermOfUse");  
 // Route::view("/TOU","footer.faq");  
 // |----------------------|
 

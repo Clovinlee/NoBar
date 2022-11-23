@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string("nama");
             $table->integer("harga");
+            $table->string("tipe");
+            $table->string("foto");
             $table->timestamps();
             $table->softDeletes();
         });

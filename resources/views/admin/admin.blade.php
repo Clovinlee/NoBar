@@ -222,7 +222,8 @@
         }
       });
     }
-    
+  }
+
     function PageChange(e){
       current=$(e.target).attr("target");
       $("#div_schedule").css("display","none");

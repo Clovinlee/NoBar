@@ -28,6 +28,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([MovieSeeder::class, UserSeeder::class,BranchSeeder::class,StudioSeeder::class,ChairSeeder::class,ScheduleSeeder::class,HtransSeeder::class,DtransSeeder::class,SnackSeeder::class,HtranssnackSeeder::class,DtranssnackSeeder::class]);
+        $this->call([MovieSeeder::class, UserSeeder::class,BranchSeeder::class,StudioSeeder::class,ChairSeeder::class,ScheduleSeeder::class,TransactionSeeder::class,HtransSeeder::class,DtransSeeder::class,SnackSeeder::class,HtranssnackSeeder::class,DtranssnackSeeder::class]);
     }
 }

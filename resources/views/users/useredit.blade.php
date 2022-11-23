@@ -23,10 +23,15 @@
             </div>
         </div>
         <div class="row md-row-cols-2">
-            <p>Nama Lengkap : {{$currentUser->name}} <br>
-            Email : {{$currentUser->email}}</p>
-            <br>
-            <button><a href="/user/edit"> Update Profile </a></button>
+            <form action="/user/edit/fixedit" method="post">
+                @csrf
+                Nama Lengkap : <input type="text" name="nama_lengkap" id="" value="{{$currentUser->name}}"><br>
+                Email : <input type="text" name="email" id="" value="{{$currentUser->email}}" disabled><br>
+                Old Password : <input type="password" name="old_password" id="" value="{{$currentUser->password}}"><br>
+                New Password : <input type="password" name="new_password" id=""><br>
+                Confirm Password : <input type="password" name="conf_password" id=""><br>
+                <button type="submit">Update Profile</button>
+            </form>
         </div>
 </div>
 </section>

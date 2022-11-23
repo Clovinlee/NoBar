@@ -43,8 +43,6 @@ Route::get('/contact',[PageController::class,"contact"])->name("contact");
 
 Route::get("/find", [SearchController::class,"search"]);
 
-Route::get("/user", [UserController::class,"index"])->middleware(["auth","verified"]);
-
 // |----------------------|
 // | LOGIN REGISTER       |
 // |----------------------|
@@ -53,7 +51,6 @@ Route::view("/register","register")->name("register")->middleware("guest");
 
 Route::post("/login",[VerificationController::class,"verifylogin"]);
 Route::post("/register",[VerificationController::class,"verifyregister"]);
-
 
 Route::post("/logout", [VerificationController::class,"logout"]);
 // |----------------------|
@@ -126,9 +123,18 @@ Route::prefix("/payment")->group(function(){
 // |----------------------|
 // | USER                 |
 // |----------------------|
+// Route::get("/manager/dashboard",[ManagerController::class,"dashboard2"]);
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
+});
+
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
     Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
+    Route::get("/edit", [UserController::class,"edit_user"])->middleware(["auth","verified"]);
+    Route::get("/movie/search", [UserController::class,"SearchMovie"]);
+    Route::post("/edit/fixedit", [UserController::class,"fix_edit_user"])->middleware(["auth","verified"]);
 });
 // |----------------------|
 

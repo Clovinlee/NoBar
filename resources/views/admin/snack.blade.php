@@ -63,22 +63,28 @@
                 <label class="form-label">Nama Snack</label>
               </div>
               <div class="form-outline mb-4">
-                <input type="text" class="form-control" id="quantity" name="quantity">
-                <label class="form-label">Stok Snack</label>
-              </div>
-              <div class="form-outline mb-4">
                 <input type="text" class="form-control" id="harga_snack" name="harga">
                 <label class="form-label">Harga Snack</label>
+              </div>
+              <div class="form-outline mb-4">
+                  <input type="radio" class="form-control" id="food" name="jenis" value="food">
+                  <label for="food">Food</label>
+                  <input type="radio" class="form-control" id="beverage" name="jenis" value="beverage">
+                  <label for="beverage">Beverage</label>
+              </div>
+              <div class="form-outline mb-4">
+                <input type="file" class="form-control" id="foto_snack" name="foto">
+                <label class="form-label">Foto Snack</label>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddBranch">Add snack</button>
+              <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddSnack">Add snack</button>
             </div>
          </form>
       </div>
     </div>
-  </div>
+   </div>
   
   
   <div class="modal" tabindex="-1" id="modaleditsnack">

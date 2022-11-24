@@ -568,5 +568,12 @@
           }
         })
       })
+
+      // Ini bagian untuk snack
+      var myurl = "<?php echo URL::to('/'); ?>";
+      
+      $("#AddSnack").click(function () {  
+        var nama = $("#nama_snack").val();
+      })
 </script>
 @endsection

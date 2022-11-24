@@ -52,6 +52,34 @@
 }
 */
 
+.navCafe{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #14141d !important; 
+}
+
+.navCafe.active{
+    background-color: #14141d !important; 
+    color: yellow !important;
+    border-color: yellow !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.navCafe:hover{
+    /* background-color: transparent !important; */
+    background-color: #14141d !important; 
+}
+
 .h-screen{
     height: 100vh;
 }

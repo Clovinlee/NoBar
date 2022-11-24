@@ -23,43 +23,45 @@
                                         </li>
                                         <li><a href="{{ route('membership') }}">Membership</a></li>
                                         <li><a href="{{ route('contact') }}">contacts</a></li>
+                                        <li class="{{ Request::is('/cafe') ? 'active' : '' }}"><a href="{{ url('/cafe') }}">Cafe</a></li>
                                     </ul>
                                 </div>
                                 <div class="header-action d-none d-md-block">
                                     <ul>
+                                        {{-- ini bagian search --}}
                                         <li class="header-search"><a href="#" data-mdb-toggle="modal" data-mdb-target="#search-modal"><i class="fas fa-search"></i></a></li>
                                         @auth
-                                        @php $user = Auth::user() @endphp
-                                        <li class="header-btn">
-                                            <button class="btnMovie dropdown-toggle"id="dropdownMenuAccount" data-mdb-toggle="dropdown" aria-expanded="false"> Account</button>
-
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuAccount">
-                                                <li>
-                                                    <a href="{{ url('/user') }}">
-                                                        <button class="dropdown-item" type="button">Your Account</button>
-                                                    </a>
-                                                </li>
-                                                <li><a href="{{ url('/user/history') }}">
-                                                        <button class="dropdown-item" type="button">History</button>    
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <form action="{{ url('/logout') }}" method="POST">
-                                                        @csrf
-                                                        <button class="dropdown-item" type="submit">Logout</button>    
-                                                    </form>
-                                                    <script>
-                                                        function submitLogout(e) {
-                                                            let frm = e.parentElement.parentElement;
-                                                            frm.submit();
-                                                        }
-                                                    </script>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    @else
-                                    <li class="header-btn"><a href="{{ route('login') }}" class="btnMovie">Sign In</a></li>
-                                    @endauth
+                                            @php $user = Auth::user() @endphp
+                                            <li class="header-btn">
+                                                <button class="btnMovie dropdown-toggle"id="dropdownMenuAccount" data-mdb-toggle="dropdown" aria-expanded="false"> Account</button>
+    
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuAccount">
+                                                    <li>
+                                                        <a href="{{ url('/user') }}">
+                                                            <button class="dropdown-item" type="button">Your Account</button>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="{{ url('/user/history') }}">
+                                                            <button class="dropdown-item" type="button">History</button>    
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <form action="{{ url('/logout') }}" method="POST">
+                                                            @csrf
+                                                            <button class="dropdown-item" type="submit">Logout</button>    
+                                                        </form>
+                                                        <script>
+                                                            function submitLogout(e) {
+                                                                let frm = e.parentElement.parentElement;
+                                                                frm.submit();
+                                                            }
+                                                        </script>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        @else
+                                        <li class="header-btn"><a href="{{ route('login') }}" class="btnMovie">Sign In</a></li>
+                                        @endauth
                                     </ul>
                                 </div>
                             </nav>

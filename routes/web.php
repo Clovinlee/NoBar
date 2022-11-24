@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CafeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
@@ -119,6 +120,15 @@ Route::prefix("/payment")->group(function(){
 });
 // |----------------------|
 
+// |----------------------|
+// | CAFE                 |
+// |----------------------|
+
+Route::prefix("/cafe")->group(function(){
+    Route::get("/", [CafeController::class, "index"]);
+});
+
+// |----------------------|
 
 // |----------------------|
 // | USER                 |

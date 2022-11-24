@@ -2,6 +2,17 @@
 @section("subtitle","Cafe")
 
 @section('body')
+
+{{-- Loading AjAX --}}
+<div id="processLoading" style="display: none">
+    <div class="position-absolute w-100 vh-100 bg-black opacity-50 d-flex flex-column justify-content-center align-items-center" style="z-index:99" style="">
+        <div class="spinner-border text-white" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="text-white">Processing payment, please wait</div>
+    </div>
+</div>
+
 <!-- preloader -->
 <div id="preloader">
     <div id="loading-center">
@@ -33,6 +44,11 @@
                     <div class="section-title text-left">
                         <span class="sub-title">Welcome To</span>
                         <h2 class="">NoBar Cafe</h2>
+                        <a href="{{ url('/cafe') }}">
+                            <button class="btn btn-outline-primary">
+                                <i class="fa-solid fa-arrows-rotate"></i> &nbsp; Reset
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -41,8 +57,8 @@
                 <!-- Tabs navs -->
                 <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="navCafe nav-link active" id="ex3-tab-1" data-mdb-toggle="tab" href="#ex3-tabs-1" role="tab"
-                            aria-controls="ex3-tabs-1" aria-selected="true">
+                        <a class="navCafe nav-link active" id="ex3-tab-1" data-mdb-toggle="tab" href="#ex3-tabs-1"
+                            role="tab" aria-controls="ex3-tabs-1" aria-selected="true">
                             <i class="fa-solid fa-pizza-slice"></i> &nbsp; Foods
                         </a>
                     </li>
@@ -60,33 +76,13 @@
                     <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
                         <div class="row">
                             <div class="col-6 col-lg-3">
-                                <x-foodcard>Popcorn</x-foodcard>
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <x-foodcard>Barbeque</x-foodcard>
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <x-foodcard>Kentang</x-foodcard>
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <x-foodcard>Keju Cheese</x-foodcard>
+                                <x-foodcard idFood="1" description="Popcorn caramel dilengkapi dengan saus tomat dan barbeque lezat dan tak tertandingi sepanjang masa!" img="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" price="10000">Popcorn</x-foodcard>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
                         <div class="row">
-                            <div class="col-6 col-lg-3">
-                                <x-foodcard>Taro</x-foodcard>
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <x-foodcard>Cincau</x-foodcard>
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <x-foodcard>Fanta</x-foodcard>
-                            </div>
-                            <div class="col-6 col-lg-3">
-                                <x-foodcard>Coca Cola</x-foodcard>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -96,25 +92,195 @@
         <div class="d-flex justify-content-center align-items-center col-12">
             <br>
             @php
-                $openTime = "10:00";
-                $closeTime = "22:30";
-                date_default_timezone_set("Asia/Jakarta");
+            $openTime = "10:00";
+            $closeTime = "22:30";
+            date_default_timezone_set("Asia/Jakarta");
             @endphp
-            @if (time() >= strtotime($openTime) && time() <= strtotime($closeTime))
-                <button class="btn btn-danger p-3 px-5">
-                    Confirm Order
+            @if (time() >= strtotime($openTime) && time() <= strtotime($closeTime)) <button
+                class="btn btn-danger p-3 px-5" data-mdb-toggle="modal" data-mdb-target="#modalConfirmationCafe"
+                onclick="updateConfirmation(event)"
+                id="btnConfirmOrderCafe"
+                >
+                Confirm Order
                 </button>
-            @else
+                @else
                 <button class="btn btn-danger disabled">
-                    Sorry we are still closed. <br><span class="fw-bold h5">Open time : {{ $openTime }} - {{ $closeTime }}</span>
+                    Sorry we are still closed. <br><span class="fw-bold h5">Open time : {{ $openTime }} -
+                        {{ $closeTime }}</span>
                 </button>
-            @endif
+                @endif
         </div>
     </section>
-
 </main>
 <!-- main-area-end -->
 
+<!-- Modal Confirmation Order -->
+<div class="modal fade" id="modalConfirmationCafe" tabindex="-1" aria-labelledby="modalConfirmationCafeLabel"
+    aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning" style="display: flex; justify-content: center">
+                <h5 class="modal-title" id="modalConfirmationCafeLabel">Confirmation Order</h5>
+            </div>
+            <div class="modal-body row">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="fw-bold">Purchased Items</div>
+                    <div class="fw-bold">Total</div>
+                </div>
+                <span id="cafeConfirmationItemList">
+                    {{-- ITEM HERE JS --}}
+                </span>
+                <div class="col-12 text-end">
+                    <br>
+                    <b>Subtotal</b> <br>
+                    <span class="text-success fw-bold" id="cafeConfirmationSubtotal">Rp70.000</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-success" onclick="paySnack(event)">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detail Food -->
+<div class="modal fade" id="modalDetailFood" tabindex="-1" aria-labelledby="modalDetailFoodLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="card" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img id="modalDetailFoodImage" src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp" class="img-fluid rounded-start h-100" />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title text-warning" id="modalDetailFoodTitle">Card title</h5>
+                                <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <p class="card-text text-dark" id="modalDetailFoodBody">
+                                This is a wider card with supporting text below as a natural lead-in to
+                                additional content. This content is a little bit longer.
+                            </p>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <button type="button" class="btn btn-warning" data-mdb-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Session::has("error"))
+    <x-toast title="Error" type="danger">{!! Session::get("error") !!}</x-toast>
+@endif
+
 <x-footer></x-footer>
+
+@section('pageScript')
+    <script>
+        var listItem = [];
+        filterListItem();
+        function paySnack(e){
+            function ajaxPay(){
+                $("#processLoading").show();
+                $.ajax({
+                type:'POST',
+                url:'{{ url("/cafe_pay") }}',
+                data:{
+                    _token:'{{ csrf_token() }}',
+                    listItem:JSON.stringify(listItem),
+                },
+                success:function(body) {
+                    $("#processLoading").hide();
+                    var r = JSON.parse(body);
+                    snap.pay(r.token, {
+                        onSuccess: async function(result){
+                            await ajaxTrans(result)
+                            console.log("SUCCESS PAYMENt");
+                            },
+                        onPending: async function(result){
+                            console.log(result);
+                            tst = result;
+                            await ajaxTrans(result);
+                            console.log("PENDING Payment");
+
+                            // window.location.replace("http://{{env('APP_URL')}}/user/history")
+
+                            // console.log("Pending");
+                            // console.log(result);
+                            // {
+                            //     "status_code": "201",
+                            //     "status_message": "Transaksi sedang diproses",
+                            //     "transaction_id": "737949c1-752e-470f-8b54-58e43727968c",
+                            //     "order_id": "584503423",
+                            //     "gross_amount": "200000.00",
+                            //     "payment_type": "qris",
+                            //     "transaction_time": "2022-09-25 21:31:21",
+                            //     "transaction_status": "pending",
+                            //     "fraud_status": "accept",
+                            //     "finish_redirect_url": "http://example.com?order_id=584503423&status_code=201&transaction_status=pending"
+                            // }
+
+                        },
+                        // Optional
+                        onError: function(result){
+                            console.log("Error");
+                            console.log(result);
+                        }
+                    });
+                }
+             });
+            }
+        }
+
+        function number_format(n){
+            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function filterListItem(){
+            listItem.forEach(function(f, idx){
+                if(f["qty"] <= 0){
+                    listItem.splice(idx,1);
+                }
+            });
+            if(listItem.length <= 0){
+                $("#btnConfirmOrderCafe").addClass("disabled");
+            }else if(listItem.length > 0){
+                $("#btnConfirmOrderCafe").removeClass("disabled");
+            }
+        }
+
+        function updateConfirmation(e){
+            var container = $("#cafeConfirmationItemList");
+            var subtotal = $("#cafeConfirmationSubtotal");
+
+            container.empty();
+            var totalPrice = 0;
+            listItem.forEach(f => {
+                var nama = f["nama"];
+                var qty = f["qty"];
+                var price = f["price"];
+                var id = f["id"];
+                totalPrice += qty*price;
+                var toprice = qty*price;
+                container.append(
+                    `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="">${nama}(${qty})</div>
+                        <div class="">Rp${number_format(toprice)}</div>
+                    </div>
+                    `
+                );
+            });
+
+            subtotal.text("Rp"+number_format(totalPrice));
+        }
+    </script>
+@endsection
 
 @endsection

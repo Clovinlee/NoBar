@@ -80,6 +80,15 @@ input[type=number] {
     background-color: #14141d !important; 
 }
 
+.foodDetail{
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3; 
+   -webkit-box-orient: vertical;
+}
+
 .h-screen{
     height: 100vh;
 }

@@ -126,6 +126,11 @@ Route::prefix("/payment")->group(function(){
 
 Route::prefix("/cafe")->group(function(){
     Route::get("/", [CafeController::class, "index"]);
+    Route::post("/refreshCafe",[CafeController::class, "refreshCafe"]);
+});
+
+Route::prefix("/cafe_pay")->group(function() {
+    Route::post("/",[CafeController::class, "cafePayment"]);
 });
 
 // |----------------------|

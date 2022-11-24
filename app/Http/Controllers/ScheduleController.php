@@ -10,6 +10,7 @@ use App\Models\Movie;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use stdClass;
+use Yajra\DataTables\Facades\DataTables;
 
 class ScheduleController extends Controller
 {
@@ -18,37 +19,25 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function JadwalBranch(Request $r)
+    public function JadwalBranch($id)
     {
-        $branch=Branch::find($r->id);
-        $jadwal=$branch->schedule;
-        $jadwal->asal="branch";
-        $jadwal->nama=$branch->nama;
-        foreach ($jadwal as $k => $s) {
-            $s->nama_branch=$branch->nama;
-            $s->nomor_studio=$s->studio->nama;
-            $s->judul_movie=$s->movie->judul;
-            $s->durasi=$s->movie->duration;
+        $jadwal=Branch::find($id)->schedule;
+        foreach ($jadwal as $key => $j) {
+            $j->branch=$j->branch;
+            $j->studio=$j->studio;
+            $j->movie=$j->movie;
         }
-        $data=new stdClass;
-        $data->schedule=$jadwal;
-        return json_encode($data);
+        return DataTables::of($jadwal)->make(true);
     }
-    public function JadwalMovie(Request $r)
+    public function JadwalMovie($id)
     {
-        $movie=Movie::find($r->id);
-        $jadwal=$movie->schedule;
-        $jadwal->asal="movie";
-        $jadwal->nama=$movie->judul;
-        foreach ($jadwal as $k => $s) {
-            $s->nama_branch=$s->branch->nama;
-            $s->nomor_studio=$s->studio->nama;
-            $s->judul_movie=$movie->judul;
-            $s->durasi=$s->movie->duration;
+        $jadwal=Movie::find($id)->schedule;
+        foreach ($jadwal as $key => $j) {
+            $j->branch=$j->branch;
+            $j->studio=$j->studio;
+            $j->movie=$j->movie;
         }
-        $data=new stdClass;
-        $data->schedule=$jadwal;
-        return json_encode($data);
+        return DataTables::of($jadwal)->make(true);
     }
     public function index()
     {

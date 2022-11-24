@@ -26,6 +26,7 @@
   $(document).ready(function () {
     //Reload();
   });
+  var dt=null;
   var current=0;
   var cbranch=-1
   var cstudio=-1
@@ -139,60 +140,93 @@
      })
     function ScheduleBranch(e) {
     const id=$(e.target).val();
-    $.ajax({
-      type: "get",
-      url: "{{url('/admin/branch/schedule')}}",
-      data:{
-        id:id
-      },
-      success: function (response) {
-        $("#div_schedule").css("display","block");
-        for (let i = 0; i < page.length; i++) {
-          const p = page[i];
-          $("#div_"+p).css("display","none");
-        };
-        const data=JSON.parse(response);
-        Schedule(data)
+      $("#div_schedule").css("display","block");
+      $("#div_branch").css("display","none");
+      if (dt!=null) {
+        dt.destroy()
       }
-    })};
+      dt=$("#schedule_table").DataTable({
+        processing:true,
+        serverSide:true,
+        ajax:"{{url('/admin/branch/schedule')}}"+"/"+id,
+        aoColumns:[
+            {
+              mData:"branch.nama"
+            },{
+              mData:"studio.nama"
+            },{
+              mData:"movie.judul"
+            },{
+              mData:"time"
+            },{
+              mData:"price"
+            }
+          ]
+      });
+    };
     function ScheduleMovie(e) {
-    const id=$(e.target).val();
-    $.ajax({
-      type: "get",
-      url: "{{url('/admin/movie/schedule')}}",
-      data:{
-        id:id
-      },
-      success: function (response) {
-        $("#div_schedule").css("display","block");
-        for (let i = 0; i < page.length; i++) {
-          const p = page[i];
-          $("#div_"+p).css("display","none");
-        };
-        const data=JSON.parse(response);
-        Schedule(data)
+      const id=$(e.target).val();
+      $("#div_schedule").css("display","block");
+      $("#div_movie").css("display","none");
+      if (dt!=null) {
+        dt.destroy()
       }
-    })};
+      dt=$("#schedule_table").DataTable({
+        processing:true,
+        serverSide:true,
+        ajax:"{{url('/admin/movie/schedule')}}"+"/"+id,
+        aoColumns:[
+            {
+              mData:"branch.nama"
+            },{
+              mData:"studio.nama"
+            },{
+              mData:"movie.judul"
+            },{
+              mData:"time"
+            },{
+              mData:"price"
+            }
+          ]
+      });
+    // $.ajax({
+    //   type: "get",
+    //   url: "{{url('/admin/movie/schedule')}}",
+    //   data:{
+    //     id:id
+    //   },
+    //   success: function (response) {
+    //     $("#div_schedule").css("display","block");
+    //     for (let i = 0; i < page.length; i++) {
+    //       const p = page[i];
+    //       $("#div_"+p).css("display","none");
+    //     };
+    //     const data=JSON.parse(response);
+    //     Schedule(data)
+    //   }
+    // })
+  };
     function Schedule(data){
-      const tbody=$("#schedule_table");
-        tbody.html("");
-        for (let i = 0; i < data.schedule.length; i++) {
-          const tr=document.createElement("tr");
-          const td1=document.createElement("td");
-          td1.innerHTML=data.schedule[i].nama_branch
-          const td2=document.createElement("td");
-          td2.innerHTML=data.schedule[i].nomor_studio
-          const td3=document.createElement("td");
-          td3.innerHTML=data.schedule[i].judul_movie
-          const td4=document.createElement("td");
-          td4.innerHTML=data.schedule[i].time
-          const td5=document.createElement("td");
-          td5.innerHTML=data.schedule[i].durasi + " menit"
-          const td6=document.createElement("td");
-          td6.innerHTML=data.schedule[i].price
-          tr.append(td1,td2,td3,td4,td5,td6);
-          tbody.append(tr);
-        }
+      // const tbody=$("#schedule_table");
+      //   tbody.html("");
+      //   for (let i = 0; i < data.schedule.length; i++) {
+      //     const tr=document.createElement("tr");
+      //     const td1=document.createElement("td");
+      //     td1.innerHTML=data.schedule[i].nama_branch
+      //     const td2=document.createElement("td");
+      //     td2.innerHTML=data.schedule[i].nomor_studio
+      //     const td3=document.createElement("td");
+      //     td3.innerHTML=data.schedule[i].judul_movie
+      //     const td4=document.createElement("td");
+      //     td4.innerHTML=data.schedule[i].time
+      //     const td5=document.createElement("td");
+      //     td5.innerHTML=data.schedule[i].durasi + " menit"
+      //     const td6=document.createElement("td");
+      //     td6.innerHTML=data.schedule[i].price
+      //     tr.append(td1,td2,td3,td4,td5,td6);
+      //     tbody.append(tr);
+      //   }
+      
       };
 
     function PageChange(e){

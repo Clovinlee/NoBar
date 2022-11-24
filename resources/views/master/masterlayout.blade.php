@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="{{ url('/css/style.css') }}">
 <link rel="stylesheet" href="{{ url('/css/responsive.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
+<link rel="stylesheet" href="{{url('https://cdn.datatables.net/1.13.1/css/dataTables.foundation.min.css')}}">
 
 <style>
 </style>
@@ -65,6 +66,8 @@
 <script src="{{ url('/js/plugins.js') }}"></script>
 <script src="{{ url('/js/main.js') }}"></script>
 <script src="{{ url("/js/script.js") }}"></script>
+<script src="{{url('https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('https://cdn.datatables.net/1.13.1/js/dataTables.foundation.min.js')}}"></script>
 
 @yield("pageScript")
 

@@ -13,12 +13,12 @@ class SnackController extends Controller
 
     public function AddSnack(Request $req){
         $namafile = "";
-        if($req->hasFile('foto')){
+        if($req->hasFile("foto")){
             echo "masuk"; 
-            $file = $req->file('foto');
+            $file = $req->file("foto");
             $namafile = $file->getClientOriginalName();
             echo $namafile;
-            $file->move('uploads', $namafile);
+            $file->move('assets/images', $namafile);
         }
         
         $snack = new Snack();
@@ -26,7 +26,7 @@ class SnackController extends Controller
         $snack->harga = $req->input("harga");
         $snack->tipe = $req->input("jenis_snack");
         // $snack->foto = $req->input($namafile);
-        $snack->foto = "popcorn.jpg";
+        $snack->foto = $namafile;
         $snack->save();
 
     }

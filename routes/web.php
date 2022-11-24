@@ -165,8 +165,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         
     });
     Route::prefix('/snack')->group(function(){
-        // Route::get('/post',[SnackController::class, "AddSnack"]);
-        Route::get('/add',[SnackController::class, "AddSnack"]);
+        Route::post('/add',[SnackController::class, "AddSnack"]);
     });
 });
 // |----------------------|

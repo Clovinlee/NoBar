@@ -59,7 +59,7 @@
                 <h5 class="modal-title" style='color: black;'>Add new Snack</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
               </div>
-          <form action="{{url('/admin/snack/add')}}" method="get" enctype="multipart/form-data">
+          <form action="{{url('/admin/snack/add')}}" method="post" enctype="multipart/form-data">
             @csrf
               <div class="modal-body">
                 <div class='row'>

@@ -56,24 +56,26 @@
           <h5 class="modal-title">Add new Snack</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
-          <div class="modal-body">
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="nama_snack" name="name"/>
-              <label class="form-label">Nama Snack</label>
+         <form action="" method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="form-outline mb-4">
+                <input type="text" class="form-control" id="nama_snack" name="name"/>
+                <label class="form-label">Nama Snack</label>
+              </div>
+              <div class="form-outline mb-4">
+                <input type="text" class="form-control" id="quantity" name="quantity">
+                <label class="form-label">Stok Snack</label>
+              </div>
+              <div class="form-outline mb-4">
+                <input type="text" class="form-control" id="harga_snack" name="harga">
+                <label class="form-label">Harga Snack</label>
+              </div>
             </div>
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="quantity" name="quantity">
-              <label class="form-label">Stok Snack</label>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddBranch">Add snack</button>
             </div>
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="harga_snack" name="harga">
-              <label class="form-label">Harga Snack</label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddBranch">Add snack</button>
-          </div>
+         </form>
       </div>
     </div>
   </div>

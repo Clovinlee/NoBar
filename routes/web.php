@@ -155,7 +155,6 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
     Route::prefix('/branch')->group(function () {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
-        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
         Route::post('/edit', [BranchController::class,"EditBranch"]);
         Route::post('/delete', [BranchController::class,"DeleteBranch"]);
@@ -167,12 +166,17 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
-        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
         Route::get('/get', [MovieController::class,"GetMovie"]);
         Route::post('/add', [MovieController::class,"AddMovie"]);
         Route::post('/edit', [MovieController::class,"EditMovie"]);
         Route::post('/delete', [MovieController::class,"DeleteMovie"]);
         
+    });
+    Route::prefix('schedule')->group(function () {
+        Route::get('/', [ScheduleController::class,"GetSchedule"]);
+        Route::post('/delete', [ScheduleController::class,"DeleteSchedule"]);
+        Route::post('/add', [ScheduleController::class,"AddSchedule"]);
+        Route::post('/{id}', [ScheduleController::class,"EditSchedule"]);
     });
     Route::prefix('/snack')->group(function(){
         Route::get('/add',[SnackController::class, "AddSnack"]);

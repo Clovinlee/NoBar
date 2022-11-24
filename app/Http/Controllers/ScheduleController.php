@@ -19,9 +19,9 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function JadwalBranch($id)
+    public function GetSchedule()
     {
-        $jadwal=Branch::find($id)->schedule;
+        $jadwal=Schedule::all();
         foreach ($jadwal as $key => $j) {
             $j->branch=$j->branch;
             $j->studio=$j->studio;
@@ -29,15 +29,16 @@ class ScheduleController extends Controller
         }
         return DataTables::of($jadwal)->make(true);
     }
-    public function JadwalMovie($id)
+    public function DeleteSchedule(Request $r)
     {
-        $jadwal=Movie::find($id)->schedule;
-        foreach ($jadwal as $key => $j) {
-            $j->branch=$j->branch;
-            $j->studio=$j->studio;
-            $j->movie=$j->movie;
-        }
-        return DataTables::of($jadwal)->make(true);
+        $s=Schedule::where("id","=",$r->id);
+        $s->delete();
+    }
+    public function EditSchedule(Request $r,$id)
+    {
+        $s=Schedule::find($id);
+        $s->time=$r->time;
+        $s->save();
     }
     public function index()
     {

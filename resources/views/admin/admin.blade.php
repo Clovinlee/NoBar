@@ -24,17 +24,18 @@
 <script>
   // console.log("HEY")
   $(document).ready(function () {
-    //Reload();
+    Schedule()
   });
   var dt=null;
   var current=0;
   var cbranch=-1
   var cstudio=-1
+  var csched=-1
   var cmov=-1
   var produser=[];
   var casts=[]
   var director=[]
-  const page=["dashboard","branch","movie","snack"];
+  const page=["dashboard","branch","movie","snack","schedule"];
   var genre=["comedy","horror","action","romance","fantasy"]
     function Reload(data){
       $("#accordionExample").html("")
@@ -48,7 +49,7 @@
         } else {
           str+="<h3>Branch ini belum punya studio</h3>"
         }
-        str+="</div><button onclick='ScheduleBranch(event)' value='"+d.id+"'class='btn btn-primary' style='margin-left: 2%'>Cek Jadwal</button></div></div>"
+        str+="</div></div></div>"
           });
           $("#accordionExample").html(str)
     }
@@ -100,13 +101,32 @@
       var str=""
       if (data.length>0) {
         data.forEach(d=>{
-          str+="<div class='card' style='width: 30%; display: inline-block; margin: 9%;''><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light' ><img src='storage/movie/"+d.image+"' class='img-fluid' alt='"+d.slug+"'/><a href=''><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>"+d.judul+"</h5><p class='card-text'>Genre :<br>"+d.genre+"<br>Duration :<br>"+d.duration+"<br></p><button onclick='ScheduleMovie(event)' value='"+d.id+"' class='btn btn-primary'>Jadwal</button><button href='' value='"+d.id+"' class='movieedit btn btn-warning'>Edit</button><button href='' data-mdb-toggle='modal' value='"+d.id+"' d='"+d.judul+"' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>"
+          str+="<div class='card' style='width: 30%; display: inline-block; margin: 9%;''><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light' ><img src='storage/movie/"+d.image+"' class='img-fluid' alt='"+d.slug+"'/><a href=''><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>"+d.judul+"</h5><p class='card-text'>Genre :<br>"+d.genre+"<br>Duration :<br>"+d.duration+"<br></p><button href='' value='"+d.id+"' class='movieedit btn btn-warning'>Edit</button><button href='' data-mdb-toggle='modal' value='"+d.id+"' d='"+d.judul+"' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>"
         })
       } else {
         str="<h2>Belum ada film yang main!</h2>"
       }
       c.html(str)
      }
+     $("#editjadwal").on("click",function () {
+      const time=$("#date").val()
+        dn=$.ajax({
+          type:"POST",
+          url:'{{url("/admin/schedule")}}'+"/"+cshed,
+          data: {
+            _token:'{{ csrf_token() }}',
+            id:csched,
+            time:time
+          },
+          success:function(data){
+            Schedule()
+          },error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    console.log(xhr.responseText);
+                  }
+        })
+     })
      $("#movsec").on("click",".movieedit",function () {
       var id=$(this).val()
       $.ajax({
@@ -138,17 +158,33 @@
         }
       })
      })
-    function ScheduleBranch(e) {
-    const id=$(e.target).val();
-      $("#div_schedule").css("display","block");
-      $("#div_branch").css("display","none");
+     $("#schedule_table").on("click",".editschedule",function () {
+      const data=dt.row($(this).parents('tr')).data()
+      cshed = data.id;
+      $("#date").val(data.time)
+     })
+     $("#schedule_table").on("click",".deleteschedule",function () {
+      var id = dt.row($(this).parents('tr')).data().id;
+      dn=$.ajax({
+        type:"post",
+        url:'{{url("/admin/schedule/delete")}}',
+        data: {
+          _token:'{{ csrf_token() }}',
+          id:id
+        },
+        success:function(data){
+          Schedule()
+        }
+      })
+     })
+    function Schedule() {
       if (dt!=null) {
         dt.destroy()
       }
       dt=$("#schedule_table").DataTable({
         processing:true,
         serverSide:true,
-        ajax:"{{url('/admin/branch/schedule')}}"+"/"+id,
+        ajax:"{{url('/admin/schedule')}}",
         aoColumns:[
             {
               mData:"branch.nama"
@@ -160,78 +196,17 @@
               mData:"time"
             },{
               mData:"price"
+            },{
+              target:-1,
+              data:null,
+              defaultContent:"<button class='btn btn-warning editschedule form-control' data-mdb-toggle='modal' data-mdb-target='#ubahjadwalbranch'>Edit</button><button class='btn btn-danger deleteschedule form-control'>Delete</button>"
             }
           ]
       });
-    };
-    function ScheduleMovie(e) {
-      const id=$(e.target).val();
-      $("#div_schedule").css("display","block");
-      $("#div_movie").css("display","none");
-      if (dt!=null) {
-        dt.destroy()
-      }
-      dt=$("#schedule_table").DataTable({
-        processing:true,
-        serverSide:true,
-        ajax:"{{url('/admin/movie/schedule')}}"+"/"+id,
-        aoColumns:[
-            {
-              mData:"branch.nama"
-            },{
-              mData:"studio.nama"
-            },{
-              mData:"movie.judul"
-            },{
-              mData:"time"
-            },{
-              mData:"price"
-            }
-          ]
-      });
-    // $.ajax({
-    //   type: "get",
-    //   url: "{{url('/admin/movie/schedule')}}",
-    //   data:{
-    //     id:id
-    //   },
-    //   success: function (response) {
-    //     $("#div_schedule").css("display","block");
-    //     for (let i = 0; i < page.length; i++) {
-    //       const p = page[i];
-    //       $("#div_"+p).css("display","none");
-    //     };
-    //     const data=JSON.parse(response);
-    //     Schedule(data)
-    //   }
-    // })
   };
-    function Schedule(data){
-      // const tbody=$("#schedule_table");
-      //   tbody.html("");
-      //   for (let i = 0; i < data.schedule.length; i++) {
-      //     const tr=document.createElement("tr");
-      //     const td1=document.createElement("td");
-      //     td1.innerHTML=data.schedule[i].nama_branch
-      //     const td2=document.createElement("td");
-      //     td2.innerHTML=data.schedule[i].nomor_studio
-      //     const td3=document.createElement("td");
-      //     td3.innerHTML=data.schedule[i].judul_movie
-      //     const td4=document.createElement("td");
-      //     td4.innerHTML=data.schedule[i].time
-      //     const td5=document.createElement("td");
-      //     td5.innerHTML=data.schedule[i].durasi + " menit"
-      //     const td6=document.createElement("td");
-      //     td6.innerHTML=data.schedule[i].price
-      //     tr.append(td1,td2,td3,td4,td5,td6);
-      //     tbody.append(tr);
-      //   }
-      
-      };
 
     function PageChange(e){
       current=$(e.target).attr("target");
-      $("#div_schedule").css("display","none");
       for (let i = 0; i < page.length; i++) {
         const p = page[i];
         if (i==current) {

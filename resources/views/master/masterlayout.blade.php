@@ -20,7 +20,8 @@
 
 <!-- MDB -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
-
+<!--Select2-->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <!-- Custom Style -->
 <link rel="stylesheet" href="{{ url('/css/animate.min.css') }}">
 <link rel="stylesheet" href="{{ url('/css/magnific-popup.css') }}">
@@ -51,7 +52,8 @@
 
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
-
+<!--Select2-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- Custom JS -->
 <script src="{{ url('/js/isotope.pkgd.min.js') }}"></script>
 <script src="{{ url('/js/imagesloaded.pkgd.min.js') }}"></script>

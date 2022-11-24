@@ -21,7 +21,6 @@
                 Duration :<br>
                 {{$m->duration}}<br>
               </p>
-              <button onclick="ScheduleMovie(event)" value="{{$m->id}}" class="btn btn-primary">Jadwal</button>
               <button class="btn btn-warning movieedit" value="{{$m->id}}">Edit</button>
               <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->judul}}" data-mdb-target="#modaldeletemovie" class="delmovie btn btn-danger">Delete</button>
             </div>

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateScheduleRequest;
 use App\Models\Branch;
 use App\Models\Movie;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use stdClass;
 
 class ScheduleController extends Controller
@@ -17,9 +18,9 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function JadwalBranch($id)
+    public function JadwalBranch(Request $r)
     {
-        $branch=Branch::find($id);
+        $branch=Branch::find($r->id);
         $jadwal=$branch->schedule;
         $jadwal->asal="branch";
         $jadwal->nama=$branch->nama;
@@ -33,9 +34,9 @@ class ScheduleController extends Controller
         $data->schedule=$jadwal;
         return json_encode($data);
     }
-    public function JadwalMovie($id)
+    public function JadwalMovie(Request $r)
     {
-        $movie=Movie::find($id);
+        $movie=Movie::find($r->id);
         $jadwal=$movie->schedule;
         $jadwal->asal="movie";
         $jadwal->nama=$movie->judul;

@@ -20,13 +20,15 @@ class SnackController extends Controller
             $img            =   $r->file("image");
             $img->storeAs("/snack",$img->getClientOriginalName(), 'public');
             $m->foto        =   $img->getClientOriginalName();
+            $m->deskripsi = $r->deskripsi;
             $m->save();
             $data           = Snack::all();
             return json_encode($data);
         }
     }
 
-    
+
+
 
 
 }

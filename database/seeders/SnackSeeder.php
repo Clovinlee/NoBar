@@ -20,6 +20,7 @@ class SnackSeeder extends Seeder
             "harga" => "12000",
             "tipe" => "beverage",
             "foto" => "cola.jpg",
+            "deskripsi" => "ini minuman berkarbonasi yang sangat menyegarkan",
         ]);
 
         Snack::create([
@@ -27,6 +28,7 @@ class SnackSeeder extends Seeder
             "harga" => "12000",
             "tipe" => "beverage",
             "foto" => "lemon.jpg",
+            "deskripsi" => "sensasi minum teh dengan rasa lemon yang menyegarkan",
         ]);
 
         Snack::create([
@@ -34,6 +36,7 @@ class SnackSeeder extends Seeder
             "harga" => "12000",
             "tipe" => "beverage",
             "foto" => "orange.jpg",
+            "deskripsi" => "jus jeruk yang sangat segar"
         ]);
 
         Snack::create([
@@ -41,6 +44,7 @@ class SnackSeeder extends Seeder
             "harga" => "10000",
             "tipe" => "beverage",
             "foto" => "aqua.jpg",
+            "deskripsi" => "Air putih yang siap menemani disetiap saat",
         ]);
 
         Snack::create([
@@ -48,6 +52,7 @@ class SnackSeeder extends Seeder
             "harga" => "10000",
             "tipe" => "food",
             "foto" => "popcorn.jpg",
+            "deskripsi" => "Makanan ringan yang siap menemani nonton film mu",
         ]);
 
         Snack::create([
@@ -55,6 +60,7 @@ class SnackSeeder extends Seeder
             "harga" => "15000",
             "tipe" => "food",
             "foto" => "hotdog.jpg",
+            "deskripsi" => "Makanan ringan yang hadir untuk memberikan rasa kenyang",
         ]);
 
         Snack::create([
@@ -62,6 +68,7 @@ class SnackSeeder extends Seeder
             "harga" => "12000",
             "tipe" => "food",
             "foto" => "fries.jpg",
+            "deskripsi" => "Makanan ringan yang siap menemani nonton film mu",
         ]);
 
         Snack::create([
@@ -69,6 +76,7 @@ class SnackSeeder extends Seeder
             "harga" => "15000",
             "tipe" => "food",
             "foto" => "burger.jpg",
+            "deskripsi" => "Makanan yang akan mengenyangkan perut mu pada saat menonton film", 
         ]);
     }
 }

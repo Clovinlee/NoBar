@@ -595,6 +595,7 @@
           jenis = "Beverage";
         }
         var img= $("#foto_snack_add")[0].files;
+        var deskripsi = $("#deskripsi_snack_add").val();
 
         alert(nm + "-" + hg + "-" + jenis); 
         
@@ -605,6 +606,7 @@
           fd.append("harga",hg)
           fd.append("jenis",jenis)
           fd.append("image",$("#foto_snack_add").prop("files")[0])
+          fd.append("deskripsi", deskripsi)
 
           dn = $.ajax({
             type: "POST",

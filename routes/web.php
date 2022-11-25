@@ -40,6 +40,7 @@ Route::get('/nowplaying',[PageController::class,"nowplaying"])->name("nowplaying
 Route::get('/comingsoon',[PageController::class,"comingsoon"])->name("comingsoon");
 Route::get('/membership',[PageController::class,"membership"])->name("membership");
 Route::get('/contact',[PageController::class,"contact"])->name("contact");
+Route::get('/history',[PageController::class,"history"])->name("history");
 
 Route::get("/find", [SearchController::class,"search"]);
 

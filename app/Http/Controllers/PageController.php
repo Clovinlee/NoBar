@@ -40,4 +40,7 @@ class PageController extends Controller
     public function contact(){
         return view("contact");
     }
+    public function history(){
+        return view("history");
+    }
 }

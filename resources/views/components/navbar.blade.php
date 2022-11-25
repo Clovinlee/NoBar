@@ -25,6 +25,7 @@
                                     </li>
                                     <li><a href="{{ route('membership') }}">Membership</a></li>
                                     <li><a href="{{ route('contact') }}">contacts</a></li>
+                                    <li><a href="{{ route('history') }}">history</a></li>
                                 </ul>
                             </div>
                             <div class="header-action d-none d-md-block">

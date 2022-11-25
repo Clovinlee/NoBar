@@ -75,9 +75,11 @@
                 <div class="tab-content shadow rounded-3 p-4" id="ex2-content" style="background-color: #14141d8a;">
                     <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
                         <div class="row">
+                            @foreach ($listSnacks as $f)
                             <div class="col-6 col-lg-3">
-                                <x-foodcard idFood="1" description="Popcorn caramel dilengkapi dengan saus tomat dan barbeque lezat dan tak tertandingi sepanjang masa!" img="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" price="10000">Popcorn</x-foodcard>
+                                <x-foodcard idFood="{{ $f->id }}" description="{{ $f->description }}" img="{{ $f->image }}" price="{{ $f->harga }}">{{ $f->nama }}</x-foodcard>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
@@ -97,7 +99,7 @@
             date_default_timezone_set("Asia/Jakarta");
             @endphp
             @if (time() >= strtotime($openTime) && time() <= strtotime($closeTime)) <button
-                class="btn btn-danger p-3 px-5" data-mdb-toggle="modal" data-mdb-target="#modalConfirmationCafe"
+                class="btn btn-danger p-3 px-5" data-mdb-toggle="modal" data-mdb-target="#modalBranch"
                 onclick="updateConfirmation(event)"
                 id="btnConfirmOrderCafe"
                 >
@@ -136,9 +138,35 @@
                     <span class="text-success fw-bold" id="cafeConfirmationSubtotal">Rp70.000</span>
                 </div>
             </div>
+            <div class="text-dark" style="margin-left: 20px">
+                Branch : <span class="text-warning fw-bold" id="confirmationBranch">Ciputra World</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-target="#modalBranch" data-mdb-toggle="modal">Back</button>
+                <button type="button" class="btn btn-success" onclick="ajaxPay(event)">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Select Branch --}}
+<div class="modal fade" id="modalBranch" tabindex="-1" aria-labelledby="modalBranchLabel"
+    aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning" style="display: flex; justify-content: center">
+                <h5 class="modal-title" id="modalBranchLabel">Select your branch</h5>
+            </div>
+            <div class="modal-body">
+                <select name="selectbranch" id="selectbranch" class="w-100">
+                    @foreach ($listBranch as $b)
+                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Back</button>
-                <button type="button" class="btn btn-success" onclick="paySnack(event)">Confirm</button>
+                <button type="button" class="btn btn-success" data-mdb-target="#modalConfirmationCafe" data-mdb-toggle="modal" onclick="updateBranch()">Confirm</button>
             </div>
         </div>
     </div>
@@ -164,6 +192,7 @@
                                 This is a wider card with supporting text below as a natural lead-in to
                                 additional content. This content is a little bit longer.
                             </p>
+                            <p class="text-dark">Price : <span id="modalDetailFoodPrice" class="fw-bold text-warning">Rp10.000</span></p>
                             <div class="d-flex justify-content-end align-items-center">
                                 <button type="button" class="btn btn-warning" data-mdb-dismiss="modal">Close</button>
                             </div>
@@ -185,17 +214,40 @@
     <script>
         var listItem = [];
         filterListItem();
-        function paySnack(e){
-            function ajaxPay(){
-                $("#processLoading").show();
-                $.ajax({
-                type:'POST',
-                url:'{{ url("/cafe_pay") }}',
-                data:{
-                    _token:'{{ csrf_token() }}',
-                    listItem:JSON.stringify(listItem),
-                },
-                success:function(body) {
+
+        function ajaxTrans(result){
+        $.ajax({
+            type:"POST",
+            url:"{{ url('/cafe_pay/process') }}",
+            data:{
+                _token:'{{ csrf_token() }}',
+                scheduleId:'{{ $schedule->id }}',
+                ticketQty:'{{ $data["qtyTicket"] }}',
+                seatList: JSON.stringify(seatList),
+                mdResult: JSON.stringify(result),
+            },
+            success: function(body){
+                console.log("DB Added |code : "+body);
+                window.location.replace("http://{{env('APP_URL')}}/user/history");
+            }
+        })
+        }
+
+        function ajaxPay(e){
+            $("#processLoading").show();
+            $.ajax({
+            type:'POST',
+            url:'{{ url("/cafe_pay") }}',
+            data:{
+                _token:'{{ csrf_token() }}',
+                branchId:$("#selectbranch").val(),
+                listItem:JSON.stringify(listItem),
+            },
+            success:function(body) {
+                if(body == false){
+                    //If user not logged in, then reload page
+                    window.location.reload();
+                }else{
                     $("#processLoading").hide();
                     var r = JSON.parse(body);
                     snap.pay(r.token, {
@@ -213,6 +265,7 @@
 
                             // console.log("Pending");
                             // console.log(result);
+                            // console.log({{ $schedule->id }})
                             // {
                             //     "status_code": "201",
                             //     "status_message": "Transaksi sedang diproses",
@@ -234,8 +287,12 @@
                         }
                     });
                 }
-             });
             }
+            });
+        }
+
+        function updateBranch(){
+            $("#confirmationBranch").text($("#selectbranch option:selected").text());
         }
 
         function number_format(n){

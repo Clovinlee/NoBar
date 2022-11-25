@@ -28,6 +28,53 @@ use Illuminate\Support\Facades\Auth;
             return Midtrans::$instance;
         }
 
+        public function paymentCafe($idBranch, $listItem){
+            $total_price = 0;
+            $item_details = [];
+
+            foreach ($listItem as $key => $value) {
+                $total_price += $value->price;
+                $f = [
+                    "id"=>$value->id,
+                    "nama"=>$value->nama,
+                    "quantity"=>$value->qty,
+                    "price"=>$value->price,
+                    "subtotal"=>$value->price*$value->qty,
+                ];
+                array_push($item_details,$f);
+            }
+
+            $transaction_details = array(
+                'order_id' => rand(),
+                'gross_amount' => $total_price, 
+                'total_food' => count($listItem),
+            );
+            $usr = Auth()->user();
+            $customer_details = array(
+                'full_name'    => $usr->name,
+                'email'         => $usr->email,
+            );
+            $transaction = array(
+                'transaction_details' => $transaction_details,
+                'customer_details' => $customer_details,
+                'item_details' => $item_details,
+                'branch' => Branch::find($idBranch)->nama,
+                // "custom_expity" => $custom_expiry,
+            );
+
+            $snap_token = '';
+
+            try {
+                $snap_token = \Midtrans\Snap::getSnapToken($transaction);
+            } catch (\Throwable $th) {
+                //throw $th;
+                echo $th->getMessage();
+            }
+
+            return $snap_token;
+
+        }
+
         public function payment($schedule, $ticket_qty, $seatList){
 
             $total_price = $schedule->price * $ticket_qty;

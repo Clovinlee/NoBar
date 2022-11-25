@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('dtranssnacks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("htranssnack_id")->references("id")->on("htranssnacks");
             $table->foreignId("snack_id")->references("id")->on("snacks");
             $table->integer("harga");
             $table->integer("qty");

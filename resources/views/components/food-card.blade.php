@@ -22,21 +22,20 @@
 <script>
     function updateDetailFood(e){
         var mainParent = $(e.target).parent().parent().parent();
-        var title = mainParent.find(".card-title").text();
-        var description = mainParent.find(".card-text").text();
+        var title = "{{ $slot }}"
+        var description = "{{ $description }}"
         var img = $(e.target).parent().parent().find("img");
+        var price = "{{ $price }}"
 
         var modalImg = $("#modalDetailFoodImage");
         var modalTitle = $("#modalDetailFoodTitle")
         var modalBody = $("#modalDetailFoodBody");
+        var modalPrice = $("#modalDetailFoodPrice");
 
-        modalImg.attr("src",img.attr("src"));
+        modalPrice.text("Rp"+number_format(price));
+        modalImg.attr("src","{{ $img }}");
         modalBody.text(description);
         modalTitle.text(title);
-
-        console.log(img.attr("src"));
-        console.log(title);
-        console.log(description);
     }
 
     function modifyQty(e){

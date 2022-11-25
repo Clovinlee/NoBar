@@ -52,6 +52,8 @@
       </section> 
     </div>
   </main>
+
+  {{-- modal untuk add snack  --}}
   <div class="modal" tabindex="-1" id="modaladdSnack">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -77,7 +79,7 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
                 {{-- <input type="submit" class="btn btn-primary" data-mdb-dismiss="modal" value="Add snack"> --}}
-                <button class="btn btn-primary" data-mdb-dismiss="modal">Add Snack</button>
+                <button class="btn btn-primary" data-mdb-dismiss="modal" id="AddSnack">Add Snack</button>
               </div>
           </form>
         </div>
@@ -89,20 +91,27 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Edit Studio </h5>
+          <h5 class="modal-title" style="color: black;">Edit Snack</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="modal-body">
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="nama_studio_edit" name="name"/>
-              <label class="form-label">Nama Studio</label><br>
-              <label for="slot">Jumlah Slot</label>
-              <input type="number" class="form-control" id="slot_studio_edit" name="slot"/>
+            <div class="row">
+                <div class="col-md-1">&nbsp;</div>
+                <div class="col-md-10">
+                  <div class="form-outline mb-4">
+                    <input type='text' class='form-control' placeholder='Nama Snack' id="nama_snack" name="name"><br>
+                      <input type='text' class='form-control' placeholder='Harga Snack' id="harga_snack" name="harga"><br>
+                      <input type='file' class='form-control' id="foto_snack" name="foto"><br>
+
+                      <input type='radio' name='jenis_snack' checked value='Food'>&nbsp;&nbsp;&nbsp;&nbsp; Food
+                      <input type='radio' name='jenis_snack' value='Beverage'>&nbsp;&nbsp;&nbsp;&nbsp; Beverage
+                  </div>
+                </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="EditStudio">Edit Studio!</button>
+            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="EditSnack">Edit Studio!</button>
           </div>
       </div>
     </div>

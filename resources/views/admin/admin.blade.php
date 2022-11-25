@@ -569,11 +569,58 @@
         })
       })
 
-      // Ini bagian untuk snack
-      var myurl = "<?php echo URL::to('/'); ?>";
       
-      // $("#AddSnack").click(function () {  
-      //   var nama = $("#nama_snack").val();
+      // Ini bagian untuk snack
+      function ReloadSnack(data){
+        var c=$("#containermovie")
+        c.html("")
+        var str=""
+        if (data.length>0) {
+          data.forEach(d=>{
+            str+="<div class='card' style='width: 30%; display: inline-block; margin: 9%;''><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light' ><img src='storage/movie/"+d.image+"' class='img-fluid' alt='"+d.slug+"'/><a href=''><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>"+d.judul+"</h5><p class='card-text'>Genre :<br>"+d.genre+"<br>Duration :<br>"+d.duration+"<br></p><button onclick='ScheduleMovie(event)' value='"+d.id+"' class='btn btn-primary'>Jadwal</button><button href='' value='"+d.id+"' class='movieedit btn btn-warning'>Edit</button><button href='' data-mdb-toggle='modal' value='"+d.id+"' d='"+d.judul+"' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>"
+          })
+        } else {
+          str="<h2>Belum ada film yang main!</h2>"
+        }
+        c.html(str)
+      }
+      
+      var myurl = "<?php echo URL::to('/'); ?>";
+      $("#AddSnack").on("click", async function(){
+        const nama = $("#nama_snack").val();
+        const harga = $("#harga_snack").val();
+        const foto = $("#foto_snack").val();
+        const tipe = $("#jenis_snack").val();
+
+        const fd = new FormData()
+        fd.append("_token",'{{ csrf_token() }}')
+        fd.append("nama", nama)
+        fd.append("harga", harga)
+        fd.append("tipe", tipe)
+        fd.append("foto", $("#foto_snack").prop("files")[0])
+        dn = $.ajax({
+          type: "POST",
+          url: "{{url('/admin/snack/add')}}",
+          data: fd,
+          contentType: false,
+          processData: false,
+          cache: false,
+          dataType: 'html',
+          success: function (data) {
+            var d = json.parse(data, false)
+            ReloadSnack(d)
+          },
+          error: function(xhr, ajaxOptions, thrownError){
+            alert(xhr.status);
+            alert(thrownError);
+            console.log(xhr.responseText);
+          }
+        })
+
+      });
+
+      
+  // $("#AddSnack").click(function () {  ~asdwar nama = $("#nama_snack").val();
       // })
 </script>
 @endsection

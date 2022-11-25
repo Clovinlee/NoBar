@@ -585,42 +585,50 @@
         c.html(str)
       }
       
-      var myurl = "<?php echo URL::to('/'); ?>";
+      // Ini bagian untuk melakukan add snack!!
       $("#AddSnack").on("click", async function(){
-        const nama = $("#nama_snack").val();
-        const harga = $("#harga_snack").val();
-        const foto = $("#foto_snack").val();
-        const tipe = $("#jenis_snack").val();
+        alert('1'); 
+        var nm = $("#nama_snack_add").val(); 
+        var hg = $("#harga_snack_add").val(); 
+        var jenis = "Food"; 
+        if($("#jenis_beverage_add").is(":checked")) {
+          jenis = "Beverage";
+        }
+        var img= $("#foto_snack_add")[0].files;
 
-        const fd = new FormData()
-        fd.append("_token",'{{ csrf_token() }}')
-        fd.append("nama", nama)
-        fd.append("harga", harga)
-        fd.append("tipe", tipe)
-        fd.append("foto", $("#foto_snack").prop("files")[0])
-        dn = $.ajax({
-          type: "POST",
-          url: "{{url('/admin/snack/add')}}",
-          data: fd,
-          contentType: false,
-          processData: false,
-          cache: false,
-          dataType: 'html',
-          success: function (data) {
-            var d = json.parse(data, false)
-            ReloadSnack(d)
-          },
-          error: function(xhr, ajaxOptions, thrownError){
-            alert(xhr.status);
-            alert(thrownError);
-            console.log(xhr.responseText);
-          }
-        })
+        alert(nm + "-" + hg + "-" + jenis); 
+        
+        if (img.length>0) {
+          const fd =new FormData()
+          fd.append("_token",'{{ csrf_token() }}')
+          fd.append("nama", nm)
+          fd.append("harga",hg)
+          fd.append("jenis",jenis)
+          fd.append("image",$("#foto_snack_add").prop("files")[0])
 
+          dn = $.ajax({
+            type: "POST",
+            url: '{{url("/admin/snack/add")}}',
+            data: fd,
+            contentType: false,
+            processData: false,
+            cache:false,
+            dataType: 'html',
+            success: function(data){
+              var d = JSON.parse(data,false)
+              // alert(data);
+              ReloadSnack(d)
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status);
+              alert(thrownError);
+              console.log(xhr.responseText);
+            }
+          }); 
+        } 
+        else {
+          alert("foto snack belum diupload!")
+        } 
       });
-
-      
-  // $("#AddSnack").click(function () {  ~asdwar nama = $("#nama_snack").val();
-      // })
 </script>
 @endsection

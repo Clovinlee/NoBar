@@ -20,6 +20,7 @@
     </div>
 
     <div class="container-fluid px-3 py-2">
+        <br>
         <div class="col-6" style="font-size: 0.7em">
             <div class="d-flex justify-content-start gap-4">
                 <span><i class="fa-solid fa-square text-success"></i>&nbsp;Available</span> 

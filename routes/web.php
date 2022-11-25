@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CafeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
@@ -44,8 +45,6 @@ Route::get('/history',[PageController::class,"history"])->name("history");
 
 Route::get("/find", [SearchController::class,"search"]);
 
-Route::get("/user", [UserController::class,"index"])->middleware(["auth","verified"]);
-
 // |----------------------|
 // | LOGIN REGISTER       |
 // |----------------------|
@@ -54,7 +53,6 @@ Route::view("/register","register")->name("register")->middleware("guest");
 
 Route::post("/login",[VerificationController::class,"verifylogin"]);
 Route::post("/register",[VerificationController::class,"verifyregister"]);
-
 
 Route::post("/logout", [VerificationController::class,"logout"]);
 // |----------------------|
@@ -123,13 +121,31 @@ Route::prefix("/payment")->group(function(){
 });
 // |----------------------|
 
+// |----------------------|
+// | CAFE                 |
+// |----------------------|
+
+Route::prefix("/cafe")->group(function(){
+    Route::get("/", [CafeController::class, "index"]);
+});
+
+// |----------------------|
 
 // |----------------------|
 // | USER                 |
 // |----------------------|
+// Route::get("/manager/dashboard",[ManagerController::class,"dashboard2"]);
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
+});
+
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
     Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
+    Route::get("/edit", [UserController::class,"edit_user"])->middleware(["auth","verified"]);
+    Route::get("/movie/search", [UserController::class,"SearchMovie"]);
+    Route::post("/edit/fixedit", [UserController::class,"fix_edit_user"])->middleware(["auth","verified"]);
 });
 // |----------------------|
 
@@ -150,7 +166,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
     Route::prefix('/branch')->group(function () {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
-        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
+        Route::get("/schedule",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
         Route::post('/edit', [BranchController::class,"EditBranch"]);
         Route::post('/delete', [BranchController::class,"DeleteBranch"]);
@@ -162,7 +178,8 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
-        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
+        Route::get("/schedule",[ScheduleController::class,"JadwalMovie"]);
+        Route::get('/get', [MovieController::class,"GetMovie"]);
         Route::post('/add', [MovieController::class,"AddMovie"]);
         Route::post('/edit', [MovieController::class,"EditMovie"]);
         Route::post('/delete', [MovieController::class,"DeleteMovie"]);

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Snack;
-use App\Http\Requests\StoreSnackRequest;
-use App\Http\Requests\UpdateSnackRequest;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+
 
 class SnackController extends Controller
 {
@@ -14,6 +14,9 @@ class SnackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     
+    use SoftDeletes;
+    
     public function index()
     {
         //
@@ -84,7 +87,7 @@ class SnackController extends Controller
     {
         //
     }
-
+    
     public function AddSnack(Request $req){
         if($req->ajax()){
             $id = Snack::get()->last()->id;
@@ -94,5 +97,4 @@ class SnackController extends Controller
 
         }
     }
-    
 }

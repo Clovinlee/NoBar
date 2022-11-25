@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('snacks', function (Blueprint $table) {
+        Schema::create('htranssnacks', function (Blueprint $table) {
             $table->id();
-            $table->string("nama_snack");
-            $table->string("harga");
+            $table->foreignId("transaction_id")->nullable()->references("id")->on("transactions");
+            $table->foreignId("user_id")->references("id")->on("users");
             $table->foreignId("branch_id")->references("id")->on("branches");
+            $table->string("status");
+            $table->integer("total");
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('snacks');
+        Schema::dropIfExists('htranssnacks');
     }
 };

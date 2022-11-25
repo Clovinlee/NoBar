@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Htrans;
-use App\Http\Requests\StoreHtransRequest;
-use App\Http\Requests\UpdateHtransRequest;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Htranssnack;
+use App\Http\Requests\StoreHtranssnackRequest;
+use App\Http\Requests\UpdateHtranssnackRequest;
 
-class HtransController extends Controller
+class HtranssnackController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    use SoftDeletes;
     public function index()
     {
         //
@@ -33,10 +31,10 @@ class HtransController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreHtransRequest  $request
+     * @param  \App\Http\Requests\StoreHtranssnackRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreHtransRequest $request)
+    public function store(StoreHtranssnackRequest $request)
     {
         //
     }
@@ -44,10 +42,10 @@ class HtransController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Htrans  $htrans
+     * @param  \App\Models\Htranssnack  $htranssnack
      * @return \Illuminate\Http\Response
      */
-    public function show(Htrans $htrans)
+    public function show(Htranssnack $htranssnack)
     {
         //
     }
@@ -55,10 +53,10 @@ class HtransController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Htrans  $htrans
+     * @param  \App\Models\Htranssnack  $htranssnack
      * @return \Illuminate\Http\Response
      */
-    public function edit(Htrans $htrans)
+    public function edit(Htranssnack $htranssnack)
     {
         //
     }
@@ -66,11 +64,11 @@ class HtransController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateHtransRequest  $request
-     * @param  \App\Models\Htrans  $htrans
+     * @param  \App\Http\Requests\UpdateHtranssnackRequest  $request
+     * @param  \App\Models\Htranssnack  $htranssnack
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateHtransRequest $request, Htrans $htrans)
+    public function update(UpdateHtranssnackRequest $request, Htranssnack $htranssnack)
     {
         //
     }
@@ -78,10 +76,10 @@ class HtransController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Htrans  $htrans
+     * @param  \App\Models\Htranssnack  $htranssnack
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Htrans $htrans)
+    public function destroy(Htranssnack $htranssnack)
     {
         //
     }

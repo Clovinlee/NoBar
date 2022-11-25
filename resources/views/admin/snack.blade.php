@@ -12,42 +12,34 @@
         <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdSnack">Add new Snack!</button>
         <br>
         <br>
-        <div class="accordion" id="accordionExample">
-          @forelse ($data->branch as $b)
-          <div class="accordion-item" id="branchacc{{$b->id}}">
-            <h2 class="accordion-header" id="heading{{$b->id}}">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-mdb-toggle="collapse"
-                data-mdb-target="#collapse{{$b->id}}"
-                aria-expanded="false"
-                aria-controls="collapse{{$b->id}}"
-              >
-                <strong>{{$b->nama}}</strong>
-              </button>
-            </h2>
-            <div id="collapse{{$b->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$b->id}}">
-              <div class="accordion-body" style="padding-left: 2%">
-                <button class="linkgantinama btn btn-secondary" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaleditbranch">Ganti nama branch?</button>
-                <button class="linkhapusbranch btn btn-danger" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaldeletebranch">Hapus branch ini!</button>
-                <a href="" class="tambahstudio btn btn-warning" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaladdstudio">Add new studio here!</a>
-                @forelse ($b->studio as $s)
-                    <br>
-                    <strong>{{$s->nama}}</strong>
-                    <br>
-                    <button class="linkeditstudio btn-warning btn" data-mdb-toggle="modal"data-id='{{$s->id}}' data-slot='{{$s->slot}}' d='{{$s->nama}}' data-mdb-target="#modaleditstudio">Edit studio</button>
-                    <button class="linkhapusstudio btn-danger btn" data-mdb-toggle="modal"data-id='{{$s->id}}' d='{{$s->nama}}' data-mdb-target="#modalhapusstudio">Hapus studio</button>
-
-                @empty
-                    <h3>Branch ini belum punya studio</h3>
-                @endforelse
+        <div class="container pt-4" id="branch">
+          <section id="movsec" class="mb-4">
+            <div id="containersnack">
+              @forelse ($data->snack as $m)
+            <div class="card" style="width: 30%; display: inline-block; margin: 9%;">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
+                  <img src="{{asset('assets/images/'.$m->foto)}}" class="img-fluid" width="150px"/>
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-dark">{{$m->nama}}</h5>
+                  <p class="card-text">
+                    Harga :<br>
+                    Rp.{{$m->harga}}<br>
+                    Tipe :<br>
+                    {{$m->tipe}}<br>
+                  </p>
+                  <button class="btn btn-warning movieedit" value="{{$m->id}}">Edit</button>
+                  <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->judul}}" data-mdb-target="#modaldeletemovie" class="delmovie btn btn-danger">Delete</button>
+                </div>
+              </div>
+            @empty
+                <h2>Belum ada snack yang terdaftar</h2>
+            @endforelse
             </div>
-            <button onclick="Schedule(event)" value="/admin/branch/schedule/{{$b->id}}" class="btn btn-primary" style="margin-left: 2%">Cek Jadwal</button>
-          </div>
-          @empty
-              <h1>Belum ada branch!</h1>
-          @endforelse
+          </section> 
         </div>
       </section> 
     </div>

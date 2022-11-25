@@ -179,7 +179,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/{id}', [ScheduleController::class,"EditSchedule"]);
     });
     Route::prefix('/snack')->group(function(){
-        Route::get('/add',[SnackController::class, "AddSnack"]);
+        Route::post('/add',[SnackController::class, "AddSnack"]);
     });
 });
 // |----------------------|

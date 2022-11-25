@@ -577,5 +577,69 @@
           }
         })
       })
+
+      
+      // Ini bagian untuk snack
+      function ReloadSnack(data){
+        var c=$("#containersnack")
+        c.html("")
+        var str=""
+        if (data.length>0) {
+          data.forEach(d=>{
+            str+="<div class='card' style='width: 30%; display: inline-block; margin: 9%;''><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light' ><img src='assets/images/"+d.foto+"'/><a href=''><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>"+d.nama+"</h5><p class='card-text'>Harga :<br>Rp."+d.harga+"<br>Tipe :<br>"+d.tipe+"<br></p><button onclick='ScheduleMovie(event)' value='"+d.id+"' class='btn btn-primary'>Jadwal</button><button href='' value='"+d.id+"' class='movieedit btn btn-warning'>Edit</button><button href='' data-mdb-toggle='modal' value='"+d.id+"' d='"+d.nama+"' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>"
+          })
+        } else {
+          str="<h2>Belum ada snack!</h2>"
+        }
+        c.html(str)
+      }
+      
+      // Ini bagian untuk melakukan add snack!!
+      $("#AddSnack").on("click", async function(){
+        alert('1'); 
+        var nm = $("#nama_snack_add").val(); 
+        var hg = $("#harga_snack_add").val(); 
+        var jenis = "Food"; 
+        if($("#jenis_beverage_add").is(":checked")) {
+          jenis = "Beverage";
+        }
+        var img= $("#foto_snack_add")[0].files;
+        var deskripsi = $("#deskripsi_snack_add").val();
+
+        alert(nm + "-" + hg + "-" + jenis); 
+        
+        if (img.length>0) {
+          const fd =new FormData()
+          fd.append("_token",'{{ csrf_token() }}')
+          fd.append("nama", nm)
+          fd.append("harga",hg)
+          fd.append("jenis",jenis)
+          fd.append("image",$("#foto_snack_add").prop("files")[0])
+          fd.append("deskripsi", deskripsi)
+
+          dn = $.ajax({
+            type: "POST",
+            url: '{{url("/admin/snack/add")}}',
+            data: fd,
+            contentType: false,
+            processData: false,
+            cache:false,
+            dataType: 'html',
+            success: function(data){
+              var d = JSON.parse(data,false)
+              // alert(data);
+              ReloadSnack(d)
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status);
+              alert(thrownError);
+              console.log(xhr.responseText);
+            }
+          }); 
+        } 
+        else {
+          alert("foto snack belum diupload!")
+        } 
+      });
 </script>
 @endsection

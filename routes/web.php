@@ -126,6 +126,12 @@ Route::prefix("/payment")->group(function(){
 
 Route::prefix("/cafe")->group(function(){
     Route::get("/", [CafeController::class, "index"]);
+    Route::post("/refreshCafe",[CafeController::class, "refreshCafe"]);
+});
+
+Route::prefix("/cafe_pay")->group(function() {
+    Route::post("/",[CafeController::class, "cafePayment"]);
+    Route::post("/process",[CafeController::class, "transactionProcess"]);
 });
 
 // |----------------------|
@@ -180,8 +186,11 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/{id}', [ScheduleController::class,"EditSchedule"]);
     });
     Route::prefix('/snack')->group(function(){
+        Route::post('/edit',[SnackController::class, "EditSnack"]);
         Route::post('/add',[SnackController::class, "AddSnack"]);
+        Route::post('/delete',[SnackController::class, "DeleteSnack"]);
     });
+
 });
 // |----------------------|
 

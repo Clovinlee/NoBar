@@ -18,11 +18,15 @@ Poster Film : <input type="file" name="" id="img">
     Tambah Cast :<input class= "form-control" type="text" id="movie_cast"><button class="btn btn-primary" id="addcast">Tambah</button><br>
     Synopsis: <br><textarea name="" id="synopsis" cols="30" rows="10"></textarea><br>
     Genre : <br>
-    <input type="checkbox" name="add_comedy" id="add_comedy">Comedy <br>
-    <input type="checkbox" id="add_horror">Horror <br>
-    <input type="checkbox" id="add_action">Action <br>
-    <input type="checkbox" id="add_romance">Romance <br>
-    <input type="checkbox" id="add_fantasy">Fantasy <br>
+    <input type="checkbox" name="add_comedy" id="add_Comedy">Comedy <br>
+    <input type="checkbox" id="add_Horror">Horror <br>
+    <input type="checkbox" id="add_Action">Action <br>
+    <input type="checkbox" id="add_Romance">Romance <br>
+    <input type="checkbox" id="add_Fantasy">Fantasy <br>
+    <input type="checkbox" id="add_Superhero">Superhero <br>
+    <input type="checkbox" id="add_History">History <br>
+    <input type="checkbox" id="add_Life">Life <br>
+    <input type="checkbox" id="add_Nature">Nature <br>
     Duration : <input type="number" name="" id="durasi"><br>
     <button class="btn btn-success" id="addmovie" val="add">Tambah Film</button>
     </div>

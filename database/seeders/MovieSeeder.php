@@ -45,7 +45,7 @@ class MovieSeeder extends Seeder
         Movie::create([
             "judul"=>"Simpson Not Home",
             "slug"=>"simpson-not-home",
-            "image"=>"simpsonnothome.png",
+            "image"=>"simpsonnothome.jpg",
             "director"=>"Sam Shaw",
             "producer"=>"Avi Arad, Amy Pascal, Phil Lord, Christopher Miller, Christina Steinberg",
             "casts"=>"Rachel Brosnahan, Michael Chernus, Christopher Denham",

@@ -26,6 +26,7 @@ class ScheduleController extends Controller
             $j->branch=$j->branch;
             $j->studio=$j->studio;
             $j->movie=$j->movie;
+            $j->harga=number_format($j->price);
         }
         return DataTables::of($jadwal)->make(true);
     }

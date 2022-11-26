@@ -24,4 +24,15 @@ class AdminController extends Controller
         $data->movie=Movie::all();
         return view("admin.admin")->with("data",$data);
     }
+    public function Get()
+    {
+        $data=new stdClass;
+        $data->branch=Branch::all();
+        foreach ($data->branch as $key => $s) {
+            $s->studio=$s->studio;
+        }
+        $data->schedule=Schedule::all();
+        $data->movie=Movie::all();
+        return json_encode($data);
+    }
 }

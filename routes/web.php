@@ -153,6 +153,7 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
+    Route::get("/get", [AdminController::class,"Get"]);
     Route::prefix('/branch')->group(function () {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);

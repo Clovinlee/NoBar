@@ -24,6 +24,8 @@
 <script>
   // console.log("HEY")
   $(document).ready(function () {
+    $('.js-example-basic-single').select2();
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
     Schedule()
   });
   var dt=null;
@@ -36,7 +38,7 @@
   var casts=[]
   var director=[]
   const page=["dashboard","branch","movie","snack","schedule"];
-  var genre=["comedy","horror","action","romance","fantasy"]
+  var genre=["Comedy","Horror","Action","Romance","Fantasy","Superhero","History","Life","Nature"]
     function Reload(data){
       $("#accordionExample").html("")
       var str="";
@@ -101,7 +103,19 @@
       var str=""
       if (data.length>0) {
         data.forEach(d=>{
-          str+="<div class='card' style='width: 30%; display: inline-block; margin: 9%;''><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light' ><img src='storage/movie/"+d.image+"' class='img-fluid' alt='"+d.slug+"'/><a href=''><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>"+d.judul+"</h5><p class='card-text'>Genre :<br>"+d.genre+"<br>Duration :<br>"+d.duration+"<br></p><button href='' value='"+d.id+"' class='movieedit btn btn-warning'>Edit</button><button href='' data-mdb-toggle='modal' value='"+d.id+"' d='"+d.judul+"' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>"
+          str+=`
+          <div class='card' style='width: 30%; display: inline-block; margin: 9%;''>
+            <div class=' bg-image hover-overlay ripple' data-mdb-ripple-color='light'>
+              <img src="{{asset('assets/images/${d.image}')}}" class='img-fluid' alt='${d.slug}' />
+          </div>
+          <div class='card-body'>
+              <h5 class='card-title text-dark'>${d.judul}</h5>
+              <p class='card-text'>Genre :<br>${d.genre}<br>Duration :<br>${d.duration}<br></p>
+              <button href='' value='${d.id}' class='movieedit btn btn-warning'>Edit</button>
+              <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.judul}'
+                  data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button>
+          </div>
+          </div>`
         })
       } else {
         str="<h2>Belum ada film yang main!</h2>"
@@ -158,19 +172,44 @@
         }
       })
      })
+     $("#btnaddschedule").on("click",function () { 
+        $.ajax({
+          type:"get",
+          url:'{{url("/admin/get")}}',
+          success:function(data){
+            $d=JSON.parse(data,false)
+            var str=""
+            $d.branch.forEach(b => {
+              str+="<optgroup label='"+b.nama+"'>"
+              b.studio.forEach(s=>{
+                str+="<option value='"+s.id+"'>"+s.nama+"</option>"
+              })
+            });
+            $("#selectstudio").html(str)
+            str=""
+            $d.movie.forEach(m => {
+              str+="<option value='"+m.id+"'>"+m.judul+"</option>"
+            });
+            $("#selectmovie").html(str)
+          }
+        })
+      })
      $("#schedule_table").on("click",".editschedule",function () {
       const data=dt.row($(this).parents('tr')).data()
       cshed = data.id;
       $("#date").val(data.time)
      })
      $("#schedule_table").on("click",".deleteschedule",function () {
-      var id = dt.row($(this).parents('tr')).data().id;
+      csched = dt.row($(this).parents('tr')).data().id;
+
+     })
+     $("#hapusjadwal").on("click",function () {
       dn=$.ajax({
         type:"post",
         url:'{{url("/admin/schedule/delete")}}',
         data: {
           _token:'{{ csrf_token() }}',
-          id:id
+          id:csched
         },
         success:function(data){
           Schedule()
@@ -195,11 +234,11 @@
             },{
               mData:"time"
             },{
-              mData:"price"
+              mData:"harga"
             },{
               target:-1,
               data:null,
-              defaultContent:"<button class='btn btn-warning editschedule form-control' data-mdb-toggle='modal' data-mdb-target='#ubahjadwalbranch'>Edit</button><button class='btn btn-danger deleteschedule form-control'>Delete</button>"
+              defaultContent:"<button class='btn btn-warning editschedule form-control' data-mdb-toggle='modal' data-mdb-target='#ubahjadwalbranch'>Edit</button><button class='btn btn-danger deleteschedule form-control' data-mdb-toggle='modal' data-mdb-target='#hapusjadwal'>Delete</button>"
             }
           ]
       });
@@ -327,7 +366,7 @@
         }
       }); 
     });
-    $("#addmovie").on("click",async function(){
+    $("#addmovie").on("click",function(){
       if ($(this).val()=="add") {
         const judul=$("#movie_judul").val();
       const synopsis=$("#synopsis").val();

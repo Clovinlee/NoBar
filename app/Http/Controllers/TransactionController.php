@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dtrans;
 use App\Models\Htrans;
+use App\Models\Htranssnack;
 use App\Models\Midtrans as ModelsMidtrans;
 use App\Models\MidtransNotification as ModelsMidtransNotification;
 use App\Models\MidtransNotification\MidtransNotification;
@@ -125,7 +126,13 @@ class TransactionController extends Controller
         if(count($t) != 0){
             $t = Transaction::where("order_id","=",$r->order_id)->get()->first();
 
-            $h = HTrans::where("transaction_id",$t->id)->get()->first();
+            $h = HTrans::where("transaction_id",$t->id)->get();
+            if(count($h) != 0){
+                $h = HTrans::where("transaction_id",$t->id)->get()->first();
+            }else{
+                $h = Htranssnack::where("transaction_id",$t->id)->get()->first();
+            }
+
             $h->status = $r->transaction_status;
             $h->save();
         }else{

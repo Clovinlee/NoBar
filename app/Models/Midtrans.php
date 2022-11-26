@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\Auth;
                 $total_price += $value->price;
                 $f = [
                     "id"=>$value->id,
-                    "nama"=>$value->nama,
+                    "name"=>$value->nama,
                     "quantity"=>$value->qty,
                     "price"=>$value->price,
                     "subtotal"=>$value->price*$value->qty,
@@ -58,7 +58,6 @@ use Illuminate\Support\Facades\Auth;
                 'transaction_details' => $transaction_details,
                 'customer_details' => $customer_details,
                 'item_details' => $item_details,
-                'branch' => Branch::find($idBranch)->nama,
                 // "custom_expity" => $custom_expiry,
             );
 

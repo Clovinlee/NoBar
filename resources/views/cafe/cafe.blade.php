@@ -77,14 +77,18 @@
                         <div class="row">
                             @foreach ($listSnacks as $f)
                             <div class="col-6 col-lg-3">
-                                <x-foodcard idFood="{{ $f->id }}" description="{{ $f->description }}" img="{{ $f->image }}" price="{{ $f->harga }}">{{ $f->nama }}</x-foodcard>
+                                <x-foodcard idFood="{{ $f->id }}" description="{{ $f->deskripsi }}" img="{{ $f->foto }}" price="{{ $f->harga }}">{{ $f->nama }}</x-foodcard>
                             </div>
                             @endforeach
                         </div>
                     </div>
                     <div class="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
                         <div class="row">
-                           
+                            @foreach ($listBeverages as $f)
+                            <div class="col-6 col-lg-3">
+                                <x-foodcard idFood="{{ $f->id }}" description="{{ $f->deskripsi }}" img="{{ $f->foto }}" price="{{ $f->harga }}">{{ $f->nama }}</x-foodcard>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -94,8 +98,8 @@
         <div class="d-flex justify-content-center align-items-center col-12">
             <br>
             @php
-            $openTime = "10:00";
-            $closeTime = "22:30";
+            $openTime = env("CAFE_OPEN_TIME") ?? "10:00";
+            $closeTime = env("CAFE_CLOSE_TIME") ?? "22:30";
             date_default_timezone_set("Asia/Jakarta");
             @endphp
             @if (time() >= strtotime($openTime) && time() <= strtotime($closeTime)) <button
@@ -179,7 +183,7 @@
             <div class="card" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img id="modalDetailFoodImage" src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp" class="img-fluid rounded-start h-100" />
+                        <img id="modalDetailFoodImage" src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp" class="img-fluid rounded-start h-100"/>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -211,6 +215,10 @@
 <x-footer></x-footer>
 
 @section('pageScript')
+    <!-- IMPORT MIDTRANS -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_SERVERKEY') }}"></script>
+    <!--  -->
+
     <script>
         var listItem = [];
         filterListItem();
@@ -221,10 +229,9 @@
             url:"{{ url('/cafe_pay/process') }}",
             data:{
                 _token:'{{ csrf_token() }}',
-                scheduleId:'{{ $schedule->id }}',
-                ticketQty:'{{ $data["qtyTicket"] }}',
-                seatList: JSON.stringify(seatList),
                 mdResult: JSON.stringify(result),
+                idBranch:$("#selectbranch").val(),
+                listItem:JSON.stringify(listItem),
             },
             success: function(body){
                 console.log("DB Added |code : "+body);
@@ -240,7 +247,7 @@
             url:'{{ url("/cafe_pay") }}',
             data:{
                 _token:'{{ csrf_token() }}',
-                branchId:$("#selectbranch").val(),
+                idBranch:$("#selectbranch").val(),
                 listItem:JSON.stringify(listItem),
             },
             success:function(body) {
@@ -248,8 +255,17 @@
                     //If user not logged in, then reload page
                     window.location.reload();
                 }else{
+                    console.log(body);
                     $("#processLoading").hide();
                     var r = JSON.parse(body);
+                    
+                    //TODO : Return of body : undefined?
+
+                    // Isi body
+                    // "token"=>$mdToken,
+                    // "idBranch"=>$r->idBranch,
+                    // "listItem"=>$listItem,
+
                     snap.pay(r.token, {
                         onSuccess: async function(result){
                             await ajaxTrans(result)
@@ -260,24 +276,6 @@
                             tst = result;
                             await ajaxTrans(result);
                             console.log("PENDING Payment");
-
-                            // window.location.replace("http://{{env('APP_URL')}}/user/history")
-
-                            // console.log("Pending");
-                            // console.log(result);
-                            // console.log({{ $schedule->id }})
-                            // {
-                            //     "status_code": "201",
-                            //     "status_message": "Transaksi sedang diproses",
-                            //     "transaction_id": "737949c1-752e-470f-8b54-58e43727968c",
-                            //     "order_id": "584503423",
-                            //     "gross_amount": "200000.00",
-                            //     "payment_type": "qris",
-                            //     "transaction_time": "2022-09-25 21:31:21",
-                            //     "transaction_status": "pending",
-                            //     "fraud_status": "accept",
-                            //     "finish_redirect_url": "http://example.com?order_id=584503423&status_code=201&transaction_status=pending"
-                            // }
 
                         },
                         // Optional

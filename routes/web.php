@@ -175,8 +175,11 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         
     });
     Route::prefix('/snack')->group(function(){
+        Route::post('/edit',[SnackController::class, "EditSnack"]);
         Route::post('/add',[SnackController::class, "AddSnack"]);
+        Route::post('/delete',[SnackController::class, "DeleteSnack"]);
     });
+
 });
 // |----------------------|
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
+use App\Models\Dtranssnack;
+use App\Models\Htranssnack;
 use App\Models\Midtrans;
 use App\Models\Snack;
 use App\Models\Transaction;
@@ -16,17 +18,19 @@ class CafeController extends Controller
 
     public function transactionProcess(Request $r){
         $mdResult = json_decode($r->mdResult);
-        
+        $idBranch = $r->idBranch;
+        $listItem = json_decode($r->listItem);
+
         DB::beginTransaction();
         try {
             $t = Transaction::where("transaction_id",$mdResult->transaction_id)->get()->first();
             $t->transaction_status = $mdResult->transaction_status;
             $t->save();
             
-            $h = new Htrans();
+            $h = new Htranssnack();
             $h->transaction_id = $t->id;
             $h->user_id = Auth::user()->id;
-            $h->schedule_id = $schedule->id;
+            $h->branch_id = $idBranch;
             $h->status = $mdResult->transaction_status;
 
             $h->total = $mdResult->gross_amount;
@@ -36,10 +40,18 @@ class CafeController extends Controller
 
             $h->save();
 
-            foreach ($seatList as $k => $v) {
-                $d = new Dtrans();
-                $d->htrans_id = $h->id;
-                $d->seat = $v;
+            // $listItem
+            // id: "7"
+            // nama: "French-fries"
+            // price: "12000"
+            // qty: "2"
+
+            foreach ($listItem as $k => $v) {
+                $d = new Dtranssnack();
+                $d->htranssnack_id = $h->id;
+                $d->snack_id = $v->id;
+                $d->harga = $v->price;
+                $d->qty = $v->qty;
                 $d->save();
             }
 
@@ -60,10 +72,11 @@ class CafeController extends Controller
                 Session::flash("error","You need to be logged in first");
                 return false;
             }
+
             $listItem = json_decode($r->listItem);
             $md = Midtrans::getInstance();
-            // $md->paymentCafe($r->branchId, $listItem);
-            $mdToken = $md->paymentCafe($r->branchId, $listItem);
+            // $md->paymentCafe($r->idBranch, $listItem);
+            $mdToken = $md->paymentCafe($r->idBranch, $listItem);
             
             $json = [
                 "token"=>$mdToken,
@@ -78,8 +91,9 @@ class CafeController extends Controller
     public function index(){
         //GET SNACK
         $listBranch = Branch::all();
-        $listSnacks = Snack::all();
-        return view("cafe.cafe",["listBranch"=>$listBranch, "listSnacks"=>$listSnacks]);
+        $listSnacks = Snack::all()->where("tipe","food");
+        $listBeverages = Snack::all()->where("tipe","beverage");
+        return view("cafe.cafe",["listBranch"=>$listBranch, "listSnacks"=>$listSnacks, "listBeverages"=>$listBeverages]);
     }
 
     public function refreshCafe(Request $r){

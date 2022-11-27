@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Branch;
 use App\Http\Requests\StoreBranchRequest;
 use App\Http\Requests\UpdateBranchRequest;
+use App\Models\Studio;
 use Illuminate\Http\Request;
 
 class BranchController extends Controller
@@ -26,6 +27,7 @@ class BranchController extends Controller
     public function DeleteBranch(Request $r)
     {
         if ($r->ajax()) {
+            Studio::where("branch_id","=",$r->id)->delete();
             $branch=Branch::find($r->id);
             $branch->delete();
             $b=Branch::all();

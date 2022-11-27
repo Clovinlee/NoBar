@@ -40,7 +40,6 @@
                     <h3>Branch ini belum punya studio</h3>
                 @endforelse
             </div>
-            <button onclick="ScheduleBranch(event)" value="{{$b->id}}" class="btn btn-primary" style="margin-left: 2%">Cek Jadwal</button>
           </div>
           </div>
           @empty

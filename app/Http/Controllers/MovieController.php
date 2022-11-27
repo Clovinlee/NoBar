@@ -126,7 +126,8 @@ class MovieController extends Controller
             $m->judul=$r->judul;
             $m->slug=str_replace(" ","-",$r->judul);
             $img=$r->file("image");
-            $img->storeAs("/movie",$img->getClientOriginalName(),'public');
+            //$img->storeAs("/movie",$img->getClientOriginalName(),'public');
+            $img->move(public_path()."/assets/images/",$img->getClientOriginalName());
             $m->image=$img->getClientOriginalName();
             $m->producer=$r->produser;
             $m->casts=$r->cast;

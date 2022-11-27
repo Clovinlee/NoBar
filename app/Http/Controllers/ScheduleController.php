@@ -41,6 +41,19 @@ class ScheduleController extends Controller
         $s->time=$r->time;
         $s->save();
     }
+    public function AddSchedule(Request $r)
+    {
+        foreach ($r->studio as $key => $st) {
+            $temp=explode(",",$st);
+            $s=new Schedule;
+            $s->studio_id=$temp[1];
+            $s->branch_id=$temp[0];
+            $s->movie_id=$r->movie;
+            $s->price=45000;
+            $s->time=$r->time;
+            $s->save();
+        }
+    }
     public function index()
     {
         //

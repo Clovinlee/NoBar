@@ -24,8 +24,12 @@
 <script>
   // console.log("HEY")
   $(document).ready(function () {
-    $('.js-example-basic-single').select2();
-    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+    $('.js-example-basic-single').select2({dropdownParent: $('#tambahschedule')});
+    $('.js-example-basic-multiple').select2({
+      dropdownParent: $('#tambahschedule'),
+      placeholder: 'Pilih studio',
+  });
+    //$.fn.modal.Constructor.prototype.enforceFocus = function() {};
     Schedule()
   });
   var dt=null;
@@ -70,6 +74,38 @@
       casts.splice(i,1)
       ReloadCast()
     }
+    $("#tambahjadwal").on("click",function(){
+      const studio=$("#selectstudio").val()
+      if (studio.length>0) {
+        if ($("#addtime").val()!="") {
+          $.ajax({
+          type:"POST",
+          url:'{{url("/admin/schedule/add")}}',
+          data: {
+            _token:'{{ csrf_token() }}',
+            studio:studio,
+            movie:$("#selectmovie").val(),
+            time:$("#addtime").val()
+          },
+          success:function(data){
+            Schedule()
+            $("#selectstudio").val(null).trigger('change')
+            $("#selectmovie").val(null).trigger('change')
+            $("#addtime").val("")
+          },error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    console.log(xhr.responseText);
+                  }
+        })
+        } else {
+          alert("Waktu tayang belum diisi!")
+        }
+      }else{
+        alert("Belum pilih studio!")
+        $("#selectstudio").val(null).trigger('change')
+      }
+    })
     function ReloadProducer() {
       var c=""
       var i=0
@@ -182,7 +218,7 @@
             $d.branch.forEach(b => {
               str+="<optgroup label='"+b.nama+"'>"
               b.studio.forEach(s=>{
-                str+="<option value='"+s.id+"'>"+s.nama+"</option>"
+                str+="<option value='"+b.id+","+s.id+"'>"+s.nama+"</option>"
               })
             });
             $("#selectstudio").html(str)

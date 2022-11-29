@@ -34,10 +34,16 @@ class SnackController extends Controller
             $m->nama        =   $r->nama;
             $m->harga       =   $r->harga;
             $m->tipe        =   $r->jenis;
+            $m->deskripsi   =   $r->deskripsi;
             if($r->imagelength > 0) {
+                // $img            =   $r->file("image");
+                // $img->storeAs("/snack",$img->getClientOriginalName(), 'public');
+                // $m->foto        =   $img->getClientOriginalName();
+                
                 $img            =   $r->file("image");
-                $img->storeAs("/snack",$img->getClientOriginalName(), 'public');
-                $m->foto        =   $img->getClientOriginalName();    
+                // $img->storeAs("/snack",$img->getClientOriginalName(), 'public');
+                $img->move('assets/images', $img->getClientOriginalName());
+                $m->foto        =   $img->getClientOriginalName();
             }
             $m->save();
             $data           = Snack::all();

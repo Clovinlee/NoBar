@@ -34,10 +34,10 @@
                     <div class="col-md-7">
                         <div class="quick-link-list">
                             <ul>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Terms of Use</a></li>
-                                <li><a href="#">Privacy</a></li>
+                                <li><a href="{{url('/FAQ')}}">FAQ</a></li>
+                                <li><a href="{{url('/HelpCenter')}}">Help Center</a></li>
+                                <li><a href="{{url('/TOU')}}">Terms of Use</a></li>
+                                {{-- <li><a href="#">Privacy</a></li> --}}
                             </ul>
                         </div>
                     </div>

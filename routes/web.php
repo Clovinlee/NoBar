@@ -41,6 +41,7 @@ Route::get('/nowplaying',[PageController::class,"nowplaying"])->name("nowplaying
 Route::get('/comingsoon',[PageController::class,"comingsoon"])->name("comingsoon");
 Route::get('/membership',[PageController::class,"membership"])->name("membership");
 Route::get('/contact',[PageController::class,"contact"])->name("contact");
+Route::get('/history',[PageController::class,"history"])->name("history");
 
 Route::get("/find", [SearchController::class,"search"]);
 
@@ -164,7 +165,17 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 
 // |----------------------|
-// | ADMIN                |
+// | FOOTER               |
+// |----------------------|
+Route::view("/FAQ","footer.faq");  
+Route::view("/HelpCenter",[PageController::class,"contact"]);  
+Route::view("/TOU","footer.TermOfUse");  
+// Route::view("/TOU","footer.faq");  
+// |----------------------|
+
+
+// |----------------------|
+// | ADMIN                 |
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
@@ -203,14 +214,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
 });
 // |----------------------|
 
-Route::get("/CalvinKwanGakKerjaFAI",function(){
-    Artisan::call("migrate:fresh --seed");
-    return response("<h1>emang</h1>");
-});
-
-Route::prefix('/manager')->group(function(){
-    Route::get('/',[ManagerController::class, "index"]);
-});
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");
+

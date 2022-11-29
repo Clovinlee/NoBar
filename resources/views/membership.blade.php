@@ -27,7 +27,7 @@
 <main>
 
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('assets/img/bg/breadcrumb_bg.jpg') }}">
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('assets/img/bg/breadcrumb_bg2.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -59,7 +59,7 @@
             </div>
             <div class="pricing-box-wrap">
                 <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-6 col-sm-8">
+                    {{-- <div class="col-lg-4 col-md-6 col-sm-8">
                         <div class="pricing-box-item mb-30">
                             <div class="pricing-top">
                                 <h6>premium</h6>
@@ -81,7 +81,7 @@
                                 <a href="#" class="btnMovie">Buy Now</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-4 col-md-6 col-sm-8">
                         <div class="pricing-box-item active mb-30">
                             <div class="pricing-top">
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-8">
+                    {{-- <div class="col-lg-4 col-md-6 col-sm-8">
                         <div class="pricing-box-item mb-30">
                             <div class="pricing-top">
                                 <h6>premium</h6>
@@ -127,7 +127,7 @@
                                 <a href="#" class="btnMovie">Buy Now</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

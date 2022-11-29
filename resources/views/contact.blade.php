@@ -7,7 +7,6 @@
 @endsection
 
 @section('body')
-    
         <!-- preloader -->
         <div id="preloader">
             <div id="loading-center">
@@ -26,7 +25,6 @@
 
         <!-- main-area -->
         <main>
-
             <!-- breadcrumb-area -->
             <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('assets/img/bg/breadcrumb_bg.jpg') }}">
                 <div class="container">
@@ -83,15 +81,15 @@
                                     <ul>
                                         <li>
                                             <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                                            <p><span>Address :</span> W38 Park Road New York</p>
+                                            <p><span>Address :</span> Jl. Ngagel Jaya Tengah No.73-77, Baratajaya, Kec. Gubeng, Kota SBY, Jawa Timur 60284</p>
                                         </li>
                                         <li>
                                             <div class="icon"><i class="fas fa-phone-alt"></i></div>
-                                            <p><span>Phone :</span> (09) 123 854 365</p>
+                                            <p><span>Phone :</span> (+62 8218723423)</p>
                                         </li>
                                         <li>
                                             <div class="icon"><i class="fas fa-envelope"></i></div>
-                                            <p><span>Email :</span> support@movflx.com</p>
+                                            <p><span>Email :</span> ayonobaristts@gmail.com</p>
                                         </li>
                                     </ul>
                                 </div>

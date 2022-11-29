@@ -669,7 +669,7 @@
           <div class='card-body'>
               <h5 class='card-title text-dark'>${d.nama}</h5>
               <p class='card-text'>Harga :Rp.${d.harga}<br>Tipe :${d.tipe}<br> Deskripsi: ${d.deskripsi} <br></p>
-              <button href='' value='${d.id}' class=' btn btn-warning'>Edit</button>
+              <button href='' value='${d.id}' class=' btn btn-warning' data-mdb-target='#modaleditsnack'>Edit</button>
               <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.nama }'
                   data-mdb-target='#modaldeletesnack' class='btn btn-danger'>Delete</button>
           </div>
@@ -733,6 +733,7 @@
       function deletesnack(id) {
         $("#delete_id_snack").val(id); 
       }
+      
       $("#DeleteSnack").on("click",function(){
         var id = $("#delete_id_snack").val(); 
         alert(id); 
@@ -762,6 +763,10 @@
         }
         $("#deskripsi_snack_edit").val($("#deskripsi" + id).val());
       }
+
+      // $("#EditSnack").on("click", function() {
+      //   var id = 
+      // })
       
 </script>
 @endsection

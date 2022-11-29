@@ -6,40 +6,44 @@
         <input type="text" class="form-control" id="search_snack"  name="name"/>
         <label class="form-label">Nama Snack</label>
       </div>
-      <button class="btn btn-primary" id="btn_search_branch">Search</button> 
+      <button class="btn btn-primary" id="btn_search_snack">Search</button> 
       <br>
       <br>
       <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdSnack">Add new Snack!</button>
       <br>
       <br>
-      <div id="containersnack">
+      <div id="containersnack" class="row px-2 gap-2" style="width: 100%;">
         @forelse ($data->snack as $m)
-          <input type='hidden' id='id{{$m->id}}' value='{{$m->id}}'>
-          <input type='hidden' id='nama{{$m->id}}' value='{{$m->nama}}'>
-          <input type='hidden' id='harga{{$m->id}}' value='{{$m->harga}}'>
-          <input type='hidden' id='tipe{{$m->id}}' value='{{$m->tipe}}'>
-          <input type='hidden' id='foto{{$m->id}}' value='{{$m->foto}}'>
-          <div class="card" style="width: 30%; display: inline-block; margin: 0.5%;">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
-              <img src="{{asset('assets/images/'.$m->foto)}}" width="150px" class="img-fluid" alt="{{$m->slug}}"/>
-              <a href="#!">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </a>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title text-dark">{{$m->nama}}</h5>
-              <p class="card-text">
-                Tipe :
-                {{$m->tipe}}<br>
-                Harga : 
-                Rp.{{$m->harga}}<br>
-                Deskripsi : 
-                {{ $m->deskripsi }} <br>
-              </p>
-              <button class="btn btn-warning"  data-mdb-toggle="modal" data-mdb-target="#modaleditSnack" onclick='editSnack({{$m->id}})'>Edit</button>
-              <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->judul}}" data-mdb-target="#modaldeletesnack" class="delmovie btn btn-danger" onclick='deletesnack({{$m->id}})'>Delete</button>
-            </div>
-          </div>
+              <input type='hidden' id='id{{$m->id}}' value='{{$m->id}}'>
+              <input type='hidden' id='nama{{$m->id}}' value='{{$m->nama}}'>
+              <input type='hidden' id='harga{{$m->id}}' value='{{$m->harga}}'>
+              <input type='hidden' id='tipe{{$m->id}}' value='{{$m->tipe}}'>
+              <input type='hidden' id='foto{{$m->id}}' value='{{$m->foto}}'>
+              <div class="card col-12 col-md-6 col-lg-4 mb-3 mr-5" style="width: 30%;">
+                <div class="bg-image hover-overlay ripple d-flex justify-content-center mt-3"  data-mdb-ripple-color="light" >
+                  <img src="{{asset('assets/images/'.$m->foto)}}" style="height: 150px;" class="img-fluid" alt="{{$m->slug}}"/>
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </a>
+                </div>
+                <div class="card-body" style="height: 250px">
+                  <h5 class="card-title text-dark">{{$m->nama}}</h5> 
+                  <p class="card-text">
+                    Tipe :
+                    {{$m->tipe}}<br>
+                    Harga : 
+                    Rp.{{$m->harga}}<br>
+                    Deskripsi : 
+                    {{ $m->deskripsi }} <br>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-center mb-10" >
+                  <button class="btn btn-warning"  data-mdb-toggle="modal" data-mdb-target="#modaleditSnack" onclick='editSnack({{$m->id}})'>Edit</button> &nbsp;&nbsp;&nbsp;
+                  <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->judul}}" data-mdb-target="#modaldeletesnack" class="delmovie btn btn-danger" onclick='deletesnack({{$m->id}})'>Delete</button>
+                </div>
+              </div>
+            
+          
         @empty
             <h1>Belum ada branch!</h1>
         @endforelse

@@ -19,4 +19,8 @@ class Branch extends Model
     public function schedule(){
         return $this->hasMany(Schedule::class);
     }
+
+    public function htranssnack(){
+        return $this->hasMany(Htranssnack::class);
+    }
 }

@@ -127,6 +127,12 @@ Route::prefix("/payment")->group(function(){
 
 Route::prefix("/cafe")->group(function(){
     Route::get("/", [CafeController::class, "index"]);
+    Route::post("/refreshCafe",[CafeController::class, "refreshCafe"]);
+});
+
+Route::prefix("/cafe_pay")->group(function() {
+    Route::post("/",[CafeController::class, "cafePayment"]);
+    Route::post("/process",[CafeController::class, "transactionProcess"]);
 });
 
 // |----------------------|
@@ -138,6 +144,15 @@ Route::prefix("/cafe")->group(function(){
 
 Route::prefix('/manager')->group(function(){
     Route::get('/',[ManagerController::class, "index"]);
+    Route::get('/addAdmin',[ManagerController::class,"addAdmin"]);
+    Route::get('/formAdmin',[ManagerController::class,"formAdmin"]);
+    Route::get('/laporan',[ManagerController::class,"laporan"]);
+    Route::get('/laporan2',[ManagerController::class,"laporanBulanan"]);
+    Route::get('/bar',[ManagerController::class,"bar"]);
+    Route::get('/barHari',[ManagerController::class,"barHari"]);
+    Route::post('/register_admin',[ManagerController::class,"verifyregister"]);
+    Route::post('/cekReport', [ManagerController::class,'cekReport']);
+    Route::get('/generate/{awal}/{akhir}', [ManagerController::class,'generate']);
 });
 
 Route::prefix("/user")->group(function() {
@@ -164,9 +179,9 @@ Route::view("/TOU","footer.TermOfUse");
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
+    Route::get("/get", [AdminController::class,"Get"]);
     Route::prefix('/branch')->group(function () {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
-        Route::get("/schedule",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
         Route::post('/edit', [BranchController::class,"EditBranch"]);
         Route::post('/delete', [BranchController::class,"DeleteBranch"]);
@@ -178,16 +193,24 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
-        Route::get("/schedule",[ScheduleController::class,"JadwalMovie"]);
         Route::get('/get', [MovieController::class,"GetMovie"]);
         Route::post('/add', [MovieController::class,"AddMovie"]);
         Route::post('/edit', [MovieController::class,"EditMovie"]);
         Route::post('/delete', [MovieController::class,"DeleteMovie"]);
         
     });
-    Route::prefix('/snack')->group(function(){
-        Route::get('/add',[SnackController::class, "AddSnack"]);
+    Route::prefix('schedule')->group(function () {
+        Route::get('/', [ScheduleController::class,"GetSchedule"]);
+        Route::post('/delete', [ScheduleController::class,"DeleteSchedule"]);
+        Route::post('/add', [ScheduleController::class,"AddSchedule"]);
+        Route::post('/{id}', [ScheduleController::class,"EditSchedule"]);
     });
+    Route::prefix('/snack')->group(function(){
+        Route::post('/edit',[SnackController::class, "EditSnack"]);
+        Route::post('/add',[SnackController::class, "AddSnack"]);
+        Route::post('/delete',[SnackController::class, "DeleteSnack"]);
+    });
+
 });
 // |----------------------|
 

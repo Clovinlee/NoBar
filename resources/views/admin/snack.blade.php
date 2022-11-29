@@ -1,124 +1,135 @@
 <main style="margin-top:58px">
-    <div class="container pt-4" id="branch">
-      <section class="mb-4">
-        <h1>Branch</h1>
-        <div class="form-outline mb-4">
-          <input type="text" class="form-control" id="search_branch" name="name"/>
-          <label class="form-label">Nama branch</label>
-        </div>
-        <button class="btn btn-primary" id="btn_search_branch">Search</button>
-        <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdSnack">Add new Snack!</button>
-        <br>
-        <div class="accordion" id="accordionExample">
-          @forelse ($data->branch as $b)
-          <div class="accordion-item" id="branchacc{{$b->id}}">
-            <h2 class="accordion-header" id="heading{{$b->id}}">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-mdb-toggle="collapse"
-                data-mdb-target="#collapse{{$b->id}}"
-                aria-expanded="false"
-                aria-controls="collapse{{$b->id}}"
-              >
-                <strong>{{$b->nama}}</strong>
-              </button>
-            </h2>
-            <div id="collapse{{$b->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$b->id}}">
-              <div class="accordion-body" style="padding-left: 2%">
-                <button class="linkgantinama btn btn-secondary" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaleditbranch">Ganti nama branch?</button>
-                <button class="linkhapusbranch btn btn-danger" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaldeletebranch">Hapus branch ini!</button>
-                <a href="" class="tambahstudio btn btn-warning" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaladdstudio">Add new studio here!</a>
-                @forelse ($b->studio as $s)
-                    <br>
-                    <strong>{{$s->nama}}</strong>
-                    <br>
-                    <button class="linkeditstudio btn-warning btn" data-mdb-toggle="modal"data-id='{{$s->id}}' data-slot='{{$s->slot}}' d='{{$s->nama}}' data-mdb-target="#modaleditstudio">Edit studio</button>
-                    <button class="linkhapusstudio btn-danger btn" data-mdb-toggle="modal"data-id='{{$s->id}}' d='{{$s->nama}}' data-mdb-target="#modalhapusstudio">Hapus studio</button>
+  <div class="container pt-4" id="branch">
+    <section class="mb-4">
+      <h1 style="color: black">Snack</h1>
+      <div class="form-outline mb-4">
+        <input type="text" class="form-control" id="search_snack"  name="name"/>
+        <label class="form-label">Nama Snack</label>
+      </div>
+      <button class="btn btn-primary" id="btn_search_snack">Search</button> 
+      <br>
+      <br>
+      <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdSnack">Add new Snack!</button>
+      <br>
+      <br>
+      <div id="containersnack" class="row px-2 gap-2" style="width: 100%;">
+        @forelse ($data->snack as $m)
+              <input type='hidden' id='id{{$m->id}}' value='{{$m->id}}'>
+              <input type='hidden' id='nama{{$m->id}}' value='{{$m->nama}}'>
+              <input type='hidden' id='harga{{$m->id}}' value='{{$m->harga}}'>
+              <input type='hidden' id='tipe{{$m->id}}' value='{{$m->tipe}}'>
+              <input type='hidden' id='foto{{$m->id}}' value='{{$m->foto}}'>
+              <div class="card col-12 col-md-6 col-lg-4 mb-3 mr-5" style="width: 30%;">
+                <div class="bg-image hover-overlay ripple d-flex justify-content-center mt-3"  data-mdb-ripple-color="light" >
+                  <img src="{{asset('assets/images/'.$m->foto)}}" style="height: 150px;" class="img-fluid" alt="{{$m->slug}}"/>
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </a>
+                </div>
+                <div class="card-body" style="height: 250px">
+                  <h5 class="card-title text-dark">{{$m->nama}}</h5> 
+                  <p class="card-text">
+                    Tipe :
+                    {{$m->tipe}}<br>
+                    Harga : 
+                    Rp.{{$m->harga}}<br>
+                    Deskripsi : 
+                    {{ $m->deskripsi }} <br>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-center mb-10" >
+                  <button class="btn btn-warning"  data-mdb-toggle="modal" data-mdb-target="#modaleditSnack" onclick='editSnack({{$m->id}})'>Edit</button> &nbsp;&nbsp;&nbsp;
+                  <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->nama}}" data-mdb-target="#modaldeletesnack" class="delmovie btn btn-danger" onclick='deletesnack({{$m->id}})'>Delete</button>
+                </div>
+              </div>
+            
+          
+        @empty
+            <h1>Belum ada branch!</h1>
+        @endforelse
+      </div>
+    </section> 
+  </div>
+</main>
 
-                @empty
-                    <h3>Branch ini belum punya studio</h3>
-                @endforelse
-            </div>
-            <button onclick="Schedule(event)" value="/admin/branch/schedule/{{$b->id}}" class="btn btn-primary" style="margin-left: 2%">Cek Jadwal</button>
-          </div>
-          @empty
-              <h1>Belum ada branch!</h1>
-          @endforelse
-        </div>
-      </section> 
-    </div>
-  </main>
-  <div class="modal" tabindex="-1" id="modaladdSnack">
-    <div class="modal-dialog">
+{{-- modal untuk add snack  --}}
+<div class="modal" tabindex="-1" id="modaladdSnack">
+  <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Add new Snack</h5>
-          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-        </div>
-          <div class="modal-body">
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="nama_snack" name="name"/>
-              <label class="form-label">Nama Snack</label>
+            <div class="modal-header">
+              <h5 class="modal-title" style='color: black;'>Add new Snack</h5>
+              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="quantity" name="quantity">
-              <label class="form-label">Stok Snack</label>
+            <div class="modal-body">
+              <div class='row'>
+                <div class='col-md-1'>&nbsp;</div>
+                <div class='col-md-10'>
+                    <input type='text' class='form-control' placeholder='Nama Snack'  id="nama_snack_add"   name="name"><br>
+                    <input type='text' class='form-control' placeholder='Harga Snack' id="harga_snack_add"  name="harga"><br>
+                    <input type='file' class='form-control'                           id="foto_snack_add"   name="foto"><br>
+                    <textarea name="deskripsi" id="deskripsi_snack_add" cols="30" rows="10" placeholder="Masukkan deskripsi snack..."></textarea> <br>
+
+                    <input type='radio' name='jenis_snack_add' id='jenis_food_add' checked value='Food'>&nbsp;&nbsp;&nbsp;&nbsp; Food
+                    <input type='radio' name='jenis_snack_add' id='jenis_beverage_add' value='Beverage'>&nbsp;&nbsp;&nbsp;&nbsp; Beverage
+                </div>
+              </div>
             </div>
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="harga_snack" name="harga">
-              <label class="form-label">Harga Snack</label>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddSnack">Add Snack</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddBranch">Add snack</button>
-          </div>
       </div>
+  </div>
+ </div>
+
+
+ <div class="modal" tabindex="-1" id="modaleditSnack">
+  <div class="modal-dialog">
+      <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" style='color: black;'>Edit Snack</h5>
+              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class='row'>
+                <div class='col-md-1'>&nbsp;</div>
+                <div class='col-md-10'>
+                    <input type='hidden' class='form-control' placeholder='Nama Snack'  id="id_snack_edit"   name="id"><br>
+                    <input type='text' class='form-control' placeholder='Nama Snack'  id="nama_snack_edit"   name="name"><br>
+                    <input type='text' class='form-control' placeholder='Harga Snack' id="harga_snack_edit"  name="harga"><br>
+                    <input type='file' class='form-control'                           id="foto_snack_edit"   name="foto"><br>
+                    <textarea name="deskripsi" id="deskripsi_snack_edit" cols="30" rows="10"></textarea> <br>
+
+                    <input type='radio' name='jenis_snack_edit' id='jenis_food_edit' checked value='Food'>&nbsp;&nbsp;&nbsp;&nbsp; Food
+                    <input type='radio' name='jenis_snack_edit' id='jenis_beverage_edit' value='Beverage'>&nbsp;&nbsp;&nbsp;&nbsp; Beverage
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="EditSnack">Edit Snack</button>
+            </div>
+      </div>
+  </div>
+ </div>
+
+<div class="modal" tabindex="-1" id="modaldeletesnack">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: black;">Hapus Snack</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+          <div class="form-outline mb-4">
+            <input type='hidden' id='delete_id_snack' value=''>
+            <h1 id="hapusstudioh1" style="color: black; font-size: 20px;">Yakin mau hapus Snack ini?</h1>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">No</button>
+          <button type="button" class="btn btn-danger" data-mdb-dismiss="modal" id="DeleteSnack">Yes</button>
+        </div>
     </div>
   </div>
-  
-  
-  <div class="modal" tabindex="-1" id="modaleditsnack">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit Studio </h5>
-          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-        </div>
-          <div class="modal-body">
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="nama_studio_edit" name="name"/>
-              <label class="form-label">Nama Studio</label><br>
-              <label for="slot">Jumlah Slot</label>
-              <input type="number" class="form-control" id="slot_studio_edit" name="slot"/>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="EditStudio">Edit Studio!</button>
-          </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="modal" tabindex="-1" id="modalhapussnack">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Hapus Studio</h5>
-          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-        </div>
-          <div class="modal-body">
-            <div class="form-outline mb-4">
-              <h1 id="hapusstudioh1">Yakin mau hapus Studio ini?</h1>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">No</button>
-            <button type="button" class="btn btn-danger" data-mdb-dismiss="modal"id="DeleteStudio">Yes</button>
-          </div>
-      </div>
-    </div>
-  </div>
-    
+</div>

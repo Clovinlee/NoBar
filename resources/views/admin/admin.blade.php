@@ -24,17 +24,25 @@
 <script>
   // console.log("HEY")
   $(document).ready(function () {
-    //Reload();
+    $('.js-example-basic-single').select2({dropdownParent: $('#tambahschedule')});
+    $('.js-example-basic-multiple').select2({
+      dropdownParent: $('#tambahschedule'),
+      placeholder: 'Pilih studio',
   });
+    //$.fn.modal.Constructor.prototype.enforceFocus = function() {};
+    Schedule()
+  });
+  var dt=null;
   var current=0;
   var cbranch=-1
   var cstudio=-1
+  var csched=-1
   var cmov=-1
   var produser=[];
   var casts=[]
   var director=[]
-  const page=["dashboard","branch","movie","snack"];
-  var genre=["comedy","horror","action","romance","fantasy"]
+  const page=["dashboard","branch","movie","snack","schedule"];
+  var genre=["Comedy","Horror","Action","Romance","Fantasy","Superhero","History","Life","Nature"]
     function Reload(data){
       $("#accordionExample").html("")
       var str="";
@@ -47,7 +55,7 @@
         } else {
           str+="<h3>Branch ini belum punya studio</h3>"
         }
-        str+="</div><button onclick='ScheduleBranch(event)' value='"+d.id+"'class='btn btn-primary' style='margin-left: 2%'>Cek Jadwal</button></div></div>"
+        str+="</div></div></div>"
           });
           $("#accordionExample").html(str)
     }
@@ -66,6 +74,38 @@
       casts.splice(i,1)
       ReloadCast()
     }
+    $("#tambahjadwal").on("click",function(){
+      const studio=$("#selectstudio").val()
+      if (studio.length>0) {
+        if ($("#addtime").val()!="") {
+          $.ajax({
+          type:"POST",
+          url:'{{url("/admin/schedule/add")}}',
+          data: {
+            _token:'{{ csrf_token() }}',
+            studio:studio,
+            movie:$("#selectmovie").val(),
+            time:$("#addtime").val()
+          },
+          success:function(data){
+            Schedule()
+            $("#selectstudio").val(null).trigger('change')
+            $("#selectmovie").val(null).trigger('change')
+            $("#addtime").val("")
+          },error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    console.log(xhr.responseText);
+                  }
+        })
+        } else {
+          alert("Waktu tayang belum diisi!")
+        }
+      }else{
+        alert("Belum pilih studio!")
+        $("#selectstudio").val(null).trigger('change')
+      }
+    })
     function ReloadProducer() {
       var c=""
       var i=0
@@ -99,13 +139,44 @@
       var str=""
       if (data.length>0) {
         data.forEach(d=>{
-          str+="<div class='card' style='width: 30%; display: inline-block; margin: 9%;''><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light' ><img src='storage/movie/"+d.image+"' class='img-fluid' alt='"+d.slug+"'/><a href=''><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>"+d.judul+"</h5><p class='card-text'>Genre :<br>"+d.genre+"<br>Duration :<br>"+d.duration+"<br></p><button onclick='ScheduleMovie(event)' value='"+d.id+"' class='btn btn-primary'>Jadwal</button><button href='' value='"+d.id+"' class='movieedit btn btn-warning'>Edit</button><button href='' data-mdb-toggle='modal' value='"+d.id+"' d='"+d.judul+"' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>"
+          str+=`
+          <div class='card' style='width: 30%; display: inline-block; margin: 9%;''>
+            <div class=' bg-image hover-overlay ripple' data-mdb-ripple-color='light'>
+              <img src="{{asset('assets/images/${d.image}')}}" class='img-fluid' alt='${d.slug}' />
+          </div>
+          <div class='card-body'>
+              <h5 class='card-title text-dark'>${d.judul}</h5>
+              <p class='card-text'>Genre :<br>${d.genre}<br>Duration :<br>${d.duration}<br></p>
+              <button href='' value='${d.id}' class='movieedit btn btn-warning'>Edit</button>
+              <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.judul}'
+                  data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button>
+          </div>
+          </div>`
         })
       } else {
         str="<h2>Belum ada film yang main!</h2>"
       }
       c.html(str)
      }
+     $("#editjadwal").on("click",function () {
+      const time=$("#date").val()
+        dn=$.ajax({
+          type:"POST",
+          url:'{{url("/admin/schedule")}}'+"/"+cshed,
+          data: {
+            _token:'{{ csrf_token() }}',
+            id:csched,
+            time:time
+          },
+          success:function(data){
+            Schedule()
+          },error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    console.log(xhr.responseText);
+                  }
+        })
+     })
      $("#movsec").on("click",".movieedit",function () {
       var id=$(this).val()
       $.ajax({
@@ -137,67 +208,80 @@
         }
       })
      })
-    function ScheduleBranch(e) {
-    const id=$(e.target).val();
-    $.ajax({
-      type: "get",
-      url: "{{url('/admin/branch/schedule')}}",
-      data:{
-        id:id
-      },
-      success: function (response) {
-        $("#div_schedule").css("display","block");
-        for (let i = 0; i < page.length; i++) {
-          const p = page[i];
-          $("#div_"+p).css("display","none");
-        };
-        const data=JSON.parse(response);
-        Schedule(data)
-      }
-    })};
-    function ScheduleMovie(e) {
-    const id=$(e.target).val();
-    $.ajax({
-      type: "get",
-      url: "{{url('/admin/movie/schedule')}}",
-      data:{
-        id:id
-      },
-      success: function (response) {
-        $("#div_schedule").css("display","block");
-        for (let i = 0; i < page.length; i++) {
-          const p = page[i];
-          $("#div_"+p).css("display","none");
-        };
-        const data=JSON.parse(response);
-        Schedule(data)
-      }
-    })};
-    function Schedule(data){
-      const tbody=$("#schedule_table");
-        tbody.html("");
-        for (let i = 0; i < data.schedule.length; i++) {
-          const tr=document.createElement("tr");
-          const td1=document.createElement("td");
-          td1.innerHTML=data.schedule[i].nama_branch
-          const td2=document.createElement("td");
-          td2.innerHTML=data.schedule[i].nomor_studio
-          const td3=document.createElement("td");
-          td3.innerHTML=data.schedule[i].judul_movie
-          const td4=document.createElement("td");
-          td4.innerHTML=data.schedule[i].time
-          const td5=document.createElement("td");
-          td5.innerHTML=data.schedule[i].durasi + " menit"
-          const td6=document.createElement("td");
-          td6.innerHTML=data.schedule[i].price
-          tr.append(td1,td2,td3,td4,td5,td6);
-          tbody.append(tr);
+     $("#btnaddschedule").on("click",function () { 
+        $.ajax({
+          type:"get",
+          url:'{{url("/admin/get")}}',
+          success:function(data){
+            $d=JSON.parse(data,false)
+            var str=""
+            $d.branch.forEach(b => {
+              str+="<optgroup label='"+b.nama+"'>"
+              b.studio.forEach(s=>{
+                str+="<option value='"+b.id+","+s.id+"'>"+s.nama+"</option>"
+              })
+            });
+            $("#selectstudio").html(str)
+            str=""
+            $d.movie.forEach(m => {
+              str+="<option value='"+m.id+"'>"+m.judul+"</option>"
+            });
+            $("#selectmovie").html(str)
+          }
+        })
+      })
+     $("#schedule_table").on("click",".editschedule",function () {
+      const data=dt.row($(this).parents('tr')).data()
+      cshed = data.id;
+      $("#date").val(data.time)
+     })
+     $("#schedule_table").on("click",".deleteschedule",function () {
+      csched = dt.row($(this).parents('tr')).data().id;
+
+     })
+     $("#hapusjadwal").on("click",function () {
+      dn=$.ajax({
+        type:"post",
+        url:'{{url("/admin/schedule/delete")}}',
+        data: {
+          _token:'{{ csrf_token() }}',
+          id:csched
+        },
+        success:function(data){
+          Schedule()
         }
-      };
+      })
+     })
+    function Schedule() {
+      if (dt!=null) {
+        dt.destroy()
+      }
+      dt=$("#schedule_table").DataTable({
+        processing:true,
+        serverSide:true,
+        ajax:"{{url('/admin/schedule')}}",
+        aoColumns:[
+            {
+              mData:"branch.nama"
+            },{
+              mData:"studio.nama"
+            },{
+              mData:"movie.judul"
+            },{
+              mData:"time"
+            },{
+              mData:"harga"
+            },{
+              target:-1,
+              data:null,
+              defaultContent:"<button class='btn btn-warning editschedule form-control' data-mdb-toggle='modal' data-mdb-target='#ubahjadwalbranch'>Edit</button><button class='btn btn-danger deleteschedule form-control' data-mdb-toggle='modal' data-mdb-target='#hapusjadwal'>Delete</button>"
+            }
+          ]
+      });
+  };
 
     function PageChange(e){
       current=$(e.target).attr("target");
-      $("#div_schedule").css("display","none");
       for (let i = 0; i < page.length; i++) {
         const p = page[i];
         if (i==current) {
@@ -318,7 +402,7 @@
         }
       }); 
     });
-    $("#addmovie").on("click",async function(){
+    $("#addmovie").on("click",function(){
       if ($(this).val()=="add") {
         const judul=$("#movie_judul").val();
       const synopsis=$("#synopsis").val();
@@ -568,5 +652,139 @@
           }
         })
       })
+
+      
+      // Ini bagian untuk snack
+      function ReloadSnack(data){
+        var c=$("#containersnack")
+        c.html("")
+        var str=""
+        if (data.length>0) {
+          data.forEach(d=>{
+            str+=`
+          <div class='card col-12 col-md-6 col-lg-4 mb-3 mr-5' style='width: 30%;'>
+            <div class=' bg-image hover-overlay ripple d-flex justify-content-center mt-3' data-mdb-ripple-color='light'>
+                <img src="{{asset('assets/images/${d.foto}')}}" style='height: 150px;' class='img-fluid' alt='${d.slug}' />
+            </div>
+            <div class='card-body' style='height: 250px'>
+                <h5 class='card-title text-dark'>${d.nama}</h5>
+                <p class='card-text'>Harga :Rp.${d.harga}<br>Tipe :${d.tipe}<br> Deskripsi: ${d.deskripsi} <br></p> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="d-flex justify-content-center mb-10">
+                <button href='' value='${d.id}' class=' btn btn-warning' data-mdb-target='#modaleditsnack onclick ='editSnack(${d.id})'>Edit</button>
+                <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.nama }'
+                    data-mdb-target='#modaldeletesnack' class='btn btn-danger' onclick ='deletesnack(${d.id})'>Delete</button>
+            </div>
+          </div>`
+          })
+        } else {
+          str="<h2>Belum ada snack!</h2>"
+        }
+        c.html(str)
+      }
+      
+      // Ini bagian untuk melakukan add snack!!
+      $("#AddSnack").on("click", async function(){
+        alert('1'); 
+        var nm = $("#nama_snack_add").val(); 
+        var hg = $("#harga_snack_add").val(); 
+        var jenis = "Food"; 
+        if($("#jenis_beverage_add").is(":checked")) {
+          jenis = "Beverage";
+        }
+        var img= $("#foto_snack_add")[0].files;
+        var deskripsi = $("#deskripsi_snack_add").val();
+
+        alert(nm + "-" + hg + "-" + jenis); 
+        
+        if (img.length>0) {
+          const fd =new FormData()
+          fd.append("_token",'{{ csrf_token() }}')
+          fd.append("nama", nm)
+          fd.append("harga",hg)
+          fd.append("jenis",jenis)
+          fd.append("image",$("#foto_snack_add").prop("files")[0])
+          fd.append("deskripsi", deskripsi)
+
+          dn = $.ajax({
+            type: "POST",
+            url: '{{url("/admin/snack/add")}}',
+            data: fd,
+            contentType: false,
+            processData: false,
+            cache:false,
+            dataType: 'html',
+            success: function(data){
+              var d = JSON.parse(data,false)
+              // alert(data);
+              ReloadSnack(d)
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status);
+              alert(thrownError);
+              console.log(xhr.responseText);
+            }
+          }); 
+        } 
+        else {
+          alert("foto snack belum diupload!")
+        } 
+      });
+      
+      var myurl = "<?php echo URL::to('/'); ?>";
+      function deletesnack(id) {
+        var dd =$("#delete_id_snack").val(id);
+        alert(dd); 
+      }
+      
+      $("#DeleteSnack").on("click",function(){
+        var id = $("#delete_id_snack").val(); 
+        alert(id); 
+        dn=$.ajax({
+          type:"post",
+          url:'{{url("/admin/snack/delete")}}',
+          data: {
+            _token:'{{ csrf_token() }}',
+            id:id
+          },
+          success:function(data){
+            var d=JSON.parse(data,false)
+            ReloadSnack(d)
+          }
+        })
+      })
+
+      function editSnack(id) {
+        var cc = $("#edit_id_snack").val(id);
+        alert(cc);
+        $("#id_snack_edit").val($("#id" + id).val()); 
+        $("#nama_snack_edit").val($("#nama" + id).val()); 
+        $("#harga_snack_edit").val($("#harga" + id).val()); 
+        if($("#tipe" + id).val() == "Food") {
+          $("#jenis_food_edit").prop("checked", "checked");
+        }
+        else {
+          $("#jenis_beverage_edit").prop("checked", "checked");
+        }
+        $("#deskripsi_snack_edit").val($("#deskripsi" + id).val());
+      }
+
+      $("#EditSnack").on("click", function() {
+        var id = $("#edit_id_snack").val();
+        alert(id);
+        dn=$.ajax({
+          type:"post",
+          url:'{{url("/admin/snack/edit")}}',
+          data: {
+            _token:'{{ csrf_token() }}',
+            id:id
+          },
+          success:function(data){
+            var d=JSON.parse(data,false)
+            ReloadSnack(d)
+          }
+        }) 
+      })
+      
 </script>
 @endsection

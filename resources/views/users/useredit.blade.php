@@ -25,12 +25,27 @@
         <div class="row md-row-cols-2">
             <form action="/user/edit/fixedit" method="post">
                 @csrf
-                Nama Lengkap : <input type="text" name="nama_lengkap" id="" value="{{$currentUser->name}}"><br>
-                Email : <input type="text" name="email" id="" value="{{$currentUser->email}}" disabled><br>
-                Old Password : <input type="password" name="old_password" id="" value="{{$currentUser->password}}"><br>
-                New Password : <input type="password" name="new_password" id=""><br>
-                Confirm Password : <input type="password" name="conf_password" id=""><br>
-                <button type="submit">Update Profile</button>
+                <div class="input-group flex-nowrap" >
+                    <span class="input-group-text" id="addon-wrapping" style="color: white">Nama Lengkap</span>
+                    <input type="text" name="nama_lengkap" id="" value="{{$currentUser->name}}">
+                </div><br>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping" style="color: white">Email</span>
+                    <input type="text" name="email" id="" value="{{$currentUser->email}}" disabled style="color: white">
+                </div><br>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping" style="color: white">Old Password</span>
+                    <input type="password" name="old_password" id="" value="{{$currentUser->password}}">
+                </div><br>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping" style="color: white">New Password</span>
+                    <input type="password" name="new_password" id="">
+                </div><br>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping" style="color: white">Confirm Password</span>
+                    <input type="password" name="conf_password" id="">
+                </div><br>
+                <button type="submit" class="btn btn-warning">Update Profile</button>
             </form>
         </div>
 </div>

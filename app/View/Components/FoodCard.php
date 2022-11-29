@@ -11,9 +11,18 @@ class FoodCard extends Component
      *
      * @return void
      */
-    public function __construct()
+    public int $idFood;
+    public string $img;
+    public string $deskripsi;
+    public int $harga;
+
+    public function __construct($idFood, $description, $img, $price)
     {
         //
+        $this->idFood = $idFood;
+        $this->img = $img;
+        $this->deskripsi = $description;
+        $this->harga = $price;
     }
 
     /**

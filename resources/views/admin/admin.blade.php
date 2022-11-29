@@ -716,6 +716,7 @@
             dataType: 'html',
             success: function(data){
               var d = JSON.parse(data,false)
+              var d = JSON.parse(data,false)
               // alert(data);
               ReloadSnack(d)
             },
@@ -755,11 +756,10 @@
       })
 
       function editSnack(id) {
-        var cc = $("#edit_id_snack").val(id);
-        alert(cc);
         $("#id_snack_edit").val($("#id" + id).val()); 
         $("#nama_snack_edit").val($("#nama" + id).val()); 
         $("#harga_snack_edit").val($("#harga" + id).val()); 
+        $("#deskripsi_snack_edit").val($("deskripsi"+ id).val());
         if($("#tipe" + id).val() == "Food") {
           $("#jenis_food_edit").prop("checked", "checked");
         }
@@ -770,14 +770,28 @@
       }
 
       $("#EditSnack").on("click", function() {
-        var id = $("#edit_id_snack").val();
+        var id = $("#id_snack_edit").val();
+        var nama = $("#nama_snack_edit").val();
+        var harga = $("#harga_snack_edit").val();
+        var deksripsi = $("#deskripsi_snack_edit").val();
+        var jenis = "Food";
+        if($("#jenis_beverage_edit").is(":checked")){
+          jenis = "Beverage";
+        }
+        var img = $("#foto_snack_edit")[0].files;
+        
         alert(id);
         dn=$.ajax({
           type:"post",
           url:'{{url("/admin/snack/edit")}}',
           data: {
             _token:'{{ csrf_token() }}',
-            id:id
+            id:id, 
+            nama:nama,
+            harga:harga,
+            jenis:jenis,
+            deskripsi:deskripsi,
+            img:$("#foto_snack_edit").prop("files")[0]
           },
           success:function(data){
             var d=JSON.parse(data,false)

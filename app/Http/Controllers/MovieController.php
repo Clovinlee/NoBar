@@ -126,7 +126,8 @@ class MovieController extends Controller
             $m->judul=$r->judul;
             $m->slug=str_replace(" ","-",$r->judul);
             $img=$r->file("image");
-            $img->storeAs("/movie",$img->getClientOriginalName(),'public');
+            //$img->storeAs("/movie",$img->getClientOriginalName(),'public');
+            $img->move(public_path()."/assets/images/",$img->getClientOriginalName());
             $m->image=$img->getClientOriginalName();
             $m->producer=$r->produser;
             $m->casts=$r->cast;
@@ -145,21 +146,24 @@ class MovieController extends Controller
             $m=Movie::find($r->id);
             $m->judul=$r->judul;
             $m->slug=str_replace(" ","-",$r->judul);
-            if ($r->file("image")->getSize()>0) {
-                $img=$r->file("image");
-                $img->storeAs("/movie",$img->getClientOriginalName(),'public');
-                $m->image=$img->getClientOriginalName();
-            }
-            $m->producer=$this->ArrToString($r->producer);
-            $m->casts=$this->ArrToString($r->casts);
-            $m->director=$this->ArrToString($r->director);
+            $img=$r->file("image");
+            $img->storeAs("/movie",$img->getClientOriginalName(),'public');
+            $m->image=$img->getClientOriginalName();
+            $m->producer=$r->produser;
+            $m->casts=$r->cast;
+            $m->director=$r->director;
             $m->synopsis=$r->synopsis;
-            $m->genre=$this->ArrToString($r->genre);
+            $m->genre=$r->genre;
             $m->duration=$r->duration;
             $m->save();
             $data=Movie::all();
             return json_encode($data);
         }
+    }
+    public function GetMovie(Request $r)
+    {
+        $m=Movie::find($r->id);
+        return json_encode($m);
     }
 
 }

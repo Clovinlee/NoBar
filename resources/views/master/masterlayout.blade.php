@@ -9,7 +9,8 @@
 </head>
 
 <!-- Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/> --}}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet"/>
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
@@ -19,6 +20,9 @@
 
 <!-- MDB -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
+
+<!-- SELECT2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <!-- Custom Style -->
 <link rel="stylesheet" href="{{ url('/css/animate.min.css') }}">
@@ -33,10 +37,10 @@
 <link rel="stylesheet" href="{{ url('/css/style.css') }}">
 <link rel="stylesheet" href="{{ url('/css/responsive.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
+<link rel="stylesheet" href="{{url('https://cdn.datatables.net/1.13.1/css/dataTables.foundation.min.css')}}">
 
 <style>
 </style>
-
 <body>
     @yield("navbar")
     @yield("body")
@@ -50,6 +54,9 @@
 
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+
+<!-- SELECT2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <!-- Custom JS -->
 <script src="{{ url('/js/isotope.pkgd.min.js') }}"></script>
@@ -65,6 +72,8 @@
 <script src="{{ url('/js/plugins.js') }}"></script>
 <script src="{{ url('/js/main.js') }}"></script>
 <script src="{{ url("/js/script.js") }}"></script>
+<script src="{{url('https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('https://cdn.datatables.net/1.13.1/js/dataTables.foundation.min.js')}}"></script>
 
 @yield("pageScript")
 

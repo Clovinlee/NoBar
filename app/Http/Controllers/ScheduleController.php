@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateScheduleRequest;
 use App\Models\Branch;
 use App\Models\Movie;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use stdClass;
+use Yajra\DataTables\Facades\DataTables;
 
 class ScheduleController extends Controller
 {
@@ -17,37 +19,40 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function JadwalBranch($id)
+    public function GetSchedule()
     {
-        $branch=Branch::find($id);
-        $jadwal=$branch->schedule;
-        $jadwal->asal="branch";
-        $jadwal->nama=$branch->nama;
-        foreach ($jadwal as $k => $s) {
-            $s->nama_branch=$branch->nama;
-            $s->nomor_studio=$s->studio->nama;
-            $s->judul_movie=$s->movie->judul;
-            $s->durasi=$s->movie->duration;
+        $jadwal=Schedule::all();
+        foreach ($jadwal as $key => $j) {
+            $j->branch=$j->branch;
+            $j->studio=$j->studio;
+            $j->movie=$j->movie;
+            $j->harga=number_format($j->price);
         }
-        $data=new stdClass;
-        $data->schedule=$jadwal;
-        return json_encode($data);
+        return DataTables::of($jadwal)->make(true);
     }
-    public function JadwalMovie($id)
+    public function DeleteSchedule(Request $r)
     {
-        $movie=Movie::find($id);
-        $jadwal=$movie->schedule;
-        $jadwal->asal="movie";
-        $jadwal->nama=$movie->judul;
-        foreach ($jadwal as $k => $s) {
-            $s->nama_branch=$s->branch->nama;
-            $s->nomor_studio=$s->studio->nama;
-            $s->judul_movie=$movie->judul;
-            $s->durasi=$s->movie->duration;
+        $s=Schedule::where("id","=",$r->id);
+        $s->delete();
+    }
+    public function EditSchedule(Request $r,$id)
+    {
+        $s=Schedule::find($id);
+        $s->time=$r->time;
+        $s->save();
+    }
+    public function AddSchedule(Request $r)
+    {
+        foreach ($r->studio as $key => $st) {
+            $temp=explode(",",$st);
+            $s=new Schedule;
+            $s->studio_id=$temp[1];
+            $s->branch_id=$temp[0];
+            $s->movie_id=$r->movie;
+            $s->price=45000;
+            $s->time=$r->time;
+            $s->save();
         }
-        $data=new stdClass;
-        $data->schedule=$jadwal;
-        return json_encode($data);
     }
     public function index()
     {

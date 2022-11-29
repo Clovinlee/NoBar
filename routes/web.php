@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CafeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
@@ -119,6 +120,21 @@ Route::prefix("/payment")->group(function(){
 });
 // |----------------------|
 
+// |----------------------|
+// | CAFE                 |
+// |----------------------|
+
+Route::prefix("/cafe")->group(function(){
+    Route::get("/", [CafeController::class, "index"]);
+    Route::post("/refreshCafe",[CafeController::class, "refreshCafe"]);
+});
+
+Route::prefix("/cafe_pay")->group(function() {
+    Route::post("/",[CafeController::class, "cafePayment"]);
+    Route::post("/process",[CafeController::class, "transactionProcess"]);
+});
+
+// |----------------------|
 
 // |----------------------|
 // | USER                 |
@@ -152,9 +168,9 @@ Route::prefix("/user")->group(function() {
 // |----------------------|
 Route::prefix("/admin")->middleware("role:admin")->group(function() {
     Route::get("/", [AdminController::class,"index"]);
+    Route::get("/get", [AdminController::class,"Get"]);
     Route::prefix('/branch')->group(function () {
         Route::get("/search",[BranchController::class,"SearchBranch"]);
-        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalBranch"]);
         Route::post('/add', [BranchController::class,"AddBranch"]);
         Route::post('/edit', [BranchController::class,"EditBranch"]);
         Route::post('/delete', [BranchController::class,"DeleteBranch"]);
@@ -166,17 +182,35 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/delete', [StudioController::class,"DeleteStudio"]);
     });
     Route::prefix('/movie')->group(function () {
-        Route::get("/schedule/{id}",[ScheduleController::class,"JadwalMovie"]);
+        Route::get('/get', [MovieController::class,"GetMovie"]);
         Route::post('/add', [MovieController::class,"AddMovie"]);
         Route::post('/edit', [MovieController::class,"EditMovie"]);
         Route::post('/delete', [MovieController::class,"DeleteMovie"]);
         
     });
-    Route::prefix('/snack')->group(function(){
-        Route::get('/add',[SnackController::class, "AddSnack"]);
+    Route::prefix('schedule')->group(function () {
+        Route::get('/', [ScheduleController::class,"GetSchedule"]);
+        Route::post('/delete', [ScheduleController::class,"DeleteSchedule"]);
+        Route::post('/add', [ScheduleController::class,"AddSchedule"]);
+        Route::post('/{id}', [ScheduleController::class,"EditSchedule"]);
     });
+    Route::prefix('/snack')->group(function(){
+        Route::post('/edit',[SnackController::class, "EditSnack"]);
+        Route::post('/add',[SnackController::class, "AddSnack"]);
+        Route::post('/delete',[SnackController::class, "DeleteSnack"]);
+    });
+
 });
 // |----------------------|
+
+Route::get("/CalvinKwanGakKerjaFAI",function(){
+    Artisan::call("migrate:fresh --seed");
+    return response("<h1>emang</h1>");
+});
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/',[ManagerController::class, "index"]);
+});
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

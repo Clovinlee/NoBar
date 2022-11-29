@@ -54,6 +54,8 @@
         >
         <span onclick="PageChange(event)" href="" target="3" id="nav_snack" class="list-group-item list-group-item-action py-2 ripple"
           ><i span onclick="PageChange(event)" target="3" class="fas fa-building fa-fw me-3" ></i><span span onclick="PageChange(event)" target="3">Snack</span></span>
+          <span onclick="PageChange(event)" href="" target="4" id="nav_schedule" class="list-group-item list-group-item-action py-2 ripple"
+          ><i span onclick="PageChange(event)" target="4" class="fas fa-building fa-fw me-3" ></i><span span onclick="PageChange(event)" target="4">Schedule</span></span>
       </div>
     </div>
   </nav>

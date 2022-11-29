@@ -52,6 +52,43 @@
 }
 */
 
+.navCafe{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #14141d !important; 
+}
+
+.navCafe.active{
+    background-color: #14141d !important; 
+    color: yellow !important;
+    border-color: yellow !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.navCafe:hover{
+    /* background-color: transparent !important; */
+    background-color: #14141d !important; 
+}
+
+.foodDetail{
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3; 
+   -webkit-box-orient: vertical;
+}
+
 .h-screen{
     height: 100vh;
 }

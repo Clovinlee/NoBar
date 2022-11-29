@@ -63,7 +63,7 @@
                     <input type='text' class='form-control' placeholder='Nama Snack'  id="nama_snack_add"   name="name"><br>
                     <input type='text' class='form-control' placeholder='Harga Snack' id="harga_snack_add"  name="harga"><br>
                     <input type='file' class='form-control'                           id="foto_snack_add"   name="foto"><br>
-                    <textarea name="deskripsi" id="deskripsi_snack_add" cols="30" rows="10" placeholder="Masukkan deskripsi snack..."></textarea>
+                    <textarea name="deskripsi" id="deskripsi_snack_add" cols="30" rows="10" placeholder="Masukkan deskripsi snack..."></textarea> <br>
 
                     <input type='radio' name='jenis_snack_add' id='jenis_food_add' checked value='Food'>&nbsp;&nbsp;&nbsp;&nbsp; Food
                     <input type='radio' name='jenis_snack_add' id='jenis_beverage_add' value='Beverage'>&nbsp;&nbsp;&nbsp;&nbsp; Beverage
@@ -94,6 +94,7 @@
                     <input type='text' class='form-control' placeholder='Nama Snack'  id="nama_snack_edit"   name="name"><br>
                     <input type='text' class='form-control' placeholder='Harga Snack' id="harga_snack_edit"  name="harga"><br>
                     <input type='file' class='form-control'                           id="foto_snack_edit"   name="foto"><br>
+                    <textarea name="deskripsi" id="deskripsi_snack_edit" cols="30" rows="10"></textarea> <br>
 
                     <input type='radio' name='jenis_snack_edit' id='jenis_food_edit' checked value='Food'>&nbsp;&nbsp;&nbsp;&nbsp; Food
                     <input type='radio' name='jenis_snack_edit' id='jenis_beverage_edit' value='Beverage'>&nbsp;&nbsp;&nbsp;&nbsp; Beverage

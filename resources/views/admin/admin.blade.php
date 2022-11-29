@@ -661,7 +661,19 @@
         var str=""
         if (data.length>0) {
           data.forEach(d=>{
-            str+="<div class='card' style='width: 30%; display: inline-block; margin: 9%;''><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light' ><img src='assets/images/"+d.foto+"'/><a href=''><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>"+d.nama+"</h5><p class='card-text'>Harga :<br>Rp."+d.harga+"<br>Tipe :<br>"+d.tipe+"<br></p><button onclick='ScheduleMovie(event)' value='"+d.id+"' class='btn btn-primary'>Jadwal</button><button href='' value='"+d.id+"' class='movieedit btn btn-warning'>Edit</button><button href='' data-mdb-toggle='modal' value='"+d.id+"' d='"+d.nama+"' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>"
+            str+=`
+          <div class='card' style='width: 30%; display: inline-block; margin: 9%;''>
+            <div class=' bg-image hover-overlay ripple' data-mdb-ripple-color='light'>
+              <img src="{{asset('assets/images/${d.foto}')}}" class='img-fluid' alt='${d.slug}' />
+          </div>
+          <div class='card-body'>
+              <h5 class='card-title text-dark'>${d.nama}</h5>
+              <p class='card-text'>Harga :Rp.${d.harga}<br>Tipe :${d.tipe}<br> Deskripsi: ${d.deskripsi} <br></p>
+              <button href='' value='${d.id}' class=' btn btn-warning'>Edit</button>
+              <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.nama }'
+                  data-mdb-target='#modaldeletesnack' class='btn btn-danger'>Delete</button>
+          </div>
+          </div>`
           })
         } else {
           str="<h2>Belum ada snack!</h2>"
@@ -737,6 +749,7 @@
           }
         })
       })
+
       function editSnack(id) {
         $("#id_snack_edit").val($("#id" + id).val()); 
         $("#nama_snack_edit").val($("#nama" + id).val()); 
@@ -747,19 +760,8 @@
         else {
           $("#jenis_beverage_edit").prop("checked", "checked");
         }
+        $("#deskripsi_snack_edit").val($("#deskripsi" + id).val());
       }
-      function ReloadSnack(data){
-        var c=$("#containersnack")
-        c.html("")
-        var str=""
-        if (data.length>0) {
-          data.forEach(d=>{
-            str+="<div class='card' style='width: 30%; display: inline-block; margin: 0.5%;'><div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light'><img src='' class='img-fluid' alt=''/><a href='#!'><div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div></a></div><div class='card-body'><h5 class='card-title text-dark'>" + d.nama + "</h5><p class='card-text'>Tipe :<br>" + d.tipe + "<br>Harga :<br>" + d.harga + "<br></p><button class='btn btn-warning movieedit' value='" + d.id + "'>Edit</button> <button href='' data-mdb-toggle='modal' value='" + d.id + "' d='" + d.judul + "' data-mdb-target='#modaldeletemovie' class='delmovie btn btn-danger'>Delete</button></div></div>";
-          })
-        } else {
-          str="<h2>Belum ada film yang main!</h2>"
-        }
-        c.html(str)
-      }
+      
 </script>
 @endsection

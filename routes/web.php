@@ -143,6 +143,15 @@ Route::prefix("/cafe_pay")->group(function() {
 
 Route::prefix('/manager')->group(function(){
     Route::get('/',[ManagerController::class, "index"]);
+    Route::get('/addAdmin',[ManagerController::class,"addAdmin"]);
+    Route::get('/formAdmin',[ManagerController::class,"formAdmin"]);
+    Route::get('/laporan',[ManagerController::class,"laporan"]);
+    Route::get('/laporan2',[ManagerController::class,"laporanBulanan"]);
+    Route::get('/bar',[ManagerController::class,"bar"]);
+    Route::get('/barHari',[ManagerController::class,"barHari"]);
+    Route::post('/register_admin',[ManagerController::class,"verifyregister"]);
+    Route::post('/cekReport', [ManagerController::class,'cekReport']);
+    Route::get('/generate/{awal}/{akhir}', [ManagerController::class,'generate']);
 });
 
 Route::prefix("/user")->group(function() {

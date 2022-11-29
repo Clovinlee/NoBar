@@ -662,17 +662,19 @@
         if (data.length>0) {
           data.forEach(d=>{
             str+=`
-          <div class='card' style='width: 30%; display: inline-block; margin: 9%;''>
-            <div class=' bg-image hover-overlay ripple' data-mdb-ripple-color='light'>
-              <img src="{{asset('assets/images/${d.foto}')}}" class='img-fluid' alt='${d.slug}' />
-          </div>
-          <div class='card-body'>
-              <h5 class='card-title text-dark'>${d.nama}</h5>
-              <p class='card-text'>Harga :Rp.${d.harga}<br>Tipe :${d.tipe}<br> Deskripsi: ${d.deskripsi} <br></p>
-              <button href='' value='${d.id}' class=' btn btn-warning' data-mdb-target='#modaleditsnack'>Edit</button>
-              <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.nama }'
-                  data-mdb-target='#modaldeletesnack' class='btn btn-danger'>Delete</button>
-          </div>
+          <div class='card col-12 col-md-6 col-lg-4 mb-3 mr-5' style='width: 30%;'>
+            <div class=' bg-image hover-overlay ripple d-flex justify-content-center mt-3' data-mdb-ripple-color='light'>
+                <img src="{{asset('assets/images/${d.foto}')}}" style='height: 150px;' class='img-fluid' alt='${d.slug}' />
+            </div>
+            <div class='card-body' style='height: 250px'>
+                <h5 class='card-title text-dark'>${d.nama}</h5>
+                <p class='card-text'>Harga :Rp.${d.harga}<br>Tipe :${d.tipe}<br> Deskripsi: ${d.deskripsi} <br></p> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="d-flex justify-content-center mb-10">
+                <button href='' value='${d.id}' class=' btn btn-warning' data-mdb-target='#modaleditsnack onclick ='editSnack(${d.id})'>Edit</button>
+                <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.nama }'
+                    data-mdb-target='#modaldeletesnack' class='btn btn-danger' onclick ='deletesnack(${d.id})'>Delete</button>
+            </div>
           </div>`
           })
         } else {
@@ -731,7 +733,8 @@
       
       var myurl = "<?php echo URL::to('/'); ?>";
       function deletesnack(id) {
-        $("#delete_id_snack").val(id); 
+        var dd =$("#delete_id_snack").val(id);
+        alert(dd); 
       }
       
       $("#DeleteSnack").on("click",function(){
@@ -752,6 +755,8 @@
       })
 
       function editSnack(id) {
+        var cc = $("#edit_id_snack").val(id);
+        alert(cc);
         $("#id_snack_edit").val($("#id" + id).val()); 
         $("#nama_snack_edit").val($("#nama" + id).val()); 
         $("#harga_snack_edit").val($("#harga" + id).val()); 
@@ -764,9 +769,22 @@
         $("#deskripsi_snack_edit").val($("#deskripsi" + id).val());
       }
 
-      // $("#EditSnack").on("click", function() {
-      //   var id = 
-      // })
+      $("#EditSnack").on("click", function() {
+        var id = $("#edit_id_snack").val();
+        alert(id);
+        dn=$.ajax({
+          type:"post",
+          url:'{{url("/admin/snack/edit")}}',
+          data: {
+            _token:'{{ csrf_token() }}',
+            id:id
+          },
+          success:function(data){
+            var d=JSON.parse(data,false)
+            ReloadSnack(d)
+          }
+        }) 
+      })
       
 </script>
 @endsection

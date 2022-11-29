@@ -39,7 +39,7 @@
                 </div>
                 <div class="d-flex justify-content-center mb-10" >
                   <button class="btn btn-warning"  data-mdb-toggle="modal" data-mdb-target="#modaleditSnack" onclick='editSnack({{$m->id}})'>Edit</button> &nbsp;&nbsp;&nbsp;
-                  <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->judul}}" data-mdb-target="#modaldeletesnack" class="delmovie btn btn-danger" onclick='deletesnack({{$m->id}})'>Delete</button>
+                  <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->nama}}" data-mdb-target="#modaldeletesnack" class="delmovie btn btn-danger" onclick='deletesnack({{$m->id}})'>Delete</button>
                 </div>
               </div>
             

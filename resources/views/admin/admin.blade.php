@@ -715,7 +715,6 @@
             dataType: 'html',
             success: function(data){
               var d = JSON.parse(data,false)
-              var d = JSON.parse(data,false)
               // alert(data);
               ReloadSnack(d)
             },
@@ -767,7 +766,7 @@
         $("#deskripsi_snack_edit").val($("#deskripsi" + id).val());
       }
 
-      $("#EditSnack").on("click", function() {
+      $("#EditSnack").on("click", async function() {
         var id = $("#id_snack_edit").val();
         var nama = $("#nama_snack_edit").val();
         var harga = $("#harga_snack_edit").val();
@@ -777,6 +776,7 @@
           jenis = "Beverage";
         }
         var img = $("#foto_snack_edit")[0].files;
+        alert(id);
         if (img.length>0) {
           const fd =new FormData()
           fd.append("_token",'{{ csrf_token() }}')
@@ -797,8 +797,7 @@
             dataType: 'html',
             success: function(data){
               var d = JSON.parse(data,false)
-              var d = JSON.parse(data,false)
-              // alert(data);
+              alert(data);
               ReloadSnack(d)
             },
             error: function (xhr, ajaxOptions, thrownError) {

@@ -41,7 +41,6 @@ class SnackController extends Controller
                 // $m->foto        =   $img->getClientOriginalName();
                 
                 $img            =   $r->file("image");
-                // $img->storeAs("/snack",$img->getClientOriginalName(), 'public');
                 $img->move('assets/images', $img->getClientOriginalName());
                 $m->foto        =   $img->getClientOriginalName();
             }

@@ -685,7 +685,6 @@
       
       // Ini bagian untuk melakukan add snack!!
       $("#AddSnack").on("click", async function(){
-        alert('1'); 
         var nm = $("#nama_snack_add").val(); 
         var hg = $("#harga_snack_add").val(); 
         var jenis = "Food"; 
@@ -695,7 +694,7 @@
         var img= $("#foto_snack_add")[0].files;
         var deskripsi = $("#deskripsi_snack_add").val();
 
-        alert(nm + "-" + hg + "-" + jenis); 
+        // alert(nm + "-" + hg + "-" + jenis); 
         
         if (img.length>0) {
           const fd =new FormData()
@@ -759,7 +758,6 @@
         $("#id_snack_edit").val($("#id" + id).val()); 
         $("#nama_snack_edit").val($("#nama" + id).val()); 
         $("#harga_snack_edit").val($("#harga" + id).val()); 
-        $("#deskripsi_snack_edit").val($("deskripsi"+ id).val());
         if($("#tipe" + id).val() == "Food") {
           $("#jenis_food_edit").prop("checked", "checked");
         }
@@ -779,25 +777,37 @@
           jenis = "Beverage";
         }
         var img = $("#foto_snack_edit")[0].files;
-        
-        alert(id);
-        dn=$.ajax({
-          type:"post",
-          url:'{{url("/admin/snack/edit")}}',
-          data: {
-            _token:'{{ csrf_token() }}',
-            id:id, 
-            nama:nama,
-            harga:harga,
-            jenis:jenis,
-            deskripsi:deskripsi,
-            img:$("#foto_snack_edit").prop("files")[0]
-          },
-          success:function(data){
-            var d=JSON.parse(data,false)
-            ReloadSnack(d)
-          }
-        }) 
+        if (img.length>0) {
+          const fd =new FormData()
+          fd.append("_token",'{{ csrf_token() }}')
+          fd.append("id", id)
+          fd.append("nama", nama)
+          fd.append("harga",harga)
+          fd.append("jenis",jenis)
+          fd.append("image",$("#foto_snack_edit").prop("files")[0])
+          fd.append("deskripsi", deskripsi)
+
+          dn = $.ajax({
+            type: "POST",
+            url: '{{url("/admin/snack/edit")}}',
+            data: fd,
+            contentType: false,
+            processData: false,
+            cache:false,
+            dataType: 'html',
+            success: function(data){
+              var d = JSON.parse(data,false)
+              var d = JSON.parse(data,false)
+              // alert(data);
+              ReloadSnack(d)
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status);
+              alert(thrownError);
+              console.log(xhr.responseText);
+            }
+          }); 
+        }  
       })
       
 </script>

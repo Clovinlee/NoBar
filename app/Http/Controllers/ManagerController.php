@@ -76,6 +76,57 @@ class ManagerController extends Controller
         return $pdf->stream();
     }
 
+    public function generateChart()
+    {
+        $htrans = DB::select('
+            select
+                MONTHNAME(date_range.mm) as month_name,
+                IFNULL(sum(total), 0) as count
+            from
+                (
+                    select (NOW() - INTERVAL counter.m MONTH) as mm
+                    from
+                        (
+                            select @rownum := @rownum + 1 as m from
+                            (select 1 union select 2 union select 3 union select 4) t1,
+                            (select 1 union select 2 union select 3) t2,
+                            (select @rownum := -1) t0
+                        ) counter
+                ) date_range    
+            left join
+                htrans ht
+            on
+                MONTH(ht.created_at) = MONTH(date_range.mm)
+            group by 
+                MONTH(date_range.mm), date_range.mm
+            order by
+                date_range.mm
+        ');
+        $htrans_snack = DB::select('select MONTHNAME(date_range.mm) as month_name, IFNULL(sum(total), 0) as count from ( select (NOW() - INTERVAL counter.m MONTH) as mm from ( select @rownum := @rownum + 1 as m from (select 1 union select 2 union select 3 union select 4) t1, (select 1 union select 2 union select 3) t2, (select @rownum := -1) t0 ) counter ) date_range left join htranssnacks ht on MONTH(ht.created_at) = MONTH(date_range.mm) group by MONTH(date_range.mm), date_range.mm order by date_range.mm');
+        $labels = array_map(function($item) {
+            return $item->month_name;
+        }, $htrans);
+        $data = array_map(function($item) {
+            return $item->count;
+        }, $htrans);
+        
+        $labels_snack = array_map(function($item) {
+            return $item->month_name;
+        }, $htrans_snack);
+        $data_snack = array_map(function($item) {
+            return $item->count;
+        }, $htrans_snack);
+        $render = view('manager.laporan',[
+            'labels' => $labels,
+            'data' => $data,
+            'labels_snack' => $labels_snack,
+            'data_snack' => $data_snack
+        ])->render();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($render);
+        return $pdf->stream();
+    }
+
     public function cekReport(Request $request){
 
         $htrans = DB::select('
@@ -102,12 +153,21 @@ class ManagerController extends Controller
             order by
                 date_range.mm
         ');
+
+        $htrans_snack = DB::select('select MONTHNAME(date_range.mm) as month_name, IFNULL(sum(total), 0) as count from ( select (NOW() - INTERVAL counter.m MONTH) as mm from ( select @rownum := @rownum + 1 as m from (select 1 union select 2 union select 3 union select 4) t1, (select 1 union select 2 union select 3) t2, (select @rownum := -1) t0 ) counter ) date_range left join htranssnacks ht on MONTH(ht.created_at) = MONTH(date_range.mm) group by MONTH(date_range.mm), date_range.mm order by date_range.mm');
         $labels = array_map(function($item) {
             return $item->month_name;
         }, $htrans);
         $data = array_map(function($item) {
             return $item->count;
         }, $htrans);
+        
+        $labels_snack = array_map(function($item) {
+            return $item->month_name;
+        }, $htrans_snack);
+        $data_snack = array_map(function($item) {
+            return $item->count;
+        }, $htrans_snack);
 
         $awal = $request->input("start") ?? "";
         $akhir = $request->input("end") ?? "";
@@ -121,6 +181,7 @@ class ManagerController extends Controller
         $jumlah = DB::select('SELECT SUM(htrans.total) as total FROM htrans WHERE (htrans.created_at) between ? and ?',[$awal,$akhir]);
         // dd($cek);
         // dd($jumlah);
+        // dd($data_snack);
         return view('manager.laporan',[
             'awal' => $awal,
             'akhir' => $akhir,
@@ -128,7 +189,9 @@ class ManagerController extends Controller
             'tipe' => $tipe,
             'jumlah' => $jumlah[0]->total,
             'labels' => $labels,
-            'data' => $data
+            'data' => $data,
+            'labels_snack' => $labels_snack,
+            'data_snack' => $data_snack
         ]);
     }
 
@@ -137,7 +200,7 @@ class ManagerController extends Controller
         $htrans = DB::select('
             select
                 MONTHNAME(date_range.mm) as month_name,
-                COUNT(id) as count
+                IFNULL(sum(total), 0) as count
             from
                 (
                     select (NOW() - INTERVAL counter.m MONTH) as mm
@@ -158,6 +221,7 @@ class ManagerController extends Controller
             order by
                 date_range.mm
         ');
+        $htrans_snack = DB::select('select MONTHNAME(date_range.mm) as month_name, IFNULL(sum(total), 0) as count from ( select (NOW() - INTERVAL counter.m MONTH) as mm from ( select @rownum := @rownum + 1 as m from (select 1 union select 2 union select 3 union select 4) t1, (select 1 union select 2 union select 3) t2, (select @rownum := -1) t0 ) counter ) date_range left join htranssnacks ht on MONTH(ht.created_at) = MONTH(date_range.mm) group by MONTH(date_range.mm), date_range.mm order by date_range.mm');
         $labels = array_map(function($item) {
             return $item->month_name;
         }, $htrans);
@@ -165,6 +229,13 @@ class ManagerController extends Controller
             return $item->count;
         }, $htrans);
         
+        $labels_snack = array_map(function($item) {
+            return $item->month_name;
+        }, $htrans_snack);
+        $data_snack = array_map(function($item) {
+            return $item->count;
+        }, $htrans_snack);
+
         $cek = DB::select('select h.id as id, u.name as nama_user, m.judul as movie_title, s.nama as studio, b.nama as branch, h.total from htrans h, users u, schedules sch, movies m, studios s, branches b where h.user_id = u.id and h.schedule_id = sch.id and sch.movie_id = m.id and sch.studio_id = s.id and sch.branch_id = b.id', []);
         $tipe = "";
 
@@ -177,7 +248,9 @@ class ManagerController extends Controller
             'tipe' => $tipe,
             'jumlah' => $jumlah[0]->total,
             'labels' => $labels,
-            'data' => $data
+            'data' => $data,
+            'labels_snack' => $labels_snack,
+            'data_snack' => $data_snack
         ]);
     }
 
@@ -218,9 +291,22 @@ class ManagerController extends Controller
         ]);
     }
 
+    public function piechart()
+    {
+        $bar = DB::select('SELECT s.tipe, SUM(d.qty) AS count
+        FROM dtranssnacks d RIGHT JOIN snacks s ON d.snack_id=s.id
+        GROUP BY s.tipe',[]); 
+        $bar = array_map(function($item) {
+            return $item->count;
+        }, $bar);
+        return view('manager.piechart',[
+            'bar' => $bar,
+        ]);
+    }
+
     public function barHari()
     {
-        $bar = DB::select('select dayname(created_at) as hari,count(dayname(created_at)) as jumlah_pembeli from htrans GROUP by dayname(created_at) order by DAYOFWEEK(created_at)',[]);  
+        $bar = DB::select('select dayname(created_at) as hari, count(dayname(created_at)) as jumlah_pembeli from htrans GROUP by dayname(created_at) ORDER BY CASE WHEN hari = "Sunday" THEN 1 WHEN hari = "Monday" THEN 2 WHEN hari = "Tuesday" THEN 3 WHEN hari = "Wednesday" THEN 4 WHEN hari = "Thursday" THEN 5 WHEN hari = "Friday" THEN 6 WHEN hari = "Saturday" THEN 7 END ASC',[]);  
         $bar = array_map(function($item) {
             return $item->jumlah_pembeli;
         }, $bar);

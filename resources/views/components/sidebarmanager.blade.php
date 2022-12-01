@@ -52,7 +52,6 @@
         
         <span onclick="PageChange(event)" href="" target="1" id="nav_report" class="list-group-item list-group-item-action py-2 ripple active"><i class="fas fa-building fa-fw me-3" ></i>
             <span>Report</span>
-            
         </span>
 
         <span  href="" target="1" id="nav_report" class="list-group-item list-group-item-action py-2 ripple active">

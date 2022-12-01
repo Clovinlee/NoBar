@@ -661,21 +661,32 @@
         var str=""
         if (data.length>0) {
           data.forEach(d=>{
-            str+=`
+            // str+=`<input type='hidden' id='id${d.id}' value='${d.id}'>
+            // <input type='hidden' id='nama${d.id}' value='${d.nama}'>
+            // <input type='hidden' id='harga${d.id}' value='${d.harga}'>
+            // <input type='hidden' id='tipe${d.id}' value='${d.tipe}'>
+            // <input type='hidden' id='deskripsi${d.id}' value='${d.deskripsi}'>
+            // <input type='hidden' id='foto${d.id}' value='${d.foto}'>`;
+            
+            str+=`<input type='hidden' id='id${d.id}' value='${d.id}'>
+            <input type='hidden' id='nama${d.id}' value='${d.nama}'>
+            <input type='hidden' id='harga${d.id}' value='${d.harga}'>
+            <input type='hidden' id='tipe${d.id}' value='${d.tipe}'>
+            <input type='hidden' id='deskripsi${d.id}' value='${d.deskripsi}'>
+            <input type='hidden' id='foto${d.id}' value='${d.foto}'>
           <div class='card col-12 col-md-6 col-lg-4 mb-3 mr-5' style='width: 30%;'>
             <div class=' bg-image hover-overlay ripple d-flex justify-content-center mt-3' data-mdb-ripple-color='light'>
                 <img src="{{asset('assets/images/${d.foto}')}}" style='height: 150px;' class='img-fluid' alt='${d.slug}' />
             </div>
             <div class='card-body' style='height: 250px'>
                 <h5 class='card-title text-dark'>${d.nama}</h5>
-                <p class='card-text'>Harga :Rp.${d.harga}<br>Tipe :${d.tipe}<br> Deskripsi: ${d.deskripsi} <br></p> &nbsp;&nbsp;&nbsp;
+                <p class='card-text'>Harga :Rp.${d.harga}<br>Tipe :${d.tipe}<br> Deskripsi: ${d.deskripsi} <br></p> 
             </div>
-            <div class="d-flex justify-content-center mb-10">
-                <button href='' value='${d.id}' class=' btn btn-warning' data-mdb-target='#modaleditsnack onclick ='editSnack(${d.id})'>Edit</button>
-                <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.nama }'
-                    data-mdb-target='#modaldeletesnack' class='btn btn-danger' onclick ='deletesnack(${d.id})'>Delete</button>
+            <div class="d-flex justify-content-center mb-10">            
+                  <button class='btn btn-warning'  data-mdb-toggle='modal' data-mdb-target='#modaleditSnack' onclick='editSnack(${d.id})'>Edit</button> &nbsp;&nbsp;
+                  <button href='' data-mdb-toggle='modal' value='${d.id}' d='${d.nama}' data-mdb-target='#modaldeletesnack' class='delmovie btn btn-danger' onclick='deletesnack(${d.id})'>Delete</button>
             </div>
-          </div>`
+          </div>`;
           })
         } else {
           str="<h2>Belum ada snack!</h2>"
@@ -685,7 +696,6 @@
       
       // Ini bagian untuk melakukan add snack!!
       $("#AddSnack").on("click", async function(){
-        alert('1'); 
         var nm = $("#nama_snack_add").val(); 
         var hg = $("#harga_snack_add").val(); 
         var jenis = "Food"; 
@@ -695,7 +705,7 @@
         var img= $("#foto_snack_add")[0].files;
         var deskripsi = $("#deskripsi_snack_add").val();
 
-        alert(nm + "-" + hg + "-" + jenis); 
+        // alert(nm + "-" + hg + "-" + jenis); 
         
         if (img.length>0) {
           const fd =new FormData()
@@ -755,8 +765,6 @@
       })
 
       function editSnack(id) {
-        var cc = $("#edit_id_snack").val(id);
-        alert(cc);
         $("#id_snack_edit").val($("#id" + id).val()); 
         $("#nama_snack_edit").val($("#nama" + id).val()); 
         $("#harga_snack_edit").val($("#harga" + id).val()); 
@@ -769,21 +777,53 @@
         $("#deskripsi_snack_edit").val($("#deskripsi" + id).val());
       }
 
-      $("#EditSnack").on("click", function() {
-        var id = $("#edit_id_snack").val();
-        alert(id);
-        dn=$.ajax({
-          type:"post",
-          url:'{{url("/admin/snack/edit")}}',
-          data: {
-            _token:'{{ csrf_token() }}',
-            id:id
+      $("#EditSnack").on("click", async function() {
+        var id = $("#id_snack_edit").val(); 
+        var nm = $("#nama_snack_edit").val(); 
+        var hg = $("#harga_snack_edit").val(); 
+        var jenis = "Food"; 
+        if($("#jenis_beverage_edit").is(":checked")) {
+          jenis = "Beverage";
+        }
+        var deskripsi = $("#deskripsi_snack_edit").val();
+
+        var img= $("#foto_snack_edit")[0].files;
+
+        alert(nm + "-" + hg + "-" + jenis); 
+        
+        var vimage = "";
+        if (img.length > 0) {
+          vimage = $("#foto_snack_edit").prop("files")[0];
+        }
+
+        const fd	=new FormData()
+        fd.append("_token",'{{ csrf_token() }}')
+        fd.append("id", id)
+        fd.append("nama", nm)
+        fd.append("harga",hg)
+        fd.append("jenis",jenis)
+        fd.append("deskripsi",deskripsi)
+        fd.append("imagelength",img.length)
+        fd.append("image",vimage)
+
+        dn = $.ajax({
+          type: "POST",
+          url: '{{url("/admin/snack/edit")}}',
+          data: fd, 
+          contentType: false,
+          processData: false,
+          cache:false,
+          dataType: 'html',
+          success: function(data){
+            var d	=	JSON.parse(data,false)
+            ReloadSnack(d);
           },
-          success:function(data){
-            var d=JSON.parse(data,false)
-            ReloadSnack(d)
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+            console.log(xhr.responseText);
           }
-        }) 
+        }); 
       })
       
 </script>

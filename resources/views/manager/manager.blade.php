@@ -6,7 +6,16 @@
         <div id="div_dashboard" style="display:block">
             @include('manager.dashboard')
         </div>
-        <div id="div_report" style="display:none">
+        <div id="div_report_profit" style="display:none">
+            @include('manager.report')
+        </div>
+        <div id="div_report_movie" style="display:none">
+            @include('manager.report')
+        </div>
+        <div id="div_report_crowd" style="display:none">
+            @include('manager.report')
+        </div>
+        <div id="div_report_snack" style="display:none">
             @include('manager.report')
         </div>
     </div>
@@ -18,7 +27,7 @@
         });
 
         var current = 0;
-        const page = ["dashboard", "report"];
+        const page = ["dashboard", "report_profit", "report_movie", "report_crowd", "report_snack"];
         
         function PageChange(e){
             current = $(e.target).attr("target");

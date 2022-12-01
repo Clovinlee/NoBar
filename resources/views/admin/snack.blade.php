@@ -45,7 +45,7 @@
             
           
         @empty
-            <h1>Belum ada branch!</h1>
+            <h1>Belum ada snack!</h1>
         @endforelse
       </div>
     </section> 
@@ -64,6 +64,7 @@
               <div class='row'>
                 <div class='col-md-1'>&nbsp;</div>
                 <div class='col-md-10'>
+                  
                     <input type='text' class='form-control' placeholder='Nama Snack'  id="nama_snack_add"   name="name"><br>
                     <input type='text' class='form-control' placeholder='Harga Snack' id="harga_snack_add"  name="harga"><br>
                     <input type='file' class='form-control'                           id="foto_snack_add"   name="foto"><br>

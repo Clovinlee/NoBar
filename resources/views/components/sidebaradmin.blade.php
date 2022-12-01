@@ -53,9 +53,9 @@
         <span id="nav_movie" onclick="PageChange(event)" href="" target="2" class="list-group-item list-group-item-action py-2 ripple"><i span onclick="PageChange(event)" target="2" class="fas fa-money-bill fa-fw me-3"></i><span span onclick="PageChange(event)" target="2">Movie</span></span
         >
         <span onclick="PageChange(event)" href="" target="3" id="nav_snack" class="list-group-item list-group-item-action py-2 ripple"
-          ><i span onclick="PageChange(event)" target="3" class="fas fa-building fa-fw me-3" ></i><span span onclick="PageChange(event)" target="3">Snack</span></span>
+          ><i span onclick="PageChange(event)" target="3" class="fas fa-coffee fa-fw me-3" ></i><span span onclick="PageChange(event)" target="3">Snack</span></span>
           <span onclick="PageChange(event)" href="" target="4" id="nav_schedule" class="list-group-item list-group-item-action py-2 ripple"
-          ><i span onclick="PageChange(event)" target="4" class="fas fa-building fa-fw me-3" ></i><span span onclick="PageChange(event)" target="4">Schedule</span></span>
+          ><i span onclick="PageChange(event)" target="4" class="fas fa-calendar fa-fw me-3" ></i><span span onclick="PageChange(event)" target="4">Schedule</span></span>
       </div>
     </div>
   </nav>
@@ -80,7 +80,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand" href="#">
-        <img src="{{asset('assets/image/logo.jpg')}}" width="50px" alt="">
+        <img src="{{asset('assets/img/logo/logo.png')}}" width="50px" alt="">
       </a>
 
       <!-- Right links -->

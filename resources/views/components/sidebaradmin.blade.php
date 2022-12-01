@@ -80,7 +80,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand" href="#">
-        <img src="{{asset('assets/image/logo.jpg')}}" width="50px" alt="">
+        <img src="{{asset('assets/img/logo/logo.png')}}" width="50px" alt="">
       </a>
 
       <!-- Right links -->

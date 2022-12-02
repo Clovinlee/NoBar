@@ -72,6 +72,12 @@
           <span onclick="PageChange(event)" href="" target="4" id="nav_report_snack" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
               <span>Report Snack</span>
          </span>
+         <span onclick="PageChange(event)" href="" target="4" id="nav_report_snack" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
+              <span>Report Genre</span>
+         </span>
+         <span onclick="PageChange(event)" href="" target="4" id="nav_report_snack" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
+              <span>Master Karyawan</span>
+         </span>
 
           {{-- <li class="nav-item has-submenu"> // ini backup plan untuk submenu pada sidebar
             <a class="nav-link"  href="#">Report</a>

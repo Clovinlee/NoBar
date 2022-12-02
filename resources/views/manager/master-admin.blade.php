@@ -22,7 +22,8 @@
                 
             @endforelse
         </table>
-        <button type="submit"><a href="/manager/formAdmin">Add Karyawan</a></button>
+        {{-- action="{{ url('/manager/register_admin') }}" --}}
+        <button type="submit"><a href="{{ url('/manager/formAdmin') }}">Add Karyawan</a></button>
       </section> 
     </div>
   </main>

@@ -21,7 +21,8 @@ class HtransSeeder extends Seeder
             "user_id"=>1,
             "schedule_id"=>1,
             "status"=>"settlement",
-            "total"=>100000
+            "total"=>100000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-01 14:34:53"))
         ]);
         Htrans::create([
             "id"=>2,
@@ -29,7 +30,8 @@ class HtransSeeder extends Seeder
             "user_id"=>1,
             "schedule_id"=>2,
             "status"=>"settlement",
-            "total"=>200000
+            "total"=>200000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-02 14:34:53"))
         ]);
         Htrans::create([
             "id"=>3,
@@ -37,7 +39,8 @@ class HtransSeeder extends Seeder
             "user_id"=>1,
             "schedule_id"=>3,
             "status"=>"settlement",
-            "total"=>300000
+            "total"=>300000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-03 14:34:53"))
         ]);
         Htrans::create([
             "id"=>4,
@@ -45,7 +48,8 @@ class HtransSeeder extends Seeder
             "user_id"=>2,
             "schedule_id"=>4,
             "status"=>"settlement",
-            "total"=>400000
+            "total"=>400000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-04 14:34:53"))
         ]);
         Htrans::create([
             "id"=>5,
@@ -53,7 +57,8 @@ class HtransSeeder extends Seeder
             "user_id"=>2,
             "schedule_id"=>5,
             "status"=>"settlement",
-            "total"=>500000
+            "total"=>500000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-05 14:34:53"))
         ]);
         Htrans::create([
             "id"=>6,
@@ -61,7 +66,8 @@ class HtransSeeder extends Seeder
             "user_id"=>2,
             "schedule_id"=>6,
             "status"=>"settlement",
-            "total"=>600000
+            "total"=>600000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-06 14:34:53"))
         ]);
         Htrans::create([
             "id"=>7,
@@ -69,7 +75,8 @@ class HtransSeeder extends Seeder
             "user_id"=>3,
             "schedule_id"=>7,
             "status"=>"settlement",
-            "total"=>700000
+            "total"=>700000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-07 14:34:53"))
         ]);
         Htrans::create([
             "id"=>8,
@@ -77,7 +84,8 @@ class HtransSeeder extends Seeder
             "user_id"=>3,
             "schedule_id"=>8,
             "status"=>"settlement",
-            "total"=>800000
+            "total"=>800000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-08 14:34:53"))
         ]);
         Htrans::create([
             "id"=>9,
@@ -85,7 +93,8 @@ class HtransSeeder extends Seeder
             "user_id"=>3,
             "schedule_id"=>9,
             "status"=>"settlement",
-            "total"=>900000
+            "total"=>900000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-09 14:34:53"))
         ]);
         Htrans::create([
             "id"=>10,
@@ -93,7 +102,8 @@ class HtransSeeder extends Seeder
             "user_id"=>1,
             "schedule_id"=>10,
             "status"=>"settlement",
-            "total"=>1000000
+            "total"=>1000000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-10 14:34:53"))
         ]);
         Htrans::create([
             "id"=>11,
@@ -101,7 +111,8 @@ class HtransSeeder extends Seeder
             "user_id"=>3,
             "schedule_id"=>11,
             "status"=>"settlement",
-            "total"=>1100000
+            "total"=>1100000,
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-11 14:34:53"))
         ]);
     }
 }

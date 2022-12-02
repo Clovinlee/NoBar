@@ -12,12 +12,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Laporan 12 bulan terakhir</h1>
+    <h1>Laporan profit 12 bulan terakhir</h1>
     <canvas id="myChart" height="100px"></canvas>
-    
+    <a href="/manager/generateChart">generate</a>
     <hr>
     <h1>Report</h1>
-    <form method="post" action="/manager/cekReport" >
+    {{-- href="{{ url('/manager/formAdmin') }}" --}}
+    <form method="post" action=" {{ url('/manager/cekReport') }}" >
         @csrf
         <label for="" class="form-label">Range tanggal : </label>
         <input type="date" name="start" id="" >  S/D <input type="date" name="end" id="">
@@ -83,7 +84,8 @@
         </tbody>
     </table>
     <h3>Total semua Transaksi : Rp. {{$jumlah}}</h3>
-    <a href="/manager/generate/{{$awal}}/{{$akhir}}">generate</a>
+    {{-- href="{{ url('/manager/formAdmin') }}" --}}
+    <a href="{{ url( '/manager/generate/'.$awal.'/'.$akhir ) }}">generate</a>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
@@ -93,19 +95,44 @@
     var labels =  {{ Js::from($labels) }};
     var htrans =  {{ Js::from($data) }};
 
+    var labels_snack =  {{ Js::from($labels_snack) }};
+    var htrans_snack =  {{ Js::from($data_snack) }};
+
     const data = {
-        labels: labels,
-        datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        label: "Tiket Bioskop",
         data: htrans,
-        }]
+        lineTension: 0,
+        fill: false,
+        borderColor: 'red'
+    };
+
+    const data_snack = {
+        label: "Snack Bioskop",
+        data: htrans_snack,
+        lineTension: 0,
+        fill: false,
+        borderColor: 'blue'
+    };
+
+    var merge = {
+        labels: labels,
+        datasets: [data, data_snack]
+    };
+
+    var chartOptions = {
+        legend: {
+            display: true,
+            position: 'top',
+            labels: {
+            boxWidth: 80,
+            fontColor: 'black'
+            }
+        }
     };
 
     const config = {
         type: 'line',
-        data: data,
+        data: merge,
         options: {}
     };
 

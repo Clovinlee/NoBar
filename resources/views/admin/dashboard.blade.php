@@ -1,13 +1,36 @@
+{{-- @php
+ dd($data->snack_today);
+@endphp --}}
 <main style="margin-top:58px">
     <div class="container pt-4" id="branch">
       <section class="mb-4">
         <h1 style="color: black">Dashboard</h1>
-        
         <h2 style="color: black">Snack yang ditambahkan hari ini :</h2>
-        @foreach($data as $d){
-          
-        }
-        @endforeach
+        @if(count($data->snack_today) > 0)
+          @foreach($data->snack_today as $d)
+          <div class="card col-12 col-md-6 col-lg-4 mb-3 mr-5" style="width: 30%;">
+            <div class="bg-image hover-overlay ripple d-flex justify-content-center mt-3"  data-mdb-ripple-color="light" >
+              <img src="{{asset('assets/images/'.$d->foto)}}" style="height: 150px;" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body" style="height: 250px">
+              <h5 class="card-title text-dark">{{$d->nama}}</h5> 
+              <p class="card-text">
+                Tipe :
+                {{$d->tipe}}<br>
+                Harga : 
+                Rp.{{$d->harga}}<br>
+                Deskripsi : 
+                {{ $d->deskripsi }} <br>
+              </p>
+            </div>
+          </div>
+          @endforeach
+        @else
+          <h2 style="color: black">Hari ini tidak ada snack baru</h2>
+        @endif
       </section> 
     </div>
   </main>

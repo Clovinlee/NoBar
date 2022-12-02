@@ -825,5 +825,10 @@
           }
         }); 
       })
+
+      //untuk menampilkan perubahan dashboard
+      // function reloadsnackbaru(d){
+
+      // }
 </script>
 @endsection

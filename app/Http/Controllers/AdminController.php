@@ -14,10 +14,12 @@ class AdminController extends Controller
 {
     //
     public function index(){
+        $dt = new Snack();
         $data=new stdClass;
         $data->branch=Branch::all();
         $data->studio=Studio::orderBy("branch_id")->get();
         $data->snack = Snack::all();
+        $data->snack_today =  $dt->getSnackNew();
         $data->schedule=Schedule::all();
         $data->schedule->asal="";
         $data->schedule->nama="";

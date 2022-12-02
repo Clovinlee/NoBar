@@ -26,7 +26,7 @@
             <p>Nama Lengkap : {{$currentUser->name}} <br>
             Email : {{$currentUser->email}}</p>
             <br>
-            <a href="/user/edit" class="btnMovie popup-video">Update Profile</a>
+            <a href="{{ url('/user/edit') }}" class="btnMovie popup-video">Update Profile</a>
             {{-- <button><a href="/user/edit"> Update Profile </a></button> --}}
         </div>
 </div>

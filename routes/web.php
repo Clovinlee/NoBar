@@ -153,6 +153,8 @@ Route::prefix('/manager')->group(function(){
     Route::post('/register_admin',[ManagerController::class,"verifyregister"]);
     Route::post('/cekReport', [ManagerController::class,'cekReport']);
     Route::get('/generate/{awal}/{akhir}', [ManagerController::class,'generate']);
+    Route::get('/generateChart', [ManagerController::class,'generateChart']);
+    Route::get('/generatepie', [ManagerController::class,'piechart']);
 });
 
 Route::prefix("/user")->group(function() {

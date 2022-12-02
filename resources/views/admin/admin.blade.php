@@ -825,6 +825,5 @@
           }
         }); 
       })
-      
 </script>
 @endsection

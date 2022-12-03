@@ -33,7 +33,7 @@
         @endif
       </section> 
     </div>
-
+    <hr>
     <div id="containermovietoday" class="row px-2">
       <section class="mb-4">
         <h2 style="color: black">Movie yang tayang hari ini: </h2>
@@ -59,7 +59,7 @@
         @endif
       </section>
     </div>
-
+    <hr>
     <div id="containermovienewest" class="row px-2">
       <section class="mb-4">
         <h2 style="color: black">Movie terbaru: </h2>

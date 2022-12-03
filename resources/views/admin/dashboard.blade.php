@@ -1,7 +1,7 @@
 {{-- @php
  dd($data->snack_today);
 @endphp --}}
-<main style="margin-top:58px">
+<main style="margin-top:58px; margin-left: 58px">
     <div class="containersnack pt-4">
       <section class="mb-4">
         <h1 style="color: black">Dashboard</h1>

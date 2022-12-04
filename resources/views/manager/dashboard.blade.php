@@ -10,12 +10,12 @@
     <div class="container pt-4 " id="manager" style="width: 100%">
       <div class="row" style="margin-right: 2px">
         <div class="col-12 col-md-6 dboardContainer">
-          Pendapatan Movie hari ini : Rp. {{ $profit }}
+          Pendapatan Movie hari ini : Rp. {{ number_format($profit,2,',','.') }}
           <br>
           <canvas id="myChart" height="100px" style="background-color:antiquewhite"></canvas>
         </div>
         <div class="col-12 col-md-6 dboardContainer">
-          Pendapatan Snack hari ini : Rp. {{ $profit_snack }}
+          Pendapatan Snack hari ini : Rp. {{ number_format($profit_snack,2,',','.') }}
           <br>
           <canvas id="myChart2" height="100px" style="background-color:antiquewhite"></canvas>
         </div>

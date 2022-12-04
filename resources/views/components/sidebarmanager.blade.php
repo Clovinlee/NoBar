@@ -60,7 +60,7 @@
           <span href="#" class="list-group-item list-group-item-action py-2 ripple pointer" aria-current="true" onclick="PageChange(event)" target="0" id="nav_dashboard">
             <i class="fas fa-tachometer-alt fa-fw me-3"></i>Main dashboard
           </span>
-          <span onclick="PageChange(event)" href="" target="1" id="nav_report_profit" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
+          <span onclick="PageChange(event)" href="/manager/laporan" target="1" id="nav_report_profit" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
               <span>Report Profit</span>
           </span>
           <span onclick="PageChange(event)" href="" target="2" id="nav_report_movie" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-pie-chart fa-fw me-3" ></i>
@@ -72,10 +72,10 @@
           <span onclick="PageChange(event)" href="" target="4" id="nav_report_snack" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
               <span>Report Snack</span>
          </span>
-         <span onclick="PageChange(event)" href="" target="5" id="nav_report_genre" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
+         <span onclick="PageChange(event)" href="" target="4" id="nav_report_snack" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
               <span>Report Genre</span>
          </span>
-         <span onclick="PageChange(event)" href="" target="6" id="nav_master_karyawan" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
+         <span onclick="PageChange(event)" href="" target="4" id="nav_report_snack" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
               <span>Master Karyawan</span>
          </span>
 

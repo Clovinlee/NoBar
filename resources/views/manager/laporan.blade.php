@@ -12,7 +12,7 @@
             </form>
             <br>
             <hr>
-            @if($tipe!="")
+            @if($tipe != "")
                 <h4>{{$tipe}}</h4>
             @else
                 <h4></h4>

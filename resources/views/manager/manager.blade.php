@@ -1,5 +1,4 @@
 @extends('master.masterlayout')
-
 @section('body')
 <x-sidebarmanager></x-sidebarmanager>
     <div>
@@ -18,6 +17,12 @@
         <div id="div_report_snack" style="display:none">
             @include('manager.report')
         </div>
+        <div id="div_report_snack" style="display:none">
+            @include('manager.report')
+        </div>
+        <div id="div_master_karyawan" style="display:none">
+            @include('manager.master-admin')
+        </div>
     </div>
 @endsection
 @section('pageScript')
@@ -27,7 +32,7 @@
         });
 
         var current = 0;
-        const page = ["dashboard", "report_profit", "report_movie", "report_crowd", "report_snack"];
+        const page = ["dashboard", "report_profit", "report_movie", "report_crowd", "report_snack", "report_genre","master_karyawan"];
         
         function PageChange(e){
             current = $(e.target).attr("target");
@@ -43,5 +48,43 @@
                 }
             }
         }
+
+        // ini bagian untuk karyawan
+
+        // function ReloadKaryawan(data){
+        //     var c=$("#containerkaryawan")
+        //     c.html("")
+        //     var str = ""
+        //     if(data.length>0){
+        //         s
+        //         data.forEach(d=>{
+                    
+        //         })
+        //     }
+        // }
+
+        function deleteusers(id){
+            $("#delete_id_user").val(id);
+        }
+
+        $("#DeleteUsers").on("click", function(){
+            var id = $("#delete_id_user").val();
+            alert(id);
+            dn=$.ajax({
+                type:"post",
+                url:'{{url("/manager/karyawan/delete")}}',
+                data: {
+                    _token:'{{ csrf_token() }}',
+                    id:id
+                },
+                success:function(data){
+                    var d=JSON.parse(data,false)
+                    alert(d)
+                    // ReloadKaryawan(d)
+                }
+            })
+        })
+
+        // 
     </script>
 @endsection

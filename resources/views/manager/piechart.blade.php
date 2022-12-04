@@ -7,8 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Bar chart snack yang dipesan</h1>
-    <canvas id="myChart" style="width: 100px;height:100px"></canvas>
+    <main style="margin-top: 58px">
+        <div class="container pt-4">
+            <section class="mb-4">
+                <h1 style="color: black">Bar chart snack yang dipesan</h1>
+                <canvas id="myChart" style="width: 100px;height:100px"></canvas>
+            </section>
+        </div>
+    </main>
 </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

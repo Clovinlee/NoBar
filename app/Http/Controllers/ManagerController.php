@@ -376,6 +376,7 @@ class ManagerController extends Controller
             return $item->count;
         }, $branch);
         
+        $admins = DB::table('users')->where('role', '=', '2')->get();
         return view('manager.manager',[
             'profit' => $profit,
             'profit_snack' => $profit_snack,
@@ -389,7 +390,8 @@ class ManagerController extends Controller
             'bar_snack' => $bar_snack,
             'semua_snack' => $semua_snack,
             'branch_label' => $branch_label,
-            'branch_count' => $branch_count
+            'branch_count' => $branch_count,
+            'admins' => $admins,
         ]);
     }
 
@@ -419,5 +421,11 @@ class ManagerController extends Controller
 
         $admins = DB::select("SELECT * FROM users WHERE role=2");
         return view('manager.master-admin',["admins" => $admins]);
+    }
+
+    public function delete(Request $r){
+        User::where('id', '=', $r->id)->delete();
+        $data   = User::all();
+        return json_encode($data);
     }
 }

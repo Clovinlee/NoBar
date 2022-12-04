@@ -12,34 +12,35 @@
                 <input type="submit" value="Tampil" class="btn btn-primary">
             </form>
             <hr>
-            <h1 style=" color:black">Laporan hari paling ramai</h1>
-            <canvas id="myChart_hari" height="100px"></canvas>
+            <h1 style=" color:black">Bar chart snack yang dipesan</h1>
+            <canvas id="myChart_semua_snack" height="100px"></canvas><br>
+            {{-- <h3 style=" color:black">Total snack terjual : {{$total_snack}}</h3> --}}
         </div>
     </div>
 </main>
-
 <script type="text/javascript">
-    var labels_hari =  ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"];
-    var bar_hari =  {{ Js::from($bar_hari) }};
+    var semua_htrans_snack =  {{ Js::from($semua_htrans_snack) }};
+    var bar_htrans_snack =  {{ Js::from($bar_htrans_snack) }};
 
-    const data_hari = {
-        labels: labels_hari,
+    const data_semua_snack = {
+        labels: semua_htrans_snack,
         datasets: [{
-        label: 'Pembeli tiket',
+        label: 'Pembeli snack',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: bar_hari,
+        data: bar_htrans_snack,
         }]
     };
 
-    const config_hari = {
+    const config_semua_snack = {
         type: 'bar',
-        data: data_hari,
+        data: data_semua_snack,
         options: {}
     };
 
-    const myChart_hari = new Chart(
-        document.getElementById('myChart_hari'),
-        config_hari
+    const myChart_semua_snack = new Chart(
+        document.getElementById('myChart_semua_snack'),
+        config_semua_snack
     );
 </script>
+  

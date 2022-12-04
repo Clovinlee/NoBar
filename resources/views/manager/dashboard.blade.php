@@ -7,8 +7,8 @@
   }
 </style>
 <main style="margin-top:8px">
-    <div class="container pt-4" id="manager">
-      <div class="row" style="margin-left: 2px;margin-right: 2px">
+    <div class="container pt-4 " id="manager" style="width: 100%">
+      <div class="row" style="margin-right: 2px">
         <div class="col-12 col-md-6 dboardContainer">
           Pendapatan Movie hari ini : Rp. {{ number_format($profit,2,',','.') }}
           <br>

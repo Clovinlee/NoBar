@@ -2,11 +2,6 @@
   <div class="container pt-4" id="branch">
     <section class="mb-4">
       <h1 style="color: black">Snack</h1>
-      <div class="form-outline mb-4">
-        <input type="text" class="form-control" id="search_snack"  name="name"/>
-        <label class="form-label">Nama Snack</label>
-      </div>
-      <button class="btn btn-primary" id="btn_search_snack">Search</button> 
       <br>
       <br>
       <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdSnack">Add new Snack!</button>
@@ -42,8 +37,6 @@
                   <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->nama}}" data-mdb-target="#modaldeletesnack" class="delmovie btn btn-danger" onclick='deletesnack({{$m->id}})'>Delete</button>
                 </div>
               </div>
-            
-          
         @empty
             <h1>Belum ada snack!</h1>
         @endforelse

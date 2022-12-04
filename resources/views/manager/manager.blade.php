@@ -20,12 +20,6 @@
         <div id="div_report_branch" style="display:none">
             @include('manager.branch')
         </div>
-        <div id="div_report_master_karyawan" style="display:none">
-            @include('manager.report')
-        </div>
-        <div id="div_report_snack" style="display:none">
-            @include('manager.report')
-        </div>
         <div id="div_master_karyawan" style="display:none">
             @include('manager.master-admin')
         </div>
@@ -38,7 +32,7 @@
         });
 
         var current = 0;
-        const page = ["dashboard", "report_profit", "report_movie", "report_crowd", "report_snack"];
+        const page = ["dashboard", "report_profit", "report_movie", "report_crowd", "report_snack", "report_branch", "master_karyawan"];
         
         function PageChange(e){
             current = $(e.target).attr("target");

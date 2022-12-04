@@ -2,7 +2,8 @@
     <div class="container pt-4" id="manager">
       <section class="mb-4">
         <h1 style="color: black">Tambah Karyawan</h1>
-        <form action="/manager/register_admin" method="post">
+        {{-- href="{{ url('/cafe') }}" --}}
+        <form action="{{ url('/manager/register_admin') }}" method="post">
             @csrf
             Nama : <input type="text" name="name" id=""><br>
             @error('name')

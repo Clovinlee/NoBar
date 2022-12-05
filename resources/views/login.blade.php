@@ -6,6 +6,12 @@
 @stop
 
 @section('body')
+@php
+    if(Session::has("listItem") && Session::has("redirectCafe")){
+        Session::flash("listItem",Session::get("listItem"));
+        Session::flash("redirectCafe",true);
+    }
+@endphp
 <div class="pt-5">
     <div class="container col-12 col-md-12 col-lg-4 d-flex flex-column h-screen justify-content-center">
         <form class="md-form w-100 border rounded-3 p-5 shadow" method="POST" action="{{ url('/login') }}">

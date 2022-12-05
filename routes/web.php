@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CafeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PageController;
@@ -49,6 +50,7 @@ Route::get("/find", [SearchController::class,"search"]);
 // | LOGIN REGISTER       |
 // |----------------------|
 Route::view("/login","login")->name("login")->middleware("guest");
+// Route::get("/login",[LoginController::class, "loginPage"])->name("login")->middleware("guest");
 Route::view("/register","register")->name("register")->middleware("guest");
 
 Route::post("/login",[VerificationController::class,"verifylogin"]);
@@ -127,7 +129,9 @@ Route::prefix("/payment")->group(function(){
 
 Route::prefix("/cafe")->group(function(){
     Route::get("/", [CafeController::class, "index"]);
+    Route::post("/save",[CafeController::class, "saveOrder"]);
     Route::post("/refreshCafe",[CafeController::class, "refreshCafe"]);
+    Route::post("/resetOrder",[CafeController::class, "resetOrder"]);
 });
 
 Route::prefix("/cafe_pay")->group(function() {
@@ -220,6 +224,10 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
 });
 // |----------------------|
 
+Route::get("/CalvinKwanGakKerjaFAI", function(){
+    Artisan::call("migrate:fresh --seed");
+    return response("<h1>emang</h1>");
+});
 
 // BUAT DEBUG / TESTING TAMPILAN DSB, PAKAI ROUTE TEST SAJA.
 Route::view("/test","index");

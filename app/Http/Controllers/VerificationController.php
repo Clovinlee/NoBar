@@ -7,13 +7,13 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use PDO;
 
@@ -21,6 +21,12 @@ class VerificationController extends Controller
 {
     //
     public function verifylogin(Request $r){
+
+        if(Session::has("redirectCafe")){
+            Session::flash("redirectCafe",Session::get("redirectCafe"));
+            Session::flash("listItem",Session::get("listItem"));
+        }
+
         $credentials = $r->validate([
             'email'=>'required|email:dns',
             'password'=>'required'
@@ -33,6 +39,14 @@ class VerificationController extends Controller
             }else if(auth()->user()["role"] == "3"){
                 return redirect(url("/manager"));
             };
+            if(Session::has("listItem")){
+                if(Session::has("redirectCafe")){
+                    Session::flash("listItem",Session::get("listItem"));
+                    return redirect(url("/cafe"));
+                }else{
+                    Session::forget("listItem");
+                }
+            }
             return redirect()->intended();
         }
         

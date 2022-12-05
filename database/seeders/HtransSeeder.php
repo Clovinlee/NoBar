@@ -94,7 +94,7 @@ class HtransSeeder extends Seeder
             "schedule_id"=>9,
             "status"=>"settlement",
             "total"=>900000,
-            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-09 14:34:53"))
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-02 14:34:53"))
         ]);
         Htrans::create([
             "id"=>10,
@@ -103,7 +103,7 @@ class HtransSeeder extends Seeder
             "schedule_id"=>10,
             "status"=>"settlement",
             "total"=>1000000,
-            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-10 14:34:53"))
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-03 14:34:53"))
         ]);
         Htrans::create([
             "id"=>11,
@@ -112,7 +112,7 @@ class HtransSeeder extends Seeder
             "schedule_id"=>11,
             "status"=>"settlement",
             "total"=>1100000,
-            "created_at" => date("Y-m-d h:i:s", strtotime("2022-11-11 14:34:53"))
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-04 14:34:53"))
         ]);
     }
 }

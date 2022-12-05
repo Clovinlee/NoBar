@@ -5,15 +5,14 @@
 <main style="margin-top:8px">
     <div class="container pt-4" id="manager">
         <div class="row" style="margin-left: 2px;margin-right: 2px">
-            <form method="post" action="/manager/cekBar" >
-                @csrf
-                <label for="" class="form-label">Range tanggal : </label>
-                <input type="date" name="start" id="" >  S/D <input type="date" name="end" id="">
-                <input type="submit" value="Tampil" class="btn btn-primary">
-            </form>
+            <label for="" class="form-label">Range tanggal : </label>
+            <input type="date" name="start" id="awalHari" > S/D <input type="date" name="end" id="akhirHari">
+            <button id="btnTampilHari" class="btn btn-primary">Tampil</button>
             <hr>
             <h1 style=" color:black">Laporan hari paling ramai</h1>
             <canvas id="myChart_hari" height="100px"></canvas>
+            <hr>
+            <button id="generateHari" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>
 </main>
@@ -42,4 +41,34 @@
         document.getElementById('myChart_hari'),
         config_hari
     );
+    
+    console.log(config_hari.data);
+
+    $("#btnTampilHari").on("click", function(){
+            var awal = $("#awalHari").val();
+            var akhir = $("#akhirHari").val();
+            dn=$.ajax({
+                type:"post",
+                url:'{{url("/manager/cekHari/")}}',
+                data: {
+                    _token:'{{ csrf_token() }}',
+                    awal:awal,
+                    akhir:akhir
+                },
+                success:function(data){
+                    var d=JSON.parse(data,false)
+                    var str ="";
+                    myChart_hari.data.datasets[0].data = d;
+                    myChart_hari.update();
+                },error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    console.log(xhr.responseText);
+                }
+            })
+    })
+
+    $("#generateHari").on("click", function(){
+        window.print();
+    })
 </script>

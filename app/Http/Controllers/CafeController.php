@@ -16,6 +16,22 @@ use Illuminate\Support\Facades\Session;
 class CafeController extends Controller
 {
 
+    public function resetOrder(Request $r){
+        if($r->ajax()){
+            Session::forget("listItem");
+            Session::flash("info","Success reset cafe order");
+            return 200;
+        }
+    }
+
+    public function saveOrder(Request $r){
+        if($r->ajax()){
+            $listItem = json_decode($r->listItem);
+            Session::flash("listItem",$listItem);
+            return 200;
+        }
+    }
+
     public function transactionProcess(Request $r){
         $mdResult = json_decode($r->mdResult);
         $idBranch = $r->idBranch;
@@ -68,12 +84,15 @@ class CafeController extends Controller
 
     public function cafePayment(Request $r){
         if($r->ajax()){
+            $listItem = json_decode($r->listItem);
             if(Auth::check() == false){
-                Session::flash("error","You need to be logged in first");
+                Session::flash("loginError","You need to be logged in first to order in cafe");
+                Session::flash("listItem",$listItem);
+                Session::flash("redirectCafe",true);
+                // return redirect(route("login"));
                 return false;
             }
 
-            $listItem = json_decode($r->listItem);
             $md = Midtrans::getInstance();
             // $md->paymentCafe($r->idBranch, $listItem);
             $mdToken = $md->paymentCafe($r->idBranch, $listItem);
@@ -93,6 +112,11 @@ class CafeController extends Controller
         $listBranch = Branch::all();
         $listSnacks = Snack::all()->where("tipe","food");
         $listBeverages = Snack::all()->where("tipe","beverage");
+
+        if(Session::has("listItem")){
+            Session::flash("listItem",Session::get("listItem"));
+        }
+
         return view("cafe.cafe",["listBranch"=>$listBranch, "listSnacks"=>$listSnacks, "listBeverages"=>$listBeverages]);
     }
 

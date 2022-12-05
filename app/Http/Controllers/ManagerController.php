@@ -152,7 +152,7 @@ class ManagerController extends Controller
             $apa = new stdClass;
             $apa->cek = $cek;
             $apa->tipe = $tipe;
-            $apa->jumlah = $jumlah;
+            $apa->jumlah = $jumlah[0]->total;
             return json_encode($apa);
         }
     }

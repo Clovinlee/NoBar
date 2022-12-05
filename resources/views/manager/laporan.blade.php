@@ -61,7 +61,7 @@
                     @endforelse
                 </tbody>
             </table>
-            <h3 style=" color:black">Total semua Transaksi : Rp. {{$jumlah}}</h3>
+            <h3 style=" color:black" id="total_laporan">Total semua Transaksi : Rp. {{$jumlah}}</h3>
             <button id="generate" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>
@@ -147,6 +147,7 @@
                     </tr>`
                     });
                     $("#report_body").html(str);
+                    $("#total_laporan").text("Total semua Transaksi : Rp. " + d.jumlah)
                 },error: function (xhr, ajaxOptions, thrownError) {
                     alert(xhr.status);
                     alert(thrownError);

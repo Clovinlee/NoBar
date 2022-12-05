@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use stdClass;
 
 class ManagerController extends Controller
 {
@@ -135,8 +136,119 @@ class ManagerController extends Controller
         return $pdf->stream();
     }
 
-    public function cekReport(Request $request){
+    public function cekReportAjax(Request $r)
+    {
+        if ($r->ajax()) {
+            $awal = $r->input("awal") ?? "";
+            $akhir = $r->input("akhir") ?? "";
+    
+            $awal = $awal . " 00:00:00";
+            $akhir = $akhir . " 23:59:59";
+    
+            $cek = DB::select('select h.id as id, u.name as nama_user, m.judul as movie_title, s.nama as studio, b.nama as branch, h.total from htrans h, users u, schedules sch, movies m, studios s, branches b where h.user_id = u.id and h.schedule_id = sch.id and sch.movie_id = m.id and sch.studio_id = s.id and sch.branch_id = b.id and h.created_at BETWEEN ? and ?', [$awal,$akhir]);
+            $tipe = "Data yang ditampilkan adalah transaksi yang terjadi pada tanggal ".$awal." s/d ".$akhir;
+    
+            $jumlah = DB::select('SELECT SUM(htrans.total) as total FROM htrans WHERE (htrans.created_at) between ? and ?',[$awal,$akhir]);
+            $apa = new stdClass;
+            $apa->cek = $cek;
+            $apa->tipe = $tipe;
+            $apa->jumlah = $jumlah[0]->total;
+            return json_encode($apa);
+        }
+    }
 
+    public function cekMovieAjax(Request $r)
+    {
+        if ($r->ajax()) {
+            $awal = $r->input("awal") ?? "";
+            $akhir = $r->input("akhir") ?? "";
+    
+            $awal = $awal . " 00:00:00";
+            $akhir = $akhir . " 23:59:59";
+    
+            $cek = DB::select('SELECT m.id as id,m.judul as judul,COUNT(d.seat) as terjual FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id RIGHT join movies m on s.movie_id = m.id and h.created_at BETWEEN ? and ? GROUP by m.judul,m.id order by 1', [$awal,$akhir] );
+            $tipe = "Data yang ditampilkan adalah transaksi yang terjadi pada tanggal ".$awal." s/d ".$akhir;
+    
+            $cek2 = array_map(function($item) {
+                return $item->terjual;
+            }, $cek);
+            $jumlah = DB::select('SELECT COUNT(d.seat) as terjual FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id RIGHT join movies m on s.movie_id = m.id and h.created_at BETWEEN ? and ?  order by 1',[$awal,$akhir]);
+            $apa = new stdClass;
+            $apa->cek = $cek;
+            $apa->cek2 = $cek2;
+            $apa->tipe = $tipe;
+            $apa->jumlah = $jumlah[0]->terjual;
+
+            return json_encode($apa);
+        }
+    }
+
+    public function cekSnackAjax(Request $r)
+    {
+        if ($r->ajax()) {
+            $awal = $r->input("awal") ?? "";
+            $akhir = $r->input("akhir") ?? "";
+    
+            $awal = $awal . " 00:00:00";
+            $akhir = $akhir . " 23:59:59";
+    
+            $cek = DB::select('select h.id as id,u.name as nama, s.nama as label,s.harga as harga, ifnull(sum(d.qty),0) as count,h.total as total FROM htranssnacks h join dtranssnacks d on h.id = d.htranssnack_id and h.created_at BETWEEN ? and ? RIGHT join snacks s on d.snack_id = s.id join users u on h.user_id = u.id GROUP by s.nama,h.id,u.name,s.harga,h.total ', [$awal,$akhir] );
+            $tipe = "Data yang ditampilkan adalah transaksi yang terjadi pada tanggal ".$awal." s/d ".$akhir;
+    
+            $cek2 = array_map(function($item) {
+                return $item->count;
+            }, $cek);
+            $jumlah = DB::select('SELECT sum(d.qty) as terjual FROM htranssnacks h join dtranssnacks d on d.htranssnack_id = h.id and h.created_at BETWEEN ? and ?  order by 1',[$awal,$akhir]);
+            $apa = new stdClass;
+            $apa->cek = $cek;
+            $apa->cek2 = $cek2;
+            $apa->tipe = $tipe;
+            $apa->jumlah = $jumlah[0]->terjual;
+
+            return json_encode($apa);
+        }
+    }
+
+    public function cekHariAjax(Request $r)
+    {
+        if ($r->ajax()) {
+            $awal = $r->input("awal") ?? "";
+            $akhir = $r->input("akhir") ?? "";
+    
+            $awal = $awal . " 00:00:00";
+            $akhir = $akhir . " 23:59:59";
+    
+            $bar_hari = DB::select('select dayname(created_at) as hari, count(dayname(created_at)) as jumlah_pembeli from htrans where created_at BETWEEN ? and ? GROUP by dayname(created_at) ORDER BY CASE WHEN hari = "Sunday" THEN 1 WHEN hari = "Monday" THEN 2 WHEN hari = "Tuesday" THEN 3 WHEN hari = "Wednesday" THEN 4 WHEN hari = "Thursday" THEN 5 WHEN hari = "Friday" THEN 6 WHEN hari = "Saturday" THEN 7 END ASC',[$awal,$akhir]); 
+            $bar_hari = array_map(function($item) {
+                return $item->jumlah_pembeli;
+            }, $bar_hari);
+            return json_encode($bar_hari);
+        }
+    }
+
+    public function cekBranchAjax(Request $r)
+    {
+        if ($r->ajax()) {
+            $awal = $r->input("awal") ?? "";
+            $akhir = $r->input("akhir") ?? "";
+    
+            $awal = $awal . " 00:00:00";
+            $akhir = $akhir . " 23:59:59";
+    
+            $branch = DB::select('select b.nama as label, count(h.id) as count FROM 
+            htrans h join schedules sch on h.schedule_id = sch.id and h.created_at BETWEEN ? and ? right join branches b on b.id = sch.branch_id GROUP by b.nama',[$awal,$akhir]);
+    
+            $branch_label = array_map(function($item) {
+                return $item->label;
+            }, $branch);
+            $branch_count = array_map(function($item) {
+                return $item->count;
+            }, $branch);
+            return json_encode($branch_count);
+        }
+    }
+
+    public function cekReport(Request $request){
         $htrans = DB::select('
             select
                 MONTHNAME(date_range.mm) as month_name,
@@ -163,22 +275,22 @@ class ManagerController extends Controller
         ');
 
         $htrans_snack = DB::select('select MONTHNAME(date_range.mm) as month_name, IFNULL(sum(total), 0) as count from ( select (NOW() - INTERVAL counter.m MONTH) as mm from ( select @rownum := @rownum + 1 as m from (select 1 union select 2 union select 3 union select 4) t1, (select 1 union select 2 union select 3) t2, (select @rownum := -1) t0 ) counter ) date_range left join htranssnacks ht on MONTH(ht.created_at) = MONTH(date_range.mm) group by MONTH(date_range.mm), date_range.mm order by date_range.mm');
-        $labels = array_map(function($item) {
+        $labels_htrans_movie = array_map(function($item) {
             return $item->month_name;
         }, $htrans);
-        $data = array_map(function($item) {
+        $data_htrans_movie = array_map(function($item) {
             return $item->count;
         }, $htrans);
         
-        $labels_snack = array_map(function($item) {
+        $labels_htrans_snack = array_map(function($item) {
             return $item->month_name;
         }, $htrans_snack);
-        $data_snack = array_map(function($item) {
+        $data_htrans_snack = array_map(function($item) {
             return $item->count;
         }, $htrans_snack);
 
-        $awal = $request->input("start") ?? "";
-        $akhir = $request->input("end") ?? "";
+        $awal = $request->input("awal") ?? "";
+        $akhir = $request->input("akhir") ?? "";
 
         $awal = $awal . " 00:00:00";
         $akhir = $akhir . " 23:59:59";
@@ -196,10 +308,10 @@ class ManagerController extends Controller
             'report'=>$cek,
             'tipe' => $tipe,
             'jumlah' => $jumlah[0]->total,
-            'labels' => $labels,
-            'data' => $data,
-            'labels_snack' => $labels_snack,
-            'data_snack' => $data_snack
+            'labels_htrans_movie' => $labels_htrans_movie,
+            'data_htrans_movie' => $data_htrans_movie,
+            'labels_htrans_snack' => $labels_htrans_snack,
+            'data_htrans_snack' => $data_htrans_snack
         ]);
     }
 
@@ -428,9 +540,9 @@ class ManagerController extends Controller
         $jumlah = DB::select('SELECT SUM(htrans.total) as total FROM htrans');
 
 
-        $bar_movie = DB::select('select m.id, count(sch.movie_id) as count FROM htrans h join schedules sch on h.schedule_id = sch.id right join movies m on m.id = sch.movie_id GROUP by m.id',[]); 
+        $bar_movie = DB::select('SELECT m.judul as label,COUNT(d.seat) as count FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id RIGHT join movies m on s.movie_id = m.id AND YEAR(h.created_at)=year(CURRENT_DATE) GROUP by m.judul',[]); 
         $semua_movie = DB::select('select judul from movies order by id asc');
-        $total_movie = DB::select('select count(sch.movie_id) as count FROM htrans h join schedules sch on h.schedule_id = sch.id right join movies m on m.id = sch.movie_id');
+        $total_movie = DB::select('SELECT COUNT(d.seat) as count FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id RIGHT join movies m on s.movie_id = m.id');
 
         $bar_htrans_snack = DB::select('select s.nama as label, ifnull(sum(d.qty),0) as count FROM htranssnacks h join dtranssnacks d on h.id = d.htranssnack_id RIGHT join snacks s on d.snack_id = s.id GROUP by s.nama',[]);
 
@@ -442,8 +554,8 @@ class ManagerController extends Controller
         }, $bar_htrans_snack);
 
         $semua_judul_movie = array_map(function($item) {
-            return $item->judul;
-        }, $semua_movie);
+            return $item->label;
+        }, $bar_movie);
         $bar_semua_movie = array_map(function($item) {
             return $item->count;
         }, $bar_movie);
@@ -463,6 +575,11 @@ class ManagerController extends Controller
         }, $bar_branch);
 
         $admins = DB::table('users')->where('role','=','2')->get();
+
+        $tabel_movie = DB::select('SELECT m.id as id,m.judul as judul,COUNT(d.seat) as terjual FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id RIGHT join movies m on s.movie_id = m.id GROUP by m.id,m.judul order by 1');
+
+        $report_snack = DB::select('select h.id as id,u.name as nama, s.nama as label,s.harga as harga, ifnull(sum(d.qty),0) as count,h.total as total FROM htranssnacks h join dtranssnacks d on h.id = d.htranssnack_id RIGHT join snacks s on d.snack_id = s.id join users u on h.user_id = u.id GROUP by s.nama,h.id,u.name,s.harga,h.total',[]);
+        $total_snack = DB::select('select sum(qty) as count from dtranssnacks',[]);
         return view('manager.manager',[
             'profit' => $profit,
             'profit_snack' => $profit_snack,
@@ -495,6 +612,9 @@ class ManagerController extends Controller
             'semua_branch' => $semua_branch,
             'data_branch' => $data_branch,
             'admins' => $admins,
+            'report_all_movie' => $tabel_movie,
+            'report_snack' => $report_snack,
+            'total_snack' => $total_snack[0]->count
         ]);
     }
 

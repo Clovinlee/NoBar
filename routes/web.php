@@ -158,7 +158,11 @@ Route::prefix('/manager')->group(function(){
     Route::get('/bar',[ManagerController::class,"bar"]);
     Route::get('/barHari',[ManagerController::class,"barHari"]);
     Route::post('/register_admin',[ManagerController::class,"verifyregister"]);
-    Route::post('/cekReport', [ManagerController::class,'cekReport']);
+    Route::post('/cekReport', [ManagerController::class,'cekReportAjax']);
+    Route::post('/cekMovie', [ManagerController::class,'cekMovieAjax']);
+    Route::post('/cekSnack', [ManagerController::class,'cekSnackAjax']);
+    Route::post('/cekHari', [ManagerController::class,'cekHariAjax']);
+    Route::post('/cekBranch', [ManagerController::class,'cekBranchAjax']);
     Route::get('/generate/{awal}/{akhir}', [ManagerController::class,'generate']);
     Route::get('/generateChart', [ManagerController::class,'generateChart']);
     Route::get('/generatepie', [ManagerController::class,'piechart']);

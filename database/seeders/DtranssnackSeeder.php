@@ -126,7 +126,7 @@ class DtranssnackSeeder extends Seeder
         ]);
         
         Dtranssnack::create([
-            "htranssnack_id"=>6,
+            "htranssnack_id"=>5,
             "snack_id"=>1,
             "harga"=>15000,
             "qty"=>8

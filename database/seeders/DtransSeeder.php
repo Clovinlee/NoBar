@@ -18,141 +18,141 @@ class DtransSeeder extends Seeder
         //
         Dtrans::create([
             "htrans_id"=>1,
-            "chair"=>"A1"
+            "seat"=>"A1"
         ]);
         Dtrans::create([
             "htrans_id"=>1,
-            "chair"=>"A2"
+            "seat"=>"A2"
         ]);
         Dtrans::create([
             "htrans_id"=>1,
-            "chair"=>"A3"
+            "seat"=>"A3"
         ]);
         Dtrans::create([
             "htrans_id"=>1,
-            "chair"=>"A4"
+            "seat"=>"A4"
         ]);
         Dtrans::create([
             "htrans_id"=>1,
-            "chair"=>"A5"
+            "seat"=>"A5"
         ]);
         Dtrans::create([
             "htrans_id"=>2,
-            "chair"=>"B1"
+            "seat"=>"B1"
         ]);
         
         Dtrans::create([
             "htrans_id"=>2,
-            "chair"=>"B2"
+            "seat"=>"B2"
         ]);
         
         Dtrans::create([
             "htrans_id"=>3,
-            "chair"=>"C1"
+            "seat"=>"C1"
         ]);
         
         Dtrans::create([
             "htrans_id"=>4,
-            "chair"=>"D1"
+            "seat"=>"D1"
         ]);
         
         Dtrans::create([
             "htrans_id"=>4,
-            "chair"=>"D2"
+            "seat"=>"D2"
         ]);
         
         Dtrans::create([
             "htrans_id"=>5,
-            "chair"=>"E1"
+            "seat"=>"E1"
         ]);
         Dtrans::create([
             "htrans_id"=>5,
-            "chair"=>"E2"
+            "seat"=>"E2"
         ]);
         Dtrans::create([
             "htrans_id"=>5,
-            "chair"=>"E3"
+            "seat"=>"E3"
         ]);
         Dtrans::create([
             "htrans_id"=>5,
-            "chair"=>"E4"
+            "seat"=>"E4"
         ]);
         Dtrans::create([
             "htrans_id"=>6,
-            "chair"=>"F6"
+            "seat"=>"F6"
         ]);
         Dtrans::create([
             "htrans_id"=>6,
-            "chair"=>"F7"
+            "seat"=>"F7"
         ]);
         Dtrans::create([
             "htrans_id"=>6,
-            "chair"=>"F8"
+            "seat"=>"F8"
         ]);
         Dtrans::create([
             "htrans_id"=>6,
-            "chair"=>"F9"
+            "seat"=>"F9"
         ]);
         Dtrans::create([
             "htrans_id"=>6,
-            "chair"=>"F10"
+            "seat"=>"F10"
         ]);
         Dtrans::create([
             "htrans_id"=>6,
-            "chair"=>"F11"
+            "seat"=>"F11"
         ]);
         Dtrans::create([
             "htrans_id"=>7,
-            "chair"=>"G1"
+            "seat"=>"G1"
         ]);
         Dtrans::create([
             "htrans_id"=>8,
-            "chair"=>"H5"
+            "seat"=>"H5"
         ]);
         
         Dtrans::create([
             "htrans_id"=>8,
-            "chair"=>"H6"
+            "seat"=>"H6"
         ]);
         
         Dtrans::create([
             "htrans_id"=>9,
-            "chair"=>"I1"
+            "seat"=>"I1"
         ]);
         
         Dtrans::create([
             "htrans_id"=>9,
-            "chair"=>"I2"
+            "seat"=>"I2"
         ]);
         
         Dtrans::create([
             "htrans_id"=>9,
-            "chair"=>"I3"
+            "seat"=>"I3"
         ]);
         
         Dtrans::create([
             "htrans_id"=>10,
-            "chair"=>"J11"
+            "seat"=>"J11"
         ]);
         
         Dtrans::create([
             "htrans_id"=>10,
-            "chair"=>"J12"
+            "seat"=>"J12"
         ]);
         
         Dtrans::create([
             "htrans_id"=>10,
-            "chair"=>"J13"
+            "seat"=>"J13"
         ]);
         
         Dtrans::create([
             "htrans_id"=>10,
-            "chair"=>"J14"
+            "seat"=>"J14"
         ]);
         
         Dtrans::create([
             "htrans_id"=>11,
-            "chair"=>"A10"
+            "seat"=>"A10"
         ]);
     }
 }

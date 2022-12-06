@@ -55,6 +55,12 @@ class SnackController extends Controller
         $data           = Snack::all();
         return json_encode($data);
     }
+    public function Dashboard(Request $r)
+    {
+        if ($r->ajax()) {
+            return json_encode(Snack::getSnackNew());
+        }
+    }
 
 
 }

@@ -49,8 +49,8 @@
       <input type="checkbox" id="add_Life">Life <br>
       <input type="checkbox" id="add_Nature">Nature <br>
       <div class="form-group">
-        <label for="durasi" class="form-label">Duration</label>
-        <input type="text" class="form-control" id="durasi" placeholder="Judul film">
+        <label for="durasi" class="form-label">Duration (menit)</label>
+        <input type="text" class="form-control" id="durasi" placeholder="Durasi film">
       </div>
       <button class="btn btn-success mt-3" id="addmovie" val="add">Tambah Film</button>
       </div>

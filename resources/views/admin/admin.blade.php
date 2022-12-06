@@ -90,6 +90,7 @@
             str += "</div></div></div>"
         });
         $("#accordionExample").html(str)
+        dashboardreload()
     }
 
     function delproducer(e) {
@@ -97,7 +98,136 @@
         produser.splice(i, 1)
         ReloadProducer()
     }
-
+    function dashboardreload() {
+        $.ajax({
+            type: "get",
+            url: '{{url("/admin/movie/dashboard")}}',
+            success: function (data) {
+                const d=JSON.parse(data,false);
+                var str=""
+                if (d.mn.length>0) {
+                    d.mn.forEach(m => {
+                        str+=`<div class="card col-3 col-lg-3 mb-3">
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
+                            <img src="{{asset('assets/images/${m.image}')}}" class="img-fluid" />
+                            </div>
+                            <div class="card-body">
+                            <h5 class="card-title text-dark">${m.judul}</h5>
+                            <p class="card-text">
+                                Genre :<br>
+                                ${m.genre}<br>
+                                Duration :<br>
+                                ${m.duration} menit<br>
+                            </p>
+                            </div>
+                        </div>`
+                    });
+                } else {
+                    str+=`<h2 style="color: black">Tidak ada tambahan movie baru</h2>`
+                }
+                $("#containermovienewest").html(str)
+                str=""
+                if (d.mt.length>0) {
+                    d.mt.forEach(m => {
+                        str+=`<div class="card col-3 col-md-3 mx-3 col-lg-3 my-5">
+                                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
+                                <img src="{{asset('assets/images/${m.image}')}}" height="200px" class="img-fluid" alt="${m.slug}"/>
+                                </div>
+                                <div class="card-body">
+                                <h5 class="card-title text-dark">${m.judul}</h5>
+                                <p class="card-text">
+                                    Genre :<br>
+                                    ${m.genre}<br>
+                                    Duration :<br>
+                                    ${m.duration} menit<br>
+                                </p>
+                                </div>
+                            </div>`
+                    });
+                } else {
+                    str+=`<h2 style="color: black">Tidak ada movie yang tayang hari ini</h2>`
+                }
+                $("#containermovietoday").html(str)
+                str=""
+                if (d.sb.length>0) {
+                    d.sb.forEach(m => {
+                        str+=`<div class="card col-3 col-lg-3 mb-3">
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
+                                <img src="{{asset('assets/images/${m.image}')}}" class="img-fluid" alt="${m.slug}"/>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title text-dark">${m.judul}</h5>
+                            </div>
+                            </div>`
+                    });
+                } else {
+                    str+=`<h2 style="color: black">Tidak ada movie </h2>`
+                }
+                $("#containerscheduleberlalu").html(str)
+                str=""
+                if (d.sa.length>0) {
+                    d.sa.forEach(m => {
+                        str+=`<div class="card col-3 col-lg-3 mb-3">
+                                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
+                                <img src="{{asset('assets/images/${m.image}')}}" class="img-fluid" alt="${m.slug}"/>
+                                </div>
+                                <div class="card-body">
+                                <h5 class="card-title text-dark">${m.judul}</h5>
+                                <p class="card-text">
+                                    Studio :<br>
+                                    ${m.nama}<br>
+                                    Branch :<br>
+                                    ${m.lokasi}<br>
+                                </p>
+                                </div>
+                            </div>`
+                    });
+                } else {
+                    str+=`<h2 style="color: black">Tidak ada movie </h2>`
+                }
+                $("#containerschedulesetelah").html(str)
+                console.log("reload aman");
+            },
+            
+        })
+    }
+    function dashboard_snack() { 
+        $.ajax({
+            type: "get",
+            url: '{{url("/admin/snack/dashboard")}}',
+            success: function (data) {
+                const d=JSON.parse(data,false);
+                var str=""
+                if (d.length>0) {
+                    d.forEach(e => {
+                        str+=`<div class="card col-12 col-md-6 col-lg-4 mb-3 mr-5" style="width: 30%;">
+                    <div class="bg-image hover-overlay ripple d-flex justify-content-center mt-3"  data-mdb-ripple-color="light" >
+                    <img src="{{asset('assets/images/${e.foto}')}}" style="height: 150px;" class="img-fluid" />
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                    </div>
+                    <div class="card-body" style="height: 250px">
+                    <h5 class="card-title text-dark">${e.nama}</h5> 
+                    <p class="card-text">
+                        Tipe :
+                        ${e.tipe}<br>
+                        Harga : 
+                        Rp.${e.harga}<br>
+                        Deskripsi : 
+                        ${ e.deskripsi } <br>
+                    </p>
+                    </div>
+                </div>`
+                    });
+                } else {
+                    str+=`<h2 style="color: black">Hari ini tidak ada snack baru</h2>`
+                }
+                $("#containersnackdashboard").html(str)
+            },
+            
+        })
+     }  
     function deldirektur(e) {
         const i = $(e.target).val()
         director.splice(i, 1)
@@ -127,6 +257,7 @@
                         $("#selectstudio").val(null).trigger('change')
                         $("#selectmovie").val(null).trigger('change')
                         $("#addtime").val("")
+                        dashboardreload()
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         alert(xhr.status);
@@ -216,6 +347,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             str = "<h2>Belum ada film yang main!</h2>"
         }
         c.html(str)
+        dashboardreload()
     }
     $("#editjadwal").on("click", function () {
         const time = $("#date").val()
@@ -229,6 +361,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             },
             success: function (data) {
                 dt.ajax.reload()
+                dashboardreload()
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
@@ -311,6 +444,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             },
             success: function (data) {
                 dt.ajax.reload()
+                dashboardreload()
             }
         })
     })
@@ -762,6 +896,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             str = "<h2>Belum ada snack!</h2>"
         }
         c.html(str)
+        dashboard_snack()
       }
       
       // Ini bagian untuk melakukan add snack!!

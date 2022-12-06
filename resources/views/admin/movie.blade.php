@@ -16,7 +16,7 @@
                 Genre :<br>
                 {{$m->genre}}<br>
                 Duration :<br>
-                {{$m->duration}}<br>
+                {{$m->duration}} menit<br>
               </p>
               <div class="d-flex justify-content-center">
                 <button class="btn btn-warning movieedit mx-3" value="{{$m->id}}"><i class="fa-regular fa-pen-to-square fa-2x"></i></button>

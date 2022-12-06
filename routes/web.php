@@ -211,6 +211,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/add', [MovieController::class,"AddMovie"]);
         Route::post('/edit', [MovieController::class,"EditMovie"]);
         Route::post('/delete', [MovieController::class,"DeleteMovie"]);
+        Route::get('/dashboard', [MovieController::class,"Dashboard"]);
         
     });
     Route::prefix('schedule')->group(function () {
@@ -223,6 +224,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/edit',[SnackController::class, "EditSnack"]);
         Route::post('/add',[SnackController::class, "AddSnack"]);
         Route::post('/delete',[SnackController::class, "DeleteSnack"]);
+        Route::get('/dashboard', [SnackController::class,"Dashboard"]);
     });
 
 });

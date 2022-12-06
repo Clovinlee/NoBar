@@ -25,6 +25,17 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function DashBoard(Request $r)
+    {
+        if ($r->ajax()) {
+            $d=new stdClass();
+            $d->mn=Movie::getmovienewest();
+            $d->mt=Movie::getmovietoday();
+            $d->sb=Schedule::schedulelalu();
+            $d->sa=Schedule::schedulesetelah();
+            return json_encode($d);
+        }
+    }
     public function index(Movie $movie)
     {
         //Now playing or Upcoming

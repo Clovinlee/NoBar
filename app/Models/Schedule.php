@@ -43,6 +43,12 @@ class Schedule extends Model
                     ->from("schedules")
                     ->whereDate("time","<",Carbon::today());
                 })
+                ->whereIn('movies.id',function ($q)
+                {
+                    $q->select("id")
+                    ->from("movies")
+                    ->where("deleted_at",null);
+                })
                 ->get();
         //print_r(date("Y-m-d, 0:0:0"));
         return $qry;
@@ -65,6 +71,12 @@ class Schedule extends Model
                     $q->select("movie_id")
                     ->from("schedules")
                     ->whereDate("time",">",Carbon::today());
+                })
+                ->whereIn('movies.id',function ($q)
+                {
+                    $q->select("id")
+                    ->from("movies")
+                    ->where("deleted_at",null);
                 })
                 ->limit(4)
                 ->get();

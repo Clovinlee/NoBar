@@ -91,23 +91,17 @@
 
     <div id="containerscheduleberlalu" class="row px-2">
       <section class="mb-4">
-        <h2 style="color: black">Schedule yang sudah berlalu: </h2>
+        <h2 style="color: black">Film Yang Pernah Dimainkan : </h2>
         @if(count($data->schedulelalu) > 0)
           @foreach($data->schedulelalu as $m)
-          <div class="card col-12 col-lg-6 mb-3">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
-              <img src="{{asset('assets/images/'.$m->image)}}" class="img-fluid" alt="{{$m->slug}}"/>
+            <div class="card col-12 col-lg-6 mb-3">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
+                <img src="{{asset('assets/images/'.$m->image)}}" class="img-fluid" alt="{{$m->slug}}"/>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-dark">{{$m->judul}}</h5>
+              </div>
             </div>
-            <div class="card-body">
-              <h5 class="card-title text-dark">{{$m->judul}}</h5>
-              <p class="card-text">
-                Studio :<br>
-                {{$m->nama}}<br>
-                Branch :<br>
-                {{$m->lokasi}}<br>
-              </p>
-            </div>
-          </div>
           @endforeach
         @else
           <h2 style="color: black">Tidak ada movie </h2>
@@ -118,7 +112,7 @@
 
     <div id="containerschedulesetelah" class="row px-2">
       <section class="mb-4">
-        <h2 style="color: black">Schedule yang sudah berlalu: </h2>
+        <h2 style="color: black">Schedule yang belom berlalu: </h2>
         @if(count($data->schedulesetelah) > 0)
           @foreach($data->schedulesetelah as $m)
           <div class="card col-12 col-lg-6 mb-3">

@@ -9,6 +9,7 @@
             <input type="date" name="start" id="awalMovie" >  S/D <input type="date" name="end" id="akhirMovie">
             <button id="btnTampilMovie" class="btn btn-primary">Tampil</button>
             <hr>
+            <h3 style=" color:black" id="movie_terjual">Total tiket terjual : {{$total_movie}} pcs</h3>
             <hr>
             <table class="table table-sm" border="1px" id="">
                 <thead>
@@ -45,7 +46,7 @@
                 </tbody>
             </table>
             <hr>
-            <h3 style=" color:black" id="movie_terjual">Total tiket terjual : {{$total_movie}}</h3>
+            
             <button id="generateMovie" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>

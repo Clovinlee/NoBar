@@ -786,51 +786,51 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
           fd.append("image",$("#foto_snack_add").prop("files")[0])
           fd.append("deskripsi", deskripsi)
 
-            dn = $.ajax({
-                type: "POST",
-                url: '{{url("/admin/snack/add")}}',
-                data: fd,
-                contentType: false,
-                processData: false,
-                cache: false,
-                dataType: 'html',
-                success: function (data) {
-                    var d = JSON.parse(data, false)
-                    // alert(data);
-                    ReloadSnack(d)
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
-                    console.log(xhr.responseText);
-                }
-            });
-        } else {
-            alert("foto snack belum diupload!")
-        }
-    });
-
-    var myurl = "<?php echo URL::to('/'); ?>";
-
-    function deletesnack(id) {
-        var dd = $("#delete_id_snack").val(id);
-        alert(dd);
-    }
-
-    $("#DeleteSnack").on("click", function () {
-        var id = $("#delete_id_snack").val();
-        alert(id);
-        dn = $.ajax({
-            type: "post",
-            url: '{{url("/admin/snack/delete")}}',
-            data: {
-                _token: '{{ csrf_token() }}',
-                id: id
+          dn = $.ajax({
+            type: "POST",
+            url: '{{url("/admin/snack/add")}}',
+            data: fd,
+            contentType: false,
+            processData: false,
+            cache:false,
+            dataType: 'html',
+            success: function(data){
+              var d = JSON.parse(data,false)
+              // alert(data);
+              ReloadSnack(d)
             },
-            success: function (data) {
-                var d = JSON.parse(data, false)
-                ReloadSnack(d)
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status);
+              alert(thrownError);
+              console.log(xhr.responseText);
             }
+          }); 
+        } 
+        else {
+          alert("foto snack belum diupload!")
+        } 
+      });
+      
+      var myurl = "<?php echo URL::to('/'); ?>";
+      function deletesnack(id) {
+        var dd =$("#delete_id_snack").val(id);
+        
+      }
+      
+      $("#DeleteSnack").on("click",function(){
+        var id = $("#delete_id_snack").val(); 
+         
+        dn=$.ajax({
+          type:"post",
+          url:'{{url("/admin/snack/delete")}}',
+          data: {
+            _token:'{{ csrf_token() }}',
+            id:id
+          },
+          success:function(data){
+            var d=JSON.parse(data,false)
+            ReloadSnack(d)
+          }
         })
     })
 
@@ -859,7 +859,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
 
         var img= $("#foto_snack_edit")[0].files;
 
-        alert(nm + "-" + hg + "-" + jenis); 
+        
         
         var vimage = "";
         if (img.length > 0) {

@@ -44,11 +44,9 @@
                     <div class="section-title text-left">
                         <span class="sub-title">Welcome To</span>
                         <h2 class="">NoBar Cafe</h2>
-                        <a href="{{ url('/cafe') }}">
-                            <button class="btn btn-outline-primary">
-                                <i class="fa-solid fa-arrows-rotate"></i> &nbsp; Reset
-                            </button>
-                        </a>
+                        <button class="btn btn-outline-primary" onclick="resetOrder()">
+                            <i class="fa-solid fa-arrows-rotate"></i> &nbsp; Reset
+                        </button>
                     </div>
                 </div>
             </div>
@@ -210,7 +208,13 @@
 
 @if (Session::has("error"))
     <x-toast title="Error" type="danger">{!! Session::get("error") !!}</x-toast>
+@elseif(Session::has("info"))
+    <x-toast title="info" type="info">{!! Session::get("info") !!}</x-toast>
 @endif
+
+@php
+    $encoded = json_encode(Session::get("listItem"));
+@endphp
 
 <x-footer></x-footer>
 
@@ -221,7 +225,30 @@
 
     <script>
         var listItem = [];
-        filterListItem();
+        if('{!! $encoded !!}' != "null"){
+            listItem = JSON.parse('{!! $encoded !!}');
+            listItem.forEach(el => {
+                var id = el.id;
+                $(".card-body input#"+id).val(el.qty);
+            });
+        }
+
+        function resetOrder(){
+            $.ajax({
+            type:"POST",
+            url:"{{ url('/cafe/resetOrder') }}",
+            data:{
+                _token:'{{ csrf_token() }}',
+            },success: function(body){
+                if(body == 200){
+                    window.location.reload();
+                }else{
+                    console.log("Error refresh");
+                    console.log(body);
+                }
+            }
+            })
+        }
 
         function ajaxTrans(result){
         $.ajax({
@@ -252,8 +279,10 @@
             },
             success:function(body) {
                 if(body == false){
-                    //If user not logged in, then reload page
-                    window.location.reload();
+                    //If user not logged in, then go to login and save session
+                    // window.location.reload();
+                    console.log(body);
+                    window.location.href = "{{ url('/login') }}";
                 }else{
                     console.log(body);
                     $("#processLoading").hide();
@@ -308,6 +337,27 @@
             }else if(listItem.length > 0){
                 $("#btnConfirmOrderCafe").removeClass("disabled");
             }
+
+            ajaxSaveCart();
+        }
+
+        function ajaxSaveCart(){
+            $.ajax({
+            type:'POST',
+            url:'{{ url("/cafe/save") }}',
+            data:{
+                _token:'{{ csrf_token() }}',
+                listItem:JSON.stringify(listItem),
+            },
+            success:function(body) {
+                    if(body == 200){
+                        console.log("cart saved");
+                    }else{
+                        console.log("cart unsaved");
+                        console.log(body);
+                    }
+                }
+            })
         }
 
         function updateConfirmation(e){

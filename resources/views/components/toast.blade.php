@@ -1,4 +1,4 @@
-<div class="position-fixed p-3 {{ $position }}" style="z-index: 11">
+<div class="position-fixed p-3 bottom-0 end-0" style="z-index: 11">
     <div id="liveToast" class="toast toast-{{ $type }} fade" data-mdb-autohide="false" role="alert" aria-live="assertive"
         aria-atomic="true" data-mdb-position="top-right" data-mdb-stacking="true" data-mdb-container="toast-container">
         <div class="toast-header toast-{{ $type }}">

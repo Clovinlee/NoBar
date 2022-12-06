@@ -35,7 +35,7 @@
                 </div><br>
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping" style="color: white">Old Password</span>
-                    <input type="password" name="old_password" id="" value="{{$currentUser->password}}">
+                    <input type="password" name="old_password" id="" value="">
                 </div><br>
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping" style="color: white">New Password</span>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\old_password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,7 @@ class UserController extends Controller
         $user = Auth::user();
         $credentials = $r->validate([
             'nama_lengkap'=>'required|max:255',
+            'old_password'=>[new old_password($r->old_password)],
             'new_password'=>'required|min:5|max:255',
             'conf_password'=>'required|same:new_password'
         ]);

@@ -12,6 +12,7 @@
             <br>
             <canvas id="myChart_semua_snack" height="100px"></canvas><br>
             <hr>
+            <h3 style=" color:black" id="snack_terjual">Total snack terjual : {{$total_snack}} pcs</h3>
             <hr>
             <table class="table table-sm" border="1px" id="">
                 <thead>
@@ -61,7 +62,7 @@
             </table>
             <hr>
             
-            <h3 style=" color:black" id="snack_terjual">Total snack terjual : {{$total_snack}}</h3>
+            
             <button id="generateSnack" class="btn btn-primary">Generate to pdf</button>
             {{-- <h3 style=" color:black">Total snack terjual : {{$total_snack}}</h3> --}}
         </div>

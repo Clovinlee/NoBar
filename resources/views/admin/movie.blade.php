@@ -4,22 +4,24 @@
         <h1 class="text-dark">Movie</h1>
         <button class="btn btn-primary" id="btnaddmovie">Add new movie here!</button>
         <br><br>
-        <div id="containermovie" class="row px-2">
+        <div id="containermovie" class="row px-2 d-flex justify-content-center">
           @forelse ($data->movie as $m)
-        <div class="card col-12 col-lg-6 mb-3">
+        <div class="card col-12 mx-5 col-md-6 col-lg-4 my-5">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
               <img src="{{asset('assets/images/'.$m->image)}}" class="img-fluid" alt="{{$m->slug}}"/>
             </div>
-            <div class="card-body">
+            <div class="card-body pl-2">
               <h5 class="card-title text-dark">{{$m->judul}}</h5>
               <p class="card-text">
                 Genre :<br>
                 {{$m->genre}}<br>
                 Duration :<br>
-                {{$m->duration}}<br>
+                {{$m->duration}} menit<br>
               </p>
-              <button class="btn btn-warning movieedit" value="{{$m->id}}">Edit</button>
-              <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->judul}}" data-mdb-target="#modaldeletemovie" class="delmovie btn btn-danger">Delete</button>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-warning movieedit mx-3" value="{{$m->id}}"><i class="fa-regular fa-pen-to-square fa-2x"></i></button>
+              <button href="" data-mdb-toggle="modal" value="{{$m->id}}" d="{{$m->judul}}" data-mdb-target="#modaldeletemovie" class="delmovie btn btn-danger"><i class="fa-solid fa-trash-can fa-2x"></i></button>
+              </div>
             </div>
           </div>
         @empty

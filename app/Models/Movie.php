@@ -22,7 +22,20 @@ class Movie extends Model
     public static function getmovietoday(){
 
         //$db = DB::select('select * from movies where DATE(movies.created_at) = DATE(current_date) limit 3');
-        $db=Movie::whereDate("created_at",Carbon::today())->get();
+        $db=Movie::whereIn("id",function ($q)
+        {
+            $q->select("movie_id")
+            ->from("schedules")
+            ->whereDate("time",Carbon::today());
+            //->where("deleted_at","=","null");
+        })
+        ->whereNotIn("id",function ($q)
+        {
+            $q->select("movie_id")
+            ->from("schedules")
+            ->where("deleted_at","!=","null");
+        })
+        ->get();
         return $db;
     }
     // public function getmovietodayAjax(){
@@ -33,7 +46,7 @@ class Movie extends Model
 
     public static function getmovienewest(){
         // $db = DB::select('select * from movies where id = "select ident_current(`movies`)"' );
-        $id = DB::table("movies")->orderBy("id","desc")->limit(3)->get();
+        $id = Movie::orderBy("id","desc")->limit(3)->get();
         // $id = DB::table('movies')->where('id', DB::raw("(select max(`id`) from movies)"))->first();
         // dd($id);
         // $db = DB::table("movies")->where('id', $id)->first();

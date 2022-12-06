@@ -4,20 +4,13 @@
             <h1 style=" color:black">Laporan profit 12 bulan terakhir</h1>
             <canvas id="myChart_movie_snack" height="100px"></canvas>
             <hr>
-            <form method="post" action=" {{ url('/manager/cekReport') }}" >
-                @csrf
-                <label for="" class="form-label">Range tanggal : </label>
-                <input type="date" name="start" id="" >  S/D <input type="date" name="end" id="">
-                <input type="submit" value="Tampil" class="btn btn-primary">
-            </form>
+            <label for="" class="form-label">Range tanggal : </label>
+            <input type="date" name="start" id="awal" >  S/D <input type="date" name="end" id="akhir">
+            <button id="btnTampil" class="btn btn-primary">Tampil</button>
             <br>
+            <h3 style=" color:black" id="total_laporan">Total semua Transaksi : Rp. {{number_format($jumlah,2,',','.')}}</h3>
             <hr>
-            @if($tipe != "")
-                <h4>{{$tipe}}</h4>
-            @else
-                <h4></h4>
-            @endif
-            <table class="table table-sm" border="1px">
+            <table class="table table-sm" border="1px" id="">
                 <thead>
                     <tr class="fw-bold">
                         <td>
@@ -40,7 +33,7 @@
                         </td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="report_body">
                     @forelse ($report as $tipe=>$item)
                     <tr height="70px" class="align-middle">
                         <td>
@@ -59,7 +52,7 @@
                             {{$item->branch}}
                         </td>
                         <td>
-                        Rp. {{$item->total}}
+                        Rp. {{number_format($item->total,2,',','.')}}
                         </td>
                     </tr>
                     @empty
@@ -69,9 +62,7 @@
                     @endforelse
                 </tbody>
             </table>
-            <h3>Total semua Transaksi : Rp. {{$jumlah}}</h3>
-            {{-- href="{{ url('/manager/formAdmin') }}" --}}
-            <a href="{{ url( '/manager/generate/'.$awal.'/'.$akhir ) }}">generate</a>
+            <button id="generate" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>
 </main>
@@ -128,6 +119,46 @@
         document.getElementById('myChart_movie_snack'),
         config_tampil_htrans
     );
+    
+    $("#btnTampil").on("click", function(){
+            var awal = $("#awal").val();
+            var akhir = $("#akhir").val();
+            dn=$.ajax({
+                type:"post",
+                url:'{{url("/manager/cekReport/")}}',
+                data: {
+                    _token:'{{ csrf_token() }}',
+                    awal:awal,
+                    akhir:akhir
+                },
+                success:function(data){
+                    var d=JSON.parse(data,false)
+                    console.log(d);
+                    var str ="";
+                    $("#report_body").html("");
+                    d.cek.forEach(el => {
+                        str += `<tr height="70px" class="align-middle">
+                        <td>${el.id}</td>
+                        <td>${el.nama_user}</td>
+                        <td>${el.movie_title}</td>
+                        <td>${el.studio}</td>
+                        <td>${el.branch}</td>
+                        <td>Rp. ${el.total}</td>
+                    </tr>`
+                    });
+                    $("#report_body").html(str);
+                    $("#total_laporan").text("Total semua Transaksi : Rp. " + d.jumlah)
+                },error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    console.log(xhr.responseText);
+                }
+            })
+    })
+
+    $("#generate").on("click", function(){
+        window.print();
+    })
 </script>
 
 </html>

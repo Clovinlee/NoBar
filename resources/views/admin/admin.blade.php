@@ -744,12 +744,12 @@
       var myurl = "<?php echo URL::to('/'); ?>";
       function deletesnack(id) {
         var dd =$("#delete_id_snack").val(id);
-        alert(dd); 
+        
       }
       
       $("#DeleteSnack").on("click",function(){
         var id = $("#delete_id_snack").val(); 
-        alert(id); 
+         
         dn=$.ajax({
           type:"post",
           url:'{{url("/admin/snack/delete")}}',
@@ -789,7 +789,7 @@
 
         var img= $("#foto_snack_edit")[0].files;
 
-        alert(nm + "-" + hg + "-" + jenis); 
+        
         
         var vimage = "";
         if (img.length > 0) {

@@ -648,7 +648,21 @@ class ManagerController extends Controller
 
     public function delete(Request $r){
         User::where('id', '=', $r->id)->delete();
-        $data   = User::all();
+        $data   = User::where('role','=','2')->get();
         return json_encode($data);
+    }
+
+    public function add(Request $r){
+        if($r->ajax()){
+            $m = new User();
+            $m->name = $r->nama;
+            $m->email = $r->email;
+            $m->password = $r->password;
+            $m->role = 2;
+            $m->save();
+
+            $data = User::where('role','=','2')->get();
+            return json_encode($data);
+        }   
     }
 }

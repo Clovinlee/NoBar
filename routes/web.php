@@ -150,6 +150,7 @@ Route::prefix('/manager')->group(function(){
     Route::get('/',[ManagerController::class, "index"]);
     Route::prefix("/karyawan")->group(function(){
         Route::post('/delete',[ManagerController::class, "delete"]);
+        Route::post('/add',[ManagerController::class, "add"]);
     });
     Route::get('/addAdmin',[ManagerController::class,"addAdmin"]);
     Route::get('/formAdmin',[ManagerController::class,"formAdmin"]);

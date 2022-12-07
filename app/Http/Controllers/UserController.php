@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -47,7 +48,16 @@ class UserController extends Controller
         return view("users.userpage",["currentUser" => Auth::user()]);
     }
 
-    public function history(){
-        return view("users.historypage");
+    public function history()
+    {
+        $username = Session::get("username");
+        $itemBuy = DB::table('htrans')
+        ->join("htrans","dtrans.htrans_id","=","htrans.id")
+        ->select("htrans.id","htrans.transaction_id","htrans.user_id","htrans.schedule_id","htrans.created_at")
+        ->where("htrans.user_id",$username)
+        ->get();
+        return View::make("historypage",[
+            "itemBuy"=>$itemBuy
+        ]);
     }
 }

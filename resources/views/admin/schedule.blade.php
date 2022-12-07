@@ -7,8 +7,8 @@
     <button type="button" class="btn btn-primary" data-mdb-toggle="modal" id="btnaddschedule" data-mdb-target="#tambahschedule">Add new schedule</button>
     @endif
     <br><br>
-      <center>
-        <table class="table table-striped" id="schedule_table">
+      <center class="col-12">
+        <table class="table table-striped" id="schedule_table" style="min-width:100%">
           <thead>
             <tr>
             <th>Branch</th>

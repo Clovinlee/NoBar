@@ -21,12 +21,12 @@ class AdminController extends Controller
         $data->branch=Branch::all();
         $data->studio=Studio::orderBy("branch_id")->get();
         $data->snack = Snack::all();
-        $data->snack_today =  $dt->getSnackNew();
-        $data->movie_newest = $dmovie->getmovienewest();
-        $data->movie_today = $dmovie->getmovietoday();
+        $data->snack_today =  Snack::getSnackNew();
+        $data->movie_newest = Movie::getmovienewest();
+        $data->movie_today = Movie::getmovietoday();
         $data->schedule=Schedule::all();
-        $data->schedulelalu = $dschedule->schedulelalu();
-        $data->schedulesetelah = $dschedule->schedulesetelah();
+        $data->schedulelalu = Schedule::schedulelalu();
+        $data->schedulesetelah = Schedule::schedulesetelah();
         $data->schedule->asal="";
         $data->schedule->nama="";
         $data->movie=Movie::all();

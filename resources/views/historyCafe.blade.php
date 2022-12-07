@@ -49,7 +49,6 @@
                                         {{-- seat: {{$seat= $a->seat}} <br> --}}
                                         
                                         Total: Rp.{{$a['total']}},- 
-                                        {{-- <hr> --}}
                                     </div>
                                     <br>
                                 @endforeach

@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             "name"=>"Calvin Kwan",
             "email"=>"kwan@gmail.com",
             "password"=>"$2y$10\$c.OeXHuukEvlVDDcBEUWcuIrFDVuufY3O9yFVvNOkA2pEAb3ap.da", //kwan
-            "role"=>2,
+            "role"=>3,
         ]);
     }
 }

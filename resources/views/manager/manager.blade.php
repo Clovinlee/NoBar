@@ -100,7 +100,7 @@
         $("#AddKaryawan").on("click", async function(){
             var nama = $("#nama_karyawan_add").val();
             var email = $("#email_karyawan_add").val();
-            var pass = $('#password_karyawan_add').val();
+            var pass = $("#password_karyawan_add").val();
             var cpass = $("#cpassword_karyawan_add").val();
 
             if(pass == cpass){

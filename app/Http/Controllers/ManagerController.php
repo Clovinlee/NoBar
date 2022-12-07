@@ -574,7 +574,9 @@ class ManagerController extends Controller
             return $item->count;
         }, $bar_branch);
 
-        $admins = DB::table('users')->where('role','=','2')->get();
+        // $admins = DB::table('users')->where('role','=','2')->get();
+        $us = new User();
+        $admins = User::where('role', '=', '2')->get();
 
         $tabel_movie = DB::select('SELECT m.id as id,m.judul as judul,COUNT(d.seat) as terjual FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id RIGHT join movies m on s.movie_id = m.id GROUP by m.id,m.judul order by 1');
 

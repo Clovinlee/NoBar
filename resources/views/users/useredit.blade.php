@@ -23,7 +23,8 @@
             </div>
         </div>
         <div class="row md-row-cols-2">
-            <form action="/user/edit/fixedit" method="post">
+            {{-- href="{{ url('/user/edit') }} --}}
+            <form action="{{url('/user/edit/fixedit')}}" method="post">
                 @csrf
                 <div class="input-group flex-nowrap" >
                     <span class="input-group-text" id="addon-wrapping" style="color: white">Nama Lengkap</span>

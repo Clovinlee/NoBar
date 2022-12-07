@@ -74,6 +74,9 @@
                     })
                 str += `</table>`;
             }
+            else{
+                str = "<h2>Belum ada karyawan!</h2>";
+            }
             c.html(str)
         }
 
@@ -122,9 +125,9 @@
                     ReloadKaryawan(d)
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
-                    console.log(xhr.responseText);
+                        alert(xhr.status);
+                        alert(thrownError);
+                        console.log(xhr.responseText);
                     }
                 }); 
             }
@@ -132,9 +135,5 @@
                 alert("password dan konfirmasi password tidak sama");
             }
         })
-
-
-
-        // 
     </script>
 @endsection

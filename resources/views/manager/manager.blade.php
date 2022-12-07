@@ -69,7 +69,7 @@
                             str += `<td>${d.email}</td>`;
                             str += `<td>${d.created_at}</td>`;
                             str += `<td>${d.role}</td>`;
-                            str += `<td><button data-mdb-toggle="modal" value="${d.id}" data-mdb-target="#modaldeleteuser" class="deluser btn btn-danger" onclick="deleteusers(${d.id})">Delete</button></td>`;
+                            str += `<td><button data-mdb-toggle="modal" value="${d.id}" data-mdb-target="#modaldeletekaryawan" class="deluser btn btn-danger" onclick="deleteusers(${d.id})">Delete</button></td>`;
                         str += `</tr>`;
                     })
                 str += `</table>`;
@@ -80,38 +80,19 @@
             c.html(str)
         }
 
-        function deleteusers(id){
-            $("#delete_id_user").val(id);
-        }
-
-        $("#DeleteUsers").on("click", function(){
-            var id = $("#delete_id_user").val();
-            dn=$.ajax({
-                type:"post",
-                url:'{{url("/manager/karyawan/delete")}}',
-                data: {
-                    _token:'{{ csrf_token() }}',
-                    id:id
-                },
-                success:function(data){
-                    var d=JSON.parse(data,false)
-                    ReloadKaryawan(d)
-                }
-            })
-        })
-
         $("#AddKaryawan").on("click", async function(){
             var nama = $("#nama_karyawan_add").val();
             var email = $("#email_karyawan_add").val();
             var pass = $("#password_karyawan_add").val();
             var cpass = $("#cpassword_karyawan_add").val();
 
+            alert(pass + " - " + cpass);
             if(pass == cpass){
                 const fd = new FormData()
                 fd.append("_token",'{{ csrf_token() }}')
                 fd.append("nama", nama)
                 fd.append("email", email)
-                fd.append("password", password)
+                fd.append("password", pass)
                 dn = $.ajax({
                     type: "POST",
                     url: '{{url("/manager/karyawan/add")}}',
@@ -135,5 +116,27 @@
                 alert("password dan konfirmasi password tidak sama");
             }
         })
+
+        function deleteusers(id){
+            $("#delete_id_user").val(id);
+        }
+
+        $("#DeleteUsers").on("click", function(){
+            var id = $("#delete_id_user").val();
+            dn=$.ajax({
+                type:"post",
+                url:'{{url("/manager/karyawan/delete")}}',
+                data: {
+                    _token:'{{ csrf_token() }}',
+                    id:id
+                },
+                success:function(data){
+                    var d=JSON.parse(data,false)
+                    ReloadKaryawan(d)
+                }
+            })
+        })
+
+        
     </script>
 @endsection

@@ -675,7 +675,7 @@ class ManagerController extends Controller
             $m = new User();
             $m->name = $r->nama;
             $m->email = $r->email;
-            $m->password = $r->password;
+            $m->password = Hash::make($r->password);
             $m->role = 2;
             $m->save();
 

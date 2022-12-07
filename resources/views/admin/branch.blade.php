@@ -1,13 +1,13 @@
 <main style="margin-top:58px">
-    <div class="container pt-4" id="branch">
+    <div class="container pt-4 col-7"  id="branch">
       <section class="mb-4">
         <h1 class="text-dark">Branch</h1>
         <div class="form-outline mb-4">
           <input type="text" class="form-control" id="search_branch" name="name"/>
           <label class="form-label">Nama branch</label>
         </div>
-        <button class="btn btn-primary" id="btn_search_branch">Search</button><br>
-        <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdbranch">Add new Branch here!</button>
+        <button class="btn btn-primary mb-4" id="btn_search_branch">Search</button><br>
+        <button class="btn btn-primary mb-4"  data-mdb-toggle="modal" data-mdb-target="#modaladdbranch">Add new Branch here!</button>
         <br>
         <div class="accordion" id="accordionExample">
           @forelse ($data->branch as $b)
@@ -21,21 +21,28 @@
                 aria-expanded="false"
                 aria-controls="collapse{{$b->id}}"
               >
-                <strong>{{$b->nama}}</strong>
+              <h2 class="text-dark">{{$b->nama}}</h2>
+
               </button>
             </h2>
             <div id="collapse{{$b->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$b->id}}">
               <div class="accordion-body" style="padding-left: 2%">
-                <button class="linkgantinama btn btn-secondary" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaleditbranch">Ganti nama branch?</button>
-                <button class="linkhapusbranch btn btn-danger" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaldeletebranch">Hapus branch ini!</button>
-                <a href="" class="tambahstudio btn btn-warning" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaladdstudio">Add new studio here!</a>
+                <div class="d-flex justify-content-center">
+                  <button class="linkgantinama btn btn-secondary mx-3" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaleditbranch">Rename</button>
+                  <button class="linkhapusbranch btn btn-danger mx-3" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaldeletebranch">Delete Branch</button>
+                  <a href="" class="tambahstudio btn btn-warning mx-3" data-mdb-toggle="modal"data-id='{{$b->id}}' d='{{$b->nama}}' data-mdb-target="#modaladdstudio">Add new studio &nbsp;<i class="fa-solid fa-plus fa-lg"></i></a>
+                </div>
                 @forelse ($b->studio as $s)
-                    <br>
-                    <strong>{{$s->nama}}</strong>
-                    <br>
-                    <button class="linkeditstudio btn-warning btn" data-mdb-toggle="modal"data-id='{{$s->id}}' data-slot='{{$s->slot}}' d='{{$s->nama}}' data-mdb-target="#modaleditstudio">Edit studio</button>
-                    <button class="linkhapusstudio btn-danger btn" data-mdb-toggle="modal"data-id='{{$s->id}}' d='{{$s->nama}}' data-mdb-target="#modalhapusstudio">Hapus studio</button>
-
+                    <hr style="height: 3px;">
+                    <div data-background="{{ asset('assets/images/bgstudio.jpg') }}" class="ucm-area ucm-bg rounded shadow-2" style="background-position-y: 100%; max-height: 50px">
+                      <div class=" d-flex justify-content-between align-item-center px-5 py-0 mt-0">
+                        <h3 class=" d-inline-block m-0 p-0 align-middle">{{$s->nama}}</h3>
+                        <span>
+                          <button class="linkeditstudio btn-warning btn" data-mdb-toggle="modal"data-id='{{$s->id}}' data-slot='{{$s->slot}}' d='{{$s->nama}}' data-mdb-target="#modaleditstudio"><i class="fa-regular fa-pen-to-square fa-2x"></i></button>
+                          <button class="linkhapusstudio btn-danger btn" data-mdb-toggle="modal"data-id='{{$s->id}}' d='{{$s->nama}}' data-mdb-target="#modalhapusstudio"><i class="fa-solid fa-trash-can fa-2x"></i></button>
+                        </span>
+                      </div>
+                    </div>
                 @empty
                     <h3>Branch ini belum punya studio</h3>
                 @endforelse
@@ -79,32 +86,13 @@
           <div class="modal-body">
             <div class="form-outline mb-4">
               <input type="text" class="form-control" id="nama_studio" name="name"/>
-              <label class="form-label">Nama Studio</label><br>
-              <input type="number" class="form-control" id="slot_studio" name="slot"/>
-              <label  for="slot">Jumlah Slot</label>
+              <label class="form-label" for="nama_studio">Nama Studio</label>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-mdb-dismiss="modal"id="AddStudio">Add new studio!</button>
-          </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal" tabindex="-1" id="modaladdstudio">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-dark" id="modaladdstudioh5">Add new Studio for </h5>
-          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-        </div>
-          <div class="modal-body">
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="nama_studio" name="name"/>
-              <label class="form-label">Nama Studio</label><br>
-              <input type="number" class="form-control" id="slot_studio" name="slot"/>
-              <label  for="slot">Jumlah Slot</label>
-            </div>
+            <br>
+              <div class="form-outline mb-4">
+                <input type="number" class="form-control" id="slot_studio" name="slot"/>
+                <label class="form-label" for="slot_studio">Jumlah Slot</label>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
@@ -122,10 +110,13 @@
         </div>
           <div class="modal-body">
             <div class="form-outline mb-4">
-              <input type="text" class="form-control" id="nama_studio_edit" name="name"/>
-              <label class="form-label">Nama Studio</label><br>
-              <label for="slot">Jumlah Slot</label>
-              <input type="number" class="form-control" id="slot_studio_edit" name="slot"/>
+              <input type="text" class="form-control active" id="nama_studio_edit" name="name"/>
+              <label class="form-label">Nama Studio</label>
+            </div>
+            <br>
+            <div class="form-outline mb-4">
+              <input type="number" class="form-control active" id="slot_studio_edit" name="slot"/>
+              <label class="form-label">Jumlah Slot</label>
             </div>
           </div>
           <div class="modal-footer">
@@ -182,7 +173,7 @@
           </div>
             <div class="modal-body">
               <div class="form-outline mb-4">
-                <input type="text" class="form-control" id="nama_branch_edit" name="name"/>
+                <input type="text" class="form-control active" id="nama_branch_edit" name="name"/>
                 <label class="form-label">Nama branch</label>
               </div>
             </div>

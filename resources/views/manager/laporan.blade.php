@@ -8,6 +8,7 @@
             <input type="date" name="start" id="awal" >  S/D <input type="date" name="end" id="akhir">
             <button id="btnTampil" class="btn btn-primary">Tampil</button>
             <br>
+            <h3 style=" color:black" id="total_laporan">Total semua Transaksi : Rp. {{number_format($jumlah,2,',','.')}}</h3>
             <hr>
             <table class="table table-sm" border="1px" id="">
                 <thead>
@@ -51,7 +52,7 @@
                             {{$item->branch}}
                         </td>
                         <td>
-                        Rp. {{$item->total}}
+                        Rp. {{number_format($item->total,2,',','.')}}
                         </td>
                     </tr>
                     @empty
@@ -61,7 +62,6 @@
                     @endforelse
                 </tbody>
             </table>
-            <h3 style=" color:black" id="total_laporan">Total semua Transaksi : Rp. {{$jumlah}}</h3>
             <button id="generate" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>

@@ -152,7 +152,7 @@ class ManagerController extends Controller
             $apa = new stdClass;
             $apa->cek = $cek;
             $apa->tipe = $tipe;
-            $apa->jumlah = $jumlah[0]->total;
+            $apa->jumlah = number_format($jumlah[0]->total,2,',','.');
             return json_encode($apa);
         }
     }
@@ -177,7 +177,7 @@ class ManagerController extends Controller
             $apa->cek = $cek;
             $apa->cek2 = $cek2;
             $apa->tipe = $tipe;
-            $apa->jumlah = $jumlah[0]->terjual;
+            $apa->jumlah = $jumlah[0]->terjual." pcs";
 
             return json_encode($apa);
         }
@@ -203,7 +203,7 @@ class ManagerController extends Controller
             $apa->cek = $cek;
             $apa->cek2 = $cek2;
             $apa->tipe = $tipe;
-            $apa->jumlah = $jumlah[0]->terjual;
+            $apa->jumlah = $jumlah[0]->terjual." pcs";
 
             return json_encode($apa);
         }
@@ -219,10 +219,26 @@ class ManagerController extends Controller
             $akhir = $akhir . " 23:59:59";
     
             $bar_hari = DB::select('select dayname(created_at) as hari, count(dayname(created_at)) as jumlah_pembeli from htrans where created_at BETWEEN ? and ? GROUP by dayname(created_at) ORDER BY CASE WHEN hari = "Sunday" THEN 1 WHEN hari = "Monday" THEN 2 WHEN hari = "Tuesday" THEN 3 WHEN hari = "Wednesday" THEN 4 WHEN hari = "Thursday" THEN 5 WHEN hari = "Friday" THEN 6 WHEN hari = "Saturday" THEN 7 END ASC',[$awal,$akhir]); 
-            $bar_hari = array_map(function($item) {
+            $bar_hari2 = array_map(function($item) {
                 return $item->jumlah_pembeli;
             }, $bar_hari);
-            return json_encode($bar_hari);
+            $hari_compare = array_map(function($item) {
+                return $item->hari;
+            }, $bar_hari);
+            $baru = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"];
+            $baru_count=[];
+            $ctr = 0;
+            foreach ($baru as $key => $value) {
+                if (in_array($value,$hari_compare)) {
+                    array_push($baru_count,$bar_hari2[$ctr]);
+                    $ctr++;
+                }
+                else{
+                    array_push($baru_count,0);
+                }
+            }
+            
+            return json_encode($baru_count);
         }
     }
 

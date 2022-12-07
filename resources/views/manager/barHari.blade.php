@@ -59,6 +59,7 @@
                     var d=JSON.parse(data,false)
                     var str ="";
                     myChart_hari.data.datasets[0].data = d;
+                    console.log(d);
                     myChart_hari.update();
                 },error: function (xhr, ajaxOptions, thrownError) {
                     alert(xhr.status);

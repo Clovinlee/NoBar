@@ -32,7 +32,6 @@
             @endforelse
         </div>
 </div>
-<center>{{$hasil->links()}}</center>
 {{-- <div class="d-flex justify-content-center align-items-center">
     <div class="pagination-wrap mt-60">
         <nav>
@@ -46,5 +45,10 @@
         </nav>
     </div>
 </div> --}}
+@if ($hasil->hasPages())
+    <div class="pagination-wrapper">
+         {{ $hasil->links() }}
+    </div>
+@endif
 </section>
 @stop

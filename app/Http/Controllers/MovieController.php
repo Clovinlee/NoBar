@@ -25,6 +25,17 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function DashBoard(Request $r)
+    {
+        if ($r->ajax()) {
+            $d=new stdClass();
+            $d->mn=Movie::getmovienewest();
+            $d->mt=Movie::getmovietoday();
+            $d->sb=Schedule::schedulelalu();
+            $d->sa=Schedule::schedulesetelah();
+            return json_encode($d);
+        }
+    }
     public function index(Movie $movie)
     {
         //Now playing or Upcoming
@@ -127,8 +138,9 @@ class MovieController extends Controller
             $m->slug=str_replace(" ","-",$r->judul);
             $img=$r->file("image");
             //$img->storeAs("/movie",$img->getClientOriginalName(),'public');
-            $img->move(public_path()."/assets/images/",$img->getClientOriginalName());
-            $m->image=$img->getClientOriginalName();
+            $imgname=strtolower($img->getClientOriginalName());
+            $img->move(public_path()."/assets/images/",$imgname);
+            $m->image=$imgname;
             $m->producer=$r->produser;
             $m->casts=$r->cast;
             $m->director=$r->director;
@@ -147,8 +159,9 @@ class MovieController extends Controller
             $m->judul=$r->judul;
             $m->slug=str_replace(" ","-",$r->judul);
             $img=$r->file("image");
-            $img->storeAs("/movie",$img->getClientOriginalName(),'public');
-            $m->image=$img->getClientOriginalName();
+            $imgname=strtolower($img->getClientOriginalName());
+            $img->move(public_path()."/assets/images/",$imgname);
+            $m->image=$imgname;
             $m->producer=$r->produser;
             $m->casts=$r->cast;
             $m->director=$r->director;

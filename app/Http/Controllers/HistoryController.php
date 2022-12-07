@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dtrans;
+use App\Models\Dtranssnack;
 use Illuminate\Http\Request;
 use App\Models\history;
 use App\Models\Htrans;
+use App\Models\Htranssnack;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -23,15 +25,17 @@ class HistoryController extends Controller
         // dd($seat);   
         $itemBuy = Htrans::all()->where('user_id',$username);
         return view('history',compact('itemBuy'),compact('seat'));
-        // return view(Htrans::find(10)->schedule->movie);
-        // $itemBuy = DB::table('htrans')
-        // ->join("htrans","dtrans.id_htrans","=","htrans.id")
-        // ->join("barang","barang.kode","=","dtrans.id_barang")
-        // ->select("htrans.id","barang.kode","barang.harga","d_trans.jumlah","h_trans.created_at","barang.foto")
-        // ->where("htrans.id_buyer",$username)
-        // ->get();
-        // return View::make("historypage",[
-        //     "itemBuy"=>$itemBuy
-        // ]);
+        
+    }
+    public function historyCafe()
+    {
+        $username = Auth::user()->id;
+        // dd($username);   
+        $snacks = htranssnack::find(1)->dtranssnack;
+        // dd($snacks);
+        $itemBuy = Htranssnack::all()->where('user_id',$username);
+        // dd($itemBuy);
+        return view('historyCafe',compact('itemBuy'),compact('snacks'));
+        
     }
 }

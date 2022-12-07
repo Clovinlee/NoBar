@@ -20,4 +20,8 @@ class Htranssnack extends Model
     public function transaction(){
         return $this->belongsTo(Transaction::class);
     }
+    
+    public function dtranssnack(){
+        return $this->hasMany(Dtranssnack::class);
+    }
 }

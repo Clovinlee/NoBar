@@ -56,9 +56,9 @@
                   </h2>
                   <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwoX">
                     <div class="accordion-body">
-                      Placeholder content for this accordion, which is intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the second item's accordion body.
-                      Let's imagine this being filled with some actual content.
+                      Nobar adalah sebuah platform pemesanan ticket yang dapat dipercaya, dan digunakan secara mudah. <br>
+                      Tetapi sebuah platform tentu saja tidak perfect 100%, tetapi kami akan usahakan semaksimal mungkin untuk memperbaiki dan cepat mengatasi <br>
+                      masalah-masalah yang dialami user"
                     </div>
                   </div>
                 </div>
@@ -72,11 +72,8 @@
                   </h2>
                   <div id="panelsStayOpen-collapseThreeX" class="accordion-collapse collapse" aria-labelledby="headingThreeX">
                     <div class="accordion-body">
-                      Placeholder content for this accordion, which is intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the third item's accordion body.
-                      Nothing more exciting happening here in terms of content, but just filling up
-                      the space to make it look, at least at first glance, a bit more representative
-                      of how this would look in a real-world application.
+                      Untuk mendapatkan tiket gratis, kamu bisa mengikuti event-event yang akan di adakan di waktu-waktu tertentu. <br>
+                      Tetapi, sebelum itu kamu harus mendaftar sebagai membership pada platform Nobar ini.
                     </div>
                   </div>
                 </div>
@@ -90,9 +87,11 @@
                     </h2>
                     <div id="panelsStayOpen-collapseFourX" class="accordion-collapse collapse" aria-labelledby="headingFourX">
                       <div class="accordion-body">
-                        Placeholder content for this accordion, which is intended to demonstrate the
-                        <code>.accordion-flush</code> class. This is the second item's accordion body.
-                        Let's imagine this being filled with some actual content.
+                        Silahkan pergi ke page register, <br>
+                        Lalu Silahkan isi semua data yang dibutuhkan, <br>
+                        menyetujui agreement dan term condition, <br>
+                        melakukan verifikasi melalui email, <br>
+                        anda telah memiliki akun Nobar.
                       </div>
                     </div>
 
@@ -105,11 +104,10 @@
                   </h2>
                   <div id="panelsStayOpen-collapseFiveX" class="accordion-collapse collapse" aria-labelledby="headingFiveX">
                     <div class="accordion-body">
-                      Placeholder content for this accordion, which is intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the third item's accordion body.
-                      Nothing more exciting happening here in terms of content, but just filling up
-                      the space to make it look, at least at first glance, a bit more representative
-                      of how this would look in a real-world application.
+                      Masukan jumlah pesanan Ticket,<br>
+                      pilih bangku yang ingin dipesan,<br>
+                      Pilih metode payment yang diinginkan, <br>
+                      melakukan pembayaran. 
                     </div>
                   </div>
                 </div>
@@ -123,11 +121,12 @@
                   </h2>
                   <div id="panelsStayOpen-collapseSixX" class="accordion-collapse collapse" aria-labelledby="headingSixX">
                     <div class="accordion-body">
-                      Placeholder content for this accordion, which is intended to demonstrate the
-                      <code>.accordion-flush</code> class. This is the third item's accordion body.
-                      Nothing more exciting happening here in terms of content, but just filling up
-                      the space to make it look, at least at first glance, a bit more representative
-                      of how this would look in a real-world application.
+                      Pilih Movie dan Now Playing pada navbar,<br>
+                      Pilih Film yang ingin di nikmati,<br>
+                      Pilih Mall dimana anda ingin menonton,<br>
+                      Pilih Jam yang sesuai waktu yang anda inginkan, <br>
+                      Pilih Kursi setelah memesan ticket, <br>
+                      Selesai.
                     </div>
                   </div>
                 </div>

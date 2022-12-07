@@ -86,7 +86,7 @@
             var pass = $("#password_karyawan_add").val();
             var cpass = $("#cpassword_karyawan_add").val();
 
-            alert(pass + " - " + cpass);
+            
             if(pass == cpass){
                 const fd = new FormData()
                 fd.append("_token",'{{ csrf_token() }}')

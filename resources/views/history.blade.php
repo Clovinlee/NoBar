@@ -56,20 +56,41 @@
                             <h5 class="title">History</h5>
                             <br>
                             <div class="contact-form">
-                                <table>
+                                {{-- @foreach ($itemBuy as $H)
+                                    $movie = H->schedule->movie
+                                    $transaction = H --}}
+                                @foreach($itemBuy as $a)
+                                    <div style="border: 1px; color: white; background-color: rgb(39, 39, 39); border-radius: 25px; padding: 3%">
+                                        Movie: {{$movie = $a->schedule->movie->judul}} <br>
+                                        <hr>
+                                        Waktu Pesan: {{$transaction = $a->created_at}} <br>
+                                        seat:@foreach($seat as $s)
+                                            {{$s->seat}};
+                                        @endforeach 
+                                        <br>
+                                        {{-- seat: {{$seat= $a->seat}} <br> --}}
+                                        
+                                        Total: Rp.{{$a['total']}},- 
+                                        {{-- <hr> --}}
+                                    </div>
+                                    <br>
+                                @endforeach
+                                {{-- <table>
                                     <tr>
-                                        <th>Nama</th>
-                                        <th>Apalah</th>
-                                        <th>Coba aja</th>
+                                        <th>user</th>
+                                        <th>transaction</th>
+                                        <th>schedule</th>
+                                        <th>Total</th>
                                     </tr>
-                                    <tr>
                                         @foreach($itemBuy as $a)
-                                            <td>{{$a['transaction_id']}}</td>
+                                        <tr>
                                             <td>{{$a['user_id']}}</td>
+                                            <td>{{$a['transaction_id']}}</td>
                                             <td>{{$a['schedule_id']}}</td>
+                                            <td>{{$a['total']}}</td>
+                                        </tr>
                                         @endforeach
-                                    </tr>
-                                </table>
+                                </table> --}}
                             </div>
                         </div>
                     </div>

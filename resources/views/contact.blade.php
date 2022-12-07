@@ -61,12 +61,12 @@
                                                 <input type="text" placeholder="You Name *">
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="email" placeholder="You  Email *">
+                                                <input type="number" placeholder="You  Number *">
                                             </div>
                                         </div>
                                         <input type="text" placeholder="Subject *">
                                         <textarea name="message" placeholder="Type Your Message..."></textarea>
-                                        <button class="btnMovie">Send Message</button>
+                                        <a href="https://wa.me/2727272829"><button class="btnMovie">Send Message</button></a>
                                     </form>
                                 </div>
                             </div>

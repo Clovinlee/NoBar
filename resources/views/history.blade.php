@@ -58,9 +58,16 @@
                             <div class="contact-form">
                                 <table>
                                     <tr>
-                                        <td>
-                                            
-                                        </td>
+                                        <th>Nama</th>
+                                        <th>Apalah</th>
+                                        <th>Coba aja</th>
+                                    </tr>
+                                    <tr>
+                                        @foreach($itemBuy as $a)
+                                            <td>{{$a['transaction_id']}}</td>
+                                            <td>{{$a['user_id']}}</td>
+                                            <td>{{$a['schedule_id']}}</td>
+                                        @endforeach
                                     </tr>
                                 </table>
                             </div>

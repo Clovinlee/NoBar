@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CafeController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MovieController;
@@ -171,7 +172,7 @@ Route::prefix('/manager')->group(function(){
 
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
-    Route::get("/history", [UserController::class,"history"])->middleware(["auth","verified"]);
+    Route::get("/history", [HistoryController::class,"history"])->middleware(["auth","verified"]);
     Route::get("/edit", [UserController::class,"edit_user"])->middleware(["auth","verified"]);
     Route::get("/movie/search", [UserController::class,"SearchMovie"]);
     Route::post("/edit/fixedit", [UserController::class,"fix_edit_user"])->middleware(["auth","verified"]);

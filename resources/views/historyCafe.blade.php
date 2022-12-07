@@ -33,7 +33,7 @@
                 <div class="col-xl-8 col-lg-7">
                     <div class="contact-form-wrap">
                         <div class="widget-title mb-50">
-                            <h5 class="title">History</h5>
+                            <h5 class="title">History Cafe</h5>
                             <br>
                             <div class="contact-form">
                                 {{-- @foreach ($itemBuy as $H)
@@ -41,17 +41,14 @@
                                     $transaction = H --}}
                                 @foreach($itemBuy as $a)
                                     <div style="border: 1px; color: white; background-color: rgb(39, 39, 39); border-radius: 25px; padding: 3%">
-                                        Movie: {{$movie = $a->schedule->movie->judul}} <br>
+                                        Pesanan: @foreach($snacks as $s)
+                                        {{$s->snack->nama}};
+                                        @endforeach  <br>
                                         <hr>
                                         Waktu Pesan: {{$transaction = $a->created_at}} <br>
-                                        seat:@foreach($seat as $s)
-                                            {{$s->seat}};
-                                        @endforeach 
-                                        <br>
                                         {{-- seat: {{$seat= $a->seat}} <br> --}}
                                         
                                         Total: Rp.{{$a['total']}},- 
-                                        {{-- <hr> --}}
                                     </div>
                                     <br>
                                 @endforeach

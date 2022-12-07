@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class UserSeeder extends Seeder
             "name"=>"MxZero",
             "email"=>"mxzeromxzero6@gmail.com",
             "email_verified_at"=>now(),
-            "password"=>'$2y$10$mlYUCprlpKjUido8kw6CAuFEZSiysVIM9UcdDeKedFDHnKcgf2BzS', //mxzero
+            "password"=>Hash::make("mxzero"), //mxzero
             "role"=>1
         ]);
 
@@ -28,15 +29,15 @@ class UserSeeder extends Seeder
             "name"=>"Chrisanto",
             "email"=>"chris@gmail.com",
             "email_verified_at"=>now(),
-            "password"=>'$2y$10$j9yWUE1./bhJzP7Uy4Y2vemTtPwiQsly1pckI.7gWexuAQYd.ssni', //chrisanto
+            "password"=>Hash::make("chrisanto"), //chrisanto
             "role"=>2
         ]);
 
         User::create([
             "name"=>"Calvin Kwan",
             "email"=>"kwan@gmail.com",
-            "password"=>"$2y$10\$c.OeXHuukEvlVDDcBEUWcuIrFDVuufY3O9yFVvNOkA2pEAb3ap.da", //kwan
-            "role"=>2,
+            "password"=>Hash::make("kwan"), //kwan
+            "role"=>3,
         ]);
     }
 }

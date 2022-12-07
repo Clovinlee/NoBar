@@ -147,7 +147,7 @@ Route::prefix("/cafe_pay")->group(function() {
 // |----------------------|
 // Route::get("/manager/dashboard",[ManagerController::class,"dashboard2"]);
 
-Route::prefix('/manager')->group(function(){
+Route::prefix('/manager')->middleware("role:manager")->group(function(){
     Route::get('/',[ManagerController::class, "index"]);
     Route::prefix("/karyawan")->group(function(){
         Route::post('/delete',[ManagerController::class, "delete"]);

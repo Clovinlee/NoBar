@@ -45,6 +45,10 @@
                                                             <button class="dropdown-item" type="button">History</button>    
                                                         </a>
                                                     </li>
+                                                    <li><a href="{{ url('/user/historyCafe') }}">
+                                                        <button class="dropdown-item" type="button">History Cafe</button>    
+                                                    </a>
+                                                    </li>
                                                     <li>
                                                         <form action="{{ url('/logout') }}" method="POST">
                                                             @csrf

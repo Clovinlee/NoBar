@@ -55,32 +55,18 @@ class Schedule extends Model
     }
 
     public static function schedulesetelah(){
-        $qry = Schedule::select('schedules.*', 'movies.judul', 'movies.image', 'studios.nama', 'branches.nama as lokasi')
-                ->join('movies', 'schedules.movie_id', '=', 'movies.id')
-                ->join('studios', 'schedules.studio_id', '=', 'studios.id')
-                ->join('branches', 'schedules.branch_id', '=', 'branches.id')
-                ->where('schedules.time', '>', date("Y-m-d, 0:0:0"))
-                ->whereNotIn('movies.id',function ($q)
-                {
-                    $q->select("movie_id")
-                    ->from("schedules")
-                    ->whereDate("time","<=",Carbon::today());
-                })
-                ->whereIn('movies.id',function ($q)
-                {
-                    $q->select("movie_id")
-                    ->from("schedules")
-                    ->whereDate("time",">",Carbon::today());
-                })
-                ->whereIn('movies.id',function ($q)
-                {
-                    $q->select("id")
-                    ->from("movies")
-                    ->where("deleted_at",null);
-                })
-                ->limit(4)
-                ->get();
-        
+        $qry=Branch::all();
+        foreach ($qry as $q => $b) {
+            $s=Schedule::where("branch_id","=",$b->id)
+            ->whereDate("time",">=",Carbon::now())
+            ->orderBy("time")
+            ->first();
+            if ($s!=null) {
+                $b->time=$s->time;
+                $b->film=$s->movie->judul;
+            }
+        }
+        //dd($qry);
         return $qry;
     }
 }

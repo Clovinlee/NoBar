@@ -14,19 +14,14 @@ class AdminController extends Controller
 {
     //
     public function index(){
-        $dt = new Snack();
-        $dmovie = new Movie();
-        $dschedule = new Schedule();
         $data=new stdClass;
         $data->branch=Branch::all();
         $data->studio=Studio::orderBy("branch_id")->get();
         $data->snack = Snack::all();
-        $data->snack_today =  Snack::getSnackNew();
-        $data->movie_newest = Movie::getmovienewest();
-        $data->movie_today = Movie::getmovietoday();
+        $data->snacknew =  Snack::getSnackNew();
+        $data->movienew = Movie::getmovienewest();
         $data->schedule=Schedule::all();
-        $data->schedulelalu = Schedule::schedulelalu();
-        $data->schedulesetelah = Schedule::schedulesetelah();
+        $data->sb = Schedule::schedulesetelah();
         $data->schedule->asal="";
         $data->schedule->nama="";
         $data->movie=Movie::all();

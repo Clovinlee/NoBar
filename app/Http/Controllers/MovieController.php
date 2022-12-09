@@ -28,12 +28,7 @@ class MovieController extends Controller
     public function DashBoard(Request $r)
     {
         if ($r->ajax()) {
-            $d=new stdClass();
-            $d->mn=Movie::getmovienewest();
-            $d->mt=Movie::getmovietoday();
-            $d->sb=Schedule::schedulelalu();
-            $d->sa=Schedule::schedulesetelah();
-            return json_encode($d);
+            return json_encode(Movie::getmovienewest());
         }
     }
     public function index(Movie $movie)

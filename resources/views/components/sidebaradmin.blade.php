@@ -82,9 +82,12 @@
       <a class="navbar-brand" href="#">
         <img src="{{asset('assets/img/logo/logo.png')}}" width="50px" alt="">
       </a>
-
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        
+      </ul>
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
+        <h3 class="text-dark me-5"> Hi, Admin {{Auth::user()->name}}</h3>
         <form action="{{url('/logout')}}" method="post" class="d-inline">
           @csrf
         <button type="submit" class="btn btn-primary">LOGOUT</button>

@@ -92,7 +92,9 @@
         />
         <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
       </form>
-
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <h3 class="text-dark">{{Auth::user()->nama}}</h3>
+      </ul>
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
         <a href="" class="btn btn-primary">LOGOUT</a>

@@ -10,11 +10,15 @@
         <p class="small text-warning m-0 foodPrice">Rp{{ number_format($harga) }}</p>
         <p class="card-text foodDetail" style="height: 80px">{{ $deskripsi }}</p>
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-warning fw-bold" onclick="modifyQty(event)"><</button> 
+            @php
+                $open = (time() >= env("CAFE_OPEN_TIME") && time() <= env("CAFE_CLOSE_TIME"));
+                $open = $open == true ? " " : "disabled";
+            @endphp
+            <button type="button" class="btn btn-warning fw-bold {{ $open }}" onclick="modifyQty(event)"><</button> 
             {{-- ID Foods ada di id=x --}}
                 <input type="text" name="" id="{{ $idFood }}" price="{{ $harga }}" title="{{ $slot }}" class="text-white text-center mx-2" placeholder="0"
                     maxlength="3" style="width: 40px; border:0; outline:0; background:transparent; border-bottom: 1px solid white;" readonly>
-                <button type="button" class="btn btn-warning fw-bold" onclick="modifyQty(event)">></button>
+                <button type="button" class="btn btn-warning fw-bold {{ $open }}" onclick="modifyQty(event)">></button>
         </div>
     </div>
 </div>

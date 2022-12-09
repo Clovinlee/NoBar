@@ -1,6 +1,11 @@
 @extends('master.masterlayout')
 @section("subtitle","Admin")
 @section('body')
+<style>
+    div.dataTables_processing div {
+        display: none;
+    }
+</style>
 <x-sidebaradmin></x-sidebaradmin>
 <div id="div_dashboard" style="display:block">
     @include('admin.dashboard')
@@ -399,12 +404,15 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
         //     console.log("destroyed");
         // }
         dt = $("#schedule_table").on( 'search.dt', function () {
-        $("#schedule_table").busyLoad("show")
+        $("#schedule_table").busyLoad("show",{
+            spinner:"cube"
+        })
     } ).DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             autowidth: true,
+            pagingType: 'full_numbers',
             drawCallback: function( settings ) {
                 $("#schedule_table").busyLoad("hide")
             },

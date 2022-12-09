@@ -14,7 +14,7 @@ class Snack extends Model
     protected $table = "snacks";
 
     public static function getSnackNew(){
-        $db=Snack::whereDate("created_at",Carbon::today())->orderBy("id","desc")->limit(3)->get();
+        $db=Snack::find(Snack::max("id"));
         //$db = DB::select("select * from snacks where DATE(snacks.created_at) = DATE(current_date) order by id desc limit 3");
         return $db;
     }

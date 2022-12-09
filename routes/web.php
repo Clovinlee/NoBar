@@ -221,6 +221,7 @@ Route::prefix("/admin")->middleware("role:admin")->group(function() {
         Route::post('/delete', [ScheduleController::class,"DeleteSchedule"]);
         Route::post('/add', [ScheduleController::class,"AddSchedule"]);
         Route::post('/{id}', [ScheduleController::class,"EditSchedule"]);
+        Route::get('/dashboard', [ScheduleController::class,"Dashboard"]);
     });
     Route::prefix('/snack')->group(function(){
         Route::post('/edit',[SnackController::class, "EditSnack"]);

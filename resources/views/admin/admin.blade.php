@@ -1,4 +1,5 @@
 @extends('master.masterlayout')
+@section("subtitle","Admin")
 @section('body')
 <x-sidebaradmin></x-sidebaradmin>
 <div id="div_dashboard" style="display:block">
@@ -19,6 +20,7 @@
 <div id="div_add" style="display: none">
     @include('admin.movieadd')
 </div>
+<div id="toast"></div>
 @endsection
 @section('pageScript')
 <script>
@@ -101,93 +103,50 @@
     function dashboardreload() {
         $.ajax({
             type: "get",
-            url: '{{url("/admin/movie/dashboard")}}',
+            url: '{{url("/admin/schedule/dashboard")}}',
             success: function (data) {
-                const d=JSON.parse(data,false);
+                const da=JSON.parse(data,false);
                 var str=""
-                if (d.mn.length>0) {
-                    d.mn.forEach(m => {
-                        str+=`<div class="card col-3 col-lg-3 mb-3">
-                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
-                            <img src="{{asset('assets/images/${m.image}')}}" class="img-fluid" />
-                            </div>
-                            <div class="card-body">
-                            <h5 class="card-title text-dark">${m.judul}</h5>
-                            <p class="card-text">
-                                Genre :<br>
-                                ${m.genre}<br>
-                                Duration :<br>
-                                ${m.duration} menit<br>
-                            </p>
-                            </div>
-                        </div>`
+                if (da.length>0) {
+                    da.forEach(d => {
+                        str+=`<div class="border border-dark border-top-5 border-bottom-5 border-end-0 border-start-0" >
+                    <h4 class="text-dark">${d.nama}</h4>`
+                    if (d.time==null) {
+                        str+=`<h5 class="text-dark">Belum ada film di cabang ${d.nama}</h5>`
+                    } else {
+                        str+=`<h5 class="text-dark">${d.film}</h5>
+                            <h5 class="text-dark">${d.time}</h5>`
+                    }
+                    str+=`</div>` 
                     });
-                } else {
-                    str+=`<h2 style="color: black">Tidak ada tambahan movie baru</h2>`
+                }else{
+                    str+=`<h4 class="text-dark">Belum ada branch!</h4>`
                 }
-                $("#containermovienewest").html(str)
-                str=""
-                if (d.mt.length>0) {
-                    d.mt.forEach(m => {
-                        str+=`<div class="card col-3 col-md-3 mx-3 col-lg-3 my-5">
-                                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
-                                <img src="{{asset('assets/images/${m.image}')}}" height="200px" class="img-fluid" alt="${m.slug}"/>
-                                </div>
-                                <div class="card-body">
-                                <h5 class="card-title text-dark">${m.judul}</h5>
-                                <p class="card-text">
-                                    Genre :<br>
-                                    ${m.genre}<br>
-                                    Duration :<br>
-                                    ${m.duration} menit<br>
-                                </p>
-                                </div>
-                            </div>`
-                    });
+                $("#sb").html(str)
+            }   
+        })
+    }
+    function dashboard_movie(){
+        $.ajax({
+            type:"get",
+            url:"{{url('/admin/movie/dashboard')}}",
+            success:function(data){
+                const d=JSON.parse(data,false)
+                var str="<center>"
+                if (d!=null) {
+                    str+=`<img src="{{asset('assets/images/${d.image}')}}" alt="${d.slug}"   srcset=""><br>
+                <h4 class="text-dark">${d.judul}</h4>
+                <h5 class="text-dark">Genre :</h5>    
+                <h5 class="text-dark">${d.genre}}</h5>
+                <h5 class="text-dark">Durasi :</h5>    
+                <h5 class="text-dark">${d.duration} menit</h5>`
                 } else {
-                    str+=`<h2 style="color: black">Tidak ada movie yang tayang hari ini</h2>`
+                    str+=`<h4 class="text-dark">Belum ada Movie!</h4>`
                 }
-                $("#containermovietoday").html(str)
-                str=""
-                if (d.sb.length>0) {
-                    d.sb.forEach(m => {
-                        str+=`<div class="card col-3 col-lg-3 mb-3">
-                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
-                                <img src="{{asset('assets/images/${m.image}')}}" class="img-fluid" alt="${m.slug}"/>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">${m.judul}</h5>
-                            </div>
-                            </div>`
-                    });
-                } else {
-                    str+=`<h2 style="color: black">Tidak ada movie </h2>`
-                }
-                $("#containerscheduleberlalu").html(str)
-                str=""
-                if (d.sa.length>0) {
-                    d.sa.forEach(m => {
-                        str+=`<div class="card col-3 col-lg-3 mb-3">
-                                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" >
-                                <img src="{{asset('assets/images/${m.image}')}}" class="img-fluid" alt="${m.slug}"/>
-                                </div>
-                                <div class="card-body">
-                                <h5 class="card-title text-dark">${m.judul}</h5>
-                                <p class="card-text">
-                                    Studio :<br>
-                                    ${m.nama}<br>
-                                    Branch :<br>
-                                    ${m.lokasi}<br>
-                                </p>
-                                </div>
-                            </div>`
-                    });
-                } else {
-                    str+=`<h2 style="color: black">Tidak ada movie </h2>`
-                }
-                $("#containerschedulesetelah").html(str)
-                console.log("reload aman");
-            },
+                str+="</center>"
+                $("#newmovie").html(str)
+                dashboardreload()
+            }
             
         })
     }
@@ -197,33 +156,19 @@
             url: '{{url("/admin/snack/dashboard")}}',
             success: function (data) {
                 const d=JSON.parse(data,false);
-                var str=""
-                if (d.length>0) {
-                    d.forEach(e => {
-                        str+=`<div class="card col-12 col-md-6 col-lg-4 mb-3 mr-5" style="width: 30%;">
-                    <div class="bg-image hover-overlay ripple d-flex justify-content-center mt-3"  data-mdb-ripple-color="light" >
-                    <img src="{{asset('assets/images/${e.foto}')}}" style="height: 150px;" class="img-fluid" />
-                    <a href="#!">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </a>
-                    </div>
-                    <div class="card-body" style="height: 250px">
-                    <h5 class="card-title text-dark">${e.nama}</h5> 
-                    <p class="card-text">
-                        Tipe :
-                        ${e.tipe}<br>
-                        Harga : 
-                        Rp.${e.harga}<br>
-                        Deskripsi : 
-                        ${ e.deskripsi } <br>
-                    </p>
-                    </div>
-                </div>`
-                    });
+                var str="<center>"
+                if (d!=null) {
+                    str+=`<img src="{{asset('assets/images/${d.foto}')}}" alt="" srcset=""><br>
+                        <h5 class="text-dark">${d.nama}</h5>
+                        <h5 class="text-dark">jenis : </h5> 
+                        <h5 class="text-dark">${d.tipe}</h5>   
+                        <h5 class="text-dark">Harga :</h5> 
+                        <h5 class="text-dark">Rp. ${d.harga.toLocaleString('en-US')}</h5>`
                 } else {
-                    str+=`<h2 style="color: black">Hari ini tidak ada snack baru</h2>`
+                    str+=`<h4 class="text-dark">Belum ada Snack!</h4>`
                 }
-                $("#containersnackdashboard").html(str)
+                str+="</center>"
+                $("#newsnack").html(str)
             },
             
         })
@@ -347,7 +292,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             str = "<h2>Belum ada film yang main!</h2>"
         }
         c.html(str)
-        dashboardreload()
+        dashboard_movie();
     }
     $("#editjadwal").on("click", function () {
         const time = $("#date").val()
@@ -605,6 +550,10 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             }
         });
     });
+    function Toast(title,type,text) {
+        $("#toast").html(`<x-toast title="${title}" type="${type}">${text}</x-toast>`)
+        $(".toast").toast("show");
+    }
     $("#addmovie").on("click", function () {
         if ($(this).val() == "add") {
             const judul = $("#movie_judul").val();
@@ -664,29 +613,35 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
                                             ReloadMovie(d)
                                             $("#div_add").css("display", "none")
                                             $("#div_movie").css("display", "block")
+                                            Toast("Success","success","Berhasil tambah film")
                                         },
                                         error: function (xhr, ajaxOptions, thrownError) {
                                             // alert(xhr.status);
                                             // alert(thrownError);
-                                            alert("Gagal Tambah film, bad internet connection")
+                                            Toast("Error","danger","Gagal Tambah film, bad internet connection")
+                                            //alert("Gagal Tambah film, bad internet connection")
                                             console.log(xhr.responseText);
                                         }
                                     });
                                 } else {
-                                    alert("poster belum diupload!")
+                                    Toast("Error","danger","poster belum diupload!")
                                 }
                             } else {
-                                alert("durasi film harus lebih dari 0!")
+                                Toast("Error","danger","durasi film harus lebih dari 0!")
+                                //alert("durasi film harus lebih dari 0!")
                             }
                         } else {
-                            alert("belum ada genre yang dipilih!")
+                            Toast("Error","danger","belum ada genre yang dipilih!")
+                            //alert("belum ada genre yang dipilih!")
                         }
                     }
                 } else {
-                    alert("produser, direktur, dan castnya harus ada!")
+                    Toast("Error","danger","produser, direktur, dan castnya harus ada!")
+                    //alert("produser, direktur, dan castnya harus ada!")
                 }
             } else {
-                alert("judul tidak boleh kosong!")
+                Toast("Error","danger","judul tidak boleh kosong!")
+                //alert("")
             }
         } else {
             const judul = $("#movie_judul").val();
@@ -747,27 +702,33 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
                                             ReloadMovie(d)
                                             $("#div_add").css("display", "none")
                                             $("#div_movie").css("display", "block")
+                                            Toast("Success","success","Berhasil edit film")
                                         },
                                         error: function (xhr, ajaxOptions, thrownError) {
-                                            alert("Gagal Edit film, bad internet connection")
-                                            console.log(xhr.responseText);
+                                            Toast("Error","danger","Gagal Edit film, bad internet connection")
+                                            //alert("Gagal Edit film, bad internet connection")
+                                            //console.log(xhr.responseText);
                                         }
                                     });
-                                } else {
-                                    alert("poster belum diupload!")
+                                }else {
+                                    Toast("Error","danger","poster belum diupload!")
                                 }
                             } else {
-                                alert("durasi film harus lebih dari 0!")
+                                Toast("Error","danger","durasi film harus lebih dari 0!")
+                                //alert("durasi film harus lebih dari 0!")
                             }
                         } else {
-                            alert("belum ada genre yang dipilih!")
+                            Toast("Error","danger","belum ada genre yang dipilih!")
+                            //alert("belum ada genre yang dipilih!")
                         }
                     }
                 } else {
-                    alert("produser, direktur, dan castnya harus ada!")
+                    Toast("Error","danger","produser, direktur, dan castnya harus ada!")
+                    //alert("produser, direktur, dan castnya harus ada!")
                 }
             } else {
-                alert("judul tidak boleh kosong!")
+                Toast("Error","danger","judul tidak boleh kosong!")
+                //alert("")
             }
         }
     });
@@ -801,14 +762,15 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             },
             success: function (data) {
                 ReloadMovie(JSON.parse(data, false))
+                Toast("Success","success","Berhasil hapus film")
             }
         });
     });
-    $('#btnaddmovie').on("click", function () {
+    $('#btn').on("click", function () {
         $("#div_add").css("display", "block")
         $("#div_movie").css("display", "none")
-        $("#addmovie").val("add")
-        $("#addmovie").text("Tambah Film")
+        $("#").val("add")
+        $("#").text("Tambah Film")
         $("#juduladd").text("Tambah Film Baru")
     })
     $("#accordionExample").on('click', '.linkgantinama', function (e) {

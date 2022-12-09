@@ -46,7 +46,7 @@ class Movie extends Model
 
     public static function getmovienewest(){
         // $db = DB::select('select * from movies where id = "select ident_current(`movies`)"' );
-        $id = Movie::orderBy("id","desc")->limit(3)->get();
+        $id = Movie::find(Movie::max("id"));
         // $id = DB::table('movies')->where('id', DB::raw("(select max(`id`) from movies)"))->first();
         // dd($id);
         // $db = DB::table("movies")->where('id', $id)->first();

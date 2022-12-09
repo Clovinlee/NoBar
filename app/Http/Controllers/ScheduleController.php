@@ -54,6 +54,12 @@ class ScheduleController extends Controller
             $s->save();
         }
     }
+    public function Dashboard(Request $r)
+    {
+        if ($r->ajax()) {
+            return json_encode(Schedule::schedulesetelah());
+        }
+    }
     public function index()
     {
         //

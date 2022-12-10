@@ -35,25 +35,81 @@
                         <div class="widget-title mb-50">
                             <h5 class="title">History</h5>
                             <br>
-                            <div class="contact-form">
+                            <div class="contact">
                                 {{-- @foreach ($itemBuy as $H)
                                     $movie = H->schedule->movie
                                     $transaction = H --}}
                                 @foreach($itemBuy as $a)
-                                    <div style="border: 1px; color: white; background-color: rgb(39, 39, 39); border-radius: 25px; padding: 3%">
-                                        Movie: {{$movie = $a->schedule->movie->judul}} <br>
-                                        <hr>
-                                        Waktu Pesan: {{$transaction = $a->created_at}} <br>
-                                        seat:@foreach($seat as $s)
-                                            {{$s->seat}};
-                                        @endforeach 
-                                        <br>
-                                        {{-- seat: {{$seat= $a->seat}} <br> --}}
-                                        
-                                        Total: Rp.{{$a['total']}},- 
-                                        {{-- <hr> --}}
+                                    <div class="col-10 my-3" width="100%" style="color: white; background-color: rgb(39, 39, 39); border-radius: 25px; padding: 3%">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <center>
+                                                        <img src="{{asset('assets/images/'.$a->schedule->movie->image)}}" style="width: 60%; height: 60%;">
+                                                    </center>
+                                                </td>
+                                                <td style="width: 50%">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                Judul Film: 
+                                                            </td>
+                                                            <td style="color: yellow">
+                                                                {{$a->schedule->movie->judul}} 
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Waktu Pesan:
+                                                            </td>
+                                                            <td style="color: yellow">
+                                                                {{$a->created_at}}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                tempat duduk:
+                                                            </td>
+                                                            <td style="color: yellow">
+                                                                @foreach($seat as $s)
+                                                                {{$s->seat}};
+                                                                @endforeach 
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Total Pesanan:
+                                                            </td>
+                                                            <td style="color: yellow">
+                                                                Rp.{{$a['total']}},- 
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <button class="btn btn-warning">QR Code</button>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-danger">Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    {{-- Movie: {{$a->schedule->movie->judul}} 
+                                                    <br>
+                                                    Waktu Pesan: {{$a->created_at}} 
+                                                    <br> --}}
+                                                    {{-- seat:  --}}
+                                                    {{-- {{$a->schedule->studio->chair}} --}}
+                                                    {{-- @foreach($seat as $s)
+                                                        {{$s->seat}};
+                                                    @endforeach  --}}
+                                                    {{-- <br> --}}
+                                                    {{-- seat: {{$seat= $a->seat}} <br> --}}
+                                                    
+                                                    {{-- Total: Rp.{{$a['total']}},-  --}}
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                    <br>
                                 @endforeach
                                 {{-- <table>
                                     <tr>

@@ -40,7 +40,10 @@
 <link rel="stylesheet" href="{{ url('/css/style.css') }}">
 <link rel="stylesheet" href="{{ url('/css/responsive.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
+{{-- datatables --}}
 <link rel="stylesheet" href="{{url('https://cdn.datatables.net/1.13.1/css/dataTables.foundation.min.css')}}">
+<link rel="stylesheet" href="{{'https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css'}}">
+<link rel="stylesheet" href="{{url('https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css')}}">
 
 <style>
 </style>
@@ -78,6 +81,7 @@
 <!--DataTable-->
 <script src="{{url('https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{url('https://cdn.datatables.net/1.13.1/js/dataTables.foundation.min.js')}}"></script>
+<script src="{{url('https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js')}}" charset="utf-8"></script>
 
 <!--BusyLoad-->
 <script src="https://cdn.jsdelivr.net/npm/busy-load/dist/app.min.js"></script>

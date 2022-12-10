@@ -1,3 +1,8 @@
+<style type="text/css" media="print">
+    @media print{
+        nav {display : none;}
+    }
+</style>
 <main style="margin-top:8px;">
     <div class="container pt-4" id="manager">
         <div class="row" style="margin-left: 2px;margin-right: 2px;">
@@ -7,6 +12,8 @@
             <label for="" class="form-label">Range tanggal : </label>
             <input type="date" name="start" id="awal" >  S/D <input type="date" name="end" id="akhir">
             <button id="btnTampil" class="btn btn-primary">Tampil</button>
+            <div style="height: 10px"></div>
+            <button id="generate" class="btn btn-primary">Generate to pdf</button>
             <br>
             <h3 style=" color:black" id="total_laporan">Total semua Transaksi : Rp. {{number_format($jumlah,2,',','.')}}</h3>
             <hr>
@@ -62,7 +69,6 @@
                     @endforelse
                 </tbody>
             </table>
-            <button id="generate" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>
 </main>

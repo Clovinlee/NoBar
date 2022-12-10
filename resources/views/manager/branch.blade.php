@@ -7,11 +7,12 @@
             <label for="" class="form-label">Range tanggal : </label>
             <input type="date" name="start" id="awalBranch" >  S/D <input type="date" name="end" id="akhirBranch">
             <button id="btnTampilBranch" class="btn btn-primary">Tampil</button>
+            <div style="height: 10px"></div>
+            <button id="generateBranch" class="btn btn-primary">Generate to pdf</button>
             <hr>
             <h1 style=" color:black">Laporan branch paling banyak dikunjungi</h1>
             <canvas id="myChart_semua_branch" height="100px"></canvas>
             <hr>
-            <button id="generateBranch" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>
 </main>

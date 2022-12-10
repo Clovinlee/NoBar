@@ -9,6 +9,8 @@
             <label for="" class="form-label">Range tanggal : </label>
             <input type="date" name="start" id="awalSnack" >  S/D <input type="date" name="end" id="akhirSnack">
             <button class="btn btn-primary" id="btnTampilSnack">TampilSnack</button>
+            <div style="height: 10px"></div>
+            <button id="generateSnack" class="btn btn-primary">Generate to pdf</button>
             <br>
             <canvas id="myChart_semua_snack" height="100px"></canvas><br>
             <hr>
@@ -63,7 +65,6 @@
             <hr>
             
             
-            <button id="generateSnack" class="btn btn-primary">Generate to pdf</button>
             {{-- <h3 style=" color:black">Total snack terjual : {{$total_snack}}</h3> --}}
         </div>
     </div>

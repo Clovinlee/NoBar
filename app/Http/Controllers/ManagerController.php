@@ -166,13 +166,13 @@ class ManagerController extends Controller
             $awal = $awal . " 00:00:00";
             $akhir = $akhir . " 23:59:59";
     
-            $cek = DB::select('SELECT m.id as id,m.judul as judul,COUNT(d.seat) as terjual FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id RIGHT join movies m on s.movie_id = m.id and h.created_at BETWEEN ? and ? GROUP by m.judul,m.id order by 1', [$awal,$akhir] );
+            $cek = DB::select('SELECT m.id as id,m.judul as judul,COUNT(d.seat) as terjual FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id join movies m on s.movie_id = m.id and h.created_at BETWEEN ? and ? GROUP by m.judul,m.id order by 1', [$awal,$akhir] );
             $tipe = "Data yang ditampilkan adalah transaksi yang terjadi pada tanggal ".$awal." s/d ".$akhir;
     
             $cek2 = array_map(function($item) {
                 return $item->terjual;
             }, $cek);
-            $jumlah = DB::select('SELECT COUNT(d.seat) as terjual FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id RIGHT join movies m on s.movie_id = m.id and h.created_at BETWEEN ? and ?  order by 1',[$awal,$akhir]);
+            $jumlah = DB::select('SELECT COUNT(d.seat) as terjual FROM htrans h join dtrans d on d.htrans_id = h.id join schedules s on h.schedule_id = s.id join movies m on s.movie_id = m.id and h.created_at BETWEEN ? and ?  order by 1',[$awal,$akhir]);
             $apa = new stdClass;
             $apa->cek = $cek;
             $apa->cek2 = $cek2;
@@ -192,7 +192,7 @@ class ManagerController extends Controller
             $awal = $awal . " 00:00:00";
             $akhir = $akhir . " 23:59:59";
     
-            $cek = DB::select('select h.id as id,u.name as nama, s.nama as label,s.harga as harga, ifnull(sum(d.qty),0) as count,h.total as total FROM htranssnacks h join dtranssnacks d on h.id = d.htranssnack_id and h.created_at BETWEEN ? and ? RIGHT join snacks s on d.snack_id = s.id join users u on h.user_id = u.id GROUP by s.nama,h.id,u.name,s.harga,h.total ', [$awal,$akhir] );
+            $cek = DB::select('select h.id as id,u.name as nama, s.nama as label,s.harga as harga, ifnull(sum(d.qty),0) as count,h.total as total FROM htranssnacks h join dtranssnacks d on h.id = d.htranssnack_id and h.created_at BETWEEN ? and ? join snacks s on d.snack_id = s.id join users u on h.user_id = u.id GROUP by s.nama,h.id,u.name,s.harga,h.total ', [$awal,$akhir] );
             $tipe = "Data yang ditampilkan adalah transaksi yang terjadi pada tanggal ".$awal." s/d ".$akhir;
     
             $cek2 = array_map(function($item) {
@@ -252,7 +252,7 @@ class ManagerController extends Controller
             $akhir = $akhir . " 23:59:59";
     
             $branch = DB::select('select b.nama as label, count(h.id) as count FROM 
-            htrans h join schedules sch on h.schedule_id = sch.id and h.created_at BETWEEN ? and ? right join branches b on b.id = sch.branch_id GROUP by b.nama',[$awal,$akhir]);
+            htrans h join schedules sch on h.schedule_id = sch.id and h.created_at BETWEEN ? and ? join branches b on b.id = sch.branch_id GROUP by b.nama',[$awal,$akhir]);
     
             $branch_label = array_map(function($item) {
                 return $item->label;

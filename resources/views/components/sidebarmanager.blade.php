@@ -21,6 +21,36 @@
   z-index: 600;
 }
 
+nav{
+  background-color: #252631;
+  color: white;
+}
+
+.list-group-item-action{
+  background-color: #252631;
+  color: white;
+}
+
+.list-group-item:active{
+  background-color: black; 
+  color: white;
+}
+
+.list-group-item-action:active{
+  background-color: black;
+  color: white;
+}
+
+.list-group-item.active{
+  background-color: yellow; 
+  color: black;
+}
+
+.list-group-item-action.active{
+  background-color: yellow;
+  color: black;
+}
+
 @media (max-width: 991.98px) {
   .sidebar {
     width: 100%;
@@ -135,6 +165,7 @@
       </a>
       <!-- Search form -->
 
+      <H5 style="color: black">Welcome, {{Auth::user()->name}}</H5>
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
         <form action="{{url('/logout')}}" method="post">

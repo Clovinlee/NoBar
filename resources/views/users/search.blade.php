@@ -46,7 +46,8 @@
     </div>
 </div> --}}
 @if ($hasil->hasPages())
-    <div class="pagination-wrapper">
+    <div class="d-flex justify-content-center align-items-center
+    pagination">
          {{ $hasil->links() }}
     </div>
 @endif

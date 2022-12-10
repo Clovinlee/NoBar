@@ -8,11 +8,12 @@
             <label for="" class="form-label">Range tanggal : </label>
             <input type="date" name="start" id="awalHari" > S/D <input type="date" name="end" id="akhirHari">
             <button id="btnTampilHari" class="btn btn-primary">Tampil</button>
+            <div style="height: 10px"></div>
+            <button id="generateHari" class="btn btn-primary">Generate to pdf</button>
             <hr>
             <h1 style=" color:black">Laporan hari paling ramai</h1>
             <canvas id="myChart_hari" height="100px"></canvas>
             <hr>
-            <button id="generateHari" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>
 </main>

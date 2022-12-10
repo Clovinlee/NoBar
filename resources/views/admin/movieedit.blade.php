@@ -1,5 +1,5 @@
 <main style="margin-top:58px">
-  <h1 class="text-dark">Edit Movie</h1>
+  <h1 class="">Edit Movie</h1>
     <div class="form-control" style="width: 40%">
       Judul Film :<input class= "form-control" type="text" id="movie_judul_edit"><br>
       Poster Film : <input type="file" name="" id="img">

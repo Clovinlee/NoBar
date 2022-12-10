@@ -1,7 +1,7 @@
 <main style="margin-top:58px">
   <div class="container pt-4" id="branch">
     <section class="mb-4">
-      <h1 style="color: black">Snack</h1>
+      <h1>Snack</h1>
       <br>
       <br>
       <button class="btn btn-primary"  data-mdb-toggle="modal" data-mdb-target="#modaladdSnack">Add new Snack!</button>
@@ -22,7 +22,7 @@
                   </a>
                 </div>
                 <div class="card-body" style="height: 250px">
-                  <h5 class="card-title text-dark">{{$m->nama}}</h5> 
+                  <h5 class="card-title ">{{$m->nama}}</h5> 
                   <p class="card-text">
                     Tipe :
                     {{$m->tipe}}<br>

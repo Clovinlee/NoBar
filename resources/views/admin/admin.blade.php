@@ -2,8 +2,29 @@
 @section("subtitle","Admin")
 @section('body')
 <style>
+    .accordion-button{
+    background-color:#252631 !important;
+  }
+  .accordion-collapse{
+    background-color:#252631;
+  }
+  .accordion-header{
+    background-color:#252631;
+  }
+  .accordion-item{
+    background-color:#252631;
+  }
     div.dataTables_processing div {
         display: none;
+    }
+    #search_branch{
+        color:white;
+    }
+    .input-sm{
+        color: white !important;
+    }
+    .input-sm:active{
+        color: white;
     }
 </style>
 <x-sidebaradmin></x-sidebaradmin>
@@ -67,7 +88,7 @@
                 aria-expanded="false"
                 aria-controls="collapse${b.id}"
               >
-              <h2 class="text-dark">${b.nama}</h2>
+              <h2 class="">${b.nama}</h2>
 
               </button>
             </h2>
@@ -115,17 +136,17 @@
                 if (da.length>0) {
                     da.forEach(d => {
                         str+=`<div class="border border-dark border-top-5 border-bottom-5 border-end-0 border-start-0" >
-                    <h4 class="text-dark">${d.nama}</h4>`
+                    <h4 class="">${d.nama}</h4>`
                     if (d.time==null) {
-                        str+=`<h5 class="text-dark">Belum ada film di cabang ${d.nama}</h5>`
+                        str+=`<h5 class="">Belum ada film di cabang ${d.nama}</h5>`
                     } else {
-                        str+=`<h5 class="text-dark">${d.film}</h5>
-                            <h5 class="text-dark">${d.time}</h5>`
+                        str+=`<h5 class="">${d.film}</h5>
+                            <h5 class="">${d.time}</h5>`
                     }
                     str+=`</div>` 
                     });
                 }else{
-                    str+=`<h4 class="text-dark">Belum ada branch!</h4>`
+                    str+=`<h4 class="">Belum ada branch!</h4>`
                 }
                 $("#sb").html(str)
             }   
@@ -140,13 +161,13 @@
                 var str="<center>"
                 if (d!=null) {
                     str+=`<img src="{{asset('assets/images/${d.image}')}}" alt="${d.slug}"   srcset=""><br>
-                <h4 class="text-dark">${d.judul}</h4>
-                <h5 class="text-dark">Genre :</h5>    
-                <h5 class="text-dark">${d.genre}}</h5>
-                <h5 class="text-dark">Durasi :</h5>    
-                <h5 class="text-dark">${d.duration} menit</h5>`
+                <h4 class="">${d.judul}</h4>
+                <h5 class="">Genre :</h5>    
+                <h5 class="">${d.genre}}</h5>
+                <h5 class="">Durasi :</h5>    
+                <h5 class="">${d.duration} menit</h5>`
                 } else {
-                    str+=`<h4 class="text-dark">Belum ada Movie!</h4>`
+                    str+=`<h4 class="">Belum ada Movie!</h4>`
                 }
                 str+="</center>"
                 $("#newmovie").html(str)
@@ -164,13 +185,13 @@
                 var str="<center>"
                 if (d!=null) {
                     str+=`<img src="{{asset('assets/images/${d.foto}')}}" alt="" srcset=""><br>
-                        <h5 class="text-dark">${d.nama}</h5>
-                        <h5 class="text-dark">jenis : </h5> 
-                        <h5 class="text-dark">${d.tipe}</h5>   
-                        <h5 class="text-dark">Harga :</h5> 
-                        <h5 class="text-dark">Rp. ${d.harga.toLocaleString('en-US')}</h5>`
+                        <h5 class="">${d.nama}</h5>
+                        <h5 class="">jenis : </h5> 
+                        <h5 class="">${d.tipe}</h5>   
+                        <h5 class="">Harga :</h5> 
+                        <h5 class="">Rp. ${d.harga.toLocaleString('en-US')}</h5>`
                 } else {
-                    str+=`<h4 class="text-dark">Belum ada Snack!</h4>`
+                    str+=`<h4 class="">Belum ada Snack!</h4>`
                 }
                 str+="</center>"
                 $("#newsnack").html(str)
@@ -228,7 +249,7 @@
         var c = ""
         var i = 0
         produser.forEach(p => {
-            c += "<div class='d-flex justify-content-between align-item-center my-2 py-3 border-dark border-3 border-top border-bottom'><h6 class='d-inline-block text-dark align-middle mt-2'>" + p +
+            c += "<div class='d-flex justify-content-between align-item-center my-2 py-3 border-dark border-3 border-top border-bottom'><h6 class='d-inline-block  align-middle mt-2'>" + p +
                 "</h6><button class='btn btn-danger justify-content-end align-items-center' onclick='delproducer(event)' value='" +
                 i + "'><i class='fa-solid fa-trash-can fa-2x'></i></button></div>"
             i++
@@ -240,7 +261,7 @@
         var c = ""
         var i = 0
         director.forEach(d => {
-            c += "<div class='d-flex justify-content-between align-item-center my-2 py-3 border-dark border-3 border-top border-bottom'><h6 class='d-inline-block text-dark align-middle mt-2'>" + d +
+            c += "<div class='d-flex justify-content-between align-item-center my-2 py-3 border-dark border-3 border-top border-bottom'><h6 class='d-inline-block  align-middle mt-2'>" + d +
                 "</h6><button class='btn btn-danger justify-content-end align-items-center' onclick='deldirektur(event)' value='" +
                 i + "'><i class='fa-solid fa-trash-can fa-2x'></i></button></div>"
             i++
@@ -252,7 +273,7 @@
         var c = ""
         var i = 0
         casts.forEach(ca => {
-            c += "<div class='d-flex justify-content-between align-item-center my-2 py-3 border-dark border-3 border-top border-bottom'><h6 class='d-inline-block text-dark align-middle mt-2'>" + ca +
+            c += "<div class='d-flex justify-content-between align-item-center my-2 py-3 border-dark border-3 border-top border-bottom'><h6 class='d-inline-block  align-middle mt-2'>" + ca +
                 "</h6><button class='btn btn-danger justify-content-end align-items-center' onclick='delcast(event)' value='" +
                 i + "'><i class='fa-solid fa-trash-can fa-2x'></i></button></div>"
             i++
@@ -279,7 +300,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
               <img src="{{asset('assets/images/${m.image}')}}" class="img-fluid" alt="${m.slug}"/>
             </div>
             <div class="card-body pl-2">
-              <h5 class="card-title text-dark">${m.judul}</h5>
+              <h5 class="card-title ">${m.judul}</h5>
               <p class="card-text">
                 Genre :<br>
                 ${m.genre}<br>
@@ -808,6 +829,13 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
         cbranch = $(this).attr("data-id")
         $("#modaladdstudioh5").text("Add new Studio for " + d)
     })
+    $('#btnaddmovie').on("click", function () {
+        $("#div_add").css("display", "block")
+        $("#div_movie").css("display", "none")
+        $("#addmovie").val("add")
+        $("#addmovie").text("Tambah Film")
+        $("#juduladd").text("Tambah Film Baru")
+    })
     $("#movsec").on('click', '.delmovie', function (e) {
         const d = $(this).attr("d")
         cmov = $(this).val()
@@ -853,7 +881,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
                 <img src="{{asset('assets/images/${d.foto}')}}" style='height: 150px;' class='img-fluid' alt='${d.slug}' />
             </div>
             <div class='card-body' style='height: 250px'>
-                <h5 class='card-title text-dark'>${d.nama}</h5>
+                <h5 class='card-title '>${d.nama}</h5>
                 <p class='card-text'>Harga :Rp.${d.harga}<br>Tipe :${d.tipe}<br> Deskripsi: ${d.deskripsi} <br></p> 
             </div>
             <div class="d-flex justify-content-center mb-10">            

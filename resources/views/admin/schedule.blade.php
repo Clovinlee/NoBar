@@ -1,14 +1,26 @@
+<style>
+  label{
+    color: white;
+  }
+  tr{
+    color:white;
+  }
+  select.form-control option {
+        color: white;
+        background-color: #252631;
+    }
+</style>
 <main style="margin-top:58px">
   <div class="container pt-4" id="branch">
     <section class="mb-4">
-      <h1 class="text-dark">Jadwal {{$data->schedule->nama}}</h1>
+      <h1 class="">Jadwal {{$data->schedule->nama}}</h1>
       <br>
       @if (count($data->movie)>0 && count($data->studio)>0)
     <button type="button" class="btn btn-primary" data-mdb-toggle="modal" id="btnaddschedule" data-mdb-target="#tambahschedule">Add new schedule</button>
     @endif
     <br><br>
       <center class="col-12">
-        <table class="table table-striped" id="schedule_table" style="min-width:100%">
+        <table class="table" id="schedule_table" style="min-width:100%">
           <thead>
             <tr>
             <th>Branch</th>
@@ -111,7 +123,7 @@
       </div>
         <div class="modal-body">
           <div class="form-outline mb-4">
-            Hapus Jadwal ini?
+            <h3 class="text-dark">Hapus Jadwal ini?</h3>
           </div>
         </div>
         <div class="modal-footer">

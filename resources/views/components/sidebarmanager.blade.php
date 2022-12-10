@@ -1,7 +1,7 @@
 
 <style>
   body {
-  background-color: #fbfbfb;
+  background-color: white;
 }
 @media (min-width: 991.98px) {
   main {
@@ -23,6 +23,11 @@
 
 nav{
   background-color: #252631;
+  color: white;
+}
+
+.list-group-item{
+  background-color: #252631; 
   color: white;
 }
 

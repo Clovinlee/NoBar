@@ -903,10 +903,13 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
               var d = JSON.parse(data,false)
               // alert(data);
               ReloadSnack(d)
+              Toast("success", "success", "Berhasil menambahkan snack!"); 
             },
             error: function (xhr, ajaxOptions, thrownError) {
-              alert(xhr.status);
-              alert(thrownError);
+            //   alert(xhr.status);
+            //   alert(thrownError);
+              Toast("error", "error", xhr.status);
+              Toast("error", "error", thrownError);
               console.log(xhr.responseText);
             }
           }); 
@@ -935,6 +938,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
           success:function(data){
             var d=JSON.parse(data,false)
             ReloadSnack(d)
+            Toast("success", "success", "Berhasil delete snack!");
           }
         })
     })
@@ -992,10 +996,13 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
           success: function(data){
             var d	=	JSON.parse(data,false)
             ReloadSnack(d);
+            Toast("success", "success", "Berhasil mengedit snack!"); 
           },
           error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
+            // alert(xhr.status);
+            // alert(thrownError);
+            Toast("error", "error", xhr.status);
+            Toast("error", "error", thrownError);
             console.log(xhr.responseText);
           }
         }); 

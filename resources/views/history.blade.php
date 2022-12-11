@@ -43,9 +43,9 @@
                                 </form>
                             </div>
                             <div class="contact">
-                                <div class="accordion accordion-borderless" id="accordionFlushExampleX">
+                                <div class="accordion accordion" id="accordionFlushExampleX">
                                     @foreach($itemBuy as $a)
-                                    <div class="accordion-item" style="color: white; background-color: #252631">
+                                    <div class="accordion-item" style="color: white; background-color: #252631; border-bottom: 10%; border-bottom-color: rgb(255, 251, 0);">
                                         <h2 class="accordion-header" id="{{$a->id}}">
                                             <button class="accordion-button collapsed" 
                                             type="button" 
@@ -53,15 +53,13 @@
                                             data-mdb-target="#panelsStayOpen-{{$a->id}}" 
                                             aria-expanded="true" 
                                             aria-controls="panelsStayOpen-{{$a->id}}"
-                                            style="color: white; background-color: #252631">
+                                            style="color: white; background-color: #252631;">
                                             {{$a->created_at}}
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-{{$a->id}}" 
-                                            class="accordion-collapse collapse"
-                                            aria-labelledby="headingOneX">
+                                        <div id="panelsStayOpen-{{$a->id}}" class="accordion-collapse collapse" aria-labelledby="headingOneX"  style="border-top: 10px; border-top-color: red;">
                                             <div class="accordion-body">
-                                            <div class="col-10 my-3" width="100%" style="color: white; background-color: #252631; border-radius: 25px; padding: 3%">
+                                            <div class="col-10 my-3" width="100%" style="color: white; background-color: #252631; border-radius: 25px; padding: 3%;">
                                                 <table>
                                                     <tr>
                                                         <td>

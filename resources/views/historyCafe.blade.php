@@ -36,9 +36,9 @@
                             <h5 class="title">History Cafe</h5>
                             <br>
                             <div class="contact">
-                                <div class="accordion accordion-borderless" id="accordionFlushExampleX">
+                                <div class="accordion accordion" id="accordionFlushExampleX">
                                     @foreach($itemBuy as $a)
-                                    <div class="accordion-item" style="color: white; background-color: #252631">
+                                    <div class="accordion-item" style="color: white; background-color: #252631; border-bottom: 10%; border-bottom-color: rgb(255, 251, 0);">
                                         <h2 class="accordion-header" id="{{$a->id}}">
                                             <button class="accordion-button collapsed" 
                                             type="button" 

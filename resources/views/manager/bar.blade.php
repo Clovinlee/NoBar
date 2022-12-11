@@ -4,12 +4,15 @@
     <div class="container pt-4" id="manager">
         <div class="row" style="margin-left: 2px;margin-right: 2px">
             <h1 style="color:white">Film yang terjual 1 tahun terakhir</h1>
-            <canvas id="myChart_semua_movie" height="100px"></canvas><br><hr>
+            <canvas id="myChart_semua_movie" height="100px" style="background-color:white"></canvas>
+            <div style="height: 10px"></div>
             <label for="" class="form-label" style="color:white">Range tanggal : </label>
             <input type="date" name="start" id="awalMovie" >  S/D <input type="date" name="end" id="akhirMovie">
+            <div style="height: 10px"></div>
             <button id="btnTampilMovie" class="btn btn-primary" style="color:white">Tampil</button>
             <div style="height: 10px"></div>
             <button id="generateMovie" class="btn btn-primary" style="color:white">Generate to pdf</button>
+            <div style="height: 10px"></div>
             <h3 id="movie_terjual" style="color:white">Total tiket terjual : {{$total_movie}} pcs</h3>
             <hr>
             <table class="table table-sm" border="1px" id="" style="color:white">

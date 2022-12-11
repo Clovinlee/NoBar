@@ -1,4 +1,5 @@
 @extends('master.masterlayout')
+@section("subtitle","Manager")
 @section('body')
 <x-sidebarmanager></x-sidebarmanager>
     <div>

@@ -8,11 +8,12 @@
             <h1 style="color:white">Bar chart snack yang dipesan</h1>
             <label for="" class="form-label" style="color:white">Range tanggal : </label>
             <input type="date" name="start" id="awalSnack" >  S/D <input type="date" name="end" id="akhirSnack">
+            <div style="height: 10px"></div>
             <button class="btn btn-primary" id="btnTampilSnack" style="color:white">TampilSnack</button>
             <div style="height: 10px"></div>
             <button id="generateSnack" class="btn btn-primary" style="color:white">Generate to pdf</button>
-            <br>
-            <canvas id="myChart_semua_snack" height="100px"></canvas><br>
+            <div style="height: 10px"></div>
+            <canvas id="myChart_semua_snack" height="100px" style="background-color:white"></canvas><br>
             <hr>
             <h3 id="snack_terjual" style="color:white">Total snack terjual : {{$total_snack}} pcs</h3>
             <hr>

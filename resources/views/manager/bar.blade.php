@@ -3,15 +3,16 @@
 <main style="margin-top:8px">
     <div class="container pt-4" id="manager">
         <div class="row" style="margin-left: 2px;margin-right: 2px">
-            <h1 style=" color:black">Film yang terjual 1 tahun terakhir</h1>
+            <h1 style="color:white">Film yang terjual 1 tahun terakhir</h1>
             <canvas id="myChart_semua_movie" height="100px"></canvas><br><hr>
-            <label for="" class="form-label">Range tanggal : </label>
+            <label for="" class="form-label" style="color:white">Range tanggal : </label>
             <input type="date" name="start" id="awalMovie" >  S/D <input type="date" name="end" id="akhirMovie">
-            <button id="btnTampilMovie" class="btn btn-primary">Tampil</button>
+            <button id="btnTampilMovie" class="btn btn-primary" style="color:white">Tampil</button>
+            <div style="height: 10px"></div>
+            <button id="generateMovie" class="btn btn-primary" style="color:white">Generate to pdf</button>
+            <h3 id="movie_terjual" style="color:white">Total tiket terjual : {{$total_movie}} pcs</h3>
             <hr>
-            <h3 style=" color:black" id="movie_terjual">Total tiket terjual : {{$total_movie}} pcs</h3>
-            <hr>
-            <table class="table table-sm" border="1px" id="">
+            <table class="table table-sm" border="1px" id="" style="color:white">
                 <thead>
                     <tr class="fw-bold">
                         <td>
@@ -25,7 +26,7 @@
                         </td>
                     </tr>
                 </thead>
-                <tbody id="report_body_movie">
+                <tbody id="report_body_movie" style="color:white">
                     @forelse ($report_all_movie as $tipe=>$item)
                     <tr height="70px" class="align-middle">
                         <td>
@@ -47,7 +48,6 @@
             </table>
             <hr>
             
-            <button id="generateMovie" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>
 </main>

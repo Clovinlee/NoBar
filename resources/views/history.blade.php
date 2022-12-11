@@ -1,6 +1,6 @@
 @extends('master.masterlayout')
 
-@section('subtitle',"Membership")
+@section('subtitle',"History")
 
 @section('navbar')
 <x-navbar></x-navbar>

@@ -41,10 +41,10 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title ">Delete Movie</h5>
+          <h5 class="modal-title text-dark">Delete Movie</h5>
           <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
-        <h4 class="">Anda yakin mau hapus film ini?</h4>
+        <h4 class="text-dark">Anda yakin mau hapus film ini?</h4>
           <div class="modal-footer" style="align-content: center">
             <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">No</button>
             <button type="button" class="btn btn-danger" data-mdb-dismiss="modal" id="deletemovie">Yes</button>

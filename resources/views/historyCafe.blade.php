@@ -36,84 +36,77 @@
                             <h5 class="title">History Cafe</h5>
                             <br>
                             <div class="contact">
-                                {{-- @foreach ($itemBuy as $H)
-                                    $movie = H->schedule->movie
-                                    $transaction = H --}}
-                                @foreach($itemBuy as $a)
-                                <div class="col-5 my-3" width="100%" style="color: white; background-color: rgb(39, 39, 39); border-radius: 25px; padding: 3%">
-                                    <table>
-                                        <tr>
-                                            {{-- <td> --}}
-                                                {{-- <center>
-                                                    <img src="{{asset('assets/images/'.$a->snack)}}" style="width: 80%; height: 80%;">
-                                                </center> --}}
-                                            {{-- </td> --}}
-                                            <td style="width: 50%;">
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            Snack Pesanan:
-                                                        </td>
-                                                        <td style="color: yellow">
-                                                            @foreach($snacks as $s)
-                                                                {{$s->snack->nama}};
-                                                            @endforeach 
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            Waktu Pesan:
-                                                        </td>
-                                                        <td style="color: yellow">
-                                                            {{$transaction = $a->created_at}}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            Total Pesanan:
-                                                        </td>
-                                                        <td style="color: yellow">
-                                                            Rp.{{$a['total']}},- 
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        {{-- <td>
-                                                            <button class="btn btn-warning">QR Code</button>
-                                                        </td> --}}
-                                                        <td>
-                                                            <button class="btn btn-danger">Delete</button>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                {{-- Pesanan: @foreach($snacks as $s)
-                                                {{$s->snack->nama}};
-                                                @endforeach  <br>
-                                                <hr>
-                                                Waktu Pesan: {{$transaction = $a->created_at}} <br> --}}
-                                                {{-- seat: {{$seat= $a->seat}} <br> --}}
-                                                
-                                                {{-- Total Pesanan: Rp.{{$a['total']}},-  --}}
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <div class="accordion accordion-borderless" id="accordionFlushExampleX">
+                                    @foreach($itemBuy as $a)
+                                    <div class="accordion-item" style="color: white; background-color: #252631">
+                                        <h2 class="accordion-header" id="{{$a->id}}">
+                                            <button class="accordion-button collapsed" 
+                                            type="button" 
+                                            data-mdb-toggle="collapse"
+                                            data-mdb-target="#panelsStayOpen-{{$a->id}}" 
+                                            aria-expanded="true" 
+                                            aria-controls="panelsStayOpen-{{$a->id}}"
+                                            style="color: white; background-color: #252631">
+                                            {{$a->created_at}}
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-{{$a->id}}" 
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="headingOneX">
+                                            <div class="accordion-body">
+                                                <div class="col-5 my-3" width="100%" style="color: white; background-color: #252631; border-radius: 25px; padding: 3%">
+                                                    <table>
+                                                        <tr>
+                                                            {{-- <td> --}}
+                                                                {{-- <center>
+                                                                    <img src="{{asset('assets/images/'.$a->snack)}}" style="width: 80%; height: 80%;">
+                                                                </center> --}}
+                                                            {{-- </td> --}}
+                                                            <td style="width: 50%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Snack Pesanan:
+                                                                        </td>
+                                                                        <td style="color: yellow">
+                                                                            @foreach($snacks as $s)
+                                                                                {{$s->snack->nama}};
+                                                                            @endforeach 
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Waktu Pesan:
+                                                                        </td>
+                                                                        <td style="color: yellow">
+                                                                            {{$transaction = $a->created_at}}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Total Pesanan:
+                                                                        </td>
+                                                                        <td style="color: yellow">
+                                                                            Rp.{{$a['total']}},- 
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        {{-- <td>
+                                                                            <button class="btn btn-warning">QR Code</button>
+                                                                        </td> --}}
+                                                                        <td>
+                                                                            <button class="btn btn-danger">Delete</button>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                    </div>
+                                    
+                                    @endforeach
                                 </div>
-                                @endforeach
-                                {{-- <table>
-                                    <tr>
-                                        <th>user</th>
-                                        <th>transaction</th>
-                                        <th>schedule</th>
-                                        <th>Total</th>
-                                    </tr>
-                                        @foreach($itemBuy as $a)
-                                        <tr>
-                                            <td>{{$a['user_id']}}</td>
-                                            <td>{{$a['transaction_id']}}</td>
-                                            <td>{{$a['schedule_id']}}</td>
-                                            <td>{{$a['total']}}</td>
-                                        </tr>
-                                        @endforeach
-                                </table> --}}
                             </div>
                         </div>
                     </div>

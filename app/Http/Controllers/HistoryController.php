@@ -23,9 +23,14 @@ class HistoryController extends Controller
         $username = Auth::user()->id;
         $movie = Movie::all();
         $seat = Htrans::find(1)->dtrans; 
-        $itemBuy = Htrans::all()->where('user_id',$username);
+        $itemBuy = Htrans::where('user_id',$username)->orderBy('created_at','desc')->get();
+        // dd($itemBuy);
         return view('history',compact('itemBuy'),compact('seat'),compact('movie'));
-        
+    }
+    public function historyFilter(Request $request)
+    {
+        $username = Auth::user()->id;
+        $itemBuy = Htrans::whereDate('created_at',$request);
     }
     public function historyCafe()
     {

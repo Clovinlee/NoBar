@@ -5,7 +5,8 @@
             <canvas id="myChart_movie_snack" height="100px"></canvas>
             <hr>
             <label for="" class="form-label">Range tanggal : </label>
-            <input type="date" name="start" id="awal" >  S/D <input type="date" name="end" id="akhir">
+            <input type="date" name="start" id="awal" >  S/D 
+            <input type="date" name="end" id="akhir">
             <button id="btnTampil" class="btn btn-primary">Tampil</button>
             <br>
             <h3 style=" color:black" id="total_laporan">Total semua Transaksi : Rp. {{number_format($jumlah,2,',','.')}}</h3>

@@ -24,7 +24,6 @@
             {{-- Testing ISI FAQ --}}
             <h3>About NoBar</h3>
             <div class="accordion accordion-borderless" id="accordionFlushExampleX">
-
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingOneX">
                     <button class="accordion-button" type="button" data-mdb-toggle="collapse"

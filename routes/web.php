@@ -173,6 +173,7 @@ Route::prefix('/manager')->middleware("role:manager")->group(function(){
 Route::prefix("/user")->group(function() {
     Route::get("/", [UserController::class,"index"])->middleware(["auth","verified"]);
     Route::get("/history", [HistoryController::class,"history"])->middleware(["auth","verified"]);
+    // Route::get("/history", [HistoryController::class,"historyFilter"])->middleware(["auth","verified"]);
     Route::get("/historyCafe", [HistoryController::class,"historyCafe"])->middleware(["auth","verified"]);
     Route::get("/edit", [UserController::class,"edit_user"])->middleware(["auth","verified"]);
     Route::get("/movie/search", [UserController::class,"SearchMovie"]);

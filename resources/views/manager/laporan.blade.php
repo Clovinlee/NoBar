@@ -7,13 +7,15 @@
     <div class="container pt-4" id="manager">
         <div class="row" style="margin-left: 2px;margin-right: 2px;color:white">
             <h1 style="">Laporan profit 12 bulan terakhir</h1>
-            <canvas id="myChart_movie_snack" height="100px"></canvas>
-            <hr>
-            <label for="" class="form-label">Range tanggal : </label>
-            <input type="date" name="start" id="awal" >  S/D 
-            <input type="date" name="end" id="akhir">
-            <button id="btnTampil" class="btn btn-primary">Tampil</button>
-            <br>
+            <canvas id="myChart_movie_snack" height="100px" style="background-color:white"></canvas>
+            <div style="height: 10px"></div>
+            <label for="" class="form-label" style="color:white" >Range tanggal : </label>
+            <input type="date" name="start" id="awal">  S/D <input type="date" name="end" id="akhir">
+            <div style="height: 10px"></div>
+            <button id="btnTampil" class="btn btn-primary" style="color:white">Tampil</button>
+            <div style="height: 10px"></div>
+            <button id="generate" class="btn btn-primary" style="color:white">Generate to pdf</button>
+            <div style="height: 10px"></div>
             <h3 id="total_laporan" style="color:white">Total semua Transaksi : Rp. {{number_format($jumlah,2,',','.')}}</h3>
             <hr>
             <table class="table table-sm" border="1px" id="" style="color:white">

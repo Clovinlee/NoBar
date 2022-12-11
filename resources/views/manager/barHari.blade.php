@@ -5,14 +5,15 @@
 <main style="margin-top:8px">
     <div class="container pt-4" id="manager">
         <div class="row" style="margin-left: 2px;margin-right: 2px">
+            <h1 style="color:white">Laporan hari paling ramai</h1>
             <label for="" class="form-label" style="color:white">Range tanggal : </label>
             <input type="date" name="start" id="awalHari"> S/D <input type="date" name="end" id="akhirHari">
+            <div style="height: 10px"></div>
             <button id="btnTampilHari" class="btn btn-primary" style="color:white">Tampil</button>
             <div style="height: 10px"></div>
             <button id="generateHari" class="btn btn-primary" style="color:white">Generate to pdf</button>
             <hr>
-            <h1 style="color:white">Laporan hari paling ramai</h1>
-            <canvas id="myChart_hari" height="100px"></canvas>
+            <canvas id="myChart_hari" height="100px" style="background-color:white"></canvas>
             <hr>
         </div>
     </div>

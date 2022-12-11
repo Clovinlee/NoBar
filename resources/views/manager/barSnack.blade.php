@@ -5,18 +5,18 @@
 <main style="margin-top:8px">
     <div class="container pt-4" id="manager">
         <div class="row" style="margin-left: 2px;margin-right: 2px">
-            <h1 style=" color:black">Bar chart snack yang dipesan</h1>
-            <label for="" class="form-label">Range tanggal : </label>
+            <h1 style="color:white">Bar chart snack yang dipesan</h1>
+            <label for="" class="form-label" style="color:white">Range tanggal : </label>
             <input type="date" name="start" id="awalSnack" >  S/D <input type="date" name="end" id="akhirSnack">
-            <button class="btn btn-primary" id="btnTampilSnack">TampilSnack</button>
+            <button class="btn btn-primary" id="btnTampilSnack" style="color:white">TampilSnack</button>
             <div style="height: 10px"></div>
-            <button id="generateSnack" class="btn btn-primary">Generate to pdf</button>
+            <button id="generateSnack" class="btn btn-primary" style="color:white">Generate to pdf</button>
             <br>
             <canvas id="myChart_semua_snack" height="100px"></canvas><br>
             <hr>
-            <h3 style=" color:black" id="snack_terjual">Total snack terjual : {{$total_snack}} pcs</h3>
+            <h3 id="snack_terjual" style="color:white">Total snack terjual : {{$total_snack}} pcs</h3>
             <hr>
-            <table class="table table-sm" border="1px" id="">
+            <table class="table table-sm" border="1px" id="" style="color:white">
                 <thead>
                     <tr class="fw-bold">
                         <td>

@@ -196,7 +196,7 @@ nav{
       </a>
       <!-- Search form -->
 
-      <H5 style="color: black">Welcome, {{Auth::user()->name}}</H5>
+      <H5 style="color: white">Welcome, {{Auth::user()->name}}</H5>
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
         <form action="{{url('/logout')}}" method="post">

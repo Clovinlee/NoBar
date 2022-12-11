@@ -2,39 +2,39 @@
   .dboardContainer{
     border-radius: 25px;
     padding: 20px;
-    background-color: bisque;
+    background-color: #828282;
     box-shadow: 2px 2px 2px 2px black;
   }
 </style>
 <main style="margin-top:8px">
     <div class="container pt-4 " id="manager" style="width: 100%">
       <div class="row" style="margin-right: 2px">
-        <div class="col-12 col-md-6 dboardContainer">
+        <div class="col-12 col-md-6 dboardContainer" style="color:white">
           Pendapatan Movie hari ini : Rp. {{ number_format($profit,2,',','.') }}
           <br>
           <canvas id="myChart" height="100px" style="background-color:antiquewhite"></canvas>
         </div>
-        <div class="col-12 col-md-6 dboardContainer">
+        <div class="col-12 col-md-6 dboardContainer" style="color:white">
           Pendapatan Snack hari ini : Rp. {{ number_format($profit_snack,2,',','.') }}
           <br>
           <canvas id="myChart2" height="100px" style="background-color:antiquewhite"></canvas>
         </div>
-        <div class="col-12 dboardContainer">
+        <div class="col-12 dboardContainer" style="color:white">
           Pendapatan total hari ini : Rp. {{ $total }}
           <br>
           <canvas id="myChart6" height="100px" style="background-color:antiquewhite"></canvas>
         </div>
-        <div class="col-4 dboardContainer">
+        <div class="col-4 dboardContainer" style="color:white">
           Snack paling banyak dibeli 7 hari terakhir
           <br>
           <canvas id="myChart3" height="100px" style="background-color:antiquewhite"></canvas>
         </div>
-        <div class="col-4 dboardContainer">
+        <div class="col-4 dboardContainer" style="color:white">
           Branch paling ramai 7 hari terakhir
           <br>
           <canvas id="myChart4" height="250px" style="background-color:antiquewhite"></canvas>
         </div>
-        <div class="col-4 dboardContainer">
+        <div class="col-4 dboardContainer" style="color:white">
           Movie paling banyak dibeli 7 hari terakhir
           <br>
           <canvas id="myChart5" height="100px" style="background-color:antiquewhite"></canvas>

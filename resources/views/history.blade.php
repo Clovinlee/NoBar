@@ -1,6 +1,6 @@
 @extends('master.masterlayout')
 
-@section('subtitle',"Membership")
+@section('subtitle',"History")
 
 @section('navbar')
 <x-navbar></x-navbar>
@@ -25,7 +25,6 @@
 
 <!-- main-area -->
 <main>
-
     <!-- contact-area -->
     <section class="contact-area contact-bg" data-background="{{ asset('assets/img/bg/contact_bg.jpg') }}">
         <div class="container">
@@ -35,42 +34,90 @@
                         <div class="widget-title mb-50">
                             <h5 class="title">History</h5>
                             <br>
-                            <div class="contact-form">
-                                {{-- @foreach ($itemBuy as $H)
-                                    $movie = H->schedule->movie
-                                    $transaction = H --}}
-                                @foreach($itemBuy as $a)
-                                    <div style="border: 1px; color: white; background-color: rgb(39, 39, 39); border-radius: 25px; padding: 3%">
-                                        Movie: {{$movie = $a->schedule->movie->judul}} <br>
-                                        <hr>
-                                        Waktu Pesan: {{$transaction = $a->created_at}} <br>
-                                        seat:@foreach($seat as $s)
-                                            {{$s->seat}};
-                                        @endforeach 
-                                        <br>
-                                        {{-- seat: {{$seat= $a->seat}} <br> --}}
-                                        
-                                        Total: Rp.{{$a['total']}},- 
-                                        {{-- <hr> --}}
-                                    </div>
-                                    <br>
-                                @endforeach
-                                {{-- <table>
-                                    <tr>
-                                        <th>user</th>
-                                        <th>transaction</th>
-                                        <th>schedule</th>
-                                        <th>Total</th>
-                                    </tr>
-                                        @foreach($itemBuy as $a)
-                                        <tr>
-                                            <td>{{$a['user_id']}}</td>
-                                            <td>{{$a['transaction_id']}}</td>
-                                            <td>{{$a['schedule_id']}}</td>
-                                            <td>{{$a['total']}}</td>
-                                        </tr>
-                                        @endforeach
-                                </table> --}}
+                            <div class="col-10 my-3" width="100%" style="color: #252631; background-color: white; border-radius: 10px; padding: 1%">
+                                <form action="" method="get">
+                                    <label for="" class="form-label">Range tanggal : </label>
+                                    <input type="date" name="start" id="awal" >  S/D 
+                                    <input type="date" name="end" id="akhir">
+                                    <button class="btn btn-warning">Search</button>
+                                </form>
+                            </div>
+                            <div class="contact">
+                                <div class="accordion accordion" id="accordionFlushExampleX">
+                                    @foreach($itemBuy as $a)
+                                    <div class="accordion-item" style="color: white; background-color: #252631; border-bottom: 10%; border-bottom-color: rgb(255, 251, 0);">
+                                        <h2 class="accordion-header" id="{{$a->id}}">
+                                            <button class="accordion-button collapsed" 
+                                            type="button" 
+                                            data-mdb-toggle="collapse"
+                                            data-mdb-target="#panelsStayOpen-{{$a->id}}" 
+                                            aria-expanded="true" 
+                                            aria-controls="panelsStayOpen-{{$a->id}}"
+                                            style="color: white; background-color: #252631;">
+                                            {{$a->created_at}}
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-{{$a->id}}" class="accordion-collapse collapse" aria-labelledby="headingOneX"  style="border-top: 10px; border-top-color: red;">
+                                            <div class="accordion-body">
+                                            <div class="col-10 my-3" width="100%" style="color: white; background-color: #252631; border-radius: 25px; padding: 3%;">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <center>
+                                                                <img src="{{asset('assets/images/'.$a->schedule->movie->image)}}" style="width: 60%; height: 60%;">
+                                                            </center>
+                                                        </td>
+                                                        <td style="width: 50%">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        Judul Film: 
+                                                                    </td>
+                                                                    <td style="color: yellow">
+                                                                        {{$a->schedule->movie->judul}} 
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Waktu Pesan:
+                                                                    </td>
+                                                                    <td style="color: yellow">
+                                                                        {{$a->created_at}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        tempat duduk:
+                                                                    </td>
+                                                                    <td style="color: yellow">
+                                                                        @foreach($seat as $s)
+                                                                        {{$s->seat}};
+                                                                        @endforeach 
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Total Pesanan:
+                                                                    </td>
+                                                                    <td style="color: yellow">
+                                                                        Rp.{{number_format($a['total'])}},- 
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <button class="btn btn-info">QR Code</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>

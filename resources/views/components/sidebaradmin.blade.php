@@ -1,13 +1,12 @@
 <style>
   body {
-  background-color: #fbfbfb;
+  background-color: #4f4f4f;
 }
 @media (min-width: 991.98px) {
   main {
     padding-left: 240px;
   }
 }
-
 /* Sidebar */
 .sidebar {
   position: fixed;
@@ -29,7 +28,9 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
-
+nav{
+  background-color: #252631;
+}
 .sidebar-sticky {
   position: relative;
   top: 0;
@@ -38,11 +39,35 @@
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
+.list-group-item{
+  background-color: #252631; 
+  color: white;
+}
+
+.list-group-item-action{
+  background-color: #252631;
+}
+
+.list-group-item:active{
+  background-color: black; 
+}
+
+.list-group-item-action:active{
+  background-color: black;
+}
+
+.list-group-item.active{
+  background-color: yellow; 
+}
+
+.list-group-item-action.active{
+  background-color: yellow;
+}
 </style>
 <!--Main Navigation-->
 <header>
   <!-- Sidebar -->
-  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
         <span href="#" class="list-group-item list-group-item-action py-2 ripple pointer active" aria-current="true" onclick="PageChange(event)" target="0" id="nav_dashboard">
@@ -62,7 +87,7 @@
   <!-- Sidebar -->
 
   <!-- Navbar -->
-  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Toggle button -->
@@ -75,7 +100,7 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <i class="fas fa-bars"></i>
+        <i class="fas fa-bars text-white"></i>
       </button>
 
       <!-- Brand -->
@@ -87,7 +112,7 @@
       </ul>
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
-        <h3 class="text-dark me-5"> Hi, Admin {{Auth::user()->name}}</h3>
+        <h3 class="me-5"> Hi, Admin {{Auth::user()->name}}</h3>
         <form action="{{url('/logout')}}" method="post" class="d-inline">
           @csrf
         <button type="submit" class="btn btn-primary">LOGOUT</button>

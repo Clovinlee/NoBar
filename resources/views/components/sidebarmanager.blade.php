@@ -1,14 +1,40 @@
 
 <style>
   body {
-  background-color: #fbfbfb;
+    background-color: #4f4f4f;
+}
+nav{
+  background-color: #252631;
 }
 @media (min-width: 991.98px) {
   main {
     padding-left: 240px;
   }
 }
+.list-group-item{
+  background-color: #252631; 
+  color: white;
+}
 
+.list-group-item-action{
+  background-color: #252631;
+}
+
+.list-group-item:active{
+  background-color: black; 
+}
+
+.list-group-item-action:active{
+  background-color: black;
+}
+
+.list-group-item.active{
+  background-color: yellow; 
+}
+
+.list-group-item-action.active{
+  background-color: yellow;
+}
 /* Sidebar */
 .sidebar {
   position: fixed;
@@ -19,6 +45,41 @@
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
   width: 240px;
   z-index: 600;
+}
+
+nav{
+  background-color: #252631;
+  color: white;
+}
+
+.list-group-item{
+  background-color: #252631; 
+  color: white;
+}
+
+.list-group-item-action{
+  background-color: #252631;
+  color: white;
+}
+
+.list-group-item:active{
+  background-color: black; 
+  color: white;
+}
+
+.list-group-item-action:active{
+  background-color: black;
+  color: white;
+}
+
+.list-group-item.active{
+  background-color: yellow; 
+  color: black;
+}
+
+.list-group-item-action.active{
+  background-color: yellow;
+  color: black;
 }
 
 @media (max-width: 991.98px) {
@@ -51,13 +112,13 @@
 <!--Main Navigation-->
 <header>
   <!-- Sidebar -->
-  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
         
         {{-- <ul class="nav flex-column" id="nav_accordion"> --}}
         <ul class="sidenav-menu">
-          <span href="#" class="list-group-item list-group-item-action py-2 ripple pointer" aria-current="true" onclick="PageChange(event)" target="0" id="nav_dashboard">
+          <span href="#" class="list-group-item list-group-item-action py-2 ripple pointer active" aria-current="true" onclick="PageChange(event)" target="0" id="nav_dashboard">
             <i class="fas fa-tachometer-alt fa-fw me-3"></i>Main dashboard
           </span>
           <span onclick="PageChange(event)" href="/manager/laporan" target="1" id="nav_report_profit" class="list-group-item list-group-item-action py-2 ripple "><i class="fas fa-bar-chart fa-fw me-3" ></i>
@@ -113,7 +174,7 @@
   <!-- Sidebar -->
 
   <!-- Navbar -->
-  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Toggle button -->
@@ -130,11 +191,12 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand text-light" href="#">
         NOBAR MANAGER
       </a>
       <!-- Search form -->
 
+      <H5 style="color: white">Welcome, {{Auth::user()->name}}</H5>
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
         <form action="{{url('/logout')}}" method="post">

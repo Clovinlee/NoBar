@@ -1,10 +1,13 @@
+<style>
+  
+</style>
 <main style="margin-top:58px">
     <div class="container pt-4 col-7"  id="branch">
       <section class="mb-4">
-        <h1 class="text-dark">Branch</h1>
+        <h1 class="">Branch</h1>
         <div class="form-outline mb-4">
           <input type="text" class="form-control" id="search_branch" name="name"/>
-          <label class="form-label">Nama branch</label>
+          <label class="form-label text-white" >Nama branch</label>
         </div>
         <button class="btn btn-primary mb-4" id="btn_search_branch">Search</button><br>
         <button class="btn btn-primary mb-4"  data-mdb-toggle="modal" data-mdb-target="#modaladdbranch">Add new Branch here!</button>
@@ -21,7 +24,7 @@
                 aria-expanded="false"
                 aria-controls="collapse{{$b->id}}"
               >
-              <h2 class="text-dark">{{$b->nama}}</h2>
+              <h2 class="">{{$b->nama}}</h2>
 
               </button>
             </h2>

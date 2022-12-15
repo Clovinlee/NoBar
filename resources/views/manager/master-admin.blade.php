@@ -1,18 +1,18 @@
 <main style="margin-top:58px">
     <div class="container pt-4" id="manager">
       <section class="mb-4">
-        <h1 style="color: black">Master Karyawan</h1>
+        <h1 style="color:white">Master Karyawan</h1>
         <div id="containerkaryawan" style="width: 100%">
-          <table border="1px" class="table table-striped">
-              <tr>
-                  <th>Nama Karyawan</th>
-                  <th>Email Karyawan</th>
-                  <th>Register at</th>
-                  <th>Role</th>
-                  <th>Action</th>
+          <table border="1px" class="table table-striped" style="color:white">
+              <tr style="color:white">
+                  <th style="color:white">Nama Karyawan</th>
+                  <th style="color:white">Email Karyawan</th>
+                  <th style="color:white">Register at</th>
+                  <th style="color:white">Role</th>
+                  <th style="color:white">Action</th>
               </tr>
               @forelse ($admins as $item)
-                  <tr>
+                  <tr style="color:white">
                       <td>{{$item->name}}</td>
                       <td>{{$item->email}}</td>
                       <td>{{$item->created_at}}</td>

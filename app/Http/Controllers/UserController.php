@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function SearchMovie(Request $request){
         $tampung = $request->input("search");
-        $movie = DB::table('movies')->where('judul','like','%'.$tampung.'%')->paginate(3);
+        $movie = DB::table('movies')->where('judul','like','%'.$tampung.'%')->paginate(4);
         return view("users.search",[
             "hasil" => $movie,
             "key" => $tampung

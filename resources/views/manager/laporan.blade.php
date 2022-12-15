@@ -1,16 +1,24 @@
+<style type="text/css" media="print">
+    @media print{
+        nav {display : none;}
+    }
+</style>
 <main style="margin-top:8px;">
     <div class="container pt-4" id="manager">
-        <div class="row" style="margin-left: 2px;margin-right: 2px;">
-            <h1 style=" color:black">Laporan profit 12 bulan terakhir</h1>
-            <canvas id="myChart_movie_snack" height="100px"></canvas>
+        <div class="row" style="margin-left: 2px;margin-right: 2px;color:white">
+            <h1 style="">Laporan profit 12 bulan terakhir</h1>
+            <canvas id="myChart_movie_snack" height="100px" style="background-color:white"></canvas>
+            <div style="height: 10px"></div>
+            <label for="" class="form-label" style="color:white" >Range tanggal : </label>
+            <input type="date" name="start" id="awal">  S/D <input type="date" name="end" id="akhir">
+            <div style="height: 10px"></div>
+            <button id="btnTampil" class="btn btn-primary" style="color:white">Tampil</button>
+            <div style="height: 10px"></div>
+            <button id="generate" class="btn btn-primary" style="color:white">Generate to pdf</button>
+            <div style="height: 10px"></div>
+            <h3 id="total_laporan" style="color:white">Total semua Transaksi : Rp. {{number_format($jumlah,2,',','.')}}</h3>
             <hr>
-            <label for="" class="form-label">Range tanggal : </label>
-            <input type="date" name="start" id="awal" >  S/D <input type="date" name="end" id="akhir">
-            <button id="btnTampil" class="btn btn-primary">Tampil</button>
-            <br>
-            <h3 style=" color:black" id="total_laporan">Total semua Transaksi : Rp. {{number_format($jumlah,2,',','.')}}</h3>
-            <hr>
-            <table class="table table-sm" border="1px" id="">
+            <table class="table table-sm" border="1px" id="" style="color:white">
                 <thead>
                     <tr class="fw-bold">
                         <td>
@@ -62,7 +70,6 @@
                     @endforelse
                 </tbody>
             </table>
-            <button id="generate" class="btn btn-primary">Generate to pdf</button>
         </div>
     </div>
 </main>
@@ -104,9 +111,10 @@
             position: 'top',
             labels: {
             boxWidth: 80,
-            fontColor: 'black'
+            fontColor: '#fff'
             }
         }
+        
     };
 
     const config_tampil_htrans = {

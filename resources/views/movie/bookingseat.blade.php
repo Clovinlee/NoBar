@@ -103,7 +103,7 @@
 
                 </table>
             </div>
-            <h1 class="text-center mt-4"><strong>LAYAR</strong></h1>
+            <h1 class="text-center mt-4 text-dark"><strong>LAYAR</strong></h1>
             <div class="col-12 col-md-6 m-auto">
                 <button class="btn btn-danger w-100 mb-2 disabled" id="btnPay" onclick="confirmPay()">Confirm Order</button><br>
                 <a href="{{ url('/movie/'.$movie->slug.'/schedule') }}"><button class="btn btn-primary w-100">Kembali</button></a>

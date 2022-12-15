@@ -229,6 +229,7 @@
                         $("#selectmovie").val(null).trigger('change')
                         $("#addtime").val("")
                         dashboardreload()
+                        Toast("Success","success","Berhasil tambah jadwal")
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         alert(xhr.status);
@@ -237,10 +238,12 @@
                     }
                 })
             } else {
-                alert("Waktu tayang belum diisi!")
+                Toast("Error","danger","Waktu tayang belum diisi!")
+                //alert("Waktu tayang belum diisi!")
             }
         } else {
-            alert("Belum pilih studio!")
+            Toast("Error","danger","Belum pilih studio!")
+            //alert("Belum pilih studio!")
             $("#selectstudio").val(null).trigger('change')
         }
     })
@@ -333,6 +336,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             success: function (data) {
                 dt.ajax.reload()
                 dashboardreload()
+                Toast("Success","success","Berhasil ubah jadwal tayang")
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
@@ -416,6 +420,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             success: function (data) {
                 dt.ajax.reload()
                 dashboardreload()
+                Toast("Success","success","Berhasil hapus jadwal")
             }
         })
     })
@@ -486,10 +491,12 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
                 success: function (data) {
                     var d = JSON.parse(data, false)
                     Reload(d)
+                    Toast("Success","success","Berhasil ubah nama branch")
                 }
             })
         } else {
-            alert("Nama tidak boleh kosong!");
+            Toast("Error","danger","Nama tidak boleh kosong!")
+            //alert("Nama tidak boleh kosong!");
         }
     })
     $("#DeleteBranch").on("click", function () {
@@ -503,6 +510,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             success: function (data) {
                 var d = JSON.parse(data, false)
                 Reload(d)
+                Toast("Success","success","Berhasil hapus branch")
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
@@ -522,62 +530,93 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             success: function (data) {
                 var d = JSON.parse(data, false)
                 Reload(d)
+                Toast("Success","success","Berhasil hapus studio")
             }
         })
     })
     $("#EditStudio").on("click", function () {
         const nama = $("#nama_studio_edit").val()
         const slot = $("#slot_studio_edit").val()
-        dn = $.ajax({
-            type: "post",
-            url: '{{url("/admin/studio/edit")}}',
-            data: {
-                _token: '{{ csrf_token() }}',
-                nama: nama,
-                slot: slot,
-                id: cstudio
-            },
-            success: function (data) {
-                var d = JSON.parse(data, false)
-                Reload(d)
-            }
+        if (nama.length>0) {
+            if (slot>0) {
+                dn = $.ajax({
+                    type: "post",
+                    url: '{{url("/admin/studio/edit")}}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        nama: nama,
+                        slot: slot,
+                        id: cstudio
+                    },
+                    success: function (data) {
+                        var d = JSON.parse(data, false)
+                        Reload(d)
+                        Toast("Success","success","Berhasil edit studio")
+                    }
         })
+            } else {
+                Toast("Error","danger","Slot harus lebih besar dari 0!")
+            }
+        } else {
+            Toast("Error","danger","Nama studio belum diisi!")
+        }
     })
     $("#addproducer").on("click", function () {
         const tp = $("#movie_produser").val()
-        produser.push(tp)
-        $("#movie_produser").val("")
-        ReloadProducer()
+        if (tp.length>0) {
+            produser.push(tp)
+            $("#movie_produser").val("")
+            ReloadProducer()
+        } else {
+            Toast("Error","danger","Nama produser belum diisi!")
+        }
     })
     $("#adddirektur").on("click", function () {
         const tp = $("#movie_direktur").val()
-        director.push(tp)
-        $("#movie_direktur").val("")
-        ReloadDirector()
+        if (tp.length>0) {
+            director.push(tp)
+            $("#movie_direktur").val("")
+            ReloadDirector()
+        } else {
+            Toast("Error","danger","Nama direktur belum diisi!")
+        }
     })
     $("#addcast").on("click", function () {
         const tp = $("#movie_cast").val()
-        casts.push(tp)
-        $("#movie_cast").val("")
-        ReloadCast()
+        if (tp.length>0) {
+            casts.push(tp)
+            $("#movie_cast").val("")
+            ReloadCast()
+        } else {
+            Toast("Error","danger","Nama cast belum diisi!")
+        }
     })
     $("#AddStudio").on("click", function () {
         const nama = $("#nama_studio").val();
         const slot = $("#slot_studio").val();
-        dn = $.ajax({
-            type: "POST",
-            url: '{{url("/admin/studio/add")}}',
-            data: {
-                _token: '{{ csrf_token() }}',
-                nama: nama,
-                branch: cbranch,
-                slot: slot
-            },
-            success: function (data) {
-                var d = JSON.parse(data, false)
-                Reload(d)
-            }
+        if (nama.length>0) {
+            if (slot>0) {
+                dn = $.ajax({
+                    type: "POST",
+                    url: '{{url("/admin/studio/add")}}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        nama: nama,
+                        branch: cbranch,
+                        slot: slot
+                    },
+                    success: function (data) {
+                        var d = JSON.parse(data, false)
+                        Reload(d)
+                        Toast("Success","success","Berhasil tambah studio")
+                    }
         });
+            } else {
+                Toast("Error","danger","Slot harus lebih besar dari 0!")
+            }
+        } else {
+            Toast("Error","danger","nama studio belum diisi!")
+        }
     });
     function Toast(title,type,text) {
         $("#toast").html(`<x-toast title="${title}" type="${type}">${text}</x-toast>`)
@@ -591,7 +630,8 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             if (judul.length > 0) {
                 if (produser.length > 0 && casts.length > 0 && director.length > 0) {
                     if (synopsis.length <= 0) {
-                        alert("sinopsis tidak boleh kosong!")
+                        Toast("Error","danger","sinopsis tidak boleh kosong!")
+                        //alert("sinopsis tidak boleh kosong!")
                     } else {
                         var addgenre = []
                         genre.forEach(g => {
@@ -679,7 +719,8 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
             if (judul.length > 0) {
                 if (produser.length > 0 && casts.length > 0 && director.length > 0) {
                     if (synopsis.length <= 0) {
-                        alert("sinopsis tidak boleh kosong!")
+                        Toast("Error","danger","sinopsis tidak boleh kosong!")
+                        //alert("sinopsis tidak boleh kosong!")
                     } else {
                         var addgenre = []
                         genre.forEach(g => {
@@ -774,10 +815,11 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
                 success: function (data) {
                     var d = JSON.parse(data, false)
                     Reload(d)
+                    Toast("Success","success","Berhasil tambah branch")
                 }
             });
         } else {
-            alert("Nama tidak boleh kosong!");
+            Toast("Error","danger","Nama tidak boleh kosong!")
         }
     });
     $("#deletemovie").on("click", function () {
@@ -931,7 +973,7 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
               var d = JSON.parse(data,false)
               // alert(data);
               ReloadSnack(d)
-              Toast("success", "success", "Berhasil menambahkan snack!"); 
+              Toast("Success", "success", "Berhasil menambahkan snack!"); 
             },
             error: function (xhr, ajaxOptions, thrownError) {
             //   alert(xhr.status);
@@ -943,7 +985,8 @@ $('input[type=email]').val('test').siblings('label').addClass('active');
           }); 
         } 
         else {
-          alert("foto snack belum diupload!")
+            Toast("Error", "danger", "foto snack belum diupload!");
+          //alert("foto snack belum diupload!")
         } 
       });
       

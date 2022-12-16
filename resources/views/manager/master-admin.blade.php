@@ -3,7 +3,7 @@
       <section class="mb-4">
         <h1 style="color:white">Master Karyawan</h1>
         <div id="containerkaryawan" style="width: 100%">
-          <table border="1px" class="table table-striped" style="color:white">
+          <table border="1px" class="table" style="color:white">
               <tr style="color:white">
                   <th style="color:white">Nama Karyawan</th>
                   <th style="color:white">Email Karyawan</th>

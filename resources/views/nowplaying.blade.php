@@ -24,13 +24,12 @@
         </div>
         <div class="row md-row-cols-2">
             @foreach ($nowPlaying as $np)
-                @php $movie = \App\Models\Movie::find($np) @endphp
+                @php $m = \App\Models\Movie::find($np) @endphp
+                @if ($m != null)
                 <div class="col-sm-6 col-md-3 text-left">
-                    @php
-                        $m = \App\Models\Movie::find($np);
-                    @endphp
-                    <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
+                        <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
                 </div>
+                @endif
             @endforeach
         </div>
 </div>

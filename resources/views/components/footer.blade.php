@@ -19,8 +19,8 @@
                                     <li><a href="{{ url('/contact') }}">Contact Us</a></li>
                                 </ul>
                                 <div class="footer-search">
-                                    <form action="#">
-                                        <input type="text" placeholder="Find Favorite Movie">
+                                    <form action="{{url('/user/movie/search')}}">
+                                        <input type="text" placeholder="Find Favorite Movie" name="search">
                                         <button><i class="fas fa-search"></i></button>
                                     </form>
                                 </div>
@@ -61,11 +61,6 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="copyright-text">
                         <p>Copyright &copy; 2021. All Rights Reserved By <a href="index.html">NoBar</a></p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="payment-method-img text-center text-md-right">
-                        <img src="{{ asset('assets/img/images/card_img.png') }}" alt="img">
                     </div>
                 </div>
             </div>

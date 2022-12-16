@@ -59,16 +59,16 @@
                                                         <tr>
                                                             <td style="width: 50%;">
                                                                 <table>
-                                                                        {{-- <tr>
+                                                                        <tr>
                                                                             <td>
                                                                                 Snack Pesanan:
                                                                             </td>
                                                                             <td style="color: yellow">
-                                                                                @foreach($snacks as $s)
+                                                                                @foreach($a->dtranssnack as $s)
                                                                                     {{$s->snack->nama}};
                                                                                 @endforeach 
                                                                             </td>
-                                                                        </tr> --}}
+                                                                        </tr>
                                                                     <tr>
                                                                         <td>
                                                                             Waktu Pesan:

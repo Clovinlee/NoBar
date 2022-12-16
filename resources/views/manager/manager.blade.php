@@ -56,7 +56,7 @@
             c.html("")
             var str = ""
             if(data.length>0){
-                str += `<table border='1px' class='table table-striped'>`;
+                str += `<table border='1px' class='table' style='color:white;'>`;
                     str += `<tr>`;
                         str += `<th>Nama Karyawan</th>`;
                         str += `<th>Email Karyawan</th>`;

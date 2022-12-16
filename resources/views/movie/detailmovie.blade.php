@@ -33,8 +33,8 @@
                     <div class="movie-details-img">
                         <img style="object-fit: contain; width: 303px; height: 430px;"
                             src="{{ asset('assets/images/'.$movie->image) }}" alt="">
-                        <a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video"><img
-                                src="{{ asset('assets/img/images/play_icon.png') }}" alt=""></a>
+                        {{-- <a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video"><img
+                                src="{{ asset('assets/img/images/play_icon.png') }}" alt=""></a> --}}
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-8">
@@ -151,7 +151,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="episode-img">
-                        <img src="{{ asset('assets/img/images/episode_img.jpg') }}" alt="">
+                        <img src="{{ asset('assets/images/'.$movie->image) }}" alt="">
                     </div>
                 </div>
             </div>

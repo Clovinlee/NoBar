@@ -16,7 +16,11 @@ class PageController extends Controller
         $weekLater = date('Y-m-d', strtotime(now(). ' + '.$wL.' days'));
         $nowPlaying = Schedule::whereDate('time',"<",$weekLater)->pluck("movie_id")->unique();
 
-        $upComing = DB::select('select * from movies m where m.id not in (select movie_id from schedules)');
+        $upComing = DB::select('select * from movies m where m.deleted_at is null 
+        and (m.id not in (select movie_id from schedules) 
+        and m.id not in (select movie_id from schedules where time < '.$weekLater.' ) )');
+
+
         return view("index",["nowPlaying" => $nowPlaying, "upComing" => $upComing]);
     }
 

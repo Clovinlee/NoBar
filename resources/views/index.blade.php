@@ -35,22 +35,8 @@
                                 <h6 class="sub-title wow fadeInUp" data-wow-delay=".2s" data-wow-duration="1.8s">NoBar</h6>
                                 <h2 class="title wow fadeInUp" data-wow-delay=".4s" data-wow-duration="1.8s">Unlimited <span>Movies</span>, and Fun</h2>
                                 <div class="banner-meta wow fadeInUp" data-wow-delay=".6s" data-wow-duration="1.8s">
-                                    <ul>
-                                        <li class="quality">
-                                            <span>Pg 18</span>
-                                            <span>hd</span>
-                                        </li>
-                                        <li class="category">
-                                            <a href="#">Romance,</a>
-                                            <a href="#">Drama</a>
-                                        </li>
-                                        <li class="release-time">
-                                            <span><i class="far fa-calendar-alt"></i> 2021</span>
-                                            <span><i class="far fa-clock"></i> 128 min</span>
-                                        </li>
-                                    </ul>
                                 </div>
-                                <a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="banner-btn btnMovie popup-video wow fadeInUp" data-wow-delay=".8s" data-wow-duration="1.8s"><i class="fas fa-play"></i> Watch Now</a>
+                                <a href="#nowPlaying" class="banner-btn btnMovie"><i class="fas fa-play"></i> Watch Now</a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +46,7 @@
 
             <!-- up-coming-movie-area -->
             
-            <section class="ucm-area ucm-bg" data-background="{{ asset('assets/img/bg/ucm_bg.jpg') }}">
+            <section id="nowPlaying" class="ucm-area ucm-bg" data-background="{{ asset('assets/img/bg/ucm_bg.jpg') }}">
             {{-- <section class="" data-background="{{ asset('assets/img/bg/ucm_bg.jpg') }}"> --}}
                 <div class="ucm-bg-shape" data-background="{{ asset('assets/img/bg/ucm_bg_shape.png') }}"></div>
                 <div class="container">
@@ -79,7 +65,9 @@
                                     @php
                                         $m = \App\Models\Movie::find($now);
                                     @endphp
-                                    <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
+                                    @if ($m != null)
+                                        <x-movie slug="{{ $m->slug }}" img="{{ $m->image }}">{{ $m->judul }}</x-movie>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -180,7 +168,7 @@
                                         <p>Likes From Customer</p>
                                     </div>
                                 </div>
-                                <a href="" class="btnMovie"><i class="fas fa-play"></i> Watch Now</a>
+                                <a href="#nowPlaying" class="btnMovie"><i class="fas fa-play"></i> Watch Now</a>
                             </div>
                         </div>
                         <div class="col-xl-7 col-lg-6">
@@ -200,15 +188,10 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6">
                                 <div class="newsletter-content">
-                                    <h4>Join now</h4>
-                                    <p>Enter your email to create your account.</p>
+                                    <a href="{{url('/register')}}">
+                                        <h4>Join now</h4>
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <form action="{{ route('login') }}" class="newsletter-form">
-                                    <input type="email" required placeholder="Enter your email">
-                                    <button class="btnMovie">get started</button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -221,4 +204,12 @@
 
         <x-footer></x-footer>
 
+@endsection
+
+@section('pageScript')
+    <script>
+        function prevent(e){
+            e.preventDefault();
+        }
+    </script>
 @endsection

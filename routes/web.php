@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\Session;
 | 
 */
 
-Route::get('/', [PageController::class,"index"]);
+Route::get('/', [PageController::class,"index"])->name("home");
 // ->middleware("role:admin,manager");
 
 Route::get('/nowplaying',[PageController::class,"nowplaying"])->name("nowplaying");

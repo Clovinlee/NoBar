@@ -34,14 +34,14 @@
                         <div class="widget-title mb-50">
                             <h5 class="title">History</h5>
                             <br>
-                            <div class="col-10 my-3" width="100%" style="color: #252631; background-color: white; border-radius: 10px; padding: 1%">
+                            {{-- <div class="col-10 my-3" width="100%" style="color: #252631; background-color: white; border-radius: 10px; padding: 1%">
                                 <form action="" method="get">
                                     <label for="" class="form-label">Range tanggal : </label>
                                     <input type="date" name="start" id="awal" >  S/D 
                                     <input type="date" name="end" id="akhir">
                                     <button class="btn btn-warning">Search</button>
                                 </form>
-                            </div>
+                            </div> --}}
                             <div class="contact">
                                 <div class="accordion accordion" id="accordionFlushExampleX">
                                     @foreach($itemBuy as $a)

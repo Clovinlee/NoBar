@@ -262,7 +262,7 @@
             },
             success: function(body){
                 console.log("DB Added |code : "+body);
-                window.location.replace("http://{{env('APP_URL')}}/user/history");
+                window.location.replace("http://{{env('APP_URL')}}/user/historyCafe");
             }
         })
         }

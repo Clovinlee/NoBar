@@ -22,7 +22,7 @@ class HtranssnackSeeder extends Seeder
             "branch_id"=>1,
             "status"=>"settlement",
             "total"=>100000,
-            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-01 14:34:53"))
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-11 14:34:53"))
         ]);
         Htranssnack::create([
             "transaction_id"=>2,
@@ -30,7 +30,7 @@ class HtranssnackSeeder extends Seeder
             "branch_id"=>2,
             "status"=>"settlement",
             "total"=>200000,
-            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-02 14:34:53"))
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-12 14:34:53"))
         ]);
         Htranssnack::create([
             "transaction_id"=>3,
@@ -38,7 +38,7 @@ class HtranssnackSeeder extends Seeder
             "branch_id"=>3,
             "status"=>"settlement",
             "total"=>300000,
-            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-03 14:34:53"))
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-13 14:34:53"))
         ]);
         Htranssnack::create([
             "transaction_id"=>4,
@@ -46,7 +46,7 @@ class HtranssnackSeeder extends Seeder
             "branch_id"=>3,
             "status"=>"settlement",
             "total"=>400000,
-            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-04 14:34:53"))
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-14 14:34:53"))
         ]);
         Htranssnack::create([
             "transaction_id"=>5,
@@ -54,7 +54,7 @@ class HtranssnackSeeder extends Seeder
             "branch_id"=>3,
             "status"=>"settlement",
             "total"=>500000,
-            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-05 14:34:53"))
+            "created_at" => date("Y-m-d h:i:s", strtotime("2022-12-15 14:34:53"))
         ]);
     }
 }

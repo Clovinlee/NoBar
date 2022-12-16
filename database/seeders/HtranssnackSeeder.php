@@ -18,7 +18,7 @@ class HtranssnackSeeder extends Seeder
         //
         Htranssnack::create([
             "transaction_id"=>1,
-            "user_id"=>2,
+            "user_id"=>1,
             "branch_id"=>1,
             "status"=>"settlement",
             "total"=>100000,
@@ -26,7 +26,7 @@ class HtranssnackSeeder extends Seeder
         ]);
         Htranssnack::create([
             "transaction_id"=>2,
-            "user_id"=>2,
+            "user_id"=>1,
             "branch_id"=>2,
             "status"=>"settlement",
             "total"=>200000,
@@ -34,7 +34,7 @@ class HtranssnackSeeder extends Seeder
         ]);
         Htranssnack::create([
             "transaction_id"=>3,
-            "user_id"=>2,
+            "user_id"=>1,
             "branch_id"=>3,
             "status"=>"settlement",
             "total"=>300000,
@@ -42,7 +42,7 @@ class HtranssnackSeeder extends Seeder
         ]);
         Htranssnack::create([
             "transaction_id"=>4,
-            "user_id"=>2,
+            "user_id"=>1,
             "branch_id"=>3,
             "status"=>"settlement",
             "total"=>400000,
@@ -50,7 +50,7 @@ class HtranssnackSeeder extends Seeder
         ]);
         Htranssnack::create([
             "transaction_id"=>5,
-            "user_id"=>2,
+            "user_id"=>1,
             "branch_id"=>3,
             "status"=>"settlement",
             "total"=>500000,

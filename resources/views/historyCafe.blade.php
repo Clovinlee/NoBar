@@ -57,23 +57,18 @@
                                                 <div class="col-5 my-3" width="100%" style="color: white; background-color: #252631; border-radius: 25px; padding: 3%">
                                                     <table>
                                                         <tr>
-                                                            {{-- <td> --}}
-                                                                {{-- <center>
-                                                                    <img src="{{asset('assets/images/'.$a->snack)}}" style="width: 80%; height: 80%;">
-                                                                </center> --}}
-                                                            {{-- </td> --}}
                                                             <td style="width: 50%;">
                                                                 <table>
-                                                                    <tr>
-                                                                        <td>
-                                                                            Snack Pesanan:
-                                                                        </td>
-                                                                        <td style="color: yellow">
-                                                                            @foreach($snacks as $s)
-                                                                                {{$s->snack->nama}};
-                                                                            @endforeach 
-                                                                        </td>
-                                                                    </tr>
+                                                                        {{-- <tr>
+                                                                            <td>
+                                                                                Snack Pesanan:
+                                                                            </td>
+                                                                            <td style="color: yellow">
+                                                                                @foreach($snacks as $s)
+                                                                                    {{$s->snack->nama}};
+                                                                                @endforeach 
+                                                                            </td>
+                                                                        </tr> --}}
                                                                     <tr>
                                                                         <td>
                                                                             Waktu Pesan:
@@ -89,22 +84,15 @@
                                                                         <td style="color: yellow">
                                                                             Rp.{{$a['total']}},- 
                                                                         </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        {{-- <td>
-                                                                            <button class="btn btn-warning">QR Code</button>
-                                                                        </td> --}}
-                                                                        <td>
-                                                                            <button class="btn btn-danger">Delete</button>
-                                                                        </td>
-                                                                    </tr>
+                                                                    </tr>   
                                                                 </table>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </div>
                                     </div>
-                                    
+                                        </div>
+                                    </div>  
                                     @endforeach
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://mhs.sib.stts.edu/k4nobar/" target="_blank"><img src="https://i.ibb.co/48rpZhN/Logo-Probis.png" alt="Logo-Probis" border="0"></a>
-<a href="https://mhs.sib.stts.edu/k4nobar/" target="_blank"><img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/HomePage.png" alt="Logo-Probis" border="0"></a>
+<a href="https://mhs.sib.stts.edu/k4nobar/" target="_blank"><img src="https://i.ibb.co/mtprbd7/image.png" alt="Logo-Probis" border="0"></a>
 </p>
 
 ## About Nobar

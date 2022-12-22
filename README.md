@@ -36,7 +36,6 @@ Edward Patrick -  220180515 <br>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/documentations/docs/MovieNowPlaying.png" width="800px"/>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/ScheduleMovie.png" width="800px"/>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/bookSeat.png" width="800px"/>
-<img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/ScheduleMovie.png" width="800px"/>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/CafePage.png" width="800px"/>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/mainboardAdmin.png" width="800px"/>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/ManagerDashboard.png" width="800px"/>

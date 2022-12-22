@@ -27,7 +27,7 @@ Edward Patrick -  220180515 <br>
 - <a href="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/src/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/ReportPendapatan.png">Report</a>
 - <a href="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/src/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/ConfOrderCafe.png">Cafe Order</a>
 - <a href="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/src/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/Search.png">Search</a>
-- <a href="https://github.com/Clovinlee/NoBar/blob/documentations/docs/ScheduleAdmin.png">Admin - Schedule</a>
+- <a href="https://raw.githubusercontent.com/Clovinlee/NoBar/documentations/docs/ScheduleAdmin.png">Admin - Schedule</a>
 - <a href="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/src/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/AddMovieAdmin.png">Admin - Add Movie</a>
 - <a href="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/src/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/midtransCafe.png">Cafe Transaction (<i>midtrans</i>)</a>
 - <a href="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/src/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/midtransMovie.png">Movie Transaction (<i>midtrans</i>)</a>
@@ -43,5 +43,6 @@ Edward Patrick -  220180515 <br>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/ReportPendapatan.png" width="800px"/>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/midtransMovie.png" width="800px"/>
 <img src="https://git.sib.stts.edu/FAI2022/Kelompok4-Nobar/raw/b7cfc138262b7ab745950e44264162bb4c8ab62e/docs/HistoryMovie.png" width="800px"/>
+<img src="https://raw.githubusercontent.com/Clovinlee/NoBar/documentations/docs/ScheduleAdmin.png" width="800px"/>
 <br>
 

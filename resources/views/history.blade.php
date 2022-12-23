@@ -90,7 +90,7 @@
                                                                         tempat duduk:
                                                                     </td>
                                                                     <td style="color: yellow">
-                                                                        @foreach($seat as $s)
+                                                                        @foreach($a->dtrans as $s)
                                                                         {{$s->seat}};
                                                                         @endforeach 
                                                                     </td>
@@ -105,7 +105,8 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <button class="btn btn-info">QR Code</button>
+                                                                        <a href="{{url('/user/historyQR')}}" class="btn btn-info">QR Code</a>
+                                                                        {{-- <button class="btn btn-info">QR Code</button> --}}
                                                                     </td>
                                                                 </tr>
                                                             </table>

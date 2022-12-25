@@ -121,7 +121,7 @@
                                                                                     <div>
                                                                                         <h3 style="color: black; display: flex; justify-content: center; align-items: center;">Scan Me</h3>
                                                                                         <br>
-                                                                                        {!! QrCode::size(250)->generate('Silahkan Masuk Ke Studio!'); !!} 
+                                                                                        {!! QrCode::size(250)->generate('mhs.sib.stts.edu/k4nobar/movie/{htrans id}/proses'); !!} 
                                                                                     </div>
                                                                                     
                                                                                 </div>

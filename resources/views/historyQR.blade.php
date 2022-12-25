@@ -35,10 +35,10 @@
                             <h5 class="title">History QR Code</h5>
                             <br>
                             <div style="align-items: center;">
-                                <img src="{{ asset('assets/images/qrCode.png') }}" alt="" style="height: 80%; width: 80%;">
+                                {{-- <img src="{{ asset('assets/images/qrCode.png') }}" alt="" style="height: 80%; width: 80%;"> --}}
                             </div>
                             <br><br>
-                            {{-- {{!! QrCode::generate('Make me into a QrCode!'); !!}} --}}
+                            {!! QrCode::generate('Make me into a QrCode!'); !!}
                             <a href="{{url('/user/history')}}" class="btn btn-warning">Back</a>
                         </div>
                     </div>

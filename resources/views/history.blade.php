@@ -90,7 +90,7 @@
                                                                         tempat duduk:
                                                                     </td>
                                                                     <td style="color: yellow">
-                                                                        @foreach($seat as $s)
+                                                                        @foreach($a->dtrans as $s)
                                                                         {{$s->seat}};
                                                                         @endforeach 
                                                                     </td>
@@ -105,7 +105,33 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <button class="btn btn-info">QR Code</button>
+                                                                        <button type="button" class="btn btn-info" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                                                                            QR Code
+                                                                        </button>
+                                                                        {{-- <button class="btn btn-info">QR Code</button> --}}
+                                                                        <!-- Modal -->
+                                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel" style="color: black">QR Code</h5>
+                                                                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body" style="display: flex; justify-content: center; align-items: center;">
+                                                                                    <div>
+                                                                                        <h3 style="color: black; display: flex; justify-content: center; align-items: center;">Scan Me</h3>
+                                                                                        <br>
+                                                                                        {!! QrCode::size(250)->generate('mhs.sib.stts.edu/k4nobar/movie/{htrans id}/proses'); !!} 
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                                                                                {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                             </table>
